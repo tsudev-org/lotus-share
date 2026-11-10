@@ -1,0 +1,61 @@
+---
+import TaiLieu from '../components/TaiLieu.astro';
+
+const mucLuc = [
+  { id: 'nhan-tep', ten: 'Nhận tệp' },
+  { id: 'gui-tep', ten: 'Gửi tệp' },
+  { id: 'nhieu-thiet-bi', ten: 'Gửi cho nhiều máy' },
+  { id: 'qua-lien-ket', ten: 'Chia sẻ qua liên kết' },
+  { id: 'yeu-thich', ten: 'Thiết bị yêu thích, Lưu nhanh' },
+  { id: 'ma-pin', ten: 'Mã PIN' },
+  { id: 'ngon-ngu', ten: 'Ngôn ngữ và giao diện' },
+  { id: 'khong-thay-may', ten: 'Không thấy máy kia' },
+];
+---
+<TaiLieu tieuDe="Hướng dẫn sử dụng" moTa="Hướng dẫn dùng tsudev-lotus: nhận và gửi tệp, gửi cho nhiều máy, chia sẻ qua liên kết, thiết bị yêu thích, mã PIN và cách xử lý khi không thấy máy." duongDan="/huong-dan/" mucLuc={mucLuc}>
+  <h1>Hướng dẫn sử dụng</h1>
+  <p>tsudev-lotus có ba thẻ chính: <strong>Nhận</strong>, <strong>Gửi</strong> và <strong>Cài đặt</strong>. Hai máy chỉ cần cùng một mạng Wi-Fi hoặc mạng LAN; không cần Internet.</p>
+
+  <h2 id="nhan-tep">Nhận tệp</h2>
+  <ol>
+    <li>Mở ứng dụng. Thẻ <strong>Nhận</strong> hiển thị tên máy bạn (máy mới cài được đặt tên ngẫu nhiên, ví dụ "Xoài Thông Minh"; đổi được trong Cài đặt) và trạng thái sẵn sàng.</li>
+    <li>Khi có máy gửi tới, một hộp thoại hiện tên máy gửi và danh sách tệp. Bấm <strong>Chấp nhận</strong> hoặc <strong>Từ chối</strong>.</li>
+    <li>Tệp được lưu vào thư mục Tải về (đổi được trong Cài đặt, mục Nhận). Lịch sử nhận ở biểu tượng đồng hồ trên thẻ Nhận.</li>
+  </ol>
+
+  <h2 id="gui-tep">Gửi tệp</h2>
+  <ol>
+    <li>Ở thẻ <strong>Gửi</strong>, chọn nội dung: Tệp, Thư mục, Ảnh/Video, Văn bản, Bộ nhớ tạm hoặc Ứng dụng (Android).</li>
+    <li>Mục <strong>Thiết bị lân cận</strong> liệt kê các máy đang mở ứng dụng. Bấm vào máy muốn gửi.</li>
+    <li>Chờ bên nhận chấp nhận. Màn hình tiến độ cho biết tốc độ, thời gian còn lại; hủy được bất cứ lúc nào.</li>
+  </ol>
+  <p>Trên máy tính, bạn cũng có thể kéo thả tệp vào cửa sổ ứng dụng, hoặc dùng menu <em>Chia sẻ</em> của hệ điều hành trên điện thoại.</p>
+
+  <h2 id="nhieu-thiet-bi">Gửi cho nhiều máy</h2>
+  <p>Ở thẻ Gửi, bấm biểu tượng chế độ gửi và chọn <strong>Nhiều người nhận</strong>. Mỗi lần bấm vào một máy là một lượt gửi riêng, chạy song song.</p>
+
+  <h2 id="qua-lien-ket">Chia sẻ qua liên kết</h2>
+  <p>Máy nhận không cài ứng dụng? Chọn chế độ <strong>Chia sẻ qua liên kết</strong>: ứng dụng hiện một địa chỉ (và mã QR) để mở bằng trình duyệt trên máy kia, trong cùng mạng. Bạn duyệt từng yêu cầu tải, và có thể đặt mã PIN cho liên kết.</p>
+
+  <h2 id="yeu-thich">Thiết bị yêu thích, Lưu nhanh</h2>
+  <ul>
+    <li>Bấm biểu tượng tim ở máy hay dùng để lưu vào <strong>Yêu thích</strong>. Trước khi lưu, so dãy biểu tượng dấu vân tay hiển thị trên hai máy: trùng nhau nghĩa là đúng máy.</li>
+    <li><strong>Lưu nhanh</strong> tự chấp nhận tệp, không hỏi. Mặc định chỉ áp dụng cho máy yêu thích; chỉ bật "cho mọi máy" ở mạng bạn tin tưởng hoàn toàn.</li>
+  </ul>
+
+  <h2 id="ma-pin">Mã PIN</h2>
+  <p>Cài đặt, mục Nhận, bật <strong>Yêu cầu mã PIN</strong>. Máy gửi phải nhập đúng PIN mới gửi được; sai 3 lần thì bị chặn. Nên bật khi dùng Wi-Fi công cộng (quán cà phê, sân bay, khách sạn).</p>
+
+  <h2 id="ngon-ngu">Ngôn ngữ và giao diện</h2>
+  <p>Ứng dụng mặc định tiếng Việt. Đổi trong Cài đặt, mục Chung, <em>Ngôn ngữ</em>: chọn một trong hơn 60 ngôn ngữ, hoặc <em>Theo hệ thống</em>. Cũng ở mục Chung: chế độ sáng, tối, màu nhấn, khởi động cùng hệ thống, thu nhỏ vào khay.</p>
+
+  <h2 id="khong-thay-may">Không thấy máy kia</h2>
+  <ol>
+    <li>Kiểm hai máy cùng một mạng Wi-Fi (không phải mạng khách, không bật chế độ cách ly máy khách "AP isolation" trên bộ phát).</li>
+    <li>Windows: cho phép ứng dụng qua tường lửa ở <em>Mạng riêng tư</em>, và đặt mạng là Riêng tư.</li>
+    <li>Tắt VPN tạm thời; VPN thường chặn kết nối trong mạng nội bộ.</li>
+    <li>Bấm biểu tượng tải lại ở mục Thiết bị lân cận, hoặc gửi theo địa chỉ: ở thẻ Gửi, dùng nút nhập địa chỉ thủ công, nhập IP hiển thị ở thẻ Nhận của máy kia.</li>
+    <li>Cài đặt, mục Mạng có trang <strong>Khắc phục sự cố</strong> tự sửa tường lửa trên Windows.</li>
+  </ol>
+  <p>Gặp lỗi khác? <a href="https://github.com/tsudev-org/tsudev-lotus/issues" target="_blank" rel="noopener noreferrer">Báo lỗi trên GitHub</a> (lỗi bảo mật: xem trang <a href="/bao-mat/">Bảo mật</a>).</p>
+</TaiLieu>
