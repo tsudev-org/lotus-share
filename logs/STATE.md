@@ -5,7 +5,12 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
-- [ ] Chứng thư ký mã Windows: nộp đơn SignPath Foundation (miễn phí cho OSS); macOS/iOS cần Apple Developer Program.
+- [ ] Chủ dự án: merge PR #11 (`gh pr merge 11 -R tsudev-org/tsudev-lotus --merge --auto --delete-branch`), rồi
+      `cd website && npm run deploy` (bỏ gói CLI Windows hiện trùng trên trang Tải về).
+- [ ] **Đầu tháng 12/2026 - ký mã Windows (SignPath Foundation) + Apple (macOS công chứng, iOS TestFlight)**, khi chủ dự
+      án đã có Apple Developer. Kế hoạch từng bước: `docs/vi/KE-HOACH-KY-MA-12-2026.md`. Việc làm được NGAY (tháng
+      11, không cần Apple): đọc điều kiện SignPath (mục 1.1), làm trang chính sách ký mã (mục 1.3), soạn sẵn nội dung
+      đơn (mục 1.4) để chủ dự án nộp sớm - xét duyệt có thể mất vài tuần.
 - [ ] Gói .deb/.rpm cho Linux (cấu hình `app/linux/packaging/` đã đổi tên, workflow chưa dựng), Linux ARM64, Windows ARM64.
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
 - [ ] Khi bật WebRTC: dựng máy chủ tín hiệu riêng từ `server/` và đổi `forkDefaultSignalingServers`.
