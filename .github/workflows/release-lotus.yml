@@ -209,9 +209,9 @@ jobs:
           apksigner="$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)/apksigner"
           want="$(printf '%s' "$ANDROID_CERT_SHA256" | tr -d ' :' | tr 'A-F' 'a-f')"
           mkdir -p dist
-          out=app/build/app/outputs/flutter-apk
+          apkdir=app/build/app/outputs/flutter-apk
           for pair in "app-release:universal" "app-arm64-v8a-release:arm64-v8a" "app-armeabi-v7a-release:armeabi-v7a" "app-x86_64-release:x86_64"; do
-            src="$out/${pair%%:*}.apk"; dst="dist/tsudev-lotus-$V-android-${pair##*:}.apk"
+            src="$apkdir/${pair%%:*}.apk"; dst="dist/tsudev-lotus-$V-android-${pair##*:}.apk"
             out="$("$apksigner" verify --verbose --print-certs "$src")"
             grep -q 'Verified using v2 scheme (APK Signature Scheme v2): true' <<< "$out" \
               || { echo "$out"; echo "::error::$src chưa ký lược đồ v2"; exit 1; }
