@@ -5,11 +5,12 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
-- [ ] Chủ dự án: merge PR `chore/khoi-tao-fork` vào `main`, bật bảo vệ nhánh `main` (PR + check "Kiểm tra bản fork", "Bảo mật").
-- [ ] Phát hành bản đầu `v1.18.2-lotus.1` theo `docs/vi/PHAT-HANH.md` (cần secret ở trên). Theo dõi lần chạy đầu của
-      `release-lotus.yml`: các bước Windows/Linux/Android/macOS chưa từng chạy trên runner thật.
-- [ ] Sau khi có bản phát hành: `cd website && npm run deploy` (trang Tải về lấy gói + SHA-256 lúc build).
-- [ ] Chứng thư ký mã Windows: nộp đơn SignPath Foundation (miễn phí cho OSS); macOS/iOS cần Apple Developer Program.
+- [ ] Chủ dự án: merge PR #11 (`gh pr merge 11 -R tsudev-org/tsudev-lotus --merge --auto --delete-branch`), rồi
+      `cd website && npm run deploy` (bỏ gói CLI Windows hiện trùng trên trang Tải về).
+- [ ] **Đầu tháng 12/2026 - ký mã Windows (SignPath Foundation) + Apple (macOS công chứng, iOS TestFlight)**, khi chủ dự
+      án đã có Apple Developer. Kế hoạch từng bước: `docs/vi/KE-HOACH-KY-MA-12-2026.md`. Việc làm được NGAY (tháng
+      11, không cần Apple): đọc điều kiện SignPath (mục 1.1), làm trang chính sách ký mã (mục 1.3), soạn sẵn nội dung
+      đơn (mục 1.4) để chủ dự án nộp sớm - xét duyệt có thể mất vài tuần.
 - [ ] Gói .deb/.rpm cho Linux (cấu hình `app/linux/packaging/` đã đổi tên, workflow chưa dựng), Linux ARM64, Windows ARM64.
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
 - [ ] Khi bật WebRTC: dựng máy chủ tín hiệu riêng từ `server/` và đổi `forkDefaultSignalingServers`.
@@ -21,6 +22,11 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 10/11/2026 - **Phát hành công khai `v1.18.2-lotus.2`** (bản mới nhất, 15 tệp): Windows exe/zip, Linux AppImage/zsync/
+  tar.gz, 4 APK ký khóa tsudev, macOS DMG, CLI Linux/Windows, SBOM, SHA256SUMS + chữ ký Sigstore; chứng thực SLSA.
+  Đã kiểm trên bản phát hành thật: SHA256SUMS khớp, `gh attestation verify` trỏ workflow tại nhãn, CLI chạy và in tiếng
+  Việt. Trang `lotus.tsudev.com/tai-ve/` hiện đủ gói + SHA-256. `main` bảo vệ bằng 3 ruleset (PR + 11 kiểm tra bắt
+  buộc; nhãn `v*-lotus.*` bất biến, chỉ quản trị tạo); repo bật tự merge (`gh pr merge --auto`).
 - 10/11/2026 - Quy trình phát hành chạy xanh trọn vẹn (build thử run 42804114546, nhánh `fix/phat-hanh-lan-dau`):
   13 gói (Windows exe/zip, Linux AppImage/zsync/tar.gz, 4 APK ký khóa tsudev, macOS DMG, CLI Linux/Windows, SBOM),
   SHA256SUMS ký Sigstore, chứng thực SLSA v1 cho 15 tệp (Rekor). Đã tự kiểm: `gh attestation verify` đạt với tệp thật,

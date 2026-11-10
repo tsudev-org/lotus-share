@@ -117,8 +117,8 @@ export interface BanPhatHanh { tag: string; phienBan: string; ngay: string; url:
  * <tên>-<phiên bản>-<nền tảng>-<kiến trúc>.<đuôi>). Thứ tự = thứ tự hiển thị.
  */
 export const NEN_TANG: { ma: string; ten: string; mau: RegExp }[] = [
-  { ma: 'windows-x64', ten: 'Windows 10/11 (x64)', mau: /-windows-x86-64\.(exe|zip|msix)$/ },
-  { ma: 'windows-arm64', ten: 'Windows 11 trên ARM (ARM64)', mau: /-windows-arm-64\.(exe|zip|msix)$/ },
+  { ma: 'windows-x64', ten: 'Windows 10/11 (x64)', mau: /^tsudev-lotus-\d[^-]*-windows-x86-64\.(exe|zip|msix)$/ },
+  { ma: 'windows-arm64', ten: 'Windows 11 trên ARM (ARM64)', mau: /^tsudev-lotus-\d[^-]*-windows-arm-64\.(exe|zip|msix)$/ },
   { ma: 'macos', ten: 'macOS 12+ (chip Apple và Intel)', mau: /\.dmg$/ },
   { ma: 'linux-x64', ten: 'Linux x64', mau: /-linux-x86-64\.(AppImage|deb|rpm|tar\.gz)$/ },
   { ma: 'linux-arm64', ten: 'Linux ARM64', mau: /-linux-arm-64\.(AppImage|deb|rpm|tar\.gz)$/ },
