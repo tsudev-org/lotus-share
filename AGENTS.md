@@ -74,9 +74,9 @@ enum). Chạy `python3 -I tools/fix_slang_format.py` để trả về đúng đ�
 
 | Lệch ở đâu | Vì sao | Kế hoạch |
 | --- | --- | --- |
-| Em-dash và chuỗi tiếng Anh trong mã kế thừa upstream | Sửa sẽ gây xung đột mỗi lần gộp upstream | Mã MỚI của fork tuân thủ; theo dõi đề xuất miễn trừ em-dash ở `tsudev-standards` (phiếu của tsudev-files) |
-| Định danh gói `org.localsend.localsend_app`, tên tệp phát hành `LocalSend-*` | Đổi định danh là việc lớn, chạm mọi nền tảng | Task "Đổi định danh nền tảng" trong `logs/STATE.md` |
-| Workflow phát hành của upstream (`build_*.yml`, `release.yml`, `winget.yml`) | Cần secret ký mã của upstream, fork chưa có | Đã tắt trigger; viết lại khi có chứng thư ký mã |
+| Em-dash trong mã + bản dịch kế thừa upstream (71 dòng) | Sửa sẽ gây xung đột mỗi lần gộp upstream | Ngoại lệ 3 của quy ước v3.3.0 (`.standards-upstream`, PR tsudev-standards#48). Tới khi có nhãn v3.3.0: bước cổng quy ước trong CI còn `continue-on-error` |
+| `namespace`/package Kotlin `org.localsend.localsend_app`, tên kênh nền tảng, gói Dart `localsend_app`, crate `localsend` | Nội bộ, người dùng không thấy; đổi thì mỗi lần gộp upstream xung đột hàng trăm tệp | Giữ. Định danh cài đặt đã đổi: xem `docs/vi/PHAT-HANH.md` mục 1 |
+| Workflow của upstream (`build_*.yml`, `release.yml`) | Cần secret ký mã của LocalSend | Không dùng; phát hành bằng `release-lotus.yml` |
 
 ### B.5. Việc riêng của repo cần biết trước khi sửa
 
@@ -89,3 +89,7 @@ enum). Chạy `python3 -I tools/fix_slang_format.py` để trả về đúng đ�
 - Không bao giờ chép khóa riêng, keystore Android, chứng thư ký mã vào repo (`/secrets` đã ignore).
 - LICENSE (Apache-2.0) giữ nguyên văn; mọi màn hình Giới thiệu phải ghi công LocalSend / Tien Do Nam.
 - Ghi chú upstream: `docs/AGENTS.upstream.md` có toàn bộ hướng dẫn kỹ thuật (isolate, lõi Rust, FOSS build).
+- Định danh cài đặt (`com.tsudev.lotus`, `tsudev_lotus`, AppId Inno) và quy trình phát hành, khóa ký: `docs/vi/PHAT-HANH.md`.
+  Khóa ký APK nằm ngoài repo (`~/.config/tsudev-lotus/keys/`); KHÔNG BAO GIỜ commit.
+- Icon mọi nền tảng sinh bằng `tools/gen_icons.py` từ `support/brand/tsudev-logo-mark.png`; không sửa tay tệp icon.
+- CLI giao diện tiếng Việt viết thẳng trong chuỗi Rust (`cli/src/`); tên lệnh `tsudev-lotus-cli`.

@@ -123,6 +123,7 @@ export const NEN_TANG: { ma: string; ten: string; mau: RegExp }[] = [
   { ma: 'linux-x64', ten: 'Linux x64', mau: /-linux-x86-64\.(AppImage|deb|rpm|tar\.gz)$/ },
   { ma: 'linux-arm64', ten: 'Linux ARM64', mau: /-linux-arm-64\.(AppImage|deb|rpm|tar\.gz)$/ },
   { ma: 'android', ten: 'Android 5.0+', mau: /\.apk$/ },
+  { ma: 'cli', ten: 'Dòng lệnh (CLI)', mau: /^tsudev-lotus-cli-/ },
 ];
 
 function loaiGoi(ten: string): string {
@@ -133,7 +134,8 @@ function loaiGoi(ten: string): string {
   if (ten.endsWith('.AppImage')) return 'AppImage (chạy ngay, không cần cài)';
   if (ten.endsWith('.deb')) return 'Gói .deb (Debian, Ubuntu)';
   if (ten.endsWith('.rpm')) return 'Gói .rpm (Fedora, openSUSE)';
-  if (ten.endsWith('.apk')) return 'Tệp APK';
+  if (ten.endsWith('.apk')) return ten.includes('universal') ? 'APK (mọi kiến trúc)' : `APK ${ten.match(/android-([^.]+)\.apk$/)?.[1] ?? ''}`;
+  if (ten.includes('-cli-')) return ten.endsWith('.exe') ? 'CLI Windows' : 'CLI Linux';
   return 'Gói nén (tar.gz)';
 }
 

@@ -56,6 +56,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          fetch-depth: 0             # ngoại lệ upstream cần commit ref có trong lịch sử
           persist-credentials: false
       - name: Bản sao quy ước không bị sửa
         run: ./scripts/sync-standards.sh --check
@@ -63,6 +64,8 @@ jobs:
       # (xem AGENTS.md mục B.4). Bỏ continue-on-error khi tsudev-standards có miễn trừ cho mã upstream.
       - name: Cổng kiểm quy ước
         continue-on-error: true
+        env:
+          STANDARDS_VERIFY_UPSTREAM: '1'   # quy ước v3.3.0: xác minh .standards-upstream với github.com/localsend/localsend
         run: ./scripts/check-standards.sh
 
   website:

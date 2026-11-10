@@ -73,7 +73,7 @@ const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? '
       <p>Không chắc máy Windows dùng bản nào? Mở <strong>Cài đặt, Hệ thống, Giới thiệu</strong>, xem dòng <em>Loại hệ thống</em>. Phần lớn máy dùng bản <strong>x64</strong>.</p>
 
       <h2 id="kiem-tra">Kiểm tra tệp trước khi chạy</h2>
-      <p>So mã SHA-256 của tệp bạn tải với mã ghi ở trên (hoặc trong tệp <code>SHA256SUMS</code> của bản phát hành).</p>
+      <p>So mã SHA-256 của tệp bạn tải với mã ghi ở trên (hoặc trong tệp <code>SHA256SUMS.txt</code> của bản phát hành). Tệp <code>SHA256SUMS.txt</code> được ký bằng Sigstore và mọi gói có chứng thực nguồn gốc bản build (SLSA), nên bạn kiểm được gói đến từ đúng quy trình phát hành của repo này: xem <a href={`${REPO_URL}/blob/main/docs/vi/PHAT-HANH.md#4-người-dùng-kiểm-chứng-tệp-tải-về`} target="_blank" rel="noopener noreferrer">hướng dẫn kiểm chứng</a>.</p>
       <p>Windows (PowerShell):</p>
       <pre tabindex="0"><code>Get-FileHash .\{vd} -Algorithm SHA256</code></pre>
       <p>macOS, Linux:</p>
@@ -108,6 +108,9 @@ const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? '
         <li>Tải tệp <code>.apk</code> trên điện thoại, mở tệp và cho phép <em>Cài ứng dụng không rõ nguồn gốc</em> cho trình duyệt.</li>
         <li>Cấp quyền truy cập ảnh/tệp khi được hỏi để gửi và lưu tệp.</li>
       </ol>
+      <p>Mọi APK ký bằng khóa của tsudev. Dấu vân tay SHA-256 của chứng thư ký (đối chiếu bằng <code>apksigner verify --print-certs</code>):</p>
+      <pre tabindex="0"><code>ad1be603b39b0c211c3ac4c4f890e1c85509209807a029380738089399be1f45</code></pre>
+      <p>Mã định danh ứng dụng là <code>com.tsudev.lotus</code>, nên tsudev-lotus cài song song được với LocalSend.</p>
 
       <h2 id="tuong-thich">Dùng cùng LocalSend</h2>
       <p>tsudev-lotus nói cùng giao thức với LocalSend, nên máy cài tsudev-lotus gửi và nhận được với máy cài LocalSend (kể cả bản trên App Store, Google Play). Hai ứng dụng dùng cùng cổng 53317, vì vậy <strong>không chạy cả hai trên cùng một máy</strong> cùng lúc.</p>

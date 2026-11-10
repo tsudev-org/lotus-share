@@ -1,0 +1,342 @@
+# tsudev-lotus: quy trình phát hành và ký mã.
+#
+# Kích hoạt: đẩy nhãn `v<phiên bản pubspec>-lotus.<n>` (vd v1.18.2-lotus.1), hoặc chạy tay (build thử, không phát hành).
+# Sản phẩm: Windows (bộ cài + ZIP), Linux (AppImage + tar.gz), Android (APK ký bằng khóa tsudev), macOS (DMG ký ad-hoc),
+# CLI (Linux, Windows). Chuỗi tin cậy:
+#   1. SHA256SUMS.txt cho mọi tệp, ký không khóa (keyless) bằng Sigstore cosign - danh tính = workflow này ở repo này.
+#   2. Chứng thực nguồn gốc bản build (SLSA build provenance) cho từng tệp: `gh attestation verify`.
+#   3. SBOM (SPDX) của mã nguồn.
+#   4. APK ký bằng khóa tsudev; dấu vân tay chứng thư được GHIM bên dưới - secret bị tráo thì phát hành dừng.
+# Kiểm chứng phía người dùng: docs/vi/PHAT-HANH.md.
+name: Phát hành
+
+on:
+  push:
+    tags: ['v*-lotus.*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  FLUTTER_VERSION: '3.47.9'
+  FLUTTER_COMMIT: 'c197ca5199e9ee5661e865596c9c07294dfab51c'
+  # SHA-256 chứng thư ký APK (keytool -list -v). Đổi khóa ký = đổi dòng này + công bố trên trang Tải về.
+  ANDROID_CERT_SHA256: 'ad1be603b39b0c211c3ac4c4f890e1c85509209807a029380738089399be1f45'
+
+jobs:
+  prepare:
+    name: Chuẩn bị
+    runs-on: ubuntu-24.04
+    outputs:
+      version: ${{ steps.v.outputs.version }}
+      tag: ${{ steps.v.outputs.tag }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - id: v
+        env:
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          version=$(sed -n 's/^version: \([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p' app/pubspec.yaml)
+          test -n "$version"
+          tag=""
+          if [[ "$REF_TYPE" == tag ]]; then
+            tag="$REF_NAME"
+            [[ "$tag" =~ ^v${version//./\\.}-lotus\.[0-9]+$ ]] \
+              || { echo "::error::Nhãn $tag không khớp phiên bản pubspec $version (cần v$version-lotus.<n>)"; exit 1; }
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "Phiên bản $version, nhãn '${tag:-(build thử)}'"
+
+  windows:
+    name: Windows x64
+    needs: prepare
+    runs-on: windows-2025
+    timeout-minutes: 90
+    env:
+      V: ${{ needs.prepare.outputs.version }}
+    steps:
+      - run: git config --system core.longpaths true
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Cài Flutter (ghim tag + commit)
+        shell: pwsh
+        run: |
+          git clone --depth 1 -b $env:FLUTTER_VERSION https://github.com/flutter/flutter.git "$env:RUNNER_TEMP\flutter"
+          if ((git -C "$env:RUNNER_TEMP\flutter" rev-parse HEAD) -ne $env:FLUTTER_COMMIT) { throw "Flutter commit lệch" }
+          "$env:RUNNER_TEMP\flutter\bin" | Out-File -Append -Encoding utf8 $env:GITHUB_PATH
+      - name: Build
+        working-directory: app
+        run: |
+          flutter config --no-analytics
+          flutter pub get
+          flutter build windows --release
+      - name: Gói ZIP di động + bộ cài
+        shell: pwsh
+        run: |
+          $rel = "app\build\windows\x64\runner\Release"
+          Copy-Item support\build\windows\x64\*.dll $rel
+          New-Item -ItemType Directory -Force dist | Out-Null
+          Compress-Archive -Path "$rel\*" -DestinationPath "dist\tsudev-lotus-$env:V-windows-x86-64.zip"
+          $payload = "$env:RUNNER_TEMP\inno"; $result = "$env:RUNNER_TEMP\inno-result"
+          New-Item -ItemType Directory -Force $payload, $result | Out-Null
+          Copy-Item "$rel\*" $payload -Recurse
+          Copy-Item app\assets\packaging\logo.ico $payload
+          # Chưa có chứng thư Authenticode: bộ cài không ký Authenticode, được bảo chứng bằng SHA256SUMS ký Sigstore
+          # và chứng thực nguồn gốc (xem đầu tệp). Có chứng thư thì bỏ /DSkipSignTool và truyền /SMySignTool=...
+          iscc /DSkipSignTool /DSkipMsixHelper "/DPayloadDir=$payload" "/DResultDir=$result" support\scripts\compile_windows_exe-inno.iss
+          Move-Item "$result\tsudev-lotus-setup.exe" "dist\tsudev-lotus-$env:V-windows-x86-64.exe"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: windows
+          path: dist/*
+          if-no-files-found: error
+
+  linux:
+    name: Linux x64
+    needs: prepare
+    runs-on: ubuntu-22.04   # glibc 2.35: chạy được trên bản Linux cũ hơn runner mới
+    timeout-minutes: 60
+    env:
+      V: ${{ needs.prepare.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Thư viện hệ thống
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build libgtk-3-dev libayatana-appindicator3-dev libfuse2 zsync
+      - name: Cài Flutter (ghim tag + commit)
+        run: |
+          git clone --depth 1 -b "$FLUTTER_VERSION" https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          test "$(git -C "$RUNNER_TEMP/flutter" rev-parse HEAD)" = "$FLUTTER_COMMIT"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+      - name: Build
+        working-directory: app
+        run: |
+          flutter config --no-analytics
+          flutter pub get
+          flutter build linux --release
+      - name: Gói tar.gz + chuẩn bị AppImage
+        run: |
+          set -euo pipefail
+          mkdir -p dist AppDir
+          tar -C app/build/linux/x64/release/bundle -czf "dist/tsudev-lotus-$V-linux-x86-64.tar.gz" .
+          cp -r app/build/linux/x64/release/bundle/* AppDir/
+          for s in 32 128 256; do
+            install -Dm644 "app/assets/img/logo-$s.png" "AppDir/usr/share/icons/hicolor/${s}x${s}/apps/tsudev-lotus.png"
+          done
+          sed "s/^    version: .*/    version: $V/" support/build/appimage/AppImageBuilder_x86_64.yml > AppImageBuilder.yml
+      - name: Dựng AppImage
+        uses: AppImageCrafters/build-appimage@57c3bc6963f870ce3be103117de5b5e33ffbaeb6
+        env:
+          APP_VERSION: ${{ needs.prepare.outputs.version }}
+        with:
+          recipe: ./AppImageBuilder.yml
+      - run: mv tsudev-lotus-"$V"-linux-x86-64.AppImage* dist/
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: linux
+          path: dist/*
+          if-no-files-found: error
+
+  android:
+    name: Android (APK ký số)
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      V: ${{ needs.prepare.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Bỏ phụ thuộc độc quyền (mua trong ứng dụng), như bản F-Droid
+        run: sh support/scripts/remove_proprietary_dependencies.sh
+      - name: Khóa ký (từ secret, chỉ tồn tại trong máy chạy)
+        env:
+          KS_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KS_PW: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          set -euo pipefail
+          if [[ -z "$KS_B64" || -z "$KS_PW" ]]; then
+            echo "::error::Thiếu secret ANDROID_KEYSTORE_BASE64/ANDROID_KEYSTORE_PASSWORD - chạy tools/day-khoa-ky-android.sh"; exit 1
+          fi
+          umask 077
+          printf '%s' "$KS_B64" | base64 -d > "$RUNNER_TEMP/release.jks"
+          printf 'storePassword=%s\nkeyPassword=%s\nkeyAlias=tsudev-lotus\nstoreFile=%s\n' "$KS_PW" "$KS_PW" "$RUNNER_TEMP/release.jks" > app/android/key.properties
+      - name: Cài Flutter (ghim tag + commit)
+        run: |
+          git clone --depth 1 -b "$FLUTTER_VERSION" https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          test "$(git -C "$RUNNER_TEMP/flutter" rev-parse HEAD)" = "$FLUTTER_COMMIT"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+      - name: Build APK
+        working-directory: app
+        run: |
+          export JAVA_HOME="$JAVA_HOME_17_X64"
+          flutter config --no-analytics
+          flutter pub get
+          flutter build apk --release --split-per-abi
+          flutter build apk --release
+      - name: Kiểm chữ ký APK khớp chứng thư đã ghim
+        run: |
+          set -euo pipefail
+          apksigner="$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)/apksigner"
+          want="$(printf '%s' "$ANDROID_CERT_SHA256" | tr -d ' :' | tr 'A-F' 'a-f')"
+          mkdir -p dist
+          out=app/build/app/outputs/flutter-apk
+          for pair in "app-release:universal" "app-arm64-v8a-release:arm64-v8a" "app-armeabi-v7a-release:armeabi-v7a" "app-x86_64-release:x86_64"; do
+            src="$out/${pair%%:*}.apk"; dst="dist/tsudev-lotus-$V-android-${pair##*:}.apk"
+            "$apksigner" verify --verbose "$src" | grep -q 'Verified using v2 scheme (APK Signature Scheme v2): true'
+            got="$("$apksigner" verify --print-certs "$src" | sed -n 's/^Signer #1 certificate SHA-256 digest: //p')"
+            [[ "$got" == "$want" ]] || { echo "::error::$src ký bằng chứng thư $got, không phải $want"; exit 1; }
+            cp "$src" "$dst"
+          done
+      - name: Xóa khóa khỏi máy chạy
+        if: always()
+        run: rm -f "$RUNNER_TEMP/release.jks" app/android/key.properties
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: android
+          path: dist/*
+          if-no-files-found: error
+
+  macos:
+    name: macOS (DMG, ký ad-hoc)
+    needs: prepare
+    runs-on: macos-15
+    timeout-minutes: 90
+    # Chưa có Apple Developer ID: bản macOS chỉ ký ad-hoc, chưa công chứng; lỗi ở đây không chặn các nền tảng khác.
+    continue-on-error: true
+    env:
+      V: ${{ needs.prepare.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Cài Flutter (ghim tag + commit)
+        run: |
+          git clone --depth 1 -b "$FLUTTER_VERSION" https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          test "$(git -C "$RUNNER_TEMP/flutter" rev-parse HEAD)" = "$FLUTTER_COMMIT"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+      - name: Build
+        working-directory: app
+        run: |
+          flutter config --no-analytics
+          flutter pub get
+          flutter build macos --release
+      - name: Ký ad-hoc + DMG
+        run: |
+          set -euo pipefail
+          app="app/build/macos/Build/Products/Release/tsudev-lotus.app"
+          codesign --force --deep --sign - "$app"
+          codesign --verify --deep --strict "$app"
+          mkdir -p dist staging && cp -R "$app" staging/ && ln -s /Applications staging/Applications
+          hdiutil create -volname tsudev-lotus -srcfolder staging -ov -format UDZO "dist/tsudev-lotus-$V-macos.dmg"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: macos
+          path: dist/*
+          if-no-files-found: error
+
+  cli:
+    name: CLI (${{ matrix.os }})
+    needs: prepare
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-22.04
+            exe: tsudev-lotus-cli
+            out: linux-x86-64
+          - os: windows-2025
+            exe: tsudev-lotus-cli.exe
+            out: windows-x86-64.exe
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Build (Cargo.lock bắt buộc khớp)
+        shell: bash
+        run: |
+          cargo build --release --locked -p localsend-cli  # gói giữ tên upstream, tệp chạy: tsudev-lotus-cli
+          mkdir -p dist
+          cp "target/release/${{ matrix.exe }}" "dist/tsudev-lotus-cli-${{ needs.prepare.outputs.version }}-${{ matrix.out }}"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: cli-${{ matrix.os }}
+          path: dist/*
+          if-no-files-found: error
+
+  publish:
+    name: Ký, chứng thực, phát hành
+    needs: [prepare, windows, linux, android, macos, cli]
+    if: ${{ always() && needs.windows.result == 'success' && needs.linux.result == 'success' && needs.android.result == 'success' && needs.cli.result == 'success' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: write        # tạo bản phát hành
+      id-token: write        # Sigstore keyless + chứng thực
+      attestations: write
+    env:
+      V: ${{ needs.prepare.outputs.version }}
+      TAG: ${{ needs.prepare.outputs.tag }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          path: dist
+          merge-multiple: true
+      - name: SBOM (SPDX) của mã nguồn
+        uses: anchore/sbom-action@66cbf4bc1f1c0d2edc94016e65bc221b6bb0ad6c # v0.24.3
+        with:
+          path: .
+          format: spdx-json
+          output-file: dist/tsudev-lotus-${{ needs.prepare.outputs.version }}-sbom.spdx.json
+          upload-artifact: false
+          upload-release-assets: false
+      - name: SHA256SUMS
+        working-directory: dist
+        run: |
+          set -euo pipefail
+          ls -la
+          sha256sum -- * > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+      - uses: sigstore/cosign-installer@756fe2d284c7292c4e9b62c8a28f1e5629c59532 # v4.1.3
+      - name: Ký SHA256SUMS bằng Sigstore (keyless, danh tính = workflow này)
+        working-directory: dist
+        run: cosign sign-blob --yes --bundle SHA256SUMS.txt.sigstore.json SHA256SUMS.txt
+      - name: Chứng thực nguồn gốc bản build (SLSA)
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: 'dist/*'
+      - name: Tạo bản phát hành (bản nháp, chủ dự án duyệt rồi công bố)
+        if: ${{ needs.prepare.outputs.tag != '' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          cat > notes.md <<EOF
+          Bản phát hành tsudev-lotus $V (dựa trên LocalSend $V). Kiểm chứng tệp tải về: docs/vi/PHAT-HANH.md.
+
+          - Dấu vân tay chứng thư ký APK (SHA-256): \`$ANDROID_CERT_SHA256\`
+          - SHA256SUMS.txt ký bằng Sigstore (SHA256SUMS.txt.sigstore.json); mọi tệp có chứng thực nguồn gốc SLSA.
+          - Bản Windows chưa ký Authenticode, bản macOS ký ad-hoc chưa công chứng.
+          EOF
+          sed -i 's/^          //' notes.md
+          gh release create "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --draft --verify-tag \
+            --title "tsudev-lotus $V (${TAG#v$V-})" --notes-file notes.md

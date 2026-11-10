@@ -46,6 +46,8 @@
 | 10/11/2026 | Máy chủ tín hiệu WebRTC lấy từ cấu hình thay vì địa chỉ viết cứng; bỏ lệnh in khóa riêng ra nhật ký | Chuẩn bị tự dựng máy chủ tín hiệu; không để khóa riêng xuất hiện trong log |
 | 10/11/2026 | CI: CodeQL (Rust, Actions), gitleaks toàn lịch sử, `tools/osv_scan.py` (Rust + Dart), Dependabot hằng tháng | Phát hiện sớm lỗ hổng mã và phụ thuộc |
 | 10/11/2026 | Gỡ `winget.yml` của upstream | Workflow tự phát hành lên định danh winget của LocalSend - không thuộc bản fork |
+| 10/11/2026 | Định danh cài đặt riêng (`com.tsudev.lotus`, AppId Inno mới, thư mục cấu hình CLI riêng); AppImage tự cập nhật từ repo tsudev | Không ghi đè/dùng chung dữ liệu, khóa TLS hay luồng cập nhật với LocalSend |
+| 10/11/2026 | Phát hành: SHA256SUMS ký Sigstore keyless, chứng thực SLSA từng tệp, SBOM SPDX, APK ký khóa tsudev có ghim dấu vân tay | Người dùng kiểm được tệp tải về đến từ đúng workflow, đúng mã nguồn (`docs/vi/PHAT-HANH.md`) |
 
 ## 5. Rủi ro đã chấp nhận (có hạn xem lại)
 
@@ -66,5 +68,5 @@ Danh sách chính thức nằm trong `tools/osv_scan.py` (biến `ACCEPTED`); CI
 
 ## 7. Việc tiếp theo
 
-Theo dõi trong `logs/STATE.md`: ký mã bản phát hành (Authenticode/notarization), SBOM + chứng thực nguồn gốc
-bản build (SLSA attestation), tự dựng máy chủ tín hiệu khi bật WebRTC, nâng `rsa` lên 0.10.
+Theo dõi trong `logs/STATE.md`: chứng thư Authenticode (SignPath Foundation) và Apple Developer ID, tự dựng máy chủ
+tín hiệu khi bật WebRTC, nâng `rsa` lên 0.10.
