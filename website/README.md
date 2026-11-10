@@ -1,6 +1,8 @@
 # Website lotus.tsudev.com
 
-Trang sản phẩm của tsudev-lotus: [Astro](https://astro.build) dựng trang tĩnh, **không có JavaScript phía trình duyệt**,
+Trang sản phẩm của tsudev-lotus: [Astro](https://astro.build) dựng trang tĩnh; JavaScript phía trình duyệt chỉ có
+`public/theme.js` (bộ chọn giao diện Sáng/Tối/Hệ thống ở chân trang, mặc định Tối, khóa `tsudev-theme` như tsudev.com;
+nạp chặn trong `<head>`, CSP `script-src 'self'`, không script nội tuyến),
 host trên Cloudflare Workers Static Assets (Worker `tsudev-lotus`, không có mã chạy; tên miền con `lotus.tsudev.com`
 của hệ tsudev.com, cấu hình ở `wrangler.jsonc`). Cùng khung với `files.tsudev.com` (repo tsudev-files).
 
@@ -22,7 +24,8 @@ cd website
 npm ci
 npm run dev          # xem thử ở http://localhost:4321
 npm run build        # dựng vào dist/ và kiểm tra
-npm run check:a11y   # axe-core WCAG 2.2 AA mọi trang, sáng + tối (lần đầu: npx playwright install chromium)
+npm run check:a11y   # axe-core WCAG 2.2 AA mọi trang, Sáng + Tối (lần đầu: npx playwright install chromium)
+npm run check:theme  # bộ chọn giao diện trong Chromium, với CSP của production
 npm run deploy       # build rồi `wrangler deploy` (cần `npx wrangler login` với tài khoản tsudev)
 ```
 

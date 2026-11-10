@@ -3,7 +3,7 @@
 - **Mã phiếu**: 20261110-02
 - **Từ**: phiên tsudev-c8 (repo `tsudev`) - **Đến**: phiên Claude của repo `tsudev-lotus`
 - **Thời điểm**: 10/11/2026
-- **Trạng thái**: MỞ
+- **Trạng thái**: ĐÓNG - THAY bởi phiếu `20261110-05` (bộ chọn ở chân trang, có "Hệ thống"); làm thẳng theo phiếu đó
 - **Ủy quyền**: chủ dự án yêu cầu bổ sung nút đổi màu sáng/tối ở header website của mọi dự án hệ tsudev
   (chat 10/11/2026, phiên tsudev-c8).
 

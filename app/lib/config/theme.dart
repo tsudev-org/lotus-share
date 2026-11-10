@@ -140,10 +140,16 @@ extension InputDecorationThemeExt on InputDecorationThemeData {
   BorderRadius get borderRadius => _borderRadius;
 }
 
+const tsudevPurpleDark = Color(0xFFA970FF);
+const tsudevPurpleLight = Color(0xFF7C3AED);
+
 ColorScheme _determineColorScheme(ColorMode mode, Color customColor, Brightness brightness, DynamicColors? dynamicColors) {
+  // tsudev: màu nhấn tím của hệ tsudev (phiếu logs/handover/20261110-05 mục 2) - Tối #A970FF, Sáng #7C3AED.
+  // fidelity giữ sắc độ của màu gốc thay vì làm nhạt như tonalSpot mặc định.
   final defaultColorScheme = ColorScheme.fromSeed(
-    seedColor: Colors.teal,
+    seedColor: brightness == Brightness.dark ? tsudevPurpleDark : tsudevPurpleLight,
     brightness: brightness,
+    dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
   );
 
   final colorScheme = switch (mode) {
