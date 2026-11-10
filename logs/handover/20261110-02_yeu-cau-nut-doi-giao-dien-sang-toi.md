@@ -24,6 +24,8 @@ trên tsudev.com để người dùng thấy một hệ sinh thái nhất quán.
    `defer`/`type=module`/`DOMContentLoaded` (cho ra một khung hình sai màu ở mọi lần tải). Bọc `try/catch`
    quanh `localStorage` (ném lỗi khi chặn cookie/iframe sandbox) - hỏng thì về chế độ mặc định, không trang trắng.
    Đồng thời cập nhật `<meta name="theme-color">` theo `--bg-base` của chế độ đang hiện.
+   **Thứ tự trong `<head>`**: đặt script SAU các thẻ `<meta name="theme-color">` và TRƯỚC stylesheet - script
+   đặt trước meta thì chạy lúc meta chưa tồn tại nên không sửa được (bài học từ cwico, PR tsudev-cwico#58).
 4. **CSP - đọc kỹ, đây là chỗ dễ hỏng im lặng.** `website/public/_headers` hiện khai `default-src 'none'` và **KHÔNG có `script-src`** - tức là site không cho chạy BẤT KỲ script nào; một nút đổi giao diện viết thêm vào sẽ chết im lặng ở production. Cách làm: đặt script vào tệp tĩnh (vd. `public/theme.js`), nạp bằng `<script src="/theme.js"></script>` (KHÔNG `defer`/`async` - phải chặn để áp màu trước khi vẽ), và thêm `script-src 'self'` vào CSP. Không dùng `'unsafe-inline'`.
 5. **Khả năng truy cập**: `<button type="button">` có `aria-label="Đổi giao diện"`, `aria-haspopup`/`aria-expanded`
    cho menu, Esc đóng menu, vòng focus nhìn thấy được; mục đang chọn có `aria-checked`/`aria-current`.

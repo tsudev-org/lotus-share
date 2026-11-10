@@ -215,8 +215,9 @@ jobs:
             out="$("$apksigner" verify --verbose --print-certs "$src")"
             grep -q 'Verified using v2 scheme (APK Signature Scheme v2): true' <<< "$out" \
               || { echo "$out"; echo "::error::$src chưa ký lược đồ v2"; exit 1; }
-            # Mọi người ký (kể cả dạng "Signer (minSdkVersion=..)" của lược đồ v3.1) phải là chứng thư đã ghim.
-            digests="$(sed -n 's/^Signer.* certificate SHA-256 digest: //p' <<< "$out" | sort -u)"
+            # Mọi người ký phải là chứng thư đã ghim. apksigner in nhiều dạng: "Signer #1 certificate ...",
+            # "V2 Signer: certificate ..." (khi --verbose), "Signer (minSdkVersion=..) certificate ..." (v3.1).
+            digests="$(sed -n -E 's/^.*Signer.*certificate SHA-256 digest: ([0-9a-f]{64})[[:space:]]*$/\1/p' <<< "$out" | sort -u)"
             if [[ -z "$digests" || "$digests" != "$want" ]]; then
               echo "$out"; echo "::error::$src ký bằng chứng thư [$digests], không phải $want"; exit 1
             fi
