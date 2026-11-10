@@ -1,5 +1,5 @@
 {
-  "appName": "LocalSend",
+  "appName": "tsudev-lotus",
   "general": {
     "accept": "Đồng ý",
     "accepted": "Đã đồng ý",
@@ -44,7 +44,7 @@
     "title": "Nhận",
     "infoBox": {
       "ip": "IP:",
-      "port": "Port:",
+      "port": "Cổng:",
       "alias": "Biệt danh:"
     },
     "quickSave": {
@@ -64,7 +64,7 @@
     "picker": {
       "file": "Tập tin",
       "folder": "Thư mục",
-      "media": "Media",
+      "media": "Ảnh/Video",
       "text": "Văn bản",
       "app": "Ứng dụng",
       "clipboard": "Dán"
@@ -106,6 +106,8 @@
       },
       "saveWindowPlacement": "Thoát: Lưu vị trí cửa sổ hiển thị",
       "saveWindowPlacementWindows": "Lưu vị trí cửa sổ sau khi thoát ứng dụng",
+      "alwaysOnTop": "Luôn hiển thị trên cùng",
+      "alwaysOnTopUnavailable": "Không hỗ trợ trên Wayland",
       "minimizeToTray": "Thoát: Ẩn xuống thanh tác vụ",
       "launchAtStartup": "Tự khởi động sau khi đăng nhập",
       "launchMinimized": "Tự khởi động: Khởi động ẩn",
@@ -119,7 +121,7 @@
       "requirePin": "@:webSharePage.requirePin",
       "autoFinish": "Tự động hoàn thành",
       "destination": "Đích đến",
-      "downloads": "(Downloads)",
+      "downloads": "(Thư mục Tải về)",
       "saveToGallery": "Lưu media vào thư viện",
       "saveToHistory": "Lưu vào lịch sử",
       "verifyChecksums": "Xác minh checksum khi nhận tệp"
@@ -132,11 +134,11 @@
     "network": {
       "title": "Mạng",
       "needRestart": "Khởi động lại server để cài đặt có hiệu lực!",
-      "server": "Server",
+      "server": "Máy chủ",
       "alias": "Biệt danh",
       "deviceType": "Loại thiết bị",
       "deviceModel": "Model thiết bị",
-      "port": "Port",
+      "port": "Cổng",
       "network": "Giao diện mạng",
       "networkOptions": {
         "all": "Tất cả",
@@ -333,7 +335,86 @@
     }
   },
   "aliasGenerator(ignoreMissing, ignoreGpt)": {
-    "@info": "Inherits from the English version"
+    "adjectives": [
+      "Đáng Yêu",
+      "Xinh Đẹp",
+      "Khổng Lồ",
+      "Rực Rỡ",
+      "Sạch Sẽ",
+      "Thông Minh",
+      "Ngầu",
+      "Dễ Thương",
+      "Lanh Lợi",
+      "Quyết Tâm",
+      "Năng Động",
+      "Hiệu Quả",
+      "Tuyệt Vời",
+      "Nhanh Nhẹn",
+      "Thân Thiện",
+      "Tươi Mới",
+      "Hiền Lành",
+      "Vui Vẻ",
+      "Chăm Chỉ",
+      "Bản Lĩnh",
+      "Tốt Bụng",
+      "Nhỏ Xinh",
+      "Hiện Đại",
+      "Gọn Gàng",
+      "Kiên Nhẫn",
+      "Lịch Sự",
+      "Mạnh Mẽ",
+      "Nhanh Trí",
+      "Bình Tĩnh",
+      "Thông Thái",
+      "Tự Tin",
+      "Tinh Tế",
+      "Sáng Tạo",
+      "Chu Đáo",
+      "Vững Vàng",
+      "Tài Ba",
+      "Lạc Quan"
+    ],
+    "combination": "{fruit} {adjective}",
+    "fruits": [
+      "Táo",
+      "Bơ",
+      "Chuối",
+      "Mâm Xôi",
+      "Việt Quất",
+      "Bông Cải",
+      "Cà Rốt",
+      "Anh Đào",
+      "Dừa",
+      "Nho",
+      "Chanh",
+      "Xà Lách",
+      "Xoài",
+      "Dưa Lưới",
+      "Nấm",
+      "Hành Tây",
+      "Cam",
+      "Đu Đủ",
+      "Đào",
+      "Lê",
+      "Dứa",
+      "Khoai Tây",
+      "Bí Ngô",
+      "Mâm Xôi Đỏ",
+      "Dâu Tây",
+      "Cà Chua",
+      "Sầu Riêng",
+      "Măng Cụt",
+      "Chôm Chôm",
+      "Thanh Long",
+      "Vải",
+      "Nhãn",
+      "Mít",
+      "Ổi",
+      "Bưởi",
+      "Khế",
+      "Mận",
+      "Hồng Xiêm"
+    ]
   },
   "dialogs": {
     "addFile": {
@@ -346,7 +427,7 @@
     },
     "addressInput": {
       "title": "Nhập địa chỉ",
-      "hashtag": "Hashtag",
+      "hashtag": "Mã thẻ (#)",
       "ip": "Địa chỉ IP",
       "recentlyUsed": "Sử dụng gần đây: "
     },
@@ -380,7 +461,8 @@
       "name": "Biệt danh",
       "auto": "(tự động)",
       "ip": "Địa chỉ IP",
-      "port": "Port"
+      "port": "Cổng",
+      "invalidPort": "Nhập một số nguyên từ 1 đến 65535."
     },
     "fileInfo": {
       "title": "Thông tin tập tin",
@@ -426,7 +508,7 @@
       "title": "Thao Tác Nhanh",
       "counter": "Bộ đếm",
       "prefix": "Tiếp đầu ngữ",
-      "padZero": "Pad with zeros",
+      "padZero": "Thêm số 0 ở đầu",
       "sortBeforeCount": "Sắp xếp theo bảng chữ cái",
       "random": "Ngẫu nhiên"
     },
@@ -492,7 +574,7 @@
     "goToSystemSettings": "Truy cập cài đặt hệ thống",
     "accessLimitedAssets": "Tiếp tục với truy cập bị giới hạn",
     "accessiblePathName": "Các tập tin có thể truy cập",
-    "sTypeAudioLabel": "Audio",
+    "sTypeAudioLabel": "Âm thanh",
     "sTypeImageLabel": "Ảnh",
     "sTypeVideoLabel": "Video",
     "sTypeOtherLabel": "Media khác",
@@ -503,5 +585,21 @@
     "sActionUseCameraHint": "dùng camera",
     "sNameDurationLabel": "thời lượng",
     "sUnitAssetCountLabel": "đếm"
+  },
+  "tsudev": {
+    "version": "Phiên bản: {version}",
+    "copyright": "© {year} tsudev",
+    "basedOn": "Dựa trên LocalSend © Tien Do Nam (Giấy phép Apache 2.0)",
+    "homepage": "Trang chủ",
+    "sourceCode": "Mã nguồn (GitHub)",
+    "upstreamSourceCode": "Dự án gốc: LocalSend (GitHub)",
+    "upstreamCodeberg": "Dự án gốc: LocalSend (Codeberg)",
+    "licenseNotices": "Giấy phép thư viện bên thứ ba",
+    "debugging": "Gỡ lỗi",
+    "selectMultipleApps": "Chọn nhiều ứng dụng",
+    "error": "Lỗi: {message}",
+    "addApps(param=n)": {
+      "other": "Thêm {n} ứng dụng"
+    }
   }
 }

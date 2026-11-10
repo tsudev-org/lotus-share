@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:localsend_app/config/fork_config.dart';
 import 'package:localsend_app/config/theme.dart';
 import 'package:localsend_app/gen/strings.g.dart';
 import 'package:localsend_app/model/persistence/color_mode.dart';
@@ -550,7 +551,7 @@ class SettingsTab extends StatelessWidget {
                   buttonLabel: t.general.open,
                   onTap: () async {
                     await launchUrl(
-                      Uri.parse('https://localsend.org/privacy'),
+                      Uri.parse(forkPrivacyUrl), // tsudev-lotus
                       mode: LaunchMode.externalApplication,
                     );
                   },
@@ -590,13 +591,17 @@ class SettingsTab extends StatelessWidget {
                 .watch(versionProvider)
                 .maybeWhen(
                   data: (version) => Text(
-                    'Version: ${version.combinedString}',
+                    t.tsudev.version(version: version.combinedString),
                     textAlign: TextAlign.center,
                   ),
                   orElse: () => Container(),
                 ),
             Text(
-              '© ${DateTime.now().year} Tien Do Nam',
+              t.tsudev.copyright(year: DateTime.now().year),
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              t.tsudev.basedOn,
               textAlign: TextAlign.center,
             ),
             Center(

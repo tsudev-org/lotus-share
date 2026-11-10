@@ -1,5 +1,5 @@
 {
-  "appName": "LocalSend",
+  "appName": "tsudev-lotus",
   "general": {
     "accept": "Accept",
     "accepted": "Accepted",
@@ -576,5 +576,23 @@
     "sActionUseCameraHint": "use camera",
     "sNameDurationLabel": "duration",
     "sUnitAssetCountLabel": "count"
+  },
+  "tsudev": {
+    "@info": "tsudev-lotus: strings added by the tsudev-lotus fork. Not part of upstream LocalSend.",
+    "version": "Version: {version}",
+    "copyright": "© {year} tsudev",
+    "basedOn": "Based on LocalSend © Tien Do Nam (Apache License 2.0)",
+    "homepage": "Homepage",
+    "sourceCode": "Source code (GitHub)",
+    "upstreamSourceCode": "Original project: LocalSend (GitHub)",
+    "upstreamCodeberg": "Original project: LocalSend (Codeberg)",
+    "licenseNotices": "License notices",
+    "debugging": "Debugging",
+    "selectMultipleApps": "Select multiple apps",
+    "error": "Error: {message}",
+    "addApps(param=n)": {
+      "one": "Add {n} app",
+      "other": "Add {n} apps"
+    }
   }
 }

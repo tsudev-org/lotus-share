@@ -40,7 +40,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 
   // Translations
   @override
-  String get appName => 'LocalSend';
+  String get appName => 'tsudev-lotus';
   @override
   late final _Translations$general$vi general = _Translations$general$vi._(_root);
   @override
@@ -84,6 +84,8 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
   @override
   late final _Translations$whatsNewPage$vi whatsNewPage = _Translations$whatsNewPage$vi._(_root);
   @override
+  late final _Translations$aliasGenerator$vi aliasGenerator = _Translations$aliasGenerator$vi._(_root);
+  @override
   late final _Translations$dialogs$vi dialogs = _Translations$dialogs$vi._(_root);
   @override
   late final _Translations$sanitization$vi sanitization = _Translations$sanitization$vi._(_root);
@@ -93,6 +95,8 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
   late final _Translations$web$vi web = _Translations$web$vi._(_root);
   @override
   late final _Translations$assetPicker$vi assetPicker = _Translations$assetPicker$vi._(_root);
+  @override
+  late final _Translations$tsudev$vi tsudev = _Translations$tsudev$vi._(_root);
 }
 
 // Path: general
@@ -577,6 +581,98 @@ class _Translations$whatsNewPage$vi extends Translations$whatsNewPage$en {
   late final _Translations$whatsNewPage$changes$vi changes = _Translations$whatsNewPage$changes$vi._(_root);
 }
 
+// Path: aliasGenerator
+class _Translations$aliasGenerator$vi extends Translations$aliasGenerator$en {
+  _Translations$aliasGenerator$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+  final TranslationsVi _root; // ignore: unused_field
+
+  // Translations
+  @override
+  List<String> get adjectives => [
+    'Đáng Yêu',
+    'Xinh Đẹp',
+    'Khổng Lồ',
+    'Rực Rỡ',
+    'Sạch Sẽ',
+    'Thông Minh',
+    'Ngầu',
+    'Dễ Thương',
+    'Lanh Lợi',
+    'Quyết Tâm',
+    'Năng Động',
+    'Hiệu Quả',
+    'Tuyệt Vời',
+    'Nhanh Nhẹn',
+    'Thân Thiện',
+    'Tươi Mới',
+    'Hiền Lành',
+    'Vui Vẻ',
+    'Chăm Chỉ',
+    'Bản Lĩnh',
+    'Tốt Bụng',
+    'Nhỏ Xinh',
+    'Hiện Đại',
+    'Gọn Gàng',
+    'Kiên Nhẫn',
+    'Lịch Sự',
+    'Mạnh Mẽ',
+    'Nhanh Trí',
+    'Bình Tĩnh',
+    'Thông Thái',
+    'Tự Tin',
+    'Tinh Tế',
+    'Sáng Tạo',
+    'Chu Đáo',
+    'Vững Vàng',
+    'Tài Ba',
+    'Lạc Quan',
+  ];
+  @override
+  String combination({required Object fruit, required Object adjective}) => '${fruit} ${adjective}';
+  @override
+  List<String> get fruits => [
+    'Táo',
+    'Bơ',
+    'Chuối',
+    'Mâm Xôi',
+    'Việt Quất',
+    'Bông Cải',
+    'Cà Rốt',
+    'Anh Đào',
+    'Dừa',
+    'Nho',
+    'Chanh',
+    'Xà Lách',
+    'Xoài',
+    'Dưa Lưới',
+    'Nấm',
+    'Hành Tây',
+    'Cam',
+    'Đu Đủ',
+    'Đào',
+    'Lê',
+    'Dứa',
+    'Khoai Tây',
+    'Bí Ngô',
+    'Mâm Xôi Đỏ',
+    'Dâu Tây',
+    'Cà Chua',
+    'Sầu Riêng',
+    'Măng Cụt',
+    'Chôm Chôm',
+    'Thanh Long',
+    'Vải',
+    'Nhãn',
+    'Mít',
+    'Ổi',
+    'Bưởi',
+    'Khế',
+    'Mận',
+    'Hồng Xiêm',
+  ];
+}
+
 // Path: dialogs
 class _Translations$dialogs$vi extends Translations$dialogs$en {
   _Translations$dialogs$vi._(TranslationsVi root) : this._root = root, super.internal(root);
@@ -733,7 +829,7 @@ class _Translations$assetPicker$vi extends Translations$assetPicker$en {
   @override
   String get accessiblePathName => 'Các tập tin có thể truy cập';
   @override
-  String get sTypeAudioLabel => 'Audio';
+  String get sTypeAudioLabel => 'Âm thanh';
   @override
   String get sTypeImageLabel => 'Ảnh';
   @override
@@ -756,6 +852,42 @@ class _Translations$assetPicker$vi extends Translations$assetPicker$en {
   String get sUnitAssetCountLabel => 'đếm';
 }
 
+// Path: tsudev
+class _Translations$tsudev$vi extends Translations$tsudev$en {
+  _Translations$tsudev$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+  final TranslationsVi _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String version({required Object version}) => 'Phiên bản: ${version}';
+  @override
+  String copyright({required Object year}) => '© ${year} tsudev';
+  @override
+  String get basedOn => 'Dựa trên LocalSend © Tien Do Nam (Giấy phép Apache 2.0)';
+  @override
+  String get homepage => 'Trang chủ';
+  @override
+  String get sourceCode => 'Mã nguồn (GitHub)';
+  @override
+  String get upstreamSourceCode => 'Dự án gốc: LocalSend (GitHub)';
+  @override
+  String get upstreamCodeberg => 'Dự án gốc: LocalSend (Codeberg)';
+  @override
+  String get licenseNotices => 'Giấy phép thư viện bên thứ ba';
+  @override
+  String get debugging => 'Gỡ lỗi';
+  @override
+  String get selectMultipleApps => 'Chọn nhiều ứng dụng';
+  @override
+  String error({required Object message}) => 'Lỗi: ${message}';
+  @override
+  String addApps({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('vi'))(
+    n,
+    other: 'Thêm ${n} ứng dụng',
+  );
+}
+
 // Path: receiveTab.infoBox
 class _Translations$receiveTab$infoBox$vi extends Translations$receiveTab$infoBox$en {
   _Translations$receiveTab$infoBox$vi._(TranslationsVi root) : this._root = root, super.internal(root);
@@ -766,7 +898,7 @@ class _Translations$receiveTab$infoBox$vi extends Translations$receiveTab$infoBo
   @override
   String get ip => 'IP:';
   @override
-  String get port => 'Port:';
+  String get port => 'Cổng:';
   @override
   String get alias => 'Biệt danh:';
 }
@@ -813,7 +945,7 @@ class _Translations$sendTab$picker$vi extends Translations$sendTab$picker$en {
   @override
   String get folder => 'Thư mục';
   @override
-  String get media => 'Media';
+  String get media => 'Ảnh/Video';
   @override
   String get text => 'Văn bản';
   @override
@@ -865,6 +997,10 @@ class _Translations$settingsTab$general$vi extends Translations$settingsTab$gene
   @override
   String get saveWindowPlacementWindows => 'Lưu vị trí cửa sổ sau khi thoát ứng dụng';
   @override
+  String get alwaysOnTop => 'Luôn hiển thị trên cùng';
+  @override
+  String get alwaysOnTopUnavailable => 'Không hỗ trợ trên Wayland';
+  @override
   String get minimizeToTray => 'Thoát: Ẩn xuống thanh tác vụ';
   @override
   String get launchAtStartup => 'Tự khởi động sau khi đăng nhập';
@@ -896,7 +1032,7 @@ class _Translations$settingsTab$receive$vi extends Translations$settingsTab$rece
   @override
   String get destination => 'Đích đến';
   @override
-  String get downloads => '(Downloads)';
+  String get downloads => '(Thư mục Tải về)';
   @override
   String get saveToGallery => 'Lưu media vào thư viện';
   @override
@@ -932,7 +1068,7 @@ class _Translations$settingsTab$network$vi extends Translations$settingsTab$netw
   @override
   String get needRestart => 'Khởi động lại server để cài đặt có hiệu lực!';
   @override
-  String get server => 'Server';
+  String get server => 'Máy chủ';
   @override
   String get alias => 'Biệt danh';
   @override
@@ -940,7 +1076,7 @@ class _Translations$settingsTab$network$vi extends Translations$settingsTab$netw
   @override
   String get deviceModel => 'Model thiết bị';
   @override
-  String get port => 'Port';
+  String get port => 'Cổng';
   @override
   String get network => 'Giao diện mạng';
   @override
@@ -1165,7 +1301,7 @@ class _Translations$dialogs$addressInput$vi extends Translations$dialogs$address
   @override
   String get title => 'Nhập địa chỉ';
   @override
-  String get hashtag => 'Hashtag';
+  String get hashtag => 'Mã thẻ (#)';
   @override
   String get ip => 'Địa chỉ IP';
   @override
@@ -1268,7 +1404,9 @@ class _Translations$dialogs$favoriteEditDialog$vi extends Translations$dialogs$f
   @override
   String get ip => 'Địa chỉ IP';
   @override
-  String get port => 'Port';
+  String get port => 'Cổng';
+  @override
+  String get invalidPort => 'Nhập một số nguyên từ 1 đến 65535.';
 }
 
 // Path: dialogs.fileInfo
@@ -1411,7 +1549,7 @@ class _Translations$dialogs$quickActions$vi extends Translations$dialogs$quickAc
   @override
   String get prefix => 'Tiếp đầu ngữ';
   @override
-  String get padZero => 'Pad with zeros';
+  String get padZero => 'Thêm số 0 ở đầu';
   @override
   String get sortBeforeCount => 'Sắp xếp theo bảng chữ cái';
   @override

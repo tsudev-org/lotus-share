@@ -43,8 +43,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
   // Translations
 
-  /// en: 'LocalSend'
-  String get appName => 'LocalSend';
+  /// en: 'tsudev-lotus'
+  String get appName => 'tsudev-lotus';
 
   late final Translations$general$en general = Translations$general$en.internal(_root);
   late final Translations$receiveTab$en receiveTab = Translations$receiveTab$en.internal(_root);
@@ -73,6 +73,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   late final Translations$tray$en tray = Translations$tray$en.internal(_root);
   late final Translations$web$en web = Translations$web$en.internal(_root);
   late final Translations$assetPicker$en assetPicker = Translations$assetPicker$en.internal(_root);
+  late final Translations$tsudev$en tsudev = Translations$tsudev$en.internal(_root);
 }
 
 // Path: general
@@ -945,6 +946,55 @@ class Translations$assetPicker$en {
 
   /// en: 'count'
   String get sUnitAssetCountLabel => 'count';
+}
+
+// Path: tsudev
+class Translations$tsudev$en {
+  Translations$tsudev$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Version: {version}'
+  String version({required Object version}) => 'Version: ${version}';
+
+  /// en: '© {year} tsudev'
+  String copyright({required Object year}) => '© ${year} tsudev';
+
+  /// en: 'Based on LocalSend © Tien Do Nam (Apache License 2.0)'
+  String get basedOn => 'Based on LocalSend © Tien Do Nam (Apache License 2.0)';
+
+  /// en: 'Homepage'
+  String get homepage => 'Homepage';
+
+  /// en: 'Source code (GitHub)'
+  String get sourceCode => 'Source code (GitHub)';
+
+  /// en: 'Original project: LocalSend (GitHub)'
+  String get upstreamSourceCode => 'Original project: LocalSend (GitHub)';
+
+  /// en: 'Original project: LocalSend (Codeberg)'
+  String get upstreamCodeberg => 'Original project: LocalSend (Codeberg)';
+
+  /// en: 'License notices'
+  String get licenseNotices => 'License notices';
+
+  /// en: 'Debugging'
+  String get debugging => 'Debugging';
+
+  /// en: 'Select multiple apps'
+  String get selectMultipleApps => 'Select multiple apps';
+
+  /// en: 'Error: {message}'
+  String error({required Object message}) => 'Error: ${message}';
+
+  /// en: '(one) {Add {n} app} (other) {Add {n} apps}'
+  String addApps({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(
+    n,
+    one: 'Add ${n} app',
+    other: 'Add ${n} apps',
+  );
 }
 
 // Path: receiveTab.infoBox
