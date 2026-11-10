@@ -5,8 +5,6 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
-- [ ] Chủ dự án: duyệt + merge `tsudev-org/tsudev-standards#48`, gắn nhãn `v3.3.0`; sau đó ở repo này
-      `./scripts/sync-standards.sh --ref v3.3.0` và bỏ `continue-on-error` ở bước cổng quy ước (`fork-ci.yml`).
 - [ ] Chủ dự án: merge PR `chore/khoi-tao-fork` vào `main`, bật bảo vệ nhánh `main` (PR + check "Kiểm tra bản fork", "Bảo mật").
 - [ ] Phát hành bản đầu `v1.18.2-lotus.1` theo `docs/vi/PHAT-HANH.md` (cần secret ở trên). Theo dõi lần chạy đầu của
       `release-lotus.yml`: các bước Windows/Linux/Android/macOS chưa từng chạy trên runner thật.
@@ -23,6 +21,7 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 10/11/2026 - Quy ước v3.3.0 (tsudev-standards#48 merge, nhãn v3.3.0) đồng bộ vào repo; cổng quy ước trong CI chặn thật (bỏ `continue-on-error`), em-dash kế thừa được miễn theo dòng.
 - 10/11/2026 - Chủ dự án đẩy khóa ký APK lên GitHub Secrets (`ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, 05:20 UTC); dấu vân tay khớp giá trị ghim trong `release-lotus.yml`.
 - 10/11/2026 (phiên 2) - Repo `tsudev-org/tsudev-lotus` (công khai): secret scanning + push protection, báo lỗi bảo
   mật riêng tư, Dependabot alerts/security updates đã bật TRƯỚC lần push đầu; homepage `https://lotus.tsudev.com`

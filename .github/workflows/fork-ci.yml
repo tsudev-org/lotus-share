@@ -60,10 +60,8 @@ jobs:
           persist-credentials: false
       - name: Bản sao quy ước không bị sửa
         run: ./scripts/sync-standards.sh --check
-      # Còn TRƯỢT mục 4 (em-dash) vì mã + bản dịch kế thừa upstream; quy ước v3.2.0 chưa có cơ chế miễn trừ
-      # (xem AGENTS.md mục B.4). Bỏ continue-on-error khi tsudev-standards có miễn trừ cho mã upstream.
+      # Em-dash kế thừa upstream được miễn theo dòng (quy ước v3.3.0, ngoại lệ 3, `.standards-upstream`).
       - name: Cổng kiểm quy ước
-        continue-on-error: true
         env:
           STANDARDS_VERIFY_UPSTREAM: '1'   # quy ước v3.3.0: xác minh .standards-upstream với github.com/localsend/localsend
         run: ./scripts/check-standards.sh

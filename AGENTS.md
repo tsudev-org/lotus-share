@@ -74,7 +74,7 @@ enum). Chạy `python3 -I tools/fix_slang_format.py` để trả về đúng đ�
 
 | Lệch ở đâu | Vì sao | Kế hoạch |
 | --- | --- | --- |
-| Em-dash trong mã + bản dịch kế thừa upstream (71 dòng) | Sửa sẽ gây xung đột mỗi lần gộp upstream | Ngoại lệ 3 của quy ước v3.3.0 (`.standards-upstream`, PR tsudev-standards#48). Tới khi có nhãn v3.3.0: bước cổng quy ước trong CI còn `continue-on-error` |
+| Em-dash trong mã + bản dịch kế thừa upstream (71 dòng) | Sửa sẽ gây xung đột mỗi lần gộp upstream | Ngoại lệ 3 của quy ước v3.3.0 (`.standards-upstream`); CI chặn thật, xác minh trực tuyến. Gộp upstream xong MUST nâng `ref` |
 | `namespace`/package Kotlin `org.localsend.localsend_app`, tên kênh nền tảng, gói Dart `localsend_app`, crate `localsend` | Nội bộ, người dùng không thấy; đổi thì mỗi lần gộp upstream xung đột hàng trăm tệp | Giữ. Định danh cài đặt đã đổi: xem `docs/vi/PHAT-HANH.md` mục 1 |
 | Workflow của upstream (`build_*.yml`, `release.yml`) | Cần secret ký mã của LocalSend | Không dùng; phát hành bằng `release-lotus.yml` |
 
