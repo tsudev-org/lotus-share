@@ -111,7 +111,7 @@ Future<bool> isAutoStartHidden() async {
   }
 }
 
-const _windowsRegistryKeyValue = 'LocalSend';
+const _windowsRegistryKeyValue = 'tsudev-lotus'; // tsudev-lotus
 
 RegistryKey _getWindowsRegistryKey() {
   return Registry.openPath(

@@ -1,7 +1,7 @@
-display_name: LocalSend
+display_name: tsudev-lotus
 packager: Tienisto
 packagerEmail: dev.tien.donam@gmail.com
-url: https://localsend.org
+url: https://lotus.tsudev.com
 buildArch: x86_64
 license: MIT
 
@@ -16,8 +16,8 @@ keywords:
   - LAN
   - Files
 
-generic_name: An open source cross-platform alternative to AirDrop
-summary: Share files easily with LocalSend
+generic_name: Chia sẻ tệp trong mạng nội bộ
+summary: Chia sẻ tệp trong mạng nội bộ, không cần Internet (tương thích LocalSend)
 group: Applications/Utilities
 
 categories:

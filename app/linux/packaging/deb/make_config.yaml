@@ -1,11 +1,8 @@
-display_name: LocalSend
-package_name: localsend
+display_name: tsudev-lotus
+package_name: tsudev-lotus
 maintainer:
-  name: Tienisto
-  email: dev.tien.donam@gmail.com
-co_authors:
-  - name: TheGB0077
-    email: gb.lima.dev@gmail.com
+  name: tsudev
+  email: noreply@tsudev.com
 priority: optional
 section: x11
 installed_size: 30600
@@ -24,16 +21,16 @@ dependencies:
   - xdg-user-dirs
 
 postinstall_scripts:
-  - echo "Installed Localsend successfully"
+  - echo "Đã cài tsudev-lotus"
 postuninstall_scripts:
-  - if [ "$1" = "remove" ]; then echo "Sorry to see you go :("; fi
+  - if [ "$1" = "remove" ]; then echo "Đã gỡ tsudev-lotus"; fi
 
 keywords:
   - Sharing
   - LAN
   - Files
 
-generic_name: An open source cross-platform alternative to AirDrop
+generic_name: Chia sẻ tệp trong mạng nội bộ
 
 categories:
   - GTK
@@ -45,4 +42,4 @@ startup_notify: true
 # Must match the GTK application id set in linux/CMakeLists.txt, otherwise the
 # desktop environment cannot map the running window back to this desktop entry.
 # https://github.com/localsend/localsend/pull/3355
-startup_wm_class: org.localsend.localsend_app
+startup_wm_class: com.tsudev.lotus

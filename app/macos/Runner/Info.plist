@@ -7,9 +7,9 @@
     <key>AppIdentifierPrefix</key>
 	<string>$(AppIdentifierPrefix)</string>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<string>vi</string>
 	<key>CFBundleDisplayName</key>
-    <string>LocalSend</string>
+    <string>tsudev-lotus</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIconFile</key>
@@ -105,15 +105,15 @@
     </array>
 
 	<key>NSPhotoLibraryUsageDescription</key>
-    <string>The app needs photo library access so that the user can select photos to share.</string>
+    <string>Ứng dụng cần quyền truy cập thư viện ảnh để bạn chọn ảnh, video muốn chia sẻ.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>The app saves received media to the photo library.</string>
+    <string>Ứng dụng lưu ảnh, video nhận được vào thư viện ảnh.</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>The app requires the local IP to communicate.</string>
+    <string>Ứng dụng cần địa chỉ IP trong mạng nội bộ để kết nối với thiết bị khác.</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>The app requires the local IP to communicate.</string>
+    <string>Ứng dụng cần địa chỉ IP trong mạng nội bộ để kết nối với thiết bị khác.</string>
     <key>NSLocalNetworkUsageDescription</key>
-    <string>The app uses the local network to find and connect to nearby devices.</string>
+    <string>Ứng dụng dùng mạng nội bộ để tìm và kết nối với các thiết bị ở gần.</string>
     <key>NSBonjourServices</key>
     <array>
         <string>_http._tcp</string>

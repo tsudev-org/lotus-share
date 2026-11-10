@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localsend_app/config/fork_config.dart';
 import 'package:localsend_app/gen/assets.gen.dart';
 
 class LocalSendLogo extends StatelessWidget {
@@ -8,15 +9,10 @@ class LocalSendLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final logo = ColorFiltered(
-      colorFilter: ColorFilter.mode(
-        Theme.of(context).colorScheme.primary,
-        BlendMode.srcATop,
-      ),
-      child: Assets.img.logo512.image(
-        width: 200,
-        height: 200,
-      ),
+    // tsudev-lotus: dấu hiệu tsudev giữ nguyên màu (BRAND_ASSETS mục 8 cấm đổi màu), không tô màu chủ đạo như logo gốc.
+    final logo = Assets.img.logo512.image(
+      width: 200,
+      height: 200,
     );
 
     if (withText) {
@@ -24,7 +20,7 @@ class LocalSendLogo extends StatelessWidget {
         children: [
           logo,
           const Text(
-            'LocalSend',
+            forkProductName, // tsudev-lotus
             style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
