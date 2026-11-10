@@ -5,8 +5,6 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
-- [ ] Chủ dự án: merge PR #11 (`gh pr merge 11 -R tsudev-org/tsudev-lotus --merge --auto --delete-branch`), rồi
-      `cd website && npm run deploy` (bỏ gói CLI Windows hiện trùng trên trang Tải về).
 - [ ] **Đầu tháng 12/2026 - ký mã Windows (SignPath Foundation) + Apple (macOS công chứng, iOS TestFlight)**, khi chủ dự
       án đã có Apple Developer. Kế hoạch từng bước: `docs/vi/KE-HOACH-KY-MA-12-2026.md`. Việc làm được NGAY (tháng
       11, không cần Apple): đọc điều kiện SignPath (mục 1.1), làm trang chính sách ký mã (mục 1.3), soạn sẵn nội dung
@@ -22,6 +20,8 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 10/11/2026 - Phiếu `20261110-05` (giao diện đen + tím kiểu Supabase): website + app (mặc định Tối, màu nhấn tím).
+  Chi tiết: mục Kết quả của phiếu. PR #11 đã merge; trang Tải về production không còn gói trùng (đã đo).
 - 10/11/2026 - **Phát hành công khai `v1.18.2-lotus.2`** (bản mới nhất, 15 tệp): Windows exe/zip, Linux AppImage/zsync/
   tar.gz, 4 APK ký khóa tsudev, macOS DMG, CLI Linux/Windows, SBOM, SHA256SUMS + chữ ký Sigstore; chứng thực SLSA.
   Đã kiểm trên bản phát hành thật: SHA256SUMS khớp, `gh attestation verify` trỏ workflow tại nhãn, CLI chạy và in tiếng

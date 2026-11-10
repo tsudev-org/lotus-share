@@ -86,3 +86,9 @@ jobs:
       - run: npm run build
         env:
           GITHUB_TOKEN: ${{ github.token }}
+      - name: Cài Chromium cho kiểm tra trong trình duyệt
+        run: npx playwright install --with-deps chromium
+      - name: Kiểm tra khả năng truy cập (axe-core, WCAG 2.2 AA, Sáng + Tối, CSP production)
+        run: npm run check:a11y
+      - name: Kiểm tra bộ chọn giao diện (3 lựa chọn, mặc định Tối, không nháy màu, bàn phím, CSP production)
+        run: npm run check:theme

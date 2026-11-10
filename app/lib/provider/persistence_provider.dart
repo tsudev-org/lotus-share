@@ -217,7 +217,7 @@ class PersistenceService {
   static Future<void> _initColorSetting(SharedPreferences prefs, bool supportsDynamicColors) async {
     await prefs.setString(
       _colorKey,
-      checkPlatform([TargetPlatform.android]) && supportsDynamicColors ? ColorMode.system.name : ColorMode.localsend.name,
+      ColorMode.localsend.name, // tsudev: tím của hệ tsudev ở mọi nền tảng; màu động Android vẫn chọn được trong Cài đặt
     );
   }
 
@@ -295,9 +295,9 @@ class PersistenceService {
   ThemeMode getTheme() {
     final value = _prefs.getString(_themeKey);
     if (value == null) {
-      return ThemeMode.system;
+      return ThemeMode.dark; // tsudev: mặc định Tối cho người dùng mới (phiếu 20261110-05)
     }
-    return ThemeMode.values.firstWhereOrNull((theme) => theme.name == value) ?? ThemeMode.system;
+    return ThemeMode.values.firstWhereOrNull((theme) => theme.name == value) ?? ThemeMode.dark;
   }
 
   Future<void> setTheme(ThemeMode theme) async {
@@ -320,7 +320,7 @@ class PersistenceService {
     final value = _prefs.getString(_customColorKey);
     final rgb = value == null ? null : int.tryParse(value, radix: 16);
     if (rgb == null) {
-      return Colors.teal;
+      return const Color(0xFFA970FF); // tsudev: tím của hệ tsudev
     }
     return Color(0xff000000 | rgb);
   }

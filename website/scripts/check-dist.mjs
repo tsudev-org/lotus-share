@@ -1,5 +1,6 @@
 // Kiểm tra bản build (ECOSYSTEM_IDENTITY mục 2.2 và 4): mọi trang có title đúng khuôn, og:site_name = tsudev, canonical
-// không www, description 120-160 ký tự, không <script> hay CSS nội tuyến (CSP), liên kết mở tab mới có rel đủ,
+// không www, description 120-160 ký tự, không CSS nội tuyến (CSP), script duy nhất là /theme.js nạp chặn trong <head>
+// trước stylesheet và được CSP cho phép, liên kết mở tab mới có rel đủ,
 // chỉ dùng gạch ngang ngắn trong chữ hiển thị (AGENTS.md mục 7), liên kết nội bộ không gãy.
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
@@ -24,7 +25,19 @@ function kiemTra(tep, html) {
   const mota = html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '';
   const dai = [...mota.replace(/&[a-z#0-9]+;/g, 'x')].length;
   if (dai < 120 || dai > 160) loi.push(`${ten}: description ${dai} ký tự (cần 120-160)`);
-  if (/<script(?![^>]*type="application\/ld\+json")[^>]*>/.test(html)) loi.push(`${ten}: có <script>`);
+  // Script: đúng một thẻ <script src="/theme.js"></script> (không defer/async/module: phải chặn để không nháy màu),
+  // nằm trong <head> và trước stylesheet đầu tiên. Script nội tuyến bị CSP chặn im lặng ở production.
+  const theScript = [...html.matchAll(/<script(?![^>]*type="application\/ld\+json")[^>]*>/g)].map((m) => m[0]);
+  if (theScript.length !== 1 || theScript[0] !== '<script src="/theme.js">') loi.push(`${ten}: script phải đúng một <script src="/theme.js">: ${theScript.join(' ')}`);
+  const viTriScript = html.indexOf('<script src="/theme.js">');
+  const viTriCss = html.search(/<link[^>]*rel="stylesheet"/);
+  if (viTriScript < 0 || viTriScript > html.indexOf('</head>') || (viTriCss >= 0 && viTriScript > viTriCss)) loi.push(`${ten}: theme.js phải nằm trong <head>, trước stylesheet`);
+  // Bộ chọn giao diện (phiếu 20261110-05): đúng ba lựa chọn, radiogroup, nằm ở chân trang; mặc định Tối.
+  const luaChon = [...html.matchAll(/data-chon-giao-dien="([a-z]+)"/g)].map((m) => m[1]).join(',');
+  if (luaChon !== 'light,dark,system') loi.push(`${ten}: bộ chọn giao diện cần đúng light,dark,system: ${luaChon}`);
+  const viTriChon = html.indexOf('id="giao-dien"');
+  if (viTriChon < html.indexOf('<footer') || !/id="giao-dien" role="radiogroup" aria-label="Giao diện"/.test(html)) loi.push(`${ten}: bộ chọn giao diện phải là radiogroup trong <footer>`);
+  if (!/<html lang="vi" data-theme="dark">/.test(html)) loi.push(`${ten}: mặc định phải là data-theme="dark"`);
   if (/<style[\s>]/.test(html) || / style="/.test(html)) loi.push(`${ten}: có CSS nội tuyến (CSP chặn)`);
   for (const a of html.matchAll(/<a [^>]*target="_blank"[^>]*>/g)) {
     if (!a[0].includes('rel="noopener noreferrer"')) loi.push(`${ten}: thiếu rel noopener noreferrer: ${a[0]}`);
@@ -38,6 +51,12 @@ function kiemTra(tep, html) {
   for (const m of html.matchAll(/(?:href|src)="(\/[^"#?]*)/g)) lienKet.push([ten, m[1]]);
 }
 duyet(dist);
+// CSP của production (public/_headers -> dist/_headers): cho phép script cùng nguồn, không 'unsafe-inline'/'unsafe-eval'
+const csp = readFileSync(join(dist, '_headers'), 'utf8').match(/Content-Security-Policy:\s*(.+)/)?.[1] ?? '';
+const scriptSrc = csp.split(';').map((x) => x.trim()).find((x) => x.startsWith('script-src ')) ?? '';
+if (!scriptSrc.split(/\s+/).includes("'self'")) loi.push(`_headers: CSP thiếu script-src 'self' (theme.js sẽ bị chặn): ${csp}`);
+if (/'unsafe-(inline|eval)'/.test(csp)) loi.push(`_headers: CSP không được có 'unsafe-inline'/'unsafe-eval'`);
+if (!existsSync(join(dist, 'theme.js'))) loi.push('thiếu dist/theme.js');
 for (const [ten, duong] of lienKet) {
   const dich = join(dist, decodeURI(duong));
   if (!existsSync(dich) && !existsSync(join(dich, 'index.html'))) loi.push(`${ten}: liên kết nội bộ gãy: ${duong}`);
