@@ -21,6 +21,12 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 10/11/2026 - Quy trình phát hành chạy xanh trọn vẹn (build thử run 42804114546, nhánh `fix/phat-hanh-lan-dau`):
+  13 gói (Windows exe/zip, Linux AppImage/zsync/tar.gz, 4 APK ký khóa tsudev, macOS DMG, CLI Linux/Windows, SBOM),
+  SHA256SUMS ký Sigstore, chứng thực SLSA v1 cho 15 tệp (Rekor). Đã tự kiểm: `gh attestation verify` đạt với tệp thật,
+  từ chối tệp sửa 1 byte. Lần gắn nhãn `v1.18.2-lotus.1` trước đó hỏng (nhãn bất biến) -> phát hành thật là `-lotus.2`.
+  Lỗi đã sửa: chú thích cuối dòng CMake, Gradle 8.14.3 + Kotlin 2.2.20 (mức tối thiểu Flutter 3.47.9), macOS ký ad-hoc +
+  Xcode 26, AppImage thử lại khi máy chủ Ubuntu đồng bộ, bước kiểm chữ ký APK (định dạng apksigner, biến đè nhau).
 - 10/11/2026 - Quy ước v3.3.0 (tsudev-standards#48 merge, nhãn v3.3.0) đồng bộ vào repo; cổng quy ước trong CI chặn thật (bỏ `continue-on-error`), em-dash kế thừa được miễn theo dòng.
 - 10/11/2026 - Chủ dự án đẩy khóa ký APK lên GitHub Secrets (`ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`, 05:20 UTC); dấu vân tay khớp giá trị ghim trong `release-lotus.yml`.
 - 10/11/2026 (phiên 2) - Repo `tsudev-org/tsudev-lotus` (công khai): secret scanning + push protection, báo lỗi bảo

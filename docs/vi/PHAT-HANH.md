@@ -68,7 +68,8 @@ apksigner verify --print-certs tsudev-lotus-<phiên bản>-android-universal.apk
 
 - **Windows**: chưa ký Authenticode, SmartScreen cảnh báo ở lần chạy đầu. Hướng xử lý không tốn phí: đăng ký SignPath
   Foundation (miễn phí cho mã nguồn mở) hoặc Azure Trusted Signing khi có ngân sách; workflow chỉ cần bỏ `/DSkipSignTool`.
-- **macOS**: ký ad-hoc, chưa công chứng; Gatekeeper yêu cầu "Vẫn mở". Cần Apple Developer Program (99 USD/năm).
+- **macOS**: ký ad-hoc (dự án Xcode đặt `CODE_SIGN_IDENTITY = "-"`, ký thủ công, không cần đội ký Apple), chưa công
+  chứng; Gatekeeper yêu cầu "Vẫn mở". Có Developer ID thì đổi lại ký tự động + `DEVELOPMENT_TEAM`.
 - **iOS**: chưa phát hành được (App Store/TestFlight cần Apple Developer Program). Người dùng iOS dùng LocalSend trên App
   Store - tương thích giao thức với tsudev-lotus.
 - **MSIX / menu chia sẻ Windows 11**: bỏ khỏi bản fork (gói thưa cần chứng thư ký mã); menu chuột phải dùng "Gửi tới".

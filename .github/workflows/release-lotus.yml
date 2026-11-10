@@ -138,7 +138,21 @@ jobs:
             install -Dm644 "app/assets/img/logo-$s.png" "AppDir/usr/share/icons/hicolor/${s}x${s}/apps/tsudev-lotus.png"
           done
           sed "s/^    version: .*/    version: $V/" support/build/appimage/AppImageBuilder_x86_64.yml > AppImageBuilder.yml
+      # appimage-builder chạy apt-get bên trong; máy chủ gói Ubuntu đôi khi đang đồng bộ ("Mirror sync in progress")
+      # nên thử lại một lần sau 2 phút thay vì đánh trượt cả bản phát hành vì lỗi tạm thời phía Ubuntu.
       - name: Dựng AppImage
+        id: appimage1
+        continue-on-error: true
+        uses: AppImageCrafters/build-appimage@57c3bc6963f870ce3be103117de5b5e33ffbaeb6
+        env:
+          APP_VERSION: ${{ needs.prepare.outputs.version }}
+        with:
+          recipe: ./AppImageBuilder.yml
+      - name: Chờ trước khi thử lại AppImage
+        if: ${{ steps.appimage1.outcome == 'failure' }}
+        run: sleep 120 && sudo rm -rf appimage-build
+      - name: Dựng AppImage (thử lại)
+        if: ${{ steps.appimage1.outcome == 'failure' }}
         uses: AppImageCrafters/build-appimage@57c3bc6963f870ce3be103117de5b5e33ffbaeb6
         env:
           APP_VERSION: ${{ needs.prepare.outputs.version }}
@@ -195,12 +209,18 @@ jobs:
           apksigner="$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)/apksigner"
           want="$(printf '%s' "$ANDROID_CERT_SHA256" | tr -d ' :' | tr 'A-F' 'a-f')"
           mkdir -p dist
-          out=app/build/app/outputs/flutter-apk
+          apkdir=app/build/app/outputs/flutter-apk
           for pair in "app-release:universal" "app-arm64-v8a-release:arm64-v8a" "app-armeabi-v7a-release:armeabi-v7a" "app-x86_64-release:x86_64"; do
-            src="$out/${pair%%:*}.apk"; dst="dist/tsudev-lotus-$V-android-${pair##*:}.apk"
-            "$apksigner" verify --verbose "$src" | grep -q 'Verified using v2 scheme (APK Signature Scheme v2): true'
-            got="$("$apksigner" verify --print-certs "$src" | sed -n 's/^Signer #1 certificate SHA-256 digest: //p')"
-            [[ "$got" == "$want" ]] || { echo "::error::$src ký bằng chứng thư $got, không phải $want"; exit 1; }
+            src="$apkdir/${pair%%:*}.apk"; dst="dist/tsudev-lotus-$V-android-${pair##*:}.apk"
+            out="$("$apksigner" verify --verbose --print-certs "$src")"
+            grep -q 'Verified using v2 scheme (APK Signature Scheme v2): true' <<< "$out" \
+              || { echo "$out"; echo "::error::$src chưa ký lược đồ v2"; exit 1; }
+            # Mọi người ký phải là chứng thư đã ghim. apksigner in nhiều dạng: "Signer #1 certificate ...",
+            # "V2 Signer: certificate ..." (khi --verbose), "Signer (minSdkVersion=..) certificate ..." (v3.1).
+            digests="$(sed -n -E 's/^.*Signer.*certificate SHA-256 digest: ([0-9a-f]{64})[[:space:]]*$/\1/p' <<< "$out" | sort -u)"
+            if [[ -z "$digests" || "$digests" != "$want" ]]; then
+              echo "$out"; echo "::error::$src ký bằng chứng thư [$digests], không phải $want"; exit 1
+            fi
             cp "$src" "$dst"
           done
       - name: Xóa khóa khỏi máy chạy
@@ -230,6 +250,14 @@ jobs:
           git clone --depth 1 -b "$FLUTTER_VERSION" https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
           test "$(git -C "$RUNNER_TEMP/flutter" rev-parse HEAD)" = "$FLUTTER_COMMIT"
           echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+      # connectivity_plus dùng API của macOS 26 SDK (NWPath.isUltraConstrained): cần Xcode 26 trở lên.
+      - name: Chọn Xcode 26 (mới nhất có trên máy chạy)
+        run: |
+          set -euo pipefail
+          xc="$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1 || true)"
+          [[ -n "$xc" ]] || { echo "::error::Máy chạy không có Xcode 26"; ls -d /Applications/Xcode*.app; exit 1; }
+          sudo xcode-select -s "$xc/Contents/Developer"
+          xcodebuild -version
       - name: Build
         working-directory: app
         run: |
