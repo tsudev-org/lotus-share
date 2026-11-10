@@ -115,7 +115,7 @@ class _Translations$general$vi extends Translations$general$en {
   @override
   String get advanced => 'Nâng cao';
   @override
-  String get cancel => 'Thoát';
+  String get cancel => 'Hủy';
   @override
   String get close => 'Đóng';
   @override
@@ -163,7 +163,7 @@ class _Translations$general$vi extends Translations$general$en {
   @override
   String get renamed => 'Đã đổi tên';
   @override
-  String get reset => 'Thiết lập lại';
+  String get reset => 'Hoàn tác thay đổi';
   @override
   String get restart => 'Khởi động lại';
   @override
@@ -231,9 +231,9 @@ class _Translations$sendTab$vi extends Translations$sendTab$en {
   @override
   String get sendModeHelp => 'Giải thích';
   @override
-  String get help => 'Vui lòng đảm bảo thiết bị gửi và nhận dùng chung mạng wifi.';
+  String get help => 'Hãy đảm bảo thiết bị nhận cũng đang dùng cùng mạng Wi-Fi.';
   @override
-  String get placeItems => 'Đặt các mục để chia sẻ.';
+  String get placeItems => 'Thả các mục vào đây để chia sẻ.';
 }
 
 // Path: settingsTab
@@ -267,7 +267,7 @@ class _Translations$troubleshootPage$vi extends Translations$troubleshootPage$en
 
   // Translations
   @override
-  String get title => 'Gỡ lỗi';
+  String get title => 'Khắc phục sự cố';
   @override
   String get subTitle => 'Ứng dụng không hoạt động như dự kiến? Bạn có thể tìm giải pháp cho những vấn đề thường gặp tại đây.';
   @override
@@ -290,16 +290,16 @@ class _Translations$networkInterfacesPage$vi extends Translations$networkInterfa
 
   // Translations
   @override
-  String get title => 'Card mạng';
+  String get title => 'Giao diện mạng';
   @override
   String get info =>
-      'LocalSend mặc định sử dụng tất cả các giao diện mạng có sẵn. Bạn có thể loại trừ các mạng không mong muốn tại đây. Bạn cần khởi động lại server để áp dụng các thay đổi.';
+      'Mặc định tsudev-lotus dùng mọi giao diện mạng có sẵn. Bạn có thể loại trừ mạng không mong muốn tại đây. Cần khởi động lại máy chủ để áp dụng thay đổi.';
   @override
   String get preview => 'Xem trước';
   @override
-  String get whitelist => 'Cho phép';
+  String get whitelist => 'Danh sách cho phép';
   @override
-  String get blacklist => 'Chặn';
+  String get blacklist => 'Danh sách chặn';
 }
 
 // Path: receiveHistoryPage
@@ -331,11 +331,11 @@ class _Translations$apkPickerPage$vi extends Translations$apkPickerPage$en {
   @override
   String get title => 'Ứng dụng (APK)';
   @override
-  String get excludeSystemApps => 'Mở ứng dụng hệ thống';
+  String get excludeSystemApps => 'Ẩn ứng dụng hệ thống';
   @override
-  String get excludeAppsWithoutLaunchIntent => 'Loại trừ các ứng dụng không thể khởi chạy';
+  String get excludeAppsWithoutLaunchIntent => 'Ẩn ứng dụng không mở được';
   @override
-  String apps({required Object n}) => '${n} Ứng dụng';
+  String apps({required Object n}) => '${n} ứng dụng';
 }
 
 // Path: selectedFilesPage
@@ -403,7 +403,7 @@ class _Translations$receivePage$vi extends Translations$receivePage$en {
   @override
   String get subTitleLink => 'đã gửi cho bạn một liên kết:';
   @override
-  String get canceled => 'Người gửi đã xoá yêu cầu.';
+  String get canceled => 'Người gửi đã hủy yêu cầu.';
 }
 
 // Path: receiveOptionsPage
@@ -418,11 +418,11 @@ class _Translations$receiveOptionsPage$vi extends Translations$receiveOptionsPag
   @override
   String get destination => _root.settingsTab.receive.destination;
   @override
-  String get appDirectory => '(Thư mục LocalSend)';
+  String get appDirectory => '(Thư mục tsudev-lotus)';
   @override
   String get saveToGallery => _root.settingsTab.receive.saveToGallery;
   @override
-  String get saveToGalleryOff => 'Đã tự động tắt vì là thư mục.';
+  String get saveToGalleryOff => 'Đã tự động tắt vì có thư mục.';
 }
 
 // Path: sendPage
@@ -473,11 +473,11 @@ class _Translations$webSharePage$vi extends Translations$webSharePage$en {
   @override
   String get title => 'Chia sẻ qua liên kết';
   @override
-  String get loading => 'Đang khởi tạo server…';
+  String get loading => 'Đang khởi động máy chủ…';
   @override
-  String get stopping => 'Đang dừng server…';
+  String get stopping => 'Đang dừng máy chủ…';
   @override
-  String get error => 'Một lỗi đã xảy ra khi khởi tạo server.';
+  String get error => 'Đã xảy ra lỗi khi khởi động máy chủ.';
   @override
   String openLink({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('vi'))(
     n,
@@ -493,11 +493,11 @@ class _Translations$webSharePage$vi extends Translations$webSharePage$en {
   @override
   String get autoAccept => 'Tự động chấp nhận yêu cầu';
   @override
-  String get requirePin => 'Cần cung cấp mã PIN';
+  String get requirePin => 'Yêu cầu mã PIN';
   @override
   String pinHint({required Object pin}) => 'Mã PIN là "${pin}"';
   @override
-  String get encryptionHint => 'LocalSend dùng chứng chỉ tự tạo. Bạn cần chấp thuận trong trình duyệt.';
+  String get encryptionHint => 'tsudev-lotus dùng chứng chỉ tự ký. Bạn cần chấp nhận chứng chỉ này trong trình duyệt.';
   @override
   String pendingRequests({required Object n}) => 'Yêu cầu chờ: ${n}';
 }
@@ -521,11 +521,11 @@ class _Translations$aboutPage$vi extends Translations$aboutPage$en {
 
   // Translations
   @override
-  String get title => 'Thông tin về LocalSend';
+  String get title => 'Thông tin về tsudev-lotus';
   @override
   List<String> get description => [
-    'LocalSend là một phần mềm miễn phí mã nguồn mở, giúp bạn chia sẻ tập tin cũng như tin nhắn đến các thiết bị phụ cận một cách bảo mật thông qua mạng nội bộ mà không cần kết nối mạng đến bên ngoài.',
-    'Ứng dụng có trên Android, iOS, macOS, Windows và Linux. Bạn có thể tìm thấy các tuỳ chọn tải ở trang chủ.',
+    'tsudev-lotus là ứng dụng miễn phí, mã nguồn mở giúp bạn chia sẻ tập tin và tin nhắn một cách an toàn với các thiết bị ở gần qua mạng nội bộ, không cần kết nối Internet.',
+    'Ứng dụng có cho Android, iOS, macOS, Windows và Linux. Mọi tùy chọn tải về có ở trang chủ chính thức.',
   ];
   @override
   String get author => 'Tác giả';
@@ -548,13 +548,13 @@ class _Translations$donationPage$vi extends Translations$donationPage$en {
   String get title => 'Ủng hộ';
   @override
   String get info =>
-      'LocalSend là ứng dụng miễn phí, mã nguồn mở, không chứa quảng cáo. Nếu bạn yêu thích ứng dụng này, bạn có thể hỗ trợ việc phát triển bằng việc ủng hộ.';
+      'tsudev-lotus dựa trên LocalSend - ứng dụng miễn phí, mã nguồn mở, không quảng cáo. Nếu bạn thích, hãy ủng hộ tác giả gốc của LocalSend bằng một khoản đóng góp.';
   @override
   String donate({required Object amount}) => 'Ủng hộ ${amount}';
   @override
   String get thanks => 'Xin chân thành cảm ơn!';
   @override
-  String get restore => 'Khôi phục lịch sử ủng hộ';
+  String get restore => 'Khôi phục giao dịch';
 }
 
 // Path: changelogPage
@@ -756,7 +756,7 @@ class _Translations$tray$vi extends Translations$tray$en {
   @override
   String get open => _root.general.open;
   @override
-  String get close => 'Đóng LocalSend';
+  String get close => 'Thoát tsudev-lotus';
   @override
   String get closeWindows => 'Thoát';
 }
@@ -775,7 +775,7 @@ class _Translations$web$vi extends Translations$web$en {
   @override
   String get invalidPin => 'Sai mã PIN';
   @override
-  String get tooManyAttempts => 'Sai quá nhiều';
+  String get tooManyAttempts => 'Nhập sai quá nhiều lần';
   @override
   String get rejected => 'Đã từ chối';
   @override
@@ -796,7 +796,7 @@ class _Translations$assetPicker$vi extends Translations$assetPicker$en {
   @override
   String get confirm => 'Xác nhận';
   @override
-  String get cancel => 'Thoát';
+  String get cancel => 'Hủy';
   @override
   String get edit => 'Sửa';
   @override
@@ -818,7 +818,7 @@ class _Translations$assetPicker$vi extends Translations$assetPicker$en {
   @override
   String get viewingLimitedAssetsTip => 'Chỉ hiển thị các tập tin và album mà ứng dụng có thể truy cập.';
   @override
-  String get changeAccessibleLimitedAssets => 'Ấn để cập nhận các tập tin có thể truy cập.';
+  String get changeAccessibleLimitedAssets => 'Nhấn để cập nhật các tập tin có thể truy cập';
   @override
   String get accessAllTip =>
       'Ứng dụng chỉ có thể truy cập một số tập tin trong thiết bị. Hãy vào cài đặt hệ thống để chấp thuận ứng dụng có thể truy cập tất cả media trong thiết bị.';
@@ -835,9 +835,9 @@ class _Translations$assetPicker$vi extends Translations$assetPicker$en {
   @override
   String get sTypeVideoLabel => 'Video';
   @override
-  String get sTypeOtherLabel => 'Media khác';
+  String get sTypeOtherLabel => 'Phương tiện khác';
   @override
-  String get sActionPlayHint => 'mở';
+  String get sActionPlayHint => 'phát';
   @override
   String get sActionPreviewHint => 'xem trước';
   @override
@@ -849,7 +849,7 @@ class _Translations$assetPicker$vi extends Translations$assetPicker$en {
   @override
   String get sNameDurationLabel => 'thời lượng';
   @override
-  String get sUnitAssetCountLabel => 'đếm';
+  String get sUnitAssetCountLabel => 'số lượng';
 }
 
 // Path: tsudev
@@ -900,7 +900,7 @@ class _Translations$receiveTab$infoBox$vi extends Translations$receiveTab$infoBo
   @override
   String get port => 'Cổng:';
   @override
-  String get alias => 'Biệt danh:';
+  String get alias => 'Tên thiết bị:';
 }
 
 // Path: receiveTab.quickSave
@@ -979,7 +979,7 @@ class _Translations$settingsTab$general$vi extends Translations$settingsTab$gene
   @override
   String get title => 'Chung';
   @override
-  String get brightness => 'Chủ đề';
+  String get brightness => 'Giao diện';
   @override
   late final _Translations$settingsTab$general$brightnessOptions$vi brightnessOptions = _Translations$settingsTab$general$brightnessOptions$vi._(
     _root,
@@ -993,7 +993,7 @@ class _Translations$settingsTab$general$vi extends Translations$settingsTab$gene
   @override
   late final _Translations$settingsTab$general$languageOptions$vi languageOptions = _Translations$settingsTab$general$languageOptions$vi._(_root);
   @override
-  String get saveWindowPlacement => 'Thoát: Lưu vị trí cửa sổ hiển thị';
+  String get saveWindowPlacement => 'Lưu vị trí cửa sổ khi thoát';
   @override
   String get saveWindowPlacementWindows => 'Lưu vị trí cửa sổ sau khi thoát ứng dụng';
   @override
@@ -1001,13 +1001,13 @@ class _Translations$settingsTab$general$vi extends Translations$settingsTab$gene
   @override
   String get alwaysOnTopUnavailable => 'Không hỗ trợ trên Wayland';
   @override
-  String get minimizeToTray => 'Thoát: Ẩn xuống thanh tác vụ';
+  String get minimizeToTray => 'Thu nhỏ xuống khay hệ thống/thanh menu khi đóng';
   @override
   String get launchAtStartup => 'Tự khởi động sau khi đăng nhập';
   @override
-  String get launchMinimized => 'Tự khởi động: Khởi động ẩn';
+  String get launchMinimized => 'Tự khởi động: Chạy ẩn';
   @override
-  String get showInContextMenu => 'Hiển thị LocalSend ở danh mục';
+  String get showInContextMenu => 'Hiển thị tsudev-lotus trong menu chuột phải';
   @override
   String get animations => 'Hoạt ảnh';
 }
@@ -1030,15 +1030,15 @@ class _Translations$settingsTab$receive$vi extends Translations$settingsTab$rece
   @override
   String get autoFinish => 'Tự động hoàn thành';
   @override
-  String get destination => 'Đích đến';
+  String get destination => 'Lưu vào thư mục';
   @override
   String get downloads => '(Thư mục Tải về)';
   @override
-  String get saveToGallery => 'Lưu media vào thư viện';
+  String get saveToGallery => 'Lưu ảnh, video vào thư viện';
   @override
   String get saveToHistory => 'Lưu vào lịch sử';
   @override
-  String get verifyChecksums => 'Xác minh checksum khi nhận tệp';
+  String get verifyChecksums => 'Kiểm tra mã checksum khi nhận tệp';
 }
 
 // Path: settingsTab.send
@@ -1053,7 +1053,7 @@ class _Translations$settingsTab$send$vi extends Translations$settingsTab$send$en
   @override
   String get shareViaLinkAutoAccept => 'Chia sẻ qua liên kết: Tự động chấp nhận';
   @override
-  String get createChecksums => 'Tạo checksum khi gửi tệp';
+  String get createChecksums => 'Tạo mã checksum khi gửi tệp';
 }
 
 // Path: settingsTab.network
@@ -1066,15 +1066,15 @@ class _Translations$settingsTab$network$vi extends Translations$settingsTab$netw
   @override
   String get title => 'Mạng';
   @override
-  String get needRestart => 'Khởi động lại server để cài đặt có hiệu lực!';
+  String get needRestart => 'Khởi động lại máy chủ để áp dụng cài đặt!';
   @override
   String get server => 'Máy chủ';
   @override
-  String get alias => 'Biệt danh';
+  String get alias => 'Tên thiết bị';
   @override
   String get deviceType => 'Loại thiết bị';
   @override
-  String get deviceModel => 'Model thiết bị';
+  String get deviceModel => 'Mẫu thiết bị';
   @override
   String get port => 'Cổng';
   @override
@@ -1082,21 +1082,21 @@ class _Translations$settingsTab$network$vi extends Translations$settingsTab$netw
   @override
   late final _Translations$settingsTab$network$networkOptions$vi networkOptions = _Translations$settingsTab$network$networkOptions$vi._(_root);
   @override
-  String get discoveryTimeout => 'Hết thời gian tìm kiếm';
+  String get discoveryTimeout => 'Thời gian chờ tìm kiếm';
   @override
   String get useSystemName => 'Dùng tên hệ thống';
   @override
-  String get generateRandomAlias => 'Dùng bí danh ngẫu nhiên';
+  String get generateRandomAlias => 'Tạo tên ngẫu nhiên';
   @override
   String portWarning({required Object defaultPort}) =>
-      'Các thiết bị khác có thể không nhận diện được thiết bị của bạn, vì bạn đang dùng port tuỳ chỉnh. (mặc định: ${defaultPort})';
+      'Các thiết bị khác có thể không tìm thấy bạn vì bạn đang dùng cổng tùy chỉnh. (mặc định: ${defaultPort})';
   @override
   String get encryption => 'Mã hoá';
   @override
-  String get multicastGroup => 'Đa phương tiện';
+  String get multicastGroup => 'Địa chỉ multicast';
   @override
   String multicastGroupWarning({required Object defaultMulticast}) =>
-      'Các thiết bị khác có thể không nhận diện được thiết bị của bạn, vì bạn đang dùng địa chỉ multicast tuỳ chỉnh. (mặc định: ${defaultMulticast})';
+      'Các thiết bị khác có thể không tìm thấy bạn vì bạn đang dùng địa chỉ multicast tùy chỉnh. (mặc định: ${defaultMulticast})';
 }
 
 // Path: settingsTab.other
@@ -1109,11 +1109,11 @@ class _Translations$settingsTab$other$vi extends Translations$settingsTab$other$
   @override
   String get title => 'Khác';
   @override
-  String get support => 'Hỗ trợ LocalSend';
+  String get support => 'Ủng hộ tác giả LocalSend';
   @override
   String get donate => 'Ủng hộ';
   @override
-  String get privacyPolicy => 'Chính sách bảo mật';
+  String get privacyPolicy => 'Chính sách quyền riêng tư';
   @override
   String get termsOfUse => 'Điều khoản sử dụng';
 }
@@ -1129,9 +1129,9 @@ class _Translations$troubleshootPage$firewall$vi extends Translations$troublesho
   String get symptom => 'Ứng dụng có thể gửi tập tin tới các thiết bị khác, nhưng các thiết bị khác không thể gửi tập tin đến thiết bị này.';
   @override
   String solution({required Object port}) =>
-      'Có vẻ như đây là một vấn đề với tường lửa (firewall). Bạn có thể khắc phục bằng cách chấp thuận các kết nối đến (UDP và TCP) trên port ${port}.';
+      'Nhiều khả năng đây là do tường lửa. Bạn có thể khắc phục bằng cách cho phép kết nối đến (UDP và TCP) trên cổng ${port}.';
   @override
-  String get openFirewall => 'Mở tường lửa(Firewall)';
+  String get openFirewall => 'Mở tường lửa';
 }
 
 // Path: troubleshootPage.noDiscovery
@@ -1145,7 +1145,7 @@ class _Translations$troubleshootPage$noDiscovery$vi extends Translations$trouble
   String get symptom => 'Thiết bị này không thể tìm thấy thiết bị khác.';
   @override
   String get solution =>
-      'Hãy đảm bảo rằng các thiết bị được kết nối với cùng một mạng Wi-Fi và dùng chung thiết lập (port, multicast address, encryption). Bạn có thể thử nhập địa chỉ IP của thiết bị đích đến. Nếu nó hoạt động, cân nhắc thêm thiết bị đó vào mục yêu thích. Thiết bị sẽ được nhận tự động trong những lần tìm kiếm trong tương lai.';
+      'Hãy đảm bảo các thiết bị cùng một mạng Wi-Fi và dùng chung cấu hình (cổng, địa chỉ multicast, mã hóa). Bạn có thể thử nhập thủ công địa chỉ IP của thiết bị đích. Nếu cách đó hoạt động, hãy thêm thiết bị vào Yêu thích để lần sau được tự động tìm thấy.';
 }
 
 // Path: troubleshootPage.noConnection
@@ -1156,10 +1156,10 @@ class _Translations$troubleshootPage$noConnection$vi extends Translations$troubl
 
   // Translations
   @override
-  String get symptom => 'Cả hai thiết bị không thể nhận diện lẫn nhau cũng như không thể chia sẻ tập tin.';
+  String get symptom => 'Hai thiết bị không tìm thấy nhau và cũng không chia sẻ được tập tin.';
   @override
   String get solution =>
-      'Vấn đề tồn tại ở cả 2 thiết bị? Nếu thế, bạn cần chắc chắn rằng cả hai thiết bị đang dùng chung một mạng wifi với cùng thiết lập (port, địa chỉ multicast, mã hoá). Wifi có thể không cho các thiết bị giao tiếp với nhau. Trong trường hợp đó, bạn cần tìm trong thiết lập của router.';
+      'Sự cố xảy ra ở cả hai phía? Nếu vậy, hãy đảm bảo hai thiết bị cùng một mạng Wi-Fi và dùng chung cấu hình (cổng, địa chỉ multicast, mã hóa). Một số mạng Wi-Fi không cho các thiết bị kết nối trực tiếp với nhau (cách ly máy khách); khi đó bạn cần tắt tùy chọn này trong cài đặt bộ định tuyến (router).';
 }
 
 // Path: receiveHistoryPage.entryActions
@@ -1301,7 +1301,7 @@ class _Translations$dialogs$addressInput$vi extends Translations$dialogs$address
   @override
   String get title => 'Nhập địa chỉ';
   @override
-  String get hashtag => 'Mã thẻ (#)';
+  String get hashtag => 'Số cuối (#)';
   @override
   String get ip => 'Địa chỉ IP';
   @override
@@ -1316,9 +1316,9 @@ class _Translations$dialogs$cancelSession$vi extends Translations$dialogs$cancel
 
   // Translations
   @override
-  String get title => 'Dừng gửi tập tin';
+  String get title => 'Hủy truyền tập tin';
   @override
-  String get content => 'Bạn có thực sự muống dừng quá trình gửi tập tin?';
+  String get content => 'Bạn có thật sự muốn hủy quá trình truyền tập tin?';
 }
 
 // Path: dialogs.cannotOpenFile
@@ -1331,7 +1331,7 @@ class _Translations$dialogs$cannotOpenFile$vi extends Translations$dialogs$canno
   @override
   String get title => 'Không thể mở tập tin';
   @override
-  String content({required Object file}) => 'Không thể mở "${file}". Có thể tập tin có thể đã bị di chuyển, đổi tên hoặc xoá?';
+  String content({required Object file}) => 'Không thể mở "${file}". Tập tin có thể đã bị di chuyển, đổi tên hoặc xóa.';
 }
 
 // Path: dialogs.encryptionDisabledNotice
@@ -1396,9 +1396,9 @@ class _Translations$dialogs$favoriteEditDialog$vi extends Translations$dialogs$f
   @override
   String get titleAdd => 'Thêm vào yêu thích';
   @override
-  String get titleEdit => 'Điều chỉnh';
+  String get titleEdit => 'Chỉnh sửa';
   @override
-  String get name => 'Biệt danh';
+  String get name => 'Tên thiết bị';
   @override
   String get auto => '(tự động)';
   @override
@@ -1438,7 +1438,7 @@ class _Translations$dialogs$fileNameInput$vi extends Translations$dialogs$fileNa
 
   // Translations
   @override
-  String get title => 'Nhập tên';
+  String get title => 'Nhập tên tập tin';
   @override
   String original({required Object original}) => 'Ban đầu: ${original}';
 }
@@ -1467,7 +1467,7 @@ class _Translations$dialogs$localNetworkUnauthorized$vi extends Translations$dia
   String get title => _root.dialogs.noPermission.title;
   @override
   String get description =>
-      'LocalSend không thể tìm kiếm thiết bị khác khi không được phép quét mạng nội bộ. Vui lòng trao quyền cho ứng dụng trong cài đặt.';
+      'tsudev-lotus không thể tìm thấy thiết bị khác khi chưa được cấp quyền quét mạng nội bộ. Vui lòng cấp quyền này trong cài đặt.';
   @override
   String get gotoSettings => 'Cài đặt';
 }
@@ -1506,9 +1506,9 @@ class _Translations$dialogs$noPermission$vi extends Translations$dialogs$noPermi
 
   // Translations
   @override
-  String get title => 'Chưa được trao quyền.';
+  String get title => 'Chưa được cấp quyền';
   @override
-  String get content => 'Bạn chưa được trao quyền. Vui lòng trao quyền cho ứng dụng trong cài đặt.';
+  String get content => 'Bạn chưa cấp các quyền cần thiết. Vui lòng cấp quyền cho ứng dụng trong cài đặt.';
 }
 
 // Path: dialogs.notAvailableOnPlatform
@@ -1543,15 +1543,15 @@ class _Translations$dialogs$quickActions$vi extends Translations$dialogs$quickAc
 
   // Translations
   @override
-  String get title => 'Thao Tác Nhanh';
+  String get title => 'Thao tác nhanh';
   @override
   String get counter => 'Bộ đếm';
   @override
-  String get prefix => 'Tiếp đầu ngữ';
+  String get prefix => 'Tiền tố';
   @override
   String get padZero => 'Thêm số 0 ở đầu';
   @override
-  String get sortBeforeCount => 'Sắp xếp theo bảng chữ cái';
+  String get sortBeforeCount => 'Sắp xếp theo bảng chữ cái trước (A-Z)';
   @override
   String get random => 'Ngẫu nhiên';
 }
@@ -1566,8 +1566,7 @@ class _Translations$dialogs$quickSaveNotice$vi extends Translations$dialogs$quic
   @override
   String get title => _root.general.quickSave;
   @override
-  String get content =>
-      'Yêu cầu tập tin đã được chấp thuận tự động. Chú ý rằng bất kỳ ai dùng chung mạng nội bộ với bạn đều có thể gửi tập tin cho bạn.';
+  String get content => 'Yêu cầu gửi tập tin giờ được tự động chấp nhận. Lưu ý: mọi người trong cùng mạng nội bộ đều có thể gửi tập tin cho bạn.';
 }
 
 // Path: dialogs.quickSaveFromFavoritesNotice
@@ -1581,7 +1580,7 @@ class _Translations$dialogs$quickSaveFromFavoritesNotice$vi extends Translations
   String get title => _root.general.quickSaveFromFavorites;
   @override
   List<String> get content => [
-    'Yêu cầu sẽ được chấp thuận tự động nếu thiết bị nằm trong danh sách yêu thích.',
+    'Yêu cầu gửi tập tin từ các thiết bị trong danh sách Yêu thích giờ được tự động chấp nhận.',
   ];
 }
 
@@ -1610,7 +1609,7 @@ class _Translations$dialogs$sendModeHelp$vi extends Translations$dialogs$sendMod
   @override
   String get multiple => 'Gửi tập tin tới nhiều người nhận. Lựa chọn sẽ không bị xoá.';
   @override
-  String get link => 'Người nhận chưa cài đặt LocalSend có thể nhận tập tin bằng cách mở liên kết trong trình duyệt.';
+  String get link => 'Người nhận chưa cài đặt tsudev-lotus có thể nhận tập tin bằng cách mở liên kết trong trình duyệt.';
 }
 
 // Path: dialogs.zoom

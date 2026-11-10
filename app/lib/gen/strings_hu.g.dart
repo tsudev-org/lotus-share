@@ -289,7 +289,7 @@ class _Translations$networkInterfacesPage$hu extends Translations$networkInterfa
   String get title => 'Hálózati interfészek';
   @override
   String get info =>
-      'Alapértelmezésként a LocalSend az összes rendelkezésre álló hálózati interfészt használja. Itt kizárhatja a nem kívánt hálózatokat. A módosítások alkalmazásához újra kell indítania a kiszolgálót.';
+      'Alapértelmezésként a tsudev-lotus az összes rendelkezésre álló hálózati interfészt használja. Itt kizárhatja a nem kívánt hálózatokat. A módosítások alkalmazásához újra kell indítania a kiszolgálót.';
   @override
   String get preview => 'Előnézet';
   @override
@@ -414,7 +414,7 @@ class _Translations$receiveOptionsPage$hu extends Translations$receiveOptionsPag
   @override
   String get destination => _root.settingsTab.receive.destination;
   @override
-  String get appDirectory => '(LocalSend mappa)';
+  String get appDirectory => '(tsudev-lotus mappa)';
   @override
   String get saveToGallery => _root.settingsTab.receive.saveToGallery;
   @override
@@ -493,7 +493,7 @@ class _Translations$webSharePage$hu extends Translations$webSharePage$en {
   @override
   String pinHint({required Object pin}) => 'A PIN kód "${pin}"';
   @override
-  String get encryptionHint => 'A LocalSend a saját aláírt tanúsítványt használja. A böngészőben kell elfogadnod.';
+  String get encryptionHint => 'A tsudev-lotus a saját aláírt tanúsítványt használja. A böngészőben kell elfogadnod.';
   @override
   String pendingRequests({required Object n}) => 'Függőben lévő kérések: ${n}';
 }
@@ -517,10 +517,10 @@ class _Translations$aboutPage$hu extends Translations$aboutPage$en {
 
   // Translations
   @override
-  String get title => 'A LocalSend';
+  String get title => 'A tsudev-lotus';
   @override
   List<String> get description => [
-    'A LocalSend egy ingyenes, nyílt forráskódú alkalmazás, amely lehetővé teszi a fájlok és üzenetek biztonságos megosztását a közeli eszközökkel a helyi hálózaton keresztül, internet kapcsolat nélkül.',
+    'A tsudev-lotus egy ingyenes, nyílt forráskódú alkalmazás, amely lehetővé teszi a fájlok és üzenetek biztonságos megosztását a közeli eszközökkel a helyi hálózaton keresztül, internet kapcsolat nélkül.',
     'Ez az alkalmazás Android, iOS, macOS, Windows és Linux rendszereken érhető el. Az összes letöltési lehetőséget megtalálja a hivatalos honlapon.',
   ];
   @override
@@ -871,7 +871,7 @@ class _Translations$settingsTab$general$hu extends Translations$settingsTab$gene
   @override
   String get launchMinimized => 'Auto. indítás: Kis méretben';
   @override
-  String get showInContextMenu => 'A LocalSend megjelenítése a helyi menüben';
+  String get showInContextMenu => 'A tsudev-lotus megjelenítése a helyi menüben';
   @override
   String get animations => 'Animációk';
 }
@@ -1330,7 +1330,7 @@ class _Translations$dialogs$localNetworkUnauthorized$hu extends Translations$dia
   String get title => _root.dialogs.noPermission.title;
   @override
   String get description =>
-      'A LocalSend nem találhat más eszközöket a helyi hálózat vizsgálatára vonatkozó engedély nélkül. Adja meg ezt az engedélyt a beállításokban.';
+      'A tsudev-lotus nem találhat más eszközöket a helyi hálózat vizsgálatára vonatkozó engedély nélkül. Adja meg ezt az engedélyt a beállításokban.';
   @override
   String get gotoSettings => 'Beállítások';
 }
@@ -1473,7 +1473,7 @@ class _Translations$dialogs$sendModeHelp$hu extends Translations$dialogs$sendMod
   String get multiple => 'Fájlokat küld több címzettnek. A kijelölés nem törlődik.';
   @override
   String get link =>
-      'Azok a címzettek, akiknél nincs telepítve a LocalSend, letölthetik a kiválasztott fájlokat a hivatkozás megnyitásával a böngészőjükben.';
+      'Azok a címzettek, akiknél nincs telepítve a tsudev-lotus, letölthetik a kiválasztott fájlokat a hivatkozás megnyitásával a böngészőjükben.';
 }
 
 // Path: dialogs.zoom

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LocalSend</title>
+    <title>tsudev-lotus</title>
     <style>
         body {
             font-family: sans-serif, system-ui;
@@ -89,7 +89,7 @@
     LocalSend requires JavaScript, which is currently disabled. Please enable it and try again.
 </noscript>
 
-<h1 style="padding: 0.5em">LocalSend</h1>
+<h1 style="padding: 0.5em">tsudev-lotus</h1>
 <p id="status-text"></p>
 <div id="file-list"></div>
 <div id="single-file"></div>
@@ -143,7 +143,7 @@
         }
 
         if (response.status !== 200) {
-          document.getElementById('status-text').innerText = 'Error: ' + response.status;
+          document.getElementById('status-text').innerText = 'Lỗi: ' + response.status;
           return;
         }
 
@@ -175,7 +175,7 @@
         }
 
         if (response.status !== 200) {
-          document.getElementById('status-text').innerText = 'Error: ' + response.status;
+          document.getElementById('status-text').innerText = 'Lỗi: ' + response.status;
           return;
         }
 
@@ -197,13 +197,13 @@
     function fetchI18n(then) {
       makeRequest('/i18n.json', 'GET', function (response) {
         if (response.status !== 200) {
-          alert('Could not load translations. Please reload the page to try again.');
+          alert('Không tải được bản dịch. Hãy tải lại trang.');
           return;
         }
         try {
           i18n = JSON.parse(response.responseText);
         } catch (e) {
-          alert('Could not parse translations. Please reload the page to try again.');
+          alert('Bản dịch bị lỗi. Hãy tải lại trang.');
           return;
         }
         then();

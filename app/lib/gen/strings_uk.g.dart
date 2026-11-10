@@ -289,7 +289,7 @@ class _Translations$networkInterfacesPage$uk extends Translations$networkInterfa
   String get title => 'Мережевий інтерфейс';
   @override
   String get info =>
-      'Типово LocalSend використовує всі доступні мережеві інтерфейси. Ви можете виключити небажані мережі тут. Щоб застосувати зміни, потрібно перезапустити сервер.';
+      'Типово tsudev-lotus використовує всі доступні мережеві інтерфейси. Ви можете виключити небажані мережі тут. Щоб застосувати зміни, потрібно перезапустити сервер.';
   @override
   String get preview => 'Передперегляд';
   @override
@@ -414,7 +414,7 @@ class _Translations$receiveOptionsPage$uk extends Translations$receiveOptionsPag
   @override
   String get destination => _root.settingsTab.receive.destination;
   @override
-  String get appDirectory => '(Папка LocalSend)';
+  String get appDirectory => '(Папка tsudev-lotus)';
   @override
   String get saveToGallery => _root.settingsTab.receive.saveToGallery;
   @override
@@ -493,7 +493,7 @@ class _Translations$webSharePage$uk extends Translations$webSharePage$en {
   @override
   String pinHint({required Object pin}) => 'PIN-код: «${pin}»';
   @override
-  String get encryptionHint => 'LocalSend використовує самопідписаний сертифікат. Вам потрібно прийняти його в браузері.';
+  String get encryptionHint => 'tsudev-lotus використовує самопідписаний сертифікат. Вам потрібно прийняти його в браузері.';
   @override
   String pendingRequests({required Object n}) => 'Запити, що очікують на розгляд: ${n}';
 }
@@ -517,10 +517,10 @@ class _Translations$aboutPage$uk extends Translations$aboutPage$en {
 
   // Translations
   @override
-  String get title => 'Про LocalSend';
+  String get title => 'Про tsudev-lotus';
   @override
   List<String> get description => [
-    'LocalSend — це безплатна програма з відкритим вихідним кодом, яка дозволяє вам безпечно обмінюватися файлами та повідомленнями з пристроями поблизу через локальну мережу, без необхідності підключення до Інтернету.',
+    'tsudev-lotus - це безплатна програма з відкритим вихідним кодом, яка дозволяє вам безпечно обмінюватися файлами та повідомленнями з пристроями поблизу через локальну мережу, без необхідності підключення до Інтернету.',
     'Ця програма доступна для Android, iOS, macOS, Windows та Linux. Ви можете знайти всі варіанти завантаження на офіційній домашній сторінці.',
   ];
   @override
@@ -660,7 +660,7 @@ class _Translations$tray$uk extends Translations$tray$en {
   @override
   String get open => _root.general.open;
   @override
-  String get close => 'Вийти з LocalSend';
+  String get close => 'Вийти з tsudev-lotus';
   @override
   String get closeWindows => 'Вийти';
 }
@@ -871,7 +871,7 @@ class _Translations$settingsTab$general$uk extends Translations$settingsTab$gene
   @override
   String get launchMinimized => 'Прихований автозапуск';
   @override
-  String get showInContextMenu => 'Відображати LocalSend в контекстному меню';
+  String get showInContextMenu => 'Відображати tsudev-lotus в контекстному меню';
   @override
   String get animations => 'Анімації';
 }
@@ -1330,7 +1330,7 @@ class _Translations$dialogs$localNetworkUnauthorized$uk extends Translations$dia
   String get title => _root.dialogs.noPermission.title;
   @override
   String get description =>
-      'LocalSend не може знайти інші пристрої без дозволу на сканування локальної мережі. Будь ласка, надайте цей дозвіл у налаштуваннях.';
+      'tsudev-lotus не може знайти інші пристрої без дозволу на сканування локальної мережі. Будь ласка, надайте цей дозвіл у налаштуваннях.';
   @override
   String get gotoSettings => 'Налаштування';
 }
@@ -1473,7 +1473,7 @@ class _Translations$dialogs$sendModeHelp$uk extends Translations$dialogs$sendMod
   @override
   String get multiple => 'Надсилає файли декільком отримувачам. Вибірку не буде очищено після завершення передачі файлів.';
   @override
-  String get link => 'Отримувачі, у яких не встановлено LocalSend, можуть завантажити вибрані файли, відкривши посилання у своєму браузері.';
+  String get link => 'Отримувачі, у яких не встановлено tsudev-lotus, можуть завантажити вибрані файли, відкривши посилання у своєму браузері.';
 }
 
 // Path: dialogs.zoom
