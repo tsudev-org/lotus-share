@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:dart_mappable/dart_mappable.dart';
-import 'package:flutter/foundation.dart';
+import 'package:localsend_app/config/fork_config.dart';
 import 'package:localsend_app/provider/device_info_provider.dart';
 import 'package:localsend_app/provider/favorites_provider.dart';
 import 'package:localsend_app/provider/network/nearby_devices_provider.dart';
@@ -50,8 +50,8 @@ class SignalingService extends ReduxNotifier<SignalingState> {
   @override
   SignalingState init() {
     return SignalingState(
-      signalingServers: _persistence.getSignalingServers() ?? ['wss://public.localsend.org/v1/ws'],
-      stunServers: _persistence.getStunServers() ?? ['stun:stun.localsend.org:3478'],
+      signalingServers: _persistence.getSignalingServers() ?? forkDefaultSignalingServers,
+      stunServers: _persistence.getStunServers() ?? forkDefaultStunServers,
       connections: {},
     );
   }
@@ -81,13 +81,11 @@ class _SetupSignalingConnection extends AsyncGlobalAction {
 
     // TODO: Use persistent key
     final key = await crypto.generateKeyPair();
-    if (kDebugMode) {
-      print('private key: ${key.privateKey}');
-    }
+    // tsudev-lotus: bỏ lệnh in khóa bí mật ra nhật ký (kể cả bản debug).
 
     LsSignalingConnection? connection;
     final stream = connect(
-      uri: 'wss://public.localsend.org/v1/ws',
+      uri: signalingServer, // tsudev-lotus: dùng máy chủ đã cấu hình thay vì địa chỉ cứng
       info: ProposingClientInfo(
         alias: settings.alias,
         version: protocolVersion,

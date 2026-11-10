@@ -39,7 +39,7 @@ impl Identity {
                 let identity = Self::generate(alias, port)?;
                 identity
                     .save(&path)
-                    .with_context(|| format!("Could not save {}", path.display()))?;
+                    .with_context(|| format!("Không lưu được {}", path.display()))?;
                 Ok(identity)
             }
             Err(err) => Err(err).context(format!("Could not read {}", path.display())),

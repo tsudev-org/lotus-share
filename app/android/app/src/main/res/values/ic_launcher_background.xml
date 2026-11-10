@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">#FFFFFF</color>
+    <!-- tsudev-lotus: nền icon = token bg tsudev (chế độ sáng) -->
+    <color name="ic_launcher_background">#EEF4FB</color>
 </resources>

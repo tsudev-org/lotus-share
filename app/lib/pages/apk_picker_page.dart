@@ -120,7 +120,7 @@ class _ApkPickerPageState extends State<ApkPickerPage> with Refena {
                 children: [
                   const Icon(Icons.add),
                   const SizedBox(width: 5),
-                  Text('Add ${_selectedApps.length} ${(_selectedApps.length == 1) ? "App" : "Apps"}'),
+                  Text(t.tsudev.addApps(n: _selectedApps.length)),
                 ],
               ),
             ),
@@ -170,7 +170,7 @@ class _ApkPickerPageState extends State<ApkPickerPage> with Refena {
                   const Spacer(),
                   Row(
                     children: [
-                      const Text('Select Multiple Apps'),
+                      Text(t.tsudev.selectMultipleApps),
                       const SizedBox(width: 5),
                       Switch(
                         value: apkParams.selectMultipleApps,
@@ -265,7 +265,7 @@ class _ApkPickerPageState extends State<ApkPickerPage> with Refena {
                 );
               },
               error: (e, st) {
-                return SliverToBoxAdapter(child: Text('Error: $e\n$st'));
+                return SliverToBoxAdapter(child: Text(t.tsudev.error(message: '$e\n$st')));
               },
               loading: () {
                 return const SliverToBoxAdapter(

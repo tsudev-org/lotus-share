@@ -11,36 +11,40 @@
   #define ResultDir "D:\inno-result"
 #endif
 
-#define MyAppName "LocalSend"
+#define MyAppName "tsudev-lotus"
 #define MyAppVersion "1.18.2"
-#define MyAppPublisher "Tien Do Nam"
-#define MyAppURL "https://localsend.org"
-#define MyAppExeName "localsend_app.exe"
+#define MyAppPublisher "tsudev"
+#define MyAppURL "https://lotus.tsudev.com"
+#define MyAppExeName "tsudev_lotus.exe"
 #define MyAppMsixHelper "localsend_msix_helper.msix"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{00809252-FEC6-448E-83B4-E7F55AE7E47D}
+; tsudev-lotus: AppId riêng, KHÔNG dùng lại GUID của LocalSend (bộ cài sẽ ghi đè/gỡ LocalSend).
+AppId={{E6A866CD-B32E-4718-9EF0-CE04D53F9263}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
-AppUpdatesURL={#MyAppURL}
+AppUpdatesURL=https://github.com/tsudev-org/tsudev-lotus/releases/latest
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir={#ResultDir}
-OutputBaseFilename=localsend
+OutputBaseFilename=tsudev-lotus-setup
 SetupIconFile={#PayloadDir}\logo.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
+; tsudev-lotus: luôn chọn sẵn tiếng Việt, vẫn cho đổi ngôn ngữ ở hộp thoại đầu
+LanguageDetectionMethod=none
+ShowLanguageDialog=yes
 ; Sign at compile time: the uninstaller is embedded during compilation, so signing the finished
 ; installer afterwards would leave it unsigned. CI defines the command via "iscc /SMySignTool=...";
 ; deliberately unsigned builds pass /DSkipSignTool.
@@ -51,6 +55,8 @@ ArchitecturesInstallIn64BitMode=x64compatible
 ArchitecturesAllowed=x64compatible
 
 [Languages]
+; tsudev-lotus: tiếng Việt đứng đầu = mặc định (vendored như Icelandic, xem ..\build\windows\inno\NGUON-VIETNAMESE.md)
+Name: "vietnamese"; MessagesFile: "..\build\windows\inno\Vietnamese.isl"
 Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "armenian"; MessagesFile: "compiler:Languages\Armenian.isl"
 Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"

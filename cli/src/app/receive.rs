@@ -138,7 +138,7 @@ impl App {
                     self.ui.log(
                         Category::Receive,
                         &format!(
-                            "{alias}: Message received\n{}",
+                            "{alias}: Đã nhận tin nhắn\n{}",
                             sanitize::multi_line(message)
                         ),
                     );
@@ -186,8 +186,8 @@ impl App {
                     // Web senders have no stable identity worth pairing: the
                     // fingerprint is an unverified payload value.
                     let prompt = match self.web {
-                        Some(WebMode::Receive) => "\nAccept? Y/N",
-                        _ => "\nAccept? Y/N/P (P = accept and pair)",
+                        Some(WebMode::Receive) => "\nChấp nhận? Y/N",
+                        _ => "\nChấp nhận? Y/N/P (P = chấp nhận và ghép đôi)",
                     };
                     lines.push(prompt.to_string());
                     self.ui.log(Category::Receive, &lines.join("\n"));
@@ -227,7 +227,7 @@ impl App {
                     let pending = self.pending.take().unwrap();
                     self.ui.log(
                         Category::Receive,
-                        &format!("{}: Aborted by sender", pending.alias),
+                        &format!("{}: Bên gửi đã hủy", pending.alias),
                     );
                 }
             }
@@ -243,7 +243,7 @@ impl App {
             ServerEventV2::ListenerFailed { error } => {
                 self.ui.log(
                     Category::Receive,
-                    &format!("Server stopped, no longer receiving: {error}"),
+                    &format!("Máy chủ đã dừng, không nhận tệp nữa: {error}"),
                 );
             }
         }
@@ -285,7 +285,7 @@ impl App {
             async move {
                 let result = match result_rx.await {
                     Ok(result) => result,
-                    Err(_) => Err("Upload aborted".to_string()),
+                    Err(_) => Err("Đã hủy tải lên".to_string()),
                 };
                 let _ = events_tx
                     .send(super::AppEvent::ReceiveFileResult {
@@ -337,7 +337,7 @@ impl App {
                 let alias = session.alias.clone();
                 self.ui.log(
                     Category::Receive,
-                    &format!("{alias}: Failed to receive {name}: {err}"),
+                    &format!("{alias}: Không nhận được {name}: {err}"),
                 );
             }
         }
@@ -374,7 +374,7 @@ impl App {
                 self.ui.log(
                     Category::Receive,
                     &format!(
-                        "{}: Cancelled by sender ({} of {} files received)",
+                        "{}: Bên gửi đã hủy (đã nhận {} trên {} tệp)",
                         session.alias,
                         session.finished_files,
                         session.files.len(),
@@ -424,7 +424,7 @@ impl App {
         self.ui.log(
             Category::Receive,
             &format!(
-                "{}: cancelled ({} of {} files received)",
+                "{}: đã hủy (đã nhận {} trên {} tệp)",
                 session.alias,
                 session.finished_files,
                 session.files.len(),
@@ -442,13 +442,13 @@ impl App {
                 let _ = pending.decision_tx.send(PrepareUploadDecisionV2::Decline);
                 self.ui.log(
                     Category::Receive,
-                    &format!("{}: You declined", pending.alias),
+                    &format!("{}: Bạn đã từ chối", pending.alias),
                 );
             }
             Answer::Accept | Answer::AcceptAndPair => {
                 self.ui.log(
                     Category::Receive,
-                    &format!("{}: You accepted", pending.alias),
+                    &format!("{}: Bạn đã chấp nhận", pending.alias),
                 );
                 // While "receive via link" is on, P was not offered; a stray
                 // press still accepts, but never pairs.

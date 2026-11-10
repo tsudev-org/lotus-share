@@ -44,7 +44,7 @@ impl Repository {
     pub fn load(args: &Args) -> anyhow::Result<Self> {
         let dir = dir();
         std::fs::create_dir_all(&dir)
-            .with_context(|| format!("Could not create {}", dir.display()))?;
+            .with_context(|| format!("Không tạo được {}", dir.display()))?;
         let config = config::load_with_fallback(&dir, args)?;
         let paired = PairedDevices::load(&dir)?;
         let identity = Arc::new(Identity::load_or_generate(&dir, config.alias, config.port)?);
@@ -70,5 +70,5 @@ fn dir() -> PathBuf {
         .filter(|path| path.is_absolute())
         .or_else(|| dirs::home_dir().map(|home| home.join(".config")))
         .unwrap_or_else(|| PathBuf::from("."))
-        .join("localsend-cli")
+        .join("tsudev-lotus-cli") // tsudev-lotus: thư mục riêng, không dùng chung danh tính với LocalSend CLI
 }

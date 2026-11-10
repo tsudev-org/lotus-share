@@ -12,7 +12,7 @@ pub(super) enum TargetSelector {
 impl TargetSelector {
     pub(super) fn parse(value: &str) -> anyhow::Result<Self> {
         let value = value.trim();
-        anyhow::ensure!(!value.is_empty(), "Destination cannot be empty");
+        anyhow::ensure!(!value.is_empty(), "Thiết bị nhận không được để trống");
         Ok(match value.parse::<IpAddr>() {
             Ok(ip) => Self::Ip(ip),
             Err(_) => Self::Alias(value.to_string()),
@@ -36,10 +36,10 @@ impl TargetSelector {
             .filter(|device| self.matches(device))
             .collect();
         match matching.as_slice() {
-            [] => Err(format!("Destination {self} was not discovered")),
+            [] => Err(format!("Không tìm thấy thiết bị nhận {self}")),
             [device] => Ok(device.device.fingerprint.clone()),
             devices => Err(format!(
-                "Destination {self} is ambiguous ({} devices matched); use an IP address",
+                "Thiết bị nhận {self} không rõ ràng ({} thiết bị trùng); hãy dùng địa chỉ IP",
                 devices.len()
             )),
         }
@@ -64,8 +64,8 @@ impl TargetSelector {
 impl std::fmt::Display for TargetSelector {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Self::Alias(alias) => write!(formatter, "alias {alias:?}"),
-            Self::Ip(ip) => write!(formatter, "IP address {ip}"),
+            Self::Alias(alias) => write!(formatter, "tên {alias:?}"),
+            Self::Ip(ip) => write!(formatter, "địa chỉ IP {ip}"),
         }
     }
 }
@@ -171,7 +171,7 @@ mod tests {
                 .unwrap()
                 .resolve(&devices)
                 .unwrap_err()
-                .contains("ambiguous")
+                .contains("không rõ ràng")
         );
     }
 
@@ -184,7 +184,7 @@ mod tests {
                 .unwrap()
                 .resolve(&devices)
                 .unwrap_err()
-                .contains("was not discovered")
+                .contains("Không tìm thấy")
         );
     }
 }

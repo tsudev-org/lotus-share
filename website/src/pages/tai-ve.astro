@@ -1,0 +1,119 @@
+---
+import Trang from '../layouts/Trang.astro';
+import { banMoiNhat, NEN_TANG, RELEASES_URL, REPO, REPO_URL } from '../lib/noi-dung';
+
+const ban = await banMoiNhat();
+const mb = (b: number) => `${(b / 1024 / 1024).toFixed(1).replace('.', ',')} MB`;
+const theoNenTang = NEN_TANG.map((nt) => ({ ...nt, goi: ban?.goi.filter((g) => g.nenTang === nt.ma) ?? [] })).filter((nt) => nt.goi.length > 0);
+const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? 'tsudev-lotus-<phiên bản>-windows-x86-64.exe';
+---
+<Trang tieuDe="Tải về" moTa="Tải tsudev-lotus cho Windows, macOS, Linux và Android; mã SHA-256 của từng gói, cách kiểm tra tệp tải về và hướng dẫn cài đặt từng hệ điều hành." duongDan="/tai-ve/">
+  <div class="khung tai-lieu">
+    <nav class="tai-lieu__menu" aria-label="Tải về">
+      <p>Tải về</p>
+      <ul>
+        <li><a href="#chon-goi">Chọn gói</a></li>
+        <li><a href="#kiem-tra">Kiểm tra tệp</a></li>
+        <li><a href="#windows">Cài trên Windows</a></li>
+        <li><a href="#macos">Cài trên macOS</a></li>
+        <li><a href="#linux">Cài trên Linux</a></li>
+        <li><a href="#android">Cài trên Android</a></li>
+        <li><a href="#tuong-thich">Dùng cùng LocalSend</a></li>
+      </ul>
+    </nav>
+    <article class="van-ban">
+      {ban ? (
+        <>
+          <h1>Tải tsudev-lotus {ban.phienBan}</h1>
+          <p>Phát hành ngày {ban.ngay}. Mọi gói được GitHub Actions build từ mã nguồn công khai; trang này chỉ dẫn tới <a href={ban.url} target="_blank" rel="noopener noreferrer">trang phát hành trên GitHub</a>, không lưu bản sao.</p>
+        </>
+      ) : (
+        <>
+          <h1>Tải tsudev-lotus</h1>
+          <div class="chu-y">
+            <p><strong>Bản phát hành đầu tiên đang được chuẩn bị.</strong> Khi có, danh sách gói kèm mã SHA-256 sẽ hiện ngay tại đây và ở <a href={RELEASES_URL} target="_blank" rel="noopener noreferrer">trang phát hành trên GitHub</a>.</p>
+            <p>Trong lúc chờ, bạn có thể tự build từ <a href={REPO_URL} target="_blank" rel="noopener noreferrer">mã nguồn</a> (cần Flutter 3.47.9 và Rust), hoặc theo dõi repo trên GitHub (Watch, chọn Releases) để được báo khi có bản mới.</p>
+          </div>
+        </>
+      )}
+
+      <h2 id="chon-goi">Chọn gói</h2>
+      {theoNenTang.length > 0 ? (
+        <div class="goi">
+          {theoNenTang.map((nt) => (
+            <section class="goi__nhom" aria-labelledby={`goi-${nt.ma}`}>
+              <h3 id={`goi-${nt.ma}`}>{nt.ten}</h3>
+              {nt.goi.map((g) => (
+                <div class="goi__muc">
+                  <div>
+                    <p class="goi__loai">{g.loai}</p>
+                    <p class="goi__ten">{g.ten} · {mb(g.kichThuoc)}</p>
+                  </div>
+                  <a class={`nut ${g.ten.endsWith('-windows-x86-64.exe') ? 'nut--chinh' : 'nut--phu'}`} href={g.url}>Tải về<span class="an-di"> {g.ten}</span></a>
+                  {g.sha256 && <p class="goi__bam">SHA-256: {g.sha256}</p>}
+                </div>
+              ))}
+            </section>
+          ))}
+        </div>
+      ) : (
+        <div class="bang" tabindex="0" role="region" aria-label="Các gói sẽ có, cuộn ngang được">
+          <table>
+            <thead><tr><th scope="col">Hệ điều hành</th><th scope="col">Gói</th></tr></thead>
+            <tbody>
+              <tr><td>Windows 10/11 x64</td><td><code>-windows-x86-64.exe</code> (bộ cài) hoặc <code>.zip</code> (di động)</td></tr>
+              <tr><td>Windows 11 ARM64</td><td><code>-windows-arm-64.zip</code></td></tr>
+              <tr><td>macOS 12+</td><td><code>.dmg</code> (chip Apple và Intel)</td></tr>
+              <tr><td>Linux x64, ARM64</td><td><code>.AppImage</code>, <code>.deb</code>, <code>.rpm</code>, <code>.tar.gz</code></td></tr>
+              <tr><td>Android 5.0+</td><td><code>.apk</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      )}
+      <p>Không chắc máy Windows dùng bản nào? Mở <strong>Cài đặt, Hệ thống, Giới thiệu</strong>, xem dòng <em>Loại hệ thống</em>. Phần lớn máy dùng bản <strong>x64</strong>.</p>
+
+      <h2 id="kiem-tra">Kiểm tra tệp trước khi chạy</h2>
+      <p>So mã SHA-256 của tệp bạn tải với mã ghi ở trên (hoặc trong tệp <code>SHA256SUMS.txt</code> của bản phát hành). Tệp <code>SHA256SUMS.txt</code> được ký bằng Sigstore và mọi gói có chứng thực nguồn gốc bản build (SLSA), nên bạn kiểm được gói đến từ đúng quy trình phát hành của repo này: xem <a href={`${REPO_URL}/blob/main/docs/vi/PHAT-HANH.md#4-người-dùng-kiểm-chứng-tệp-tải-về`} target="_blank" rel="noopener noreferrer">hướng dẫn kiểm chứng</a>.</p>
+      <p>Windows (PowerShell):</p>
+      <pre tabindex="0"><code>Get-FileHash .\{vd} -Algorithm SHA256</code></pre>
+      <p>macOS, Linux:</p>
+      <pre tabindex="0"><code>sha256sum tsudev-lotus-*.AppImage     # macOS: shasum -a 256 tsudev-lotus-*.dmg</code></pre>
+      <div class="chu-y">
+        <p><strong>Chỉ tải từ trang này hoặc từ <a href={`${REPO_URL}/releases`} target="_blank" rel="noopener noreferrer">github.com/{REPO}</a>.</strong> Mọi trang khác tự xưng "bản chính thức" đều không liên quan tới tsudev.</p>
+        <p>Bản Windows hiện chưa có chứng thư ký mã nên SmartScreen có thể cảnh báo ở lần chạy đầu: chọn <em>Thông tin thêm</em>, rồi <em>Vẫn chạy</em> sau khi đã kiểm SHA-256.</p>
+      </div>
+
+      <h2 id="windows">Cài trên Windows 10/11</h2>
+      <ol>
+        <li>Chạy bộ cài <code>.exe</code>, hoặc giải nén bản <code>.zip</code> vào một thư mục cố định rồi chạy tệp chương trình.</li>
+        <li>Lần chạy đầu, Tường lửa Windows hỏi quyền truy cập mạng: chọn <strong>Mạng riêng tư</strong> (Private). Không cấp quyền thì các máy khác không thấy máy bạn.</li>
+        <li>Nếu mạng đang đặt là <em>Công cộng</em>, đổi sang <em>Riêng tư</em> trong Cài đặt, Mạng và Internet, hoặc mở cổng TCP/UDP 53317 cho mạng đó.</li>
+      </ol>
+
+      <h2 id="macos">Cài trên macOS 12 trở lên</h2>
+      <ol>
+        <li>Mở tệp <code>.dmg</code>, kéo ứng dụng vào thư mục Applications.</li>
+        <li>Bản build chưa được Apple công chứng (notarize). Lần mở đầu, vào <strong>Cài đặt hệ thống, Quyền riêng tư và bảo mật</strong>, chọn <strong>Vẫn mở</strong>.</li>
+        <li>Khi được hỏi quyền <em>Mạng cục bộ</em>, chọn Cho phép.</li>
+      </ol>
+
+      <h2 id="linux">Cài trên Linux</h2>
+      <pre tabindex="0"><code>chmod +x tsudev-lotus-&lt;phiên bản&gt;-linux-x86-64.AppImage
+./tsudev-lotus-&lt;phiên bản&gt;-linux-x86-64.AppImage
+# hoặc: sudo apt install ./tsudev-lotus-&lt;phiên bản&gt;-linux-x86-64.deb</code></pre>
+      <p>Có tường lửa (ufw, firewalld)? Mở cổng 53317 cho TCP và UDP trong mạng nội bộ: <code>sudo ufw allow from 192.168.0.0/16 to any port 53317</code>.</p>
+
+      <h2 id="android">Cài trên Android</h2>
+      <ol>
+        <li>Tải tệp <code>.apk</code> trên điện thoại, mở tệp và cho phép <em>Cài ứng dụng không rõ nguồn gốc</em> cho trình duyệt.</li>
+        <li>Cấp quyền truy cập ảnh/tệp khi được hỏi để gửi và lưu tệp.</li>
+      </ol>
+      <p>Mọi APK ký bằng khóa của tsudev. Dấu vân tay SHA-256 của chứng thư ký (đối chiếu bằng <code>apksigner verify --print-certs</code>):</p>
+      <pre tabindex="0"><code>ad1be603b39b0c211c3ac4c4f890e1c85509209807a029380738089399be1f45</code></pre>
+      <p>Mã định danh ứng dụng là <code>com.tsudev.lotus</code>, nên tsudev-lotus cài song song được với LocalSend.</p>
+
+      <h2 id="tuong-thich">Dùng cùng LocalSend</h2>
+      <p>tsudev-lotus nói cùng giao thức với LocalSend, nên máy cài tsudev-lotus gửi và nhận được với máy cài LocalSend (kể cả bản trên App Store, Google Play). Hai ứng dụng dùng cùng cổng 53317, vì vậy <strong>không chạy cả hai trên cùng một máy</strong> cùng lúc.</p>
+    </article>
+  </div>
+</Trang>

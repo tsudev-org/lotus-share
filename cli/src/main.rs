@@ -9,40 +9,63 @@ mod storage;
 mod ui;
 mod util;
 
-use clap::{Parser, Subcommand};
+use clap::{ArgAction, Parser, Subcommand};
 use std::path::PathBuf;
+
+// tsudev-lotus: khung trợ giúp tiếng Việt (thay tiêu đề mặc định tiếng Anh của clap).
+const HELP_TEMPLATE: &str = "{about-with-newline}\nCách dùng: {usage}\n\n{all-args}{after-help}";
 
 #[derive(Subcommand)]
 pub enum Command {
-    /// Send one or more files or directories, or a text message
+    /// Gửi một hay nhiều tệp, thư mục, hoặc một tin nhắn văn bản
+    #[command(help_template = HELP_TEMPLATE, next_help_heading = "Tùy chọn", disable_help_flag = true)]
     Send {
-        /// Destination device: an exact alias or IP address
+        /// Thiết bị nhận: tên thiết bị chính xác hoặc địa chỉ IP
         #[arg(long, value_name = "TARGET")]
         to: Option<String>,
 
-        /// Send this text as a message instead of files; `-` reads it from stdin
+        /// Gửi văn bản này dưới dạng tin nhắn thay vì tệp; `-` đọc từ stdin
         #[arg(long, value_name = "TEXT", requires = "to", conflicts_with = "paths")]
         text: Option<String>,
 
-        /// Files or directories to send (directories are collected recursively)
+        /// Tệp hoặc thư mục cần gửi (thư mục được gom đệ quy)
         #[arg(value_name = "PATH", required_unless_present = "text", num_args = 1..)]
         paths: Vec<PathBuf>,
     },
 }
 
-/// LocalSend CLI
+/// tsudev-lotus CLI - gửi/nhận tệp trong mạng nội bộ, tương thích LocalSend
 #[derive(Parser)]
-#[command(name = "localsend-cli", version, about, after_help = HELP_SECTIONS)]
+#[command(
+    name = "tsudev-lotus-cli",
+    version,
+    about,
+    after_help = HELP_SECTIONS,
+    help_template = HELP_TEMPLATE,
+    subcommand_help_heading = "Lệnh",
+    next_help_heading = "Tùy chọn",
+    disable_help_flag = true,
+    disable_version_flag = true,
+    disable_help_subcommand = true
+)]
 pub struct Args {
-    /// Device name shown to other devices [default: config.toml, else the hostname]
+    /// In trợ giúp
+    #[arg(short = 'h', long, action = ArgAction::Help, global = true)]
+    help: Option<bool>,
+
+    /// In phiên bản
+    #[arg(short = 'V', long, action = ArgAction::Version)]
+    version: Option<bool>,
+
+    /// Tên thiết bị hiển thị với máy khác [mặc định: config.toml, không có thì tên máy]
     #[arg(long, env = "LOCALSEND_ALIAS")]
     pub alias: Option<String>,
 
-    /// Port of the HTTP server [default: config.toml, else 53317]
+    /// Cổng máy chủ HTTP [mặc định: config.toml, không có thì 53317]
     #[arg(long, env = "LOCALSEND_PORT")]
     pub port: Option<u16>,
 
-    /// Directory where received files are saved [default: config.toml, else the Downloads folder]
+    /// Thư mục lưu tệp nhận được [mặc định: config.toml, không có thì thư mục Tải về]
     #[arg(long, env = "LOCALSEND_DESTINATION")]
     pub destination: Option<PathBuf>,
 
@@ -50,18 +73,19 @@ pub struct Args {
     pub command: Option<Command>,
 }
 
-const HELP_SECTIONS: &str = "Events:\n  \
-                             D      Discovery\n  \
-                             S      Sending files\n  \
-                             R      Receiving files\n\
-                             \nHotkeys:\n  \
-                             1-9    Send files to the device with that number\n  \
-                             D      Show the paired and discovered devices\n  \
-                             W+S    Toggle share via link: serve files to browsers over plain HTTP\n  \
-                             W+R    Toggle receive via link: let browsers upload files over plain HTTP\n  \
-                             Y/N/P  Accept / Decline / Accept-and-Pair an incoming request\n  \
-                             Ctrl+C Cancel the current transfer or request, or quit when idle\n \
-                             \nEnvironment Variables:\n  \
+// tsudev-lotus: trợ giúp tiếng Việt.
+const HELP_SECTIONS: &str = "Sự kiện:\n  \
+                             D      Tìm thiết bị\n  \
+                             S      Gửi tệp\n  \
+                             R      Nhận tệp\n\
+                             \nPhím tắt:\n  \
+                             1-9    Gửi tệp tới thiết bị có số đó\n  \
+                             D      Xem thiết bị đã ghép đôi và đã tìm thấy\n  \
+                             W+S    Bật/tắt chia sẻ qua liên kết: trình duyệt tải tệp qua HTTP thường\n  \
+                             W+R    Bật/tắt nhận qua liên kết: trình duyệt tải tệp lên qua HTTP thường\n  \
+                             Y/N/P  Chấp nhận / Từ chối / Chấp nhận và ghép đôi yêu cầu đến\n  \
+                             Ctrl+C Hủy lượt truyền hoặc yêu cầu hiện tại, hoặc thoát khi rảnh\n \
+                             \nBiến môi trường:\n  \
                              XDG_CONFIG_HOME, LOCALSEND_ALIAS, LOCALSEND_PORT, LOCALSEND_DESTINATION";
 
 fn main() -> anyhow::Result<()> {

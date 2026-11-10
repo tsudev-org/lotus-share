@@ -89,7 +89,7 @@ async fn send_inner(
     };
 
     let Some(http) = device.get_best_channel().and_then(|channel| channel.http()) else {
-        log(format!("{alias}: No dialable address")).await;
+        log(format!("{alias}: Không có địa chỉ kết nối được")).await;
         return false;
     };
     let protocol = match http.protocol {
@@ -108,7 +108,7 @@ async fn send_inner(
     ) {
         Ok(client) => client,
         Err(err) => {
-            log(format!("{alias}: Failed to create HTTP client: {err}")).await;
+            log(format!("{alias}: Không tạo được kết nối HTTP: {err}")).await;
             return false;
         }
     };
@@ -138,12 +138,12 @@ async fn send_inner(
         }
         Err(ClientError::StatusCode(err)) => {
             let reason = match err.status {
-                401 => "PIN required (not supported by the CLI)".to_string(),
+                401 => "Cần mã PIN (CLI chưa hỗ trợ)".to_string(),
                 403 => "Declined".to_string(),
-                409 => "Blocked by another session".to_string(),
-                429 => "Too many requests".to_string(),
+                409 => "Bị chặn bởi một phiên khác".to_string(),
+                429 => "Quá nhiều yêu cầu".to_string(),
                 status => format!(
-                    "Request failed with status {status}{}",
+                    "Yêu cầu thất bại, mã trạng thái {status}{}",
                     err.message
                         .map(|message| format!(": {}", sanitize::single_line(&message)))
                         .unwrap_or_default()
@@ -160,10 +160,10 @@ async fn send_inner(
 
     let Some(response) = prepared.response else {
         if is_message {
-            log(format!("{alias}: Message sent")).await;
+            log(format!("{alias}: Đã gửi tin nhắn")).await;
             return true;
         }
-        log(format!("{alias}: all files were declined")).await;
+        log(format!("{alias}: mọi tệp đều bị từ chối")).await;
         return false;
     };
     if prepared.status_code != 200
@@ -174,7 +174,7 @@ async fn send_inner(
             .iter()
             .any(|(id, token)| !files.contains_key(id) || token.is_empty())
     {
-        log(format!("{alias}: Invalid prepare-upload response")).await;
+        log(format!("{alias}: Phản hồi chuẩn bị tải lên không hợp lệ")).await;
         return false;
     }
 
@@ -192,7 +192,7 @@ async fn send_inner(
         .await;
     if response.files.len() < offered {
         log(format!(
-            "{alias}: receiver accepted {} of {offered} files",
+            "{alias}: bên nhận chấp nhận {} trên {offered} tệp",
             response.files.len()
         ))
         .await;
@@ -248,7 +248,7 @@ async fn send_inner(
             Err(ClientError::Cancelled) => {
                 if cancel.by_peer.load(Ordering::Relaxed) {
                     log(format!(
-                        "{alias}: Cancelled by receiver ({sent_files} file(s) sent)"
+                        "{alias}: Bên nhận đã hủy (đã gửi {sent_files} tệp)"
                     ))
                     .await;
                 } else {
@@ -267,7 +267,7 @@ async fn send_inner(
             }
             Err(err) => {
                 log(format!(
-                    "{alias}: Failed to upload {}: {err}",
+                    "{alias}: Không tải lên được {}: {err}",
                     file.file_name
                 ))
                 .await;
@@ -285,7 +285,7 @@ async fn send_inner(
     }
 
     if is_message && sent_files == 1 {
-        log(format!("{alias}: Message sent")).await;
+        log(format!("{alias}: Đã gửi tin nhắn")).await;
         return true;
     }
     log(format!(

@@ -1,11 +1,11 @@
 {
-  "appName": "LocalSend",
+  "appName": "tsudev-lotus",
   "general": {
     "accept": "Đồng ý",
     "accepted": "Đã đồng ý",
     "add": "Thêm",
     "advanced": "Nâng cao",
-    "cancel": "Thoát",
+    "cancel": "Hủy",
     "close": "Đóng",
     "confirm": "Xác nhận",
     "continueStr": "Tiếp tục",
@@ -29,7 +29,7 @@
     "quickSave": "Lưu nhanh",
     "quickSaveFromFavorites": "Lưu nhanh cho \"Yêu thích\"",
     "renamed": "Đã đổi tên",
-    "reset": "Thiết lập lại",
+    "reset": "Hoàn tác thay đổi",
     "restart": "Khởi động lại",
     "settings": "Cài đặt",
     "skipped": "Đã bỏ qua",
@@ -44,8 +44,8 @@
     "title": "Nhận",
     "infoBox": {
       "ip": "IP:",
-      "port": "Port:",
-      "alias": "Biệt danh:"
+      "port": "Cổng:",
+      "alias": "Tên thiết bị:"
     },
     "quickSave": {
       "off": "@:general.off",
@@ -64,7 +64,7 @@
     "picker": {
       "file": "Tập tin",
       "folder": "Thư mục",
-      "media": "Media",
+      "media": "Ảnh/Video",
       "text": "Văn bản",
       "app": "Ứng dụng",
       "clipboard": "Dán"
@@ -81,14 +81,14 @@
       "link": "Chia sẻ liên kết"
     },
     "sendModeHelp": "Giải thích",
-    "help": "Vui lòng đảm bảo thiết bị gửi và nhận dùng chung mạng wifi.",
-    "placeItems": "Đặt các mục để chia sẻ."
+    "help": "Hãy đảm bảo thiết bị nhận cũng đang dùng cùng mạng Wi-Fi.",
+    "placeItems": "Thả các mục vào đây để chia sẻ."
   },
   "settingsTab": {
     "title": "Cài đặt",
     "general": {
       "title": "Chung",
-      "brightness": "Chủ đề",
+      "brightness": "Giao diện",
       "brightnessOptions": {
         "system": "Hệ thống",
         "dark": "Tối",
@@ -104,12 +104,14 @@
       "languageOptions": {
         "system": "Hệ thống"
       },
-      "saveWindowPlacement": "Thoát: Lưu vị trí cửa sổ hiển thị",
+      "saveWindowPlacement": "Lưu vị trí cửa sổ khi thoát",
       "saveWindowPlacementWindows": "Lưu vị trí cửa sổ sau khi thoát ứng dụng",
-      "minimizeToTray": "Thoát: Ẩn xuống thanh tác vụ",
+      "alwaysOnTop": "Luôn hiển thị trên cùng",
+      "alwaysOnTopUnavailable": "Không hỗ trợ trên Wayland",
+      "minimizeToTray": "Thu nhỏ xuống khay hệ thống/thanh menu khi đóng",
       "launchAtStartup": "Tự khởi động sau khi đăng nhập",
-      "launchMinimized": "Tự khởi động: Khởi động ẩn",
-      "showInContextMenu": "Hiển thị LocalSend ở danh mục",
+      "launchMinimized": "Tự khởi động: Chạy ẩn",
+      "showInContextMenu": "Hiển thị tsudev-lotus trong menu chuột phải",
       "animations": "Hoạt ảnh"
     },
     "receive": {
@@ -118,72 +120,72 @@
       "quickSaveFromFavorites": "@:general.quickSaveFromFavorites",
       "requirePin": "@:webSharePage.requirePin",
       "autoFinish": "Tự động hoàn thành",
-      "destination": "Đích đến",
-      "downloads": "(Downloads)",
-      "saveToGallery": "Lưu media vào thư viện",
+      "destination": "Lưu vào thư mục",
+      "downloads": "(Thư mục Tải về)",
+      "saveToGallery": "Lưu ảnh, video vào thư viện",
       "saveToHistory": "Lưu vào lịch sử",
-      "verifyChecksums": "Xác minh checksum khi nhận tệp"
+      "verifyChecksums": "Kiểm tra mã checksum khi nhận tệp"
     },
     "send": {
       "title": "Gửi",
       "shareViaLinkAutoAccept": "Chia sẻ qua liên kết: Tự động chấp nhận",
-      "createChecksums": "Tạo checksum khi gửi tệp"
+      "createChecksums": "Tạo mã checksum khi gửi tệp"
     },
     "network": {
       "title": "Mạng",
-      "needRestart": "Khởi động lại server để cài đặt có hiệu lực!",
-      "server": "Server",
-      "alias": "Biệt danh",
+      "needRestart": "Khởi động lại máy chủ để áp dụng cài đặt!",
+      "server": "Máy chủ",
+      "alias": "Tên thiết bị",
       "deviceType": "Loại thiết bị",
-      "deviceModel": "Model thiết bị",
-      "port": "Port",
+      "deviceModel": "Mẫu thiết bị",
+      "port": "Cổng",
       "network": "Giao diện mạng",
       "networkOptions": {
         "all": "Tất cả",
         "filtered": "Đã lọc"
       },
-      "discoveryTimeout": "Hết thời gian tìm kiếm",
+      "discoveryTimeout": "Thời gian chờ tìm kiếm",
       "useSystemName": "Dùng tên hệ thống",
-      "generateRandomAlias": "Dùng bí danh ngẫu nhiên",
-      "portWarning": "Các thiết bị khác có thể không nhận diện được thiết bị của bạn, vì bạn đang dùng port tuỳ chỉnh. (mặc định: {defaultPort})",
+      "generateRandomAlias": "Tạo tên ngẫu nhiên",
+      "portWarning": "Các thiết bị khác có thể không tìm thấy bạn vì bạn đang dùng cổng tùy chỉnh. (mặc định: {defaultPort})",
       "encryption": "Mã hoá",
-      "multicastGroup": "Đa phương tiện",
-      "multicastGroupWarning": "Các thiết bị khác có thể không nhận diện được thiết bị của bạn, vì bạn đang dùng địa chỉ multicast tuỳ chỉnh. (mặc định: {defaultMulticast})"
+      "multicastGroup": "Địa chỉ multicast",
+      "multicastGroupWarning": "Các thiết bị khác có thể không tìm thấy bạn vì bạn đang dùng địa chỉ multicast tùy chỉnh. (mặc định: {defaultMulticast})"
     },
     "other": {
       "title": "Khác",
-      "support": "Hỗ trợ LocalSend",
+      "support": "Ủng hộ tác giả LocalSend",
       "donate": "Ủng hộ",
-      "privacyPolicy": "Chính sách bảo mật",
+      "privacyPolicy": "Chính sách quyền riêng tư",
       "termsOfUse": "Điều khoản sử dụng"
     },
     "advancedSettings": "Cài đặt nâng cao"
   },
   "troubleshootPage": {
-    "title": "Gỡ lỗi",
+    "title": "Khắc phục sự cố",
     "subTitle": "Ứng dụng không hoạt động như dự kiến? Bạn có thể tìm giải pháp cho những vấn đề thường gặp tại đây.",
     "solution": "Giải pháp:",
     "fixButton": "Sửa lỗi tự động",
     "firewall": {
       "symptom": "Ứng dụng có thể gửi tập tin tới các thiết bị khác, nhưng các thiết bị khác không thể gửi tập tin đến thiết bị này.",
-      "solution": "Có vẻ như đây là một vấn đề với tường lửa (firewall). Bạn có thể khắc phục bằng cách chấp thuận các kết nối đến (UDP và TCP) trên port {port}.",
-      "openFirewall": "Mở tường lửa(Firewall)"
+      "solution": "Nhiều khả năng đây là do tường lửa. Bạn có thể khắc phục bằng cách cho phép kết nối đến (UDP và TCP) trên cổng {port}.",
+      "openFirewall": "Mở tường lửa"
     },
     "noDiscovery": {
       "symptom": "Thiết bị này không thể tìm thấy thiết bị khác.",
-      "solution": "Hãy đảm bảo rằng các thiết bị được kết nối với cùng một mạng Wi-Fi và dùng chung thiết lập (port, multicast address, encryption). Bạn có thể thử nhập địa chỉ IP của thiết bị đích đến. Nếu nó hoạt động, cân nhắc thêm thiết bị đó vào mục yêu thích. Thiết bị sẽ được nhận tự động trong những lần tìm kiếm trong tương lai."
+      "solution": "Hãy đảm bảo các thiết bị cùng một mạng Wi-Fi và dùng chung cấu hình (cổng, địa chỉ multicast, mã hóa). Bạn có thể thử nhập thủ công địa chỉ IP của thiết bị đích. Nếu cách đó hoạt động, hãy thêm thiết bị vào Yêu thích để lần sau được tự động tìm thấy."
     },
     "noConnection": {
-      "symptom": "Cả hai thiết bị không thể nhận diện lẫn nhau cũng như không thể chia sẻ tập tin.",
-      "solution": "Vấn đề tồn tại ở cả 2 thiết bị? Nếu thế, bạn cần chắc chắn rằng cả hai thiết bị đang dùng chung một mạng wifi với cùng thiết lập (port, địa chỉ multicast, mã hoá). Wifi có thể không cho các thiết bị giao tiếp với nhau. Trong trường hợp đó, bạn cần tìm trong thiết lập của router."
+      "symptom": "Hai thiết bị không tìm thấy nhau và cũng không chia sẻ được tập tin.",
+      "solution": "Sự cố xảy ra ở cả hai phía? Nếu vậy, hãy đảm bảo hai thiết bị cùng một mạng Wi-Fi và dùng chung cấu hình (cổng, địa chỉ multicast, mã hóa). Một số mạng Wi-Fi không cho các thiết bị kết nối trực tiếp với nhau (cách ly máy khách); khi đó bạn cần tắt tùy chọn này trong cài đặt bộ định tuyến (router)."
     }
   },
   "networkInterfacesPage": {
-    "title": "Card mạng",
-    "info": "LocalSend mặc định sử dụng tất cả các giao diện mạng có sẵn. Bạn có thể loại trừ các mạng không mong muốn tại đây. Bạn cần khởi động lại server để áp dụng các thay đổi.",
+    "title": "Giao diện mạng",
+    "info": "Mặc định tsudev-lotus dùng mọi giao diện mạng có sẵn. Bạn có thể loại trừ mạng không mong muốn tại đây. Cần khởi động lại máy chủ để áp dụng thay đổi.",
     "preview": "Xem trước",
-    "whitelist": "Cho phép",
-    "blacklist": "Chặn"
+    "whitelist": "Danh sách cho phép",
+    "blacklist": "Danh sách chặn"
   },
   "receiveHistoryPage": {
     "title": "Lịch sử",
@@ -199,9 +201,9 @@
   },
   "apkPickerPage": {
     "title": "Ứng dụng (APK)",
-    "excludeSystemApps": "Mở ứng dụng hệ thống",
-    "excludeAppsWithoutLaunchIntent": "Loại trừ các ứng dụng không thể khởi chạy",
-    "apps": "{n} Ứng dụng"
+    "excludeSystemApps": "Ẩn ứng dụng hệ thống",
+    "excludeAppsWithoutLaunchIntent": "Ẩn ứng dụng không mở được",
+    "apps": "{n} ứng dụng"
   },
   "selectedFilesPage": {
     "deleteAll": "Xoá toàn bộ"
@@ -236,14 +238,14 @@
     },
     "subTitleMessage": "đã gửi cho bạn một tin nhắn:",
     "subTitleLink": "đã gửi cho bạn một liên kết:",
-    "canceled": "Người gửi đã xoá yêu cầu."
+    "canceled": "Người gửi đã hủy yêu cầu."
   },
   "receiveOptionsPage": {
     "title": "Tuỳ chọn",
     "destination": "@:settingsTab.receive.destination",
-    "appDirectory": "(Thư mục LocalSend)",
+    "appDirectory": "(Thư mục tsudev-lotus)",
     "saveToGallery": "@:settingsTab.receive.saveToGallery",
-    "saveToGalleryOff": "Đã tự động tắt vì là thư mục."
+    "saveToGalleryOff": "Đã tự động tắt vì có thư mục."
   },
   "sendPage": {
     "calculatingChecksum": "Đang tính checksum ({curr} / {n})",
@@ -280,9 +282,9 @@
   },
   "webSharePage": {
     "title": "Chia sẻ qua liên kết",
-    "loading": "Đang khởi tạo server…",
-    "stopping": "Đang dừng server…",
-    "error": "Một lỗi đã xảy ra khi khởi tạo server.",
+    "loading": "Đang khởi động máy chủ…",
+    "stopping": "Đang dừng máy chủ…",
+    "error": "Đã xảy ra lỗi khi khởi động máy chủ.",
     "openLink": {
       "one": "Mở liên kết trong trình duyệt:",
       "other": "Mở một trong các liên kết với trình duyệt:"
@@ -291,19 +293,19 @@
     "noRequests": "Hiện không có yêu cầu nào.",
     "encryption": "@:settingsTab.network.encryption",
     "autoAccept": "Tự động chấp nhận yêu cầu",
-    "requirePin": "Cần cung cấp mã PIN",
+    "requirePin": "Yêu cầu mã PIN",
     "pinHint": "Mã PIN là \"{pin}\"",
-    "encryptionHint": "LocalSend dùng chứng chỉ tự tạo. Bạn cần chấp thuận trong trình duyệt.",
+    "encryptionHint": "tsudev-lotus dùng chứng chỉ tự ký. Bạn cần chấp nhận chứng chỉ này trong trình duyệt.",
     "pendingRequests": "Yêu cầu chờ: {n}"
   },
   "webReceivePage": {
     "title": "Nhận qua liên kết"
   },
   "aboutPage": {
-    "title": "Thông tin về LocalSend",
+    "title": "Thông tin về tsudev-lotus",
     "description": [
-      "LocalSend là một phần mềm miễn phí mã nguồn mở, giúp bạn chia sẻ tập tin cũng như tin nhắn đến các thiết bị phụ cận một cách bảo mật thông qua mạng nội bộ mà không cần kết nối mạng đến bên ngoài.",
-      "Ứng dụng có trên Android, iOS, macOS, Windows và Linux. Bạn có thể tìm thấy các tuỳ chọn tải ở trang chủ."
+      "tsudev-lotus là ứng dụng miễn phí, mã nguồn mở giúp bạn chia sẻ tập tin và tin nhắn một cách an toàn với các thiết bị ở gần qua mạng nội bộ, không cần kết nối Internet.",
+      "Ứng dụng có cho Android, iOS, macOS, Windows và Linux. Mọi tùy chọn tải về có ở trang chủ chính thức."
     ],
     "author": "Tác giả",
     "contributors": "Người đóng góp",
@@ -312,10 +314,10 @@
   },
   "donationPage": {
     "title": "Ủng hộ",
-    "info": "LocalSend là ứng dụng miễn phí, mã nguồn mở, không chứa quảng cáo. Nếu bạn yêu thích ứng dụng này, bạn có thể hỗ trợ việc phát triển bằng việc ủng hộ.",
+    "info": "tsudev-lotus dựa trên LocalSend - ứng dụng miễn phí, mã nguồn mở, không quảng cáo. Nếu bạn thích, hãy ủng hộ tác giả gốc của LocalSend bằng một khoản đóng góp.",
     "donate": "Ủng hộ {amount}",
     "thanks": "Xin chân thành cảm ơn!",
-    "restore": "Khôi phục lịch sử ủng hộ"
+    "restore": "Khôi phục giao dịch"
   },
   "changelogPage": {
     "title": "Lịch sử thay đổi"
@@ -333,7 +335,86 @@
     }
   },
   "aliasGenerator(ignoreMissing, ignoreGpt)": {
-    "@info": "Inherits from the English version"
+    "adjectives": [
+      "Đáng Yêu",
+      "Xinh Đẹp",
+      "Khổng Lồ",
+      "Rực Rỡ",
+      "Sạch Sẽ",
+      "Thông Minh",
+      "Ngầu",
+      "Dễ Thương",
+      "Lanh Lợi",
+      "Quyết Tâm",
+      "Năng Động",
+      "Hiệu Quả",
+      "Tuyệt Vời",
+      "Nhanh Nhẹn",
+      "Thân Thiện",
+      "Tươi Mới",
+      "Hiền Lành",
+      "Vui Vẻ",
+      "Chăm Chỉ",
+      "Bản Lĩnh",
+      "Tốt Bụng",
+      "Nhỏ Xinh",
+      "Hiện Đại",
+      "Gọn Gàng",
+      "Kiên Nhẫn",
+      "Lịch Sự",
+      "Mạnh Mẽ",
+      "Nhanh Trí",
+      "Bình Tĩnh",
+      "Thông Thái",
+      "Tự Tin",
+      "Tinh Tế",
+      "Sáng Tạo",
+      "Chu Đáo",
+      "Vững Vàng",
+      "Tài Ba",
+      "Lạc Quan"
+    ],
+    "combination": "{fruit} {adjective}",
+    "fruits": [
+      "Táo",
+      "Bơ",
+      "Chuối",
+      "Mâm Xôi",
+      "Việt Quất",
+      "Bông Cải",
+      "Cà Rốt",
+      "Anh Đào",
+      "Dừa",
+      "Nho",
+      "Chanh",
+      "Xà Lách",
+      "Xoài",
+      "Dưa Lưới",
+      "Nấm",
+      "Hành Tây",
+      "Cam",
+      "Đu Đủ",
+      "Đào",
+      "Lê",
+      "Dứa",
+      "Khoai Tây",
+      "Bí Ngô",
+      "Mâm Xôi Đỏ",
+      "Dâu Tây",
+      "Cà Chua",
+      "Sầu Riêng",
+      "Măng Cụt",
+      "Chôm Chôm",
+      "Thanh Long",
+      "Vải",
+      "Nhãn",
+      "Mít",
+      "Ổi",
+      "Bưởi",
+      "Khế",
+      "Mận",
+      "Hồng Xiêm"
+    ]
   },
   "dialogs": {
     "addFile": {
@@ -346,17 +427,17 @@
     },
     "addressInput": {
       "title": "Nhập địa chỉ",
-      "hashtag": "Hashtag",
+      "hashtag": "Số cuối (#)",
       "ip": "Địa chỉ IP",
       "recentlyUsed": "Sử dụng gần đây: "
     },
     "cancelSession": {
-      "title": "Dừng gửi tập tin",
-      "content": "Bạn có thực sự muống dừng quá trình gửi tập tin?"
+      "title": "Hủy truyền tập tin",
+      "content": "Bạn có thật sự muốn hủy quá trình truyền tập tin?"
     },
     "cannotOpenFile": {
       "title": "Không thể mở tập tin",
-      "content": "Không thể mở \"{file}\". Có thể tập tin có thể đã bị di chuyển, đổi tên hoặc xoá?"
+      "content": "Không thể mở \"{file}\". Tập tin có thể đã bị di chuyển, đổi tên hoặc xóa."
     },
     "encryptionDisabledNotice": {
       "title": "Mã hoá đã tắt",
@@ -376,11 +457,12 @@
     },
     "favoriteEditDialog": {
       "titleAdd": "Thêm vào yêu thích",
-      "titleEdit": "Điều chỉnh",
-      "name": "Biệt danh",
+      "titleEdit": "Chỉnh sửa",
+      "name": "Tên thiết bị",
       "auto": "(tự động)",
       "ip": "Địa chỉ IP",
-      "port": "Port"
+      "port": "Cổng",
+      "invalidPort": "Nhập một số nguyên từ 1 đến 65535."
     },
     "fileInfo": {
       "title": "Thông tin tập tin",
@@ -391,7 +473,7 @@
       "time": "Thời gian:"
     },
     "fileNameInput": {
-      "title": "Nhập tên",
+      "title": "Nhập tên tập tin",
       "original": "Ban đầu: {original}"
     },
     "historyClearDialog": {
@@ -400,7 +482,7 @@
     },
     "localNetworkUnauthorized": {
       "title": "@:dialogs.noPermission.title",
-      "description": "LocalSend không thể tìm kiếm thiết bị khác khi không được phép quét mạng nội bộ. Vui lòng trao quyền cho ứng dụng trong cài đặt.",
+      "description": "tsudev-lotus không thể tìm thấy thiết bị khác khi chưa được cấp quyền quét mạng nội bộ. Vui lòng cấp quyền này trong cài đặt.",
       "gotoSettings": "Cài đặt"
     },
     "messageInput": {
@@ -412,8 +494,8 @@
       "content": "Vui lòng chọn ít nhất một tập tin."
     },
     "noPermission": {
-      "title": "Chưa được trao quyền.",
-      "content": "Bạn chưa được trao quyền. Vui lòng trao quyền cho ứng dụng trong cài đặt."
+      "title": "Chưa được cấp quyền",
+      "content": "Bạn chưa cấp các quyền cần thiết. Vui lòng cấp quyền cho ứng dụng trong cài đặt."
     },
     "notAvailableOnPlatform": {
       "title": "Không khả dụng",
@@ -423,21 +505,21 @@
       "title": "Mã QR"
     },
     "quickActions": {
-      "title": "Thao Tác Nhanh",
+      "title": "Thao tác nhanh",
       "counter": "Bộ đếm",
-      "prefix": "Tiếp đầu ngữ",
-      "padZero": "Pad with zeros",
-      "sortBeforeCount": "Sắp xếp theo bảng chữ cái",
+      "prefix": "Tiền tố",
+      "padZero": "Thêm số 0 ở đầu",
+      "sortBeforeCount": "Sắp xếp theo bảng chữ cái trước (A-Z)",
       "random": "Ngẫu nhiên"
     },
     "quickSaveNotice": {
       "title": "@:general.quickSave",
-      "content": "Yêu cầu tập tin đã được chấp thuận tự động. Chú ý rằng bất kỳ ai dùng chung mạng nội bộ với bạn đều có thể gửi tập tin cho bạn."
+      "content": "Yêu cầu gửi tập tin giờ được tự động chấp nhận. Lưu ý: mọi người trong cùng mạng nội bộ đều có thể gửi tập tin cho bạn."
     },
     "quickSaveFromFavoritesNotice": {
       "title": "@:general.quickSaveFromFavorites",
       "content": [
-        "Yêu cầu sẽ được chấp thuận tự động nếu thiết bị nằm trong danh sách yêu thích."
+        "Yêu cầu gửi tập tin từ các thiết bị trong danh sách Yêu thích giờ được tự động chấp nhận."
       ]
     },
     "pin": {
@@ -447,7 +529,7 @@
       "title": "Chế độ gửi",
       "single": "Gửi tập tin tới một người nhận. Lựa chọn sẽ được xoá sau khi quá trình gửi hoàn thành.",
       "multiple": "Gửi tập tin tới nhiều người nhận. Lựa chọn sẽ không bị xoá.",
-      "link": "Người nhận chưa cài đặt LocalSend có thể nhận tập tin bằng cách mở liên kết trong trình duyệt."
+      "link": "Người nhận chưa cài đặt tsudev-lotus có thể nhận tập tin bằng cách mở liên kết trong trình duyệt."
     },
     "zoom": {
       "title": "Đường dẫn"
@@ -460,14 +542,14 @@
   "tray": {
     "@info": "Apple Guidelines are very strict about the 'close' wording.",
     "open": "@:general.open",
-    "close": "Đóng LocalSend",
+    "close": "Thoát tsudev-lotus",
     "closeWindows": "Thoát"
   },
   "web": {
     "waiting": "@:sendPage.waiting",
     "enterPin": "Nhập mã PIN",
     "invalidPin": "Sai mã PIN",
-    "tooManyAttempts": "Sai quá nhiều",
+    "tooManyAttempts": "Nhập sai quá nhiều lần",
     "rejected": "Đã từ chối",
     "files": "Tập tin",
     "fileName": "Tên",
@@ -476,7 +558,7 @@
   "assetPicker": {
     "@info": "Translations for the Media selection tool for Android and Iphone",
     "confirm": "Xác nhận",
-    "cancel": "Thoát",
+    "cancel": "Hủy",
     "edit": "Sửa",
     "gifIndicator": "GIF",
     "loadFailed": "Tải lỗi",
@@ -487,21 +569,37 @@
     "unSupportedAssetType": "Định dạng tập tin không được hỗ trợ.",
     "unableToAccessAll": "Không thể truy cập tới tất cả tập tin trong thiết bị",
     "viewingLimitedAssetsTip": "Chỉ hiển thị các tập tin và album mà ứng dụng có thể truy cập.",
-    "changeAccessibleLimitedAssets": "Ấn để cập nhận các tập tin có thể truy cập.",
+    "changeAccessibleLimitedAssets": "Nhấn để cập nhật các tập tin có thể truy cập",
     "accessAllTip": "Ứng dụng chỉ có thể truy cập một số tập tin trong thiết bị. Hãy vào cài đặt hệ thống để chấp thuận ứng dụng có thể truy cập tất cả media trong thiết bị.",
     "goToSystemSettings": "Truy cập cài đặt hệ thống",
     "accessLimitedAssets": "Tiếp tục với truy cập bị giới hạn",
     "accessiblePathName": "Các tập tin có thể truy cập",
-    "sTypeAudioLabel": "Audio",
+    "sTypeAudioLabel": "Âm thanh",
     "sTypeImageLabel": "Ảnh",
     "sTypeVideoLabel": "Video",
-    "sTypeOtherLabel": "Media khác",
-    "sActionPlayHint": "mở",
+    "sTypeOtherLabel": "Phương tiện khác",
+    "sActionPlayHint": "phát",
     "sActionPreviewHint": "xem trước",
     "sActionSelectHint": "chọn",
     "sActionSwitchPathLabel": "đổi đường dẫn",
     "sActionUseCameraHint": "dùng camera",
     "sNameDurationLabel": "thời lượng",
-    "sUnitAssetCountLabel": "đếm"
+    "sUnitAssetCountLabel": "số lượng"
+  },
+  "tsudev": {
+    "version": "Phiên bản: {version}",
+    "copyright": "© {year} tsudev",
+    "basedOn": "Dựa trên LocalSend © Tien Do Nam (Giấy phép Apache 2.0)",
+    "homepage": "Trang chủ",
+    "sourceCode": "Mã nguồn (GitHub)",
+    "upstreamSourceCode": "Dự án gốc: LocalSend (GitHub)",
+    "upstreamCodeberg": "Dự án gốc: LocalSend (Codeberg)",
+    "licenseNotices": "Giấy phép thư viện bên thứ ba",
+    "debugging": "Gỡ lỗi",
+    "selectMultipleApps": "Chọn nhiều ứng dụng",
+    "error": "Lỗi: {message}",
+    "addApps(param=n)": {
+      "other": "Thêm {n} ứng dụng"
+    }
   }
 }

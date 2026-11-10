@@ -49,14 +49,14 @@ pub(super) fn read_text(arg: &str) -> anyhow::Result<Bytes> {
             let stdin = std::io::stdin();
             if stdin.is_terminal() {
                 eprintln!(
-                    "Reading the text from stdin, end it with Ctrl+D (Ctrl+Z, Enter on Windows)"
+                    "Đang đọc văn bản từ stdin, kết thúc bằng Ctrl+D (Windows: Ctrl+Z rồi Enter)"
                 );
             }
             read_stdin(stdin.lock())?
         }
         text => text.as_bytes().to_vec(),
     };
-    anyhow::ensure!(!text.is_empty(), "Nothing to send: the text is empty");
+    anyhow::ensure!(!text.is_empty(), "Không có gì để gửi: văn bản trống");
     Ok(text.into())
 }
 
@@ -65,12 +65,12 @@ fn read_stdin(reader: impl Read) -> anyhow::Result<Vec<u8>> {
     reader.take(MAX_STDIN_BYTES + 1).read_to_end(&mut text)?;
     anyhow::ensure!(
         text.len() as u64 <= MAX_STDIN_BYTES,
-        "Input is longer than {} MB; save it to a file and send the file instead",
+        "Nội dung dài hơn {} MB; hãy lưu thành tệp rồi gửi tệp",
         MAX_STDIN_BYTES / 1_000_000
     );
     anyhow::ensure!(
         std::str::from_utf8(&text).is_ok(),
-        "Input is not UTF-8 text; save it to a file and send the file instead"
+        "Nội dung không phải văn bản UTF-8; hãy lưu thành tệp rồi gửi tệp"
     );
     strip_trailing_line_break(&mut text);
     Ok(text)
@@ -98,7 +98,7 @@ fn text_transfer(ui: &mut Ui, text: Bytes) -> Transfer {
         false => {
             ui.log(
                 Category::Send,
-                "Text too long for a message, sending it as a file",
+                "Văn bản quá dài cho một tin nhắn, sẽ gửi dưới dạng tệp",
             );
             None
         }
@@ -149,7 +149,7 @@ fn collect_path(path: &Path) -> Vec<CollectedPath> {
     if !metadata.is_dir() {
         return vec![Err((
             path.to_path_buf(),
-            "not a regular file or directory".to_string(),
+            "không phải tệp hay thư mục thông thường".to_string(),
         ))];
     }
 
@@ -165,7 +165,7 @@ fn collect_path(path: &Path) -> Vec<CollectedPath> {
     let Some(root_name) = root_name else {
         return vec![Err((
             path.to_path_buf(),
-            "directory has no transferable name".to_string(),
+            "thư mục không có tên truyền được".to_string(),
         ))];
     };
 
@@ -217,7 +217,7 @@ pub(super) fn spawn_send(
     let host = dialable_host(&device)?;
     let (files, paths, total_bytes) = collect_files(ui, picked);
     if files.is_empty() {
-        return Err("No files selected".to_string());
+        return Err("Chưa chọn tệp nào".to_string());
     }
     let sources = paths
         .into_iter()
@@ -254,7 +254,7 @@ fn dialable_host(device: &StatefulDevice) -> Result<String, String> {
         .map(|http| http.host.clone())
         .ok_or_else(|| {
             format!(
-                "{}: No dialable address",
+                "{}: Không có địa chỉ kết nối được",
                 sanitize::single_line(&device.device.alias)
             )
         })
@@ -300,7 +300,10 @@ pub(super) fn collect_files(
             Err((path, error)) => {
                 ui.log(
                     Category::Send,
-                    &format!("Skipping unreadable path: {} ({error})", path.display()),
+                    &format!(
+                        "Bỏ qua đường dẫn không đọc được: {} ({error})",
+                        path.display()
+                    ),
                 );
                 continue;
             }
@@ -310,7 +313,7 @@ pub(super) fn collect_files(
             _ => {
                 ui.log(
                     Category::Send,
-                    &format!("Skipping unreadable file: {}", path.display()),
+                    &format!("Bỏ qua tệp không đọc được: {}", path.display()),
                 );
                 continue;
             }
@@ -344,7 +347,7 @@ impl App {
             .and_then(|fingerprint| self.discovery.device_by_fingerprint(fingerprint));
         let Some(device) = device else {
             self.ui
-                .log(Category::Send, &format!("No device on [{slot}]"));
+                .log(Category::Send, &format!("Không có thiết bị ở [{slot}]"));
             return;
         };
         if !self.preselected.is_empty() {
@@ -360,7 +363,7 @@ impl App {
     pub(super) fn open_picker(&mut self, target: PickerTarget) {
         if matches!(target, PickerTarget::Device { .. }) && self.send.is_some() {
             self.close_overlay();
-            self.ui.log(Category::Send, "A send is already in progress");
+            self.ui.log(Category::Send, "Đang có một lượt gửi khác");
             return;
         }
         // When the device list is open, the picker takes over its alternate
@@ -393,7 +396,7 @@ impl App {
                 }
                 self.ui.log(
                     Category::Send,
-                    &format!("Could not open the file picker: {err}"),
+                    &format!("Không mở được trình chọn tệp: {err}"),
                 );
             }
         }
@@ -421,7 +424,7 @@ impl App {
 
     pub(super) fn start_send(&mut self, fingerprint: &str, picked: Vec<PathBuf>) {
         if self.send.is_some() {
-            self.ui.log(Category::Send, "A send is already in progress");
+            self.ui.log(Category::Send, "Đang có một lượt gửi khác");
             return;
         }
         let Some(device) = self.discovery.device_by_fingerprint(fingerprint) else {

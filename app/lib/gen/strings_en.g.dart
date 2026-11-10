@@ -43,8 +43,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
   // Translations
 
-  /// en: 'LocalSend'
-  String get appName => 'LocalSend';
+  /// en: 'tsudev-lotus'
+  String get appName => 'tsudev-lotus';
 
   late final Translations$general$en general = Translations$general$en.internal(_root);
   late final Translations$receiveTab$en receiveTab = Translations$receiveTab$en.internal(_root);
@@ -73,6 +73,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   late final Translations$tray$en tray = Translations$tray$en.internal(_root);
   late final Translations$web$en web = Translations$web$en.internal(_root);
   late final Translations$assetPicker$en assetPicker = Translations$assetPicker$en.internal(_root);
+  late final Translations$tsudev$en tsudev = Translations$tsudev$en.internal(_root);
 }
 
 // Path: general
@@ -317,9 +318,9 @@ class Translations$networkInterfacesPage$en {
   /// en: 'Network Interfaces'
   String get title => 'Network Interfaces';
 
-  /// en: 'By default, LocalSend uses all available network interfaces. You can exclude unwanted networks here. You need to restart the server to apply the changes.'
+  /// en: 'By default, tsudev-lotus uses all available network interfaces. You can exclude unwanted networks here. You need to restart the server to apply the changes.'
   String get info =>
-      'By default, LocalSend uses all available network interfaces. You can exclude unwanted networks here. You need to restart the server to apply the changes.';
+      'By default, tsudev-lotus uses all available network interfaces. You can exclude unwanted networks here. You need to restart the server to apply the changes.';
 
   /// en: 'Preview'
   String get preview => 'Preview';
@@ -468,8 +469,8 @@ class Translations$receiveOptionsPage$en {
   /// en: 'Save to folder'
   String get destination => _root.settingsTab.receive.destination;
 
-  /// en: '(LocalSend folder)'
-  String get appDirectory => '(LocalSend folder)';
+  /// en: '(tsudev-lotus folder)'
+  String get appDirectory => '(tsudev-lotus folder)';
 
   /// en: 'Save media to gallery'
   String get saveToGallery => _root.settingsTab.receive.saveToGallery;
@@ -568,8 +569,8 @@ class Translations$webSharePage$en {
   /// en: 'The PIN is "{pin}"'
   String pinHint({required Object pin}) => 'The PIN is "${pin}"';
 
-  /// en: 'LocalSend uses a self-signed certificate. You need to accept it in your browser.'
-  String get encryptionHint => 'LocalSend uses a self-signed certificate. You need to accept it in your browser.';
+  /// en: 'tsudev-lotus uses a self-signed certificate. You need to accept it in your browser.'
+  String get encryptionHint => 'tsudev-lotus uses a self-signed certificate. You need to accept it in your browser.';
 
   /// en: 'Pending requests: {n}'
   String pendingRequests({required Object n}) => 'Pending requests: ${n}';
@@ -595,11 +596,11 @@ class Translations$aboutPage$en {
 
   // Translations
 
-  /// en: 'About LocalSend'
-  String get title => 'About LocalSend';
+  /// en: 'About tsudev-lotus'
+  String get title => 'About tsudev-lotus';
 
   List<String> get description => [
-    'LocalSend is a free, open-source app that allows you to securely share files and messages with nearby devices over your local network without needing an internet connection.',
+    'tsudev-lotus is a free, open-source app that allows you to securely share files and messages with nearby devices over your local network without needing an internet connection.',
     'This app is available on Android, iOS, macOS, Windows and Linux. You can find all download options on the official homepage.',
   ];
 
@@ -813,8 +814,8 @@ class Translations$tray$en {
   /// en: 'Open'
   String get open => _root.general.open;
 
-  /// en: 'Quit LocalSend'
-  String get close => 'Quit LocalSend';
+  /// en: 'Quit tsudev-lotus'
+  String get close => 'Quit tsudev-lotus';
 
   /// en: 'Exit'
   String get closeWindows => 'Exit';
@@ -945,6 +946,55 @@ class Translations$assetPicker$en {
 
   /// en: 'count'
   String get sUnitAssetCountLabel => 'count';
+}
+
+// Path: tsudev
+class Translations$tsudev$en {
+  Translations$tsudev$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Version: {version}'
+  String version({required Object version}) => 'Version: ${version}';
+
+  /// en: '© {year} tsudev'
+  String copyright({required Object year}) => '© ${year} tsudev';
+
+  /// en: 'Based on LocalSend © Tien Do Nam (Apache License 2.0)'
+  String get basedOn => 'Based on LocalSend © Tien Do Nam (Apache License 2.0)';
+
+  /// en: 'Homepage'
+  String get homepage => 'Homepage';
+
+  /// en: 'Source code (GitHub)'
+  String get sourceCode => 'Source code (GitHub)';
+
+  /// en: 'Original project: LocalSend (GitHub)'
+  String get upstreamSourceCode => 'Original project: LocalSend (GitHub)';
+
+  /// en: 'Original project: LocalSend (Codeberg)'
+  String get upstreamCodeberg => 'Original project: LocalSend (Codeberg)';
+
+  /// en: 'License notices'
+  String get licenseNotices => 'License notices';
+
+  /// en: 'Debugging'
+  String get debugging => 'Debugging';
+
+  /// en: 'Select multiple apps'
+  String get selectMultipleApps => 'Select multiple apps';
+
+  /// en: 'Error: {message}'
+  String error({required Object message}) => 'Error: ${message}';
+
+  /// en: '(one) {Add {n} app} (other) {Add {n} apps}'
+  String addApps({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(
+    n,
+    one: 'Add ${n} app',
+    other: 'Add ${n} apps',
+  );
 }
 
 // Path: receiveTab.infoBox
@@ -1097,8 +1147,8 @@ class Translations$settingsTab$general$en {
   /// en: 'Autostart: Start hidden'
   String get launchMinimized => 'Autostart: Start hidden';
 
-  /// en: 'Show LocalSend in context menu'
-  String get showInContextMenu => 'Show LocalSend in context menu';
+  /// en: 'Show tsudev-lotus in context menu'
+  String get showInContextMenu => 'Show tsudev-lotus in context menu';
 
   /// en: 'Animations'
   String get animations => 'Animations';
@@ -1653,9 +1703,9 @@ class Translations$dialogs$localNetworkUnauthorized$en {
   /// en: 'No permission'
   String get title => _root.dialogs.noPermission.title;
 
-  /// en: 'LocalSend can't find other devices without having the permission to scan the local network. Please grant this permission in the settings.'
+  /// en: 'tsudev-lotus can't find other devices without having the permission to scan the local network. Please grant this permission in the settings.'
   String get description =>
-      'LocalSend can\'t find other devices without having the permission to scan the local network. Please grant this permission in the settings.';
+      'tsudev-lotus can\'t find other devices without having the permission to scan the local network. Please grant this permission in the settings.';
 
   /// en: 'Settings'
   String get gotoSettings => 'Settings';
@@ -1820,8 +1870,8 @@ class Translations$dialogs$sendModeHelp$en {
   /// en: 'Sends files to multiple recipients. Selection will not be cleared after finished files transfer.'
   String get multiple => 'Sends files to multiple recipients. Selection will not be cleared after finished files transfer.';
 
-  /// en: 'Recipients who do not have LocalSend installed can download the selected files by opening the link in their browser.'
-  String get link => 'Recipients who do not have LocalSend installed can download the selected files by opening the link in their browser.';
+  /// en: 'Recipients who do not have tsudev-lotus installed can download the selected files by opening the link in their browser.'
+  String get link => 'Recipients who do not have tsudev-lotus installed can download the selected files by opening the link in their browser.';
 }
 
 // Path: dialogs.zoom

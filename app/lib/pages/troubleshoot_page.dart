@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:localsend_app/config/fork_config.dart';
 import 'package:localsend_app/gen/strings.g.dart';
 import 'package:localsend_app/provider/settings_provider.dart';
 import 'package:localsend_app/util/native/cmd_helper.dart';
@@ -37,8 +38,8 @@ class TroubleshootPage extends StatelessWidget {
                   TargetPlatform.windows: _CommandFixAction(
                     adminPrivileges: true,
                     commands: [
-                      'netsh advfirewall firewall add rule name="LocalSend" dir=in action=allow protocol=TCP localport=${settings.port}',
-                      'netsh advfirewall firewall add rule name="LocalSend" dir=in action=allow protocol=UDP localport=${settings.port}',
+                      'netsh advfirewall firewall add rule name="$forkProductName" dir=in action=allow protocol=TCP localport=${settings.port}',
+                      'netsh advfirewall firewall add rule name="$forkProductName" dir=in action=allow protocol=UDP localport=${settings.port}',
                     ],
                   ),
                 },

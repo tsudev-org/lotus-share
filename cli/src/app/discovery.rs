@@ -21,7 +21,7 @@ impl App {
             DiscoveryEvent::MulticastFailed => {
                 self.ui.log(
                     Category::Discovery,
-                    "Multicast stopped, no longer hearing announcements",
+                    "Multicast đã dừng, không còn nghe thông báo",
                 );
                 return;
             }
@@ -47,7 +47,7 @@ impl App {
         let host = device
             .http()
             .map(|http| http.host.as_str())
-            .unwrap_or("unknown address");
+            .unwrap_or("địa chỉ không rõ");
         self.ui.log(
             Category::Discovery,
             &format!(
@@ -90,7 +90,7 @@ pub(super) fn refresh_paired_channels(
     if let Err(err) = result {
         ui.log(
             Category::Discovery,
-            &format!("Could not save the paired devices: {err:#}"),
+            &format!("Không lưu được danh sách thiết bị đã ghép đôi: {err:#}"),
         );
     }
 }

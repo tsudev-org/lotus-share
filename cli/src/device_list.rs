@@ -191,7 +191,7 @@ impl DeviceList {
             list_state,
         } = self;
 
-        let help = Span::raw(" ↑/↓: navigate  Enter: send  P: pair/unpair  Esc: close");
+        let help = Span::raw(" ↑/↓: di chuyển  Enter: gửi  P: ghép đôi/bỏ ghép  Esc: đóng");
         let _ = terminal.draw(|frame| {
             let [main_area, help_area] =
                 Layout::vertical([Constraint::Fill(1), Constraint::Length(1)]).areas(frame.area());
@@ -200,7 +200,7 @@ impl DeviceList {
                 .block(
                     Block::default()
                         .borders(Borders::ALL)
-                        .title_top(" Devices "),
+                        .title_top(" Thiết bị "),
                 )
                 .highlight_spacing(HighlightSpacing::Always)
                 .highlight_style(Style::default().bg(Color::DarkGray).fg(Color::White));
@@ -220,7 +220,7 @@ fn row_item(row: &Row) -> ListItem<'_> {
                 .add_modifier(Modifier::BOLD),
         )),
         Row::Empty => ListItem::new(Span::styled(
-            "  (none)",
+            "  (không có)",
             Style::default().fg(Color::DarkGray),
         )),
         Row::Spacer => ListItem::new(""),
@@ -240,7 +240,7 @@ fn row_item(row: &Row) -> ListItem<'_> {
                     )))
                 }
                 true => ListItem::new(Span::styled(
-                    format!("  [{slot}] {} (offline)", device.alias),
+                    format!("  [{slot}] {} (ngoại tuyến)", device.alias),
                     Style::default().fg(Color::DarkGray),
                 )),
             }

@@ -1,0 +1,88 @@
+---
+import Trang from '../layouts/Trang.astro';
+import { banMoiNhat, REPO_URL, UPSTREAM_URL } from '../lib/noi-dung';
+
+const ban = await banMoiNhat();
+const buoc = [
+  { t: 'Mở ứng dụng trên hai máy', d: 'Hai máy cùng một mạng Wi-Fi hoặc mạng LAN. Không cần đăng nhập, không cần Internet, không cần cáp.' },
+  { t: 'Chọn tệp, chọn máy nhận', d: 'Ở thẻ Gửi, chọn tệp, thư mục, ảnh, văn bản hay nội dung bộ nhớ tạm, rồi bấm vào tên máy trong mục Thiết bị lân cận.' },
+  { t: 'Bên nhận bấm Chấp nhận', d: 'Tệp đi thẳng từ máy này sang máy kia qua kết nối HTTPS được mã hóa. Không bên thứ ba nào nhìn thấy nội dung.' },
+];
+const tinhNang = [
+  { t: 'Mọi hệ điều hành', d: 'Windows, macOS, Linux, Android, iOS. Gửi từ điện thoại sang máy tính và ngược lại như nhau.' },
+  { t: 'Tương thích LocalSend', d: 'Giữ nguyên giao thức LocalSend v2: trao đổi được với mọi máy đang dùng LocalSend, không cần cài cùng ứng dụng.' },
+  { t: 'Tệp lớn, nhiều tệp', d: 'Không giới hạn dung lượng hay số tệp. Gửi nguyên thư mục, gửi cho nhiều máy cùng lúc.' },
+  { t: 'Chia sẻ qua liên kết', d: 'Máy không cài ứng dụng vẫn nhận được: mở liên kết trong trình duyệt, có thể đặt mã PIN.' },
+  { t: 'Thiết bị yêu thích', d: 'Lưu máy hay dùng để gửi nhanh; chế độ Lưu nhanh chỉ tự nhận từ máy yêu thích.' },
+  { t: 'Dòng lệnh', d: 'Công cụ dòng lệnh cho máy chủ không giao diện và script tự động hóa, dùng chung lõi giao thức.' },
+  { t: 'Tiếng Việt mặc định', d: 'Giao diện tiếng Việt đầy đủ ngay lần mở đầu, tên thiết bị ngẫu nhiên kiểu "Xoài Thông Minh"; vẫn đổi được sang hơn 60 ngôn ngữ.' },
+  { t: 'Miễn phí, không quảng cáo', d: 'Mã nguồn mở theo giấy phép Apache 2.0, không theo dõi, không thu thập dữ liệu.' },
+];
+const baoMat = [
+  { t: 'Dữ liệu không rời mạng nội bộ', d: 'Không máy chủ trung gian, không đám mây. Tính năng cần máy chủ ngoài (WebRTC) đang tắt trong mã nguồn.' },
+  { t: 'Mã hóa và xác thực hai chiều', d: 'HTTPS bật sẵn; mỗi máy có chứng thư riêng và hai bên kiểm chứng thư của nhau ngay khi bắt tay TLS.' },
+  { t: 'Chống dò mã PIN', d: 'Tối đa 3 lần sai rồi chặn; bản tsudev đếm theo cả khối địa chỉ IPv6 nên đổi địa chỉ không lách được.' },
+  { t: 'Kiểm tra liên tục', d: 'Mỗi thay đổi đi qua CodeQL, gitleaks, soát lỗ hổng thư viện Rust và Dart, kiểm bản dịch tiếng Việt.' },
+];
+---
+<Trang moTa="tsudev-lotus: gửi tệp và tin nhắn giữa điện thoại, máy tính trong cùng mạng Wi-Fi, không cần Internet, mã hóa đầu cuối, giao diện tiếng Việt." duongDan="/">
+  <section class="mo-dau">
+    <div class="khung mo-dau__luoi">
+      <div>
+        <span class="nhan">{ban ? `Phiên bản ${ban.phienBan} · ${ban.ngay}` : 'Sắp có bản phát hành đầu tiên'}</span>
+        <h1>Gửi tệp giữa các thiết bị, không cần Internet</h1>
+        <p class="mo-dau__phu">tsudev-lotus chuyển ảnh, video, tài liệu và tin nhắn giữa điện thoại, máy tính bảng và máy tính trong cùng mạng Wi-Fi. Mã hóa, không tài khoản, không qua đám mây, giao diện tiếng Việt.</p>
+        <div class="mo-dau__nut">
+          <a class="nut nut--chinh" href="/tai-ve/">Tải tsudev-lotus</a>
+          <a class="nut nut--phu" href="/huong-dan/">Xem hướng dẫn</a>
+        </div>
+        <p class="mo-dau__ghi-chu">Windows · macOS · Linux · Android · iOS · giấy phép Apache 2.0</p>
+      </div>
+      <figure class="minh-hoa">
+        <img src="/anh/minh-hoa.svg" alt="Sơ đồ: điện thoại và máy tính trong cùng mạng Wi-Fi gửi tệp trực tiếp cho nhau qua kết nối có khóa, không qua Internet" width="640" height="420">
+        <figcaption>Tệp đi thẳng giữa hai máy trong mạng nội bộ</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="muc muc--nen" aria-labelledby="cach-dung">
+    <div class="khung">
+      <h2 id="cach-dung">Ba bước là xong</h2>
+      <p class="muc__dan">Không cài đặt máy chủ, không cấu hình mạng. Hai máy tự tìm thấy nhau.</p>
+      <ol class="buoc">
+        {buoc.map((x) => <li class="the"><h3>{x.t}</h3><p>{x.d}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="muc" aria-labelledby="tinh-nang">
+    <div class="khung">
+      <h2 id="tinh-nang">Tính năng</h2>
+      <p class="muc__dan">Giữ trọn tính năng của LocalSend, thêm tiếng Việt và các lớp bảo vệ riêng của tsudev.</p>
+      <ul class="the-luoi">
+        {tinhNang.map((x) => <li class="the"><h3>{x.t}</h3><p>{x.d}</p></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="muc muc--nen" aria-labelledby="bao-mat">
+    <div class="khung">
+      <h2 id="bao-mat">Riêng tư và an toàn</h2>
+      <p class="muc__dan">Mô hình mối đe dọa và từng lớp phòng thủ ở trang <a href="/bao-mat/kien-truc/">Kiến trúc bảo mật</a>.</p>
+      <ul class="the-luoi">
+        {baoMat.map((x) => <li class="the"><h3>{x.t}</h3><p>{x.d}</p></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="muc" aria-labelledby="nguon-goc">
+    <div class="khung">
+      <h2 id="nguon-goc">Mã nguồn và ghi công</h2>
+      <p class="muc__dan">tsudev-lotus là bản phái sinh của <a href={UPSTREAM_URL} target="_blank" rel="noopener noreferrer">LocalSend</a>, tác phẩm của Tien Do Nam và cộng đồng, phát hành theo giấy phép Apache 2.0. tsudev giữ bản fork đồng bộ với upstream, Việt hóa và gia cố bảo mật. tsudev-lotus không phải sản phẩm chính thức của dự án LocalSend. Muốn ủng hộ, hãy ủng hộ trực tiếp tác giả gốc.</p>
+      <div class="mo-dau__nut">
+        <a class="nut nut--phu" href={REPO_URL} target="_blank" rel="noopener noreferrer">Mã nguồn trên GitHub</a>
+        <a class="nut nut--phu" href="/ban-quyen/">Bản quyền</a>
+      </div>
+    </div>
+  </section>
+</Trang>

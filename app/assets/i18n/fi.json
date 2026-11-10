@@ -1,5 +1,5 @@
 {
-  "appName": "LocalSend",
+  "appName": "tsudev-lotus",
   "general": {
     "accept": "Hyväksy",
     "accepted": "Hyväksytty",
@@ -109,7 +109,7 @@
       "minimizeToTray": "Poistu: Minimoi ilmoitusalueelle",
       "launchAtStartup": "Automaattinen käynnistys",
       "launchMinimized": "Automaattinen käynnistys: Käynnistä piiilotettuna",
-      "showInContextMenu": "Näytä LocalSend kontekstivalikossa",
+      "showInContextMenu": "Näytä tsudev-lotus kontekstivalikossa",
       "animations": "Animaatiot"
     },
     "receive": {
@@ -131,7 +131,7 @@
     },
     "network": {
       "title": "Verkko",
-      "needRestart": "Käynnistä LocalSend uudelleen saadaksesi muutokset käyttöön!",
+      "needRestart": "Käynnistä tsudev-lotus uudelleen saadaksesi muutokset käyttöön!",
       "server": "Palvelin",
       "alias": "Laitteen nimi",
       "deviceType": "Laitteen tyyppi",
@@ -180,7 +180,7 @@
   },
   "networkInterfacesPage": {
     "title": "Verkkokäyttöliittymät",
-    "info": "Oletuksena LocalSend käyttää kaikkia saatavilla olevia verkkoliitäntöjä. Voit sulkea pois verkkoliitännät, joita et halua. Sinun tulee uudelleenkäynnistää LocalSend ottaaksesi muutokset käyttöön.",
+    "info": "Oletuksena tsudev-lotus käyttää kaikkia saatavilla olevia verkkoliitäntöjä. Voit sulkea pois verkkoliitännät, joita et halua. Sinun tulee uudelleenkäynnistää tsudev-lotus ottaaksesi muutokset käyttöön.",
     "preview": "Esikatselu",
     "whitelist": "Sallittujen lista",
     "blacklist": "Estettyjen lista"
@@ -241,7 +241,7 @@
   "receiveOptionsPage": {
     "title": "Asetukset",
     "destination": "Vastaanottoasetukset",
-    "appDirectory": "(LocalSend-kansio)",
+    "appDirectory": "(tsudev-lotus-kansio)",
     "saveToGallery": "Tallenna galleriaan",
     "saveToGalleryOff": "Poistettu käytöstä automaattisesti, koska lähetetyissä tiedostoissa on kansioita."
   },
@@ -293,17 +293,17 @@
     "autoAccept": "Hyväksy pyynnöt automaattisesti",
     "requirePin": "Vaadi PIN-koodi",
     "pinHint": "PIN-koodi on \"{pin}\"",
-    "encryptionHint": "LocalSend käyttää itse allekirjoitettua sertifikaattia. Sinun on hyväksyttävä se selaimessasi.",
+    "encryptionHint": "tsudev-lotus käyttää itse allekirjoitettua sertifikaattia. Sinun on hyväksyttävä se selaimessasi.",
     "pendingRequests": "Odottavat pyynnöt: {n}"
   },
   "webReceivePage": {
     "title": "Vastaanota linkin kautta"
   },
   "aboutPage": {
-    "title": "Tietoja LocalSendista",
+    "title": "Tietoja tsudev-lotusista",
     "description": [
-      "LocalSend on ilmainen, avoimen lähdekoodin sovellus, jonka avulla voit turvallisesti jakaa tiedostoja ja lähettää viestejä läheisten laitteiden kanssa paikallisessa verkossasi ilman internet-yhteyttä.",
-      "LocalSend on saatavilla Androidille, iOS:lle, Linuxille, macOS:lle ja Windowsille. Kaikki latausvaihtoehdot löytyvät virallisilta kotisivuilta."
+      "tsudev-lotus on ilmainen, avoimen lähdekoodin sovellus, jonka avulla voit turvallisesti jakaa tiedostoja ja lähettää viestejä läheisten laitteiden kanssa paikallisessa verkossasi ilman internet-yhteyttä.",
+      "tsudev-lotus on saatavilla Androidille, iOS:lle, Linuxille, macOS:lle ja Windowsille. Kaikki latausvaihtoehdot löytyvät virallisilta kotisivuilta."
     ],
     "author": "Tekijä",
     "contributors": "Avustajat",
@@ -477,7 +477,7 @@
     },
     "localNetworkUnauthorized": {
       "title": "@:dialogs.noPermission.title",
-      "description": "LocalSend ei löydä muita laitteita ilman lupaa skannata paikallisverkkoa. Anna tämä lupa asetuksissa.",
+      "description": "tsudev-lotus ei löydä muita laitteita ilman lupaa skannata paikallisverkkoa. Anna tämä lupa asetuksissa.",
       "gotoSettings": "Asetukset"
     },
     "messageInput": {
@@ -524,7 +524,7 @@
       "title": "Lähetystilat",
       "single": "Lähettää tiedostoja yhdelle vastaanottajalle. Valinta tyhjennetään tiedostonsiirron päätyttyä.",
       "multiple": "Lähettää tiedostoja useille vastaanottajille. Valinta ei tyhjene.",
-      "link": "Vastaanottajat, joilla ei ole LocalSendia asennettuna, voivat ladata valitut tiedostot avaamalla linkin selaimessaan."
+      "link": "Vastaanottajat, joilla ei ole tsudev-lotusia asennettuna, voivat ladata valitut tiedostot avaamalla linkin selaimessaan."
     },
     "zoom": {
       "title": "URL"
@@ -537,7 +537,7 @@
   "tray": {
     "@info": "Applen ohjeistukset ovat hyvin tiukat 'sulje'-sanan käytöstä.",
     "open": "Avaa",
-    "close": "Lopeta LocalSend",
+    "close": "Lopeta tsudev-lotus",
     "closeWindows": "Poistu"
   },
   "web": {

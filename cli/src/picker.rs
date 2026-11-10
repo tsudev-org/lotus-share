@@ -309,8 +309,7 @@ impl Picker {
             ..
         } = self;
 
-        let help =
-            " Type: filter  ←/→: folder  Space: select  Enter: confirm  Esc: cancel".to_string();
+        let help = " Gõ: lọc  ←/→: thư mục  Space: chọn  Enter: xác nhận  Esc: hủy".to_string();
         let _ = terminal.draw(|frame| {
             let [main_area, selected_area, help_area] = Layout::vertical([
                 Constraint::Fill(1),
@@ -320,8 +319,8 @@ impl Picker {
             .areas(frame.area());
 
             let title = match target {
-                PickerTarget::Device { alias, .. } => format!(" To: {alias} "),
-                PickerTarget::WebShare => " Share via link ".to_string(),
+                PickerTarget::Device { alias, .. } => format!(" Tới: {alias} "),
+                PickerTarget::WebShare => " Chia sẻ qua liên kết ".to_string(),
             };
             let mut block = Block::default()
                 .borders(Borders::ALL)
@@ -329,10 +328,10 @@ impl Picker {
                 .title_top(Line::from(title).right_aligned());
             if !query.is_empty() {
                 let hits = match matches.is_empty() {
-                    true => " no matches".to_string(),
+                    true => " không có kết quả".to_string(),
                     false => format!(" {} of {}", matches.len(), explorer.files().len()),
                 };
-                block = block.title_bottom(format!(" Filter: {query} ({hits}) "));
+                block = block.title_bottom(format!(" Lọc: {query} ({hits}) "));
             }
 
             // No highlight symbol is set, so `HighlightSpacing::Always` reserves
@@ -364,7 +363,7 @@ impl Picker {
             frame.render_stateful_widget(list, main_area, list_state);
 
             let selected_line = match selected.is_empty() {
-                true => " No files selected".to_string(),
+                true => " Chưa chọn tệp nào".to_string(),
                 false => format!(
                     " Selected: {} file{}, {}",
                     selected.len(),

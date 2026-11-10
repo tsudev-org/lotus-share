@@ -41,7 +41,9 @@ android {
     }
 
     defaultConfig {
-        applicationId "org.localsend.localsend_app"
+        // tsudev-lotus: định danh cài đặt riêng (cài song song được với LocalSend). Giữ nguyên `namespace`
+        // (package Kotlin + tên kênh nền tảng) để gộp upstream ít xung đột.
+        applicationId "com.tsudev.lotus"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion flutter.minSdkVersion

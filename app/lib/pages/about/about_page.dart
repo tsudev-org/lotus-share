@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:localsend_app/config/fork_config.dart';
 import 'package:localsend_app/gen/strings.g.dart';
 import 'package:localsend_app/pages/debug/debug_page.dart';
 import 'package:localsend_app/util/i18n.dart';
@@ -32,17 +33,22 @@ class AboutPage extends StatelessWidget {
         children: [
           const SizedBox(height: 20),
           const LocalSendLogo(withText: true),
+          // tsudev-lotus: bản quyền bản fork + ghi công dự án gốc (Apache-2.0).
           Text(
-            '© ${DateTime.now().year} Tien Do Nam',
+            t.tsudev.copyright(year: DateTime.now().year),
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            t.tsudev.basedOn,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 10),
           Center(
             child: TextButton(
               onPressed: () async {
-                await launchUrl(Uri.parse('https://localsend.org'));
+                await launchUrl(Uri.parse(forkHomepageUrl));
               },
-              child: const Text('localsend.org'),
+              child: Text(Uri.parse(forkHomepageUrl).host),
             ),
           ),
           const SizedBox(height: 10),
@@ -137,21 +143,27 @@ class AboutPage extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () async {
-                  await launchUrl(Uri.parse('https://localsend.org'));
+                  await launchUrl(Uri.parse(forkHomepageUrl));
                 },
-                child: const Text('Homepage'),
+                child: Text(t.tsudev.homepage),
               ),
               TextButton(
                 onPressed: () async {
-                  await launchUrl(Uri.parse('https://github.com/localsend/localsend'), mode: LaunchMode.externalApplication);
+                  await launchUrl(Uri.parse(forkRepositoryUrl), mode: LaunchMode.externalApplication);
                 },
-                child: const Text('Source Code (Github)'),
+                child: Text(t.tsudev.sourceCode),
+              ),
+              TextButton(
+                onPressed: () async {
+                  await launchUrl(Uri.parse(upstreamRepositoryUrl), mode: LaunchMode.externalApplication);
+                },
+                child: Text(t.tsudev.upstreamSourceCode),
               ),
               TextButton(
                 onPressed: () async {
                   await launchUrl(Uri.parse('https://codeberg.org/localsend/localsend'), mode: LaunchMode.externalApplication);
                 },
-                child: const Text('Source Code (Codeberg)'),
+                child: Text(t.tsudev.upstreamCodeberg),
               ),
               TextButton(
                 onPressed: () async {
@@ -163,13 +175,13 @@ class AboutPage extends StatelessWidget {
                 onPressed: () async {
                   await context.push(() => const LicensePage());
                 },
-                child: const Text('License Notices'),
+                child: Text(t.tsudev.licenseNotices),
               ),
               TextButton(
                 onPressed: () async {
                   await context.push(() => const DebugPage());
                 },
-                child: const Text('Debugging'),
+                child: Text(t.tsudev.debugging),
               ),
             ],
           ),

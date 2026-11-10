@@ -1,5 +1,5 @@
 {
-  "appName": "LocalSend",
+  "appName": "tsudev-lotus",
   "general": {
     "accept": "Accept",
     "accepted": "Accepted",
@@ -111,7 +111,7 @@
       "minimizeToTray": "Minimize to the System Tray/Menu Bar when closing",
       "launchAtStartup": "Autostart after login",
       "launchMinimized": "Autostart: Start hidden",
-      "showInContextMenu": "Show LocalSend in context menu",
+      "showInContextMenu": "Show tsudev-lotus in context menu",
       "animations": "Animations"
     },
     "receive": {
@@ -182,7 +182,7 @@
   },
   "networkInterfacesPage": {
     "title": "Network Interfaces",
-    "info": "By default, LocalSend uses all available network interfaces. You can exclude unwanted networks here. You need to restart the server to apply the changes.",
+    "info": "By default, tsudev-lotus uses all available network interfaces. You can exclude unwanted networks here. You need to restart the server to apply the changes.",
     "preview": "Preview",
     "whitelist": "Whitelist",
     "blacklist": "Blacklist"
@@ -243,7 +243,7 @@
   "receiveOptionsPage": {
     "title": "Options",
     "destination": "@:settingsTab.receive.destination",
-    "appDirectory": "(LocalSend folder)",
+    "appDirectory": "(tsudev-lotus folder)",
     "saveToGallery": "@:settingsTab.receive.saveToGallery",
     "saveToGalleryOff": "Turned off automatically because there are folders."
   },
@@ -295,16 +295,16 @@
     "autoAccept": "Automatically accept requests",
     "requirePin": "Require PIN",
     "pinHint": "The PIN is \"{pin}\"",
-    "encryptionHint": "LocalSend uses a self-signed certificate. You need to accept it in your browser.",
+    "encryptionHint": "tsudev-lotus uses a self-signed certificate. You need to accept it in your browser.",
     "pendingRequests": "Pending requests: {n}"
   },
   "webReceivePage": {
     "title": "Receive via link"
   },
   "aboutPage": {
-    "title": "About LocalSend",
+    "title": "About tsudev-lotus",
     "description": [
-      "LocalSend is a free, open-source app that allows you to securely share files and messages with nearby devices over your local network without needing an internet connection.",
+      "tsudev-lotus is a free, open-source app that allows you to securely share files and messages with nearby devices over your local network without needing an internet connection.",
       "This app is available on Android, iOS, macOS, Windows and Linux. You can find all download options on the official homepage."
     ],
     "author": "Author",
@@ -473,7 +473,7 @@
     },
     "localNetworkUnauthorized": {
       "title": "@:dialogs.noPermission.title",
-      "description": "LocalSend can't find other devices without having the permission to scan the local network. Please grant this permission in the settings.",
+      "description": "tsudev-lotus can't find other devices without having the permission to scan the local network. Please grant this permission in the settings.",
       "gotoSettings": "Settings"
     },
     "messageInput": {
@@ -520,7 +520,7 @@
       "title": "Send modes",
       "single": "Sends files to one recipient. Selection will be cleared after finished files transfer.",
       "multiple": "Sends files to multiple recipients. Selection will not be cleared after finished files transfer.",
-      "link": "Recipients who do not have LocalSend installed can download the selected files by opening the link in their browser."
+      "link": "Recipients who do not have tsudev-lotus installed can download the selected files by opening the link in their browser."
     },
     "zoom": {
       "title": "URL"
@@ -533,7 +533,7 @@
   "tray": {
     "@info": "Apple Guidelines are very strict about the \"close\" wording.",
     "open": "@:general.open",
-    "close": "Quit LocalSend",
+    "close": "Quit tsudev-lotus",
     "closeWindows": "Exit"
   },
   "web": {
@@ -576,5 +576,23 @@
     "sActionUseCameraHint": "use camera",
     "sNameDurationLabel": "duration",
     "sUnitAssetCountLabel": "count"
+  },
+  "tsudev": {
+    "@info": "tsudev-lotus: strings added by the tsudev-lotus fork. Not part of upstream LocalSend.",
+    "version": "Version: {version}",
+    "copyright": "© {year} tsudev",
+    "basedOn": "Based on LocalSend © Tien Do Nam (Apache License 2.0)",
+    "homepage": "Homepage",
+    "sourceCode": "Source code (GitHub)",
+    "upstreamSourceCode": "Original project: LocalSend (GitHub)",
+    "upstreamCodeberg": "Original project: LocalSend (Codeberg)",
+    "licenseNotices": "License notices",
+    "debugging": "Debugging",
+    "selectMultipleApps": "Select multiple apps",
+    "error": "Error: {message}",
+    "addApps(param=n)": {
+      "one": "Add {n} app",
+      "other": "Add {n} apps"
+    }
   }
 }

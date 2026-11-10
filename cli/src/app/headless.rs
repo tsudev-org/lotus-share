@@ -49,7 +49,7 @@ pub(super) async fn run(
         known_channels,
         identity.port,
     );
-    ui.log_plain(&format!("Discovering destination {target}..."));
+    ui.log_plain(&format!("Đang tìm thiết bị nhận {target}..."));
 
     let mut tick = tokio::time::interval(Duration::from_millis(250));
     tick.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Skip);
@@ -89,7 +89,7 @@ pub(super) async fn run(
             AppEvent::SendEnded { success } => {
                 break match success {
                     true => Ok(()),
-                    false => Err(anyhow::anyhow!("Transfer failed")),
+                    false => Err(anyhow::anyhow!("Truyền thất bại")),
                 };
             }
             // No keyboard, no accepted receive sessions and no web links in
@@ -115,7 +115,7 @@ fn start_send(
     let fingerprint = target.resolve(&discovery.devices())?;
     let device = discovery
         .device_by_fingerprint(&fingerprint)
-        .ok_or_else(|| format!("Destination {target} was not discovered"))?;
+        .ok_or_else(|| format!("Không tìm thấy thiết bị nhận {target}"))?;
     match payload {
         Payload::Files(paths) => sending::spawn_send(
             ui,
@@ -161,7 +161,7 @@ fn handle_server_event(
             ui.log(
                 Category::Receive,
                 &format!(
-                    "{}: Declined the incoming request (busy sending)",
+                    "{}: Đã từ chối yêu cầu đến (đang bận gửi)",
                     sanitize::single_line(&info.alias)
                 ),
             );
@@ -176,7 +176,7 @@ fn handle_server_event(
             }
         }
         ServerEventV2::ListenerFailed { error } => {
-            ui.log(Category::Receive, &format!("Server stopped: {error}"));
+            ui.log(Category::Receive, &format!("Máy chủ đã dừng: {error}"));
         }
         // No receive session is ever accepted; dropping the responders
         // rejects the requests.
@@ -197,7 +197,7 @@ fn handle_discovery(
         DiscoveryEvent::MulticastFailed => {
             ui.log(
                 Category::Discovery,
-                "Multicast stopped, no longer hearing announcements",
+                "Multicast đã dừng, không còn nghe thông báo",
             );
             return;
         }
@@ -211,7 +211,7 @@ fn handle_discovery(
     let host = device
         .http()
         .map(|http| http.host.as_str())
-        .unwrap_or("unknown address");
+        .unwrap_or("địa chỉ không rõ");
     ui.log(
         Category::Discovery,
         &format!("{} ({host})", sanitize::single_line(&device.alias)),

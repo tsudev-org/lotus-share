@@ -19,7 +19,7 @@ impl App {
             }
             Err(err) => {
                 self.ui
-                    .log_plain(&format!("Could not open the device list: {err}"));
+                    .log_plain(&format!("Không mở được danh sách thiết bị: {err}"));
             }
         }
     }
@@ -121,11 +121,11 @@ impl App {
         ) {
             Ok(()) => self.ui.log(
                 Category::Discovery,
-                &format!("{alias}: Paired. Future requests are auto-accepted."),
+                &format!("{alias}: Đã ghép đôi. Các yêu cầu sau sẽ tự được chấp nhận."),
             ),
             Err(err) => self.ui.log(
                 Category::Discovery,
-                &format!("{alias}: Paired for this run, but saving failed: {err:#}"),
+                &format!("{alias}: Đã ghép đôi cho lần chạy này, nhưng lưu thất bại: {err:#}"),
             ),
         }
         let rows = self.device_rows();
@@ -150,7 +150,7 @@ impl App {
             Err(err) => {
                 self.ui.log(
                     Category::Discovery,
-                    &format!("Unpaired for this run, but saving failed: {err:#}"),
+                    &format!("Đã bỏ ghép đôi cho lần chạy này, nhưng lưu thất bại: {err:#}"),
                 );
             }
         }

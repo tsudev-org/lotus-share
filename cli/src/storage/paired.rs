@@ -89,7 +89,8 @@ impl PairedDevices {
                 struct Version {
                     version: u32,
                 }
-                let context = || format!("Invalid paired devices file: {}", path.display());
+                let context =
+                    || format!("Tệp thiết bị đã ghép đôi không hợp lệ: {}", path.display());
                 let Version { version } = serde_json::from_str(&text).with_context(context)?;
                 match version {
                     PAIRED_DEVICES_VERSION => {
@@ -181,9 +182,9 @@ impl PairedDevices {
         // Write-then-rename so a crash cannot leave a truncated file.
         let temp = self.path.with_extension("json.tmp");
         std::fs::write(&temp, serde_json::to_string_pretty(&self.file)?)
-            .with_context(|| format!("Could not write {}", temp.display()))?;
+            .with_context(|| format!("Không ghi được {}", temp.display()))?;
         std::fs::rename(&temp, &self.path)
-            .with_context(|| format!("Could not write {}", self.path.display()))
+            .with_context(|| format!("Không ghi được {}", self.path.display()))
     }
 }
 

@@ -1,142 +1,95 @@
-# AGENTS.md
+# AGENTS.md - tsudev-lotus
 
-LocalSend disallows AI generated contributions unless:
+> **ĐỌC FILE NÀY ĐẦU TIÊN trong mọi phiên làm việc mới.**
 
-- they are bug fixes or
-- very small or
-- you prove your expertise in your field
+## Phần A - Quy ước chung của hệ sinh thái (KHÔNG SỬA Ở ĐÂY)
 
-This file provides guidance to LLMs when working with code in this repository.
+Toàn bộ quy ước chung nằm trong bản sao chỉ-đọc tại
+[`.standards/AGENTS.md`](.standards/AGENTS.md). `MUST` đọc file đó trước.
 
-## Repository layout
+Bản quy ước repo này đang dùng: xem [`.standards-version`](.standards-version).
 
-This is a multi-language monorepo: a Flutter app on top of a Rust protocol implementation.
+| Cần gì | Đọc file nào |
+| --- | --- |
+| Điểm vào, nguyên tắc chung | `.standards/AGENTS.md` |
+| Quy trình phiên, khóa file, bàn giao | `.standards/docs/AGENT_PROTOCOL.md` |
+| Bảo mật bắt buộc | `.standards/docs/SECURITY_BASELINE.md` |
+| Quy tắc `.gitignore` | `.standards/docs/GITIGNORE_POLICY.md` |
+| Nhánh, commit, PR, phát hành | `.standards/docs/GIT_WORKFLOW.md` |
+| Đăng nhập, đăng ký, xác minh tài khoản | `.standards/docs/AUTH_AND_ACCOUNT.md` |
+| Giao diện và token | `.standards/docs/DESIGN_SYSTEM.md` |
+| Bảng bản ghi, bộ chọn số bản ghi | `.standards/docs/DATA_TABLE.md` |
+| Logo, favicon, icon ứng dụng | `.standards/docs/BRAND_ASSETS.md` |
+| tsudev.com, ảnh đại diện, trang hồ sơ | `.standards/docs/ECOSYSTEM_IDENTITY.md` |
+| Cấu trúc thư mục | `.standards/docs/PROJECT_STRUCTURE.md` |
+| Chọn ngôn ngữ, framework | `.standards/docs/LANGUAGE_SELECTION.md` |
+| Hạ tầng 0 đồng | `.standards/docs/FREE_TIER_STACK.md` |
+| Trình soạn thảo nội dung | `.standards/docs/RICH_TEXT_EDITOR.md` |
+| Tìm kiếm và lọc tiếng Việt | `.standards/docs/SEARCH_AND_FILTER.md` |
+| Kiểm thử và chất lượng mã | `.standards/docs/TESTING_QUALITY.md` |
+| Khả năng truy cập | `.standards/docs/ACCESSIBILITY.md` |
 
-| Path                           | What it is                                                                                                                                                  |
-|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `app/`                         | The Flutter app (`localsend_app`). UI, providers, persistence, platform channels.                                                                           |
-| `packages/localsend_isolates/` | Dart isolate layer + `flutter_rust_bridge` (FRB) bindings. Owns `rust/` (the Flutter plugin crate `rust_lib_localsend_app`) and `rust_builder/` (cargokit). |
-| `packages/core/`               | Rust crate `localsend`: protocol, HTTP server/client, crypto, WebRTC. No Flutter dependency.                                                                |
-| `packages/typed_isolates/`     | Small standalone package wrapping Dart `Isolate` with typed send/receive channels.                                                                          |
-| `server/`                      | Axum WebSocket signaling server for WebRTC (`/v1/ws`). Deployed separately, see `server/Dockerfile`.                                                        |
-| `cli/`                         | Rust CLI crate (`localsend-cli`): interactive terminal client on top of `packages/core` (v2 HTTP + multicast).                                              |
-| `support/scripts/`             | Release/packaging scripts (per-platform builds, MSIX, Inno Setup, FOSS stripping).                                                                          |
+`MUST NOT` sửa bất kỳ file nào trong `.standards/`. Cần đổi quy ước thì mở đề
+xuất tại repo `tsudev-standards` theo `.standards/docs/SYNC.md` mục 1.
 
-The four Rust crates (`packages/core`, `packages/localsend_isolates/rust`, `server`, `cli`) form a single Cargo workspace rooted at the repository root: one shared `Cargo.lock` and `target/`, and `[profile.*]` settings live only in the root `Cargo.toml` (member profiles would be ignored). Cargokit still builds the plugin crate into its own target dir during Flutter builds.
+## Phần B - Riêng của repo này
 
-The three Dart packages (`app`, `packages/localsend_isolates`, `packages/typed_isolates`) form a pub workspace rooted at the repository root: one shared `pubspec.lock` and `.dart_tool/`, resolved by running `pub get` from any member. `rust_builder` and the vendored `cargokit/build_tool` are deliberately not members and still resolve standalone.
+### B.1. Repo này là gì
 
-Dependency direction: `app` → `localsend_isolates` → (`typed_isolates`, `rust_lib_localsend_app` → `localsend` core).
-The app depends on **only** `localsend_isolates` — not on `flutter_rust_bridge`, `typed_isolates`, or the plugin crate directly.
+- **Loại**: ứng dụng đa nền tảng (Windows, macOS, Linux, Android, iOS) + công cụ dòng lệnh + website sản phẩm
+- **Stack**: Flutter/Dart (giao diện) trên lõi Rust (giao thức, HTTPS, mã hóa); fork của `localsend/localsend`
+  (Apache-2.0). Kiến trúc gốc: [`docs/AGENTS.upstream.md`](docs/AGENTS.upstream.md); bảo mật:
+  [`docs/vi/KIEN-TRUC-BAO-MAT.md`](docs/vi/KIEN-TRUC-BAO-MAT.md)
+- **Mức phân loại dữ liệu cao nhất**: D3 (tệp người dùng truyền giữa các thiết bị; khóa TLS riêng của thiết bị)
+- **Người liên hệ khi có sự cố**: tsudev-tsudev
+- **Trang sản phẩm**: `https://lotus.tsudev.com` (mã nguồn ở `website/`)
 
-## Flutter version
+### B.2. Chạy trong 5 phút
 
-Pinned to the version in `.fvmrc` (also mirrored in `.github/workflows/ci.yml` and `app/pubspec.yaml`, plus the `support/submodules/flutter` git submodule). Use **`fvm flutter` / `fvm dart`** instead of the system-wide toolchain.
-Bumping the version means updating all four places — see the "Bump Flutter" section of `CONTRIBUTING.md`.
-
-## Platform detection
-
-Use `Theme.of(context).platform` for platform-specific styling in Material widgets, and `defaultTargetPlatform` for platform behavior in lower layers. Use `dart:io.Platform` for OS-specific native APIs: with the `FLUTTER_TEST` environment variable and assertions enabled, `defaultTargetPlatform` is set to Android regardless of the actual OS (unless `debugDefaultTargetPlatformOverride` is set).
-
-## Commands
-
-Run from `app/` unless stated otherwise.
-
-```bash
-fvm flutter pub get
-fvm dart run build_runner build  # dart_mappable, freezed, flutter_gen, mockito
-fvm dart run slang               # i18n codegen (slang_build_runner is disabled in build.yaml)
-fvm flutter run
-```
-
-Checks (what CI runs):
+Flutter ghim ở `.fvmrc` (3.47.9). Máy này cài sẵn tại `~/.local/share/flutter-sdk/3.47.9` (không dùng fvm):
 
 ```bash
-fvm dart format --set-exit-if-changed lib test   # CI deletes lib/gen first; generated code is not format-checked
-fvm flutter analyze
-fvm flutter test
-fvm flutter test test/unit/util/security_helper_test.dart          # single file
-fvm flutter test --plain-name 'some test name'                     # single test
+export PATH=$HOME/.local/share/flutter-sdk/3.47.9/bin:$PATH
+cd app && flutter pub get
+dart run slang                         # sinh lại mã dịch sau khi sửa assets/i18n/*.json
+flutter analyze && flutter test        # cổng kiểm Dart
+cd .. && python3 -I tools/check_i18n_vi.py   # bản dịch tiếng Việt đủ khóa, đúng tham số
+(cd packages/core && cargo test --features full)
 ```
 
-Formatting is **150 columns** (`page_width: 150` in `analysis_options.yaml`, `trailing_commas: preserve`). Any tool that reformats generated Dart at 80 columns creates pure noise — reformat with `fvm dart format` afterwards.
+Sau `dart run slang`, slang 4.x định dạng `app/lib/gen/strings.g.dart` khác bản upstream một dòng (dấu `;` cuối
+enum). Chạy `python3 -I tools/fix_slang_format.py` để trả về đúng định dạng upstream, tránh diff nhiễu.
 
-Rust:
+### B.3. Ranh giới sở hữu file
 
-```bash
-cargo test --features full       # in packages/core — see "Core crate features" below
-cargo clippy --features full
-cargo check                      # in packages/localsend_isolates/rust, server, cli
-```
+| Vùng | Chủ sở hữu |
+| --- | --- |
+| `app/lib/config/fork_config.dart` (tên, URL, ngôn ngữ mặc định, máy chủ) | Chủ dự án - mọi thay đổi cần duyệt |
+| `app/assets/i18n/vi.json`, nhóm khóa `tsudev` trong `en.json` | Agent/người dịch; giữ đồng bộ khóa với `en.json` |
+| `website/` | Agent website |
+| `tools/`, `docs/vi/`, `.github/workflows/security.yml`, `.github/workflows/fork-ci.yml` | Riêng của fork |
+| Phần còn lại của `app/`, `packages/`, `cli/`, `server/` | Mã upstream - sửa tối thiểu, ghi chú `tsudev-lotus:` tại chỗ sửa |
 
-FRB codegen — run from `packages/localsend_isolates/`:
+### B.4. Điểm lệch chuẩn đã biết
 
-```bash
-flutter_rust_bridge_codegen generate    # config in flutter_rust_bridge.yaml (dart_format_line_length: 150)
-```
+| Lệch ở đâu | Vì sao | Kế hoạch |
+| --- | --- | --- |
+| Em-dash trong mã + bản dịch kế thừa upstream (71 dòng) | Sửa sẽ gây xung đột mỗi lần gộp upstream | Ngoại lệ 3 của quy ước v3.3.0 (`.standards-upstream`); CI chặn thật, xác minh trực tuyến. Gộp upstream xong MUST nâng `ref` |
+| `namespace`/package Kotlin `org.localsend.localsend_app`, tên kênh nền tảng, gói Dart `localsend_app`, crate `localsend` | Nội bộ, người dùng không thấy; đổi thì mỗi lần gộp upstream xung đột hàng trăm tệp | Giữ. Định danh cài đặt đã đổi: xem `docs/vi/PHAT-HANH.md` mục 1 |
+| Workflow của upstream (`build_*.yml`, `release.yml`) | Cần secret ký mã của LocalSend | Không dùng; phát hành bằng `release-lotus.yml` |
 
-Codegen has a habit of rewriting `app/test/mocks.mocks.dart` at 80 columns; revert that file if it shows up in the diff.
+### B.5. Việc riêng của repo cần biết trước khi sửa
 
-`packages/localsend_isolates` has its own `build.yaml` and needs its own `build_runner` run when its models change (`pub get` is shared via the pub workspace). CI additionally runs `flutter pub get` in `packages/localsend_isolates/rust_builder/cargokit/build_tool`.
-
-## Core crate features
-
-`packages/core` gates almost everything behind Cargo features (`crypto`, `http`, `multicast`, `webrtc`, `webrtc-signaling`, `full`), and `default = []`. **Always build and test it with `--features full`.** A bare `cargo check`/`cargo build` fails because modules are declared unconditionally while their dependencies are optional — that is pre-existing and expected, not a regression.
-
-## Architecture
-
-### State management
-
-Refena (`refena_flutter`), not Riverpod. Providers live in `app/lib/provider/`; `NotifierProvider` for plain state, `ReduxProvider` + dispatched action classes for anything the isolate layer touches. `app/lib/config/init.dart` (`preInit`) is the bootstrap: it initialises logging, `RustLib.init()`, persistence, the isolate container, tray/window, and returns the `RefenaContainer` that `main.dart` mounts.
-
-Models are `dart_mappable` (`@MappableClass`, `.mapper.dart` parts) with renamed methods — `fromJson`/`toJson` are the **Map** converters and `deserialize`/`serialize` are the string ones (configured in both `build.yaml` files). Freezed is used for FRB-adjacent unions.
-
-### Isolates
-
-The heavy networking never runs on the main isolate. `packages/localsend_isolates/lib/src/isolate/`:
-
-- `parent/parent_isolate_provider.dart` — `ParentIsolateState` holds one `IsolateConnector` per child (http scan discovery, multicast discovery, http upload, http server) plus a `SyncState` mirrored into every child. `IsolateSetupAction` spawns them.
-- `parent/actions.dart`, `parent/actions_sync.dart` — the only supported way for the app to talk to the children.
-- `child/*_isolate.dart` — child entry points; they translate typed task messages into calls on `lib/src/task/`.
-- `lib/src/task/` — pure helpers only; **isolate logic is prohibited there** (see its `README.md`).
-
-State that children need (alias, port, protocol, whether the server runs, whether web send is on) is pushed via `IsolateSyncServerStateAction`. Children read `syncState` at start, so sync **before** starting the server.
-
-### Networking (Rust)
-
-The HTTP server and client are Rust, not Dart. `packages/core/src/http/server/` implements protocol v2 (v1 endpoints are not served) plus the "web send" download flow (`server/web.rs`) and an internal `show` endpoint used to foreground an already-running instance.
-
-Integration is channel-based: `start_with_port` takes a `ServerConfigV2 { pin, event_tx, web_send }` and emits `ServerEventV2` events (`Register`, `PrepareUpload` with a `decision_tx` oneshot, `FileUpload` with a byte stream + `result_tx`, `PrepareDownload`, `SessionEnd`, `PrepareUploadAborted`, `CancelReceived`). Only **one upload session is active at a time**; cancellation safety comes from drop guards (`PendingSessionGuard`, `UploadGuard`, `PendingWebSessionGuard`). There is deliberately no `auto_accept` in core — the app auto-accepts by answering `decision_tx` immediately. New server→app interactions should extend `ServerEventV2` rather than adding side channels.
-
-The FRB layer (`packages/localsend_isolates/rust/src/api/server.rs`) exposes `start_server` + an opaque `RsHttpServer` whose `listen` merges the v2, web-send and internal channels into one `RsServerEvent` stream; responder oneshots stay on the Rust side. On the Dart side `child/server_isolate.dart` turns those into `HttpServerEvent`s, which `app/lib/provider/network/server/server_provider.dart` routes to `ReceiveController` / `SendController` — these are **event handlers, not route handlers**.
-
-Save targets are decided in Dart (`prepareFileSaveTarget`) and written by Rust: a path, or an Android SAF file descriptor obtained through the `org.localsend.localsend_app/localsend` method channel. Gallery saves go through a cache file first.
-
-Server event `ip`s are `PeerIp` (IP + IPv6 scope): a link-local peer renders as `fe80::1%3`, which the HTTP client accepts back as a host, so event ips stay dialable.
-
-TLS uses per-device on-the-fly certificates with **mandatory client certificates** (optional while the web pages are served, so browsers can connect); the peer identity is the uppercase-hex SHA-256 of the client cert DER, and `Register` is simply not emitted when a payload's claimed fingerprint disagrees with the cert. Prefer `event.certFingerprint ?? event.info.fingerprint` — the payload fallback only exists for encryption-off mode.
-
-Both the receive pin and the web-send pin are fixed at server start, so changing either restarts the server.
-
-Web assets for the browser download page are embedded from `packages/core/assets/web/`.
-
-### Multicast discovery (Rust)
-
-`packages/core/src/multicast/` (feature `multicast`, independent of `http`) implements UDP multicast discovery for protocol v2.2 — v1 messages are not parsed.
-Integration mirrors the HTTP server: `multicast::start` takes a `MulticastConfig { group, group_v6, port, interface_filter, device, event_tx }` and emits `MulticastEvent::Discovered { ip, message }`; the returned `MulticastHandle` offers `announce` (the announcement burst) and `wait_stopped`.
-
-UDP is **announce-only**: responses go back over HTTP as a unicast register request to the announcing device.
-
-One socket is bound per interface IPv4 address (`SO_REUSEPORT`/`SO_REUSEADDR` + `IP_MULTICAST_IF`), because a single socket only sends on one interface. Multicast loopback stays on so that instances on one host see each other; own messages are dropped by fingerprint. IPv6 is a LocalSend extension (group `ff12::fd3a:e420`, `DEFAULT_MULTICAST_GROUP_V6`), enabled by setting `group_v6`: one `IPV6_V6ONLY` socket per interface, joined by interface index. `Discovered` carries the source's scope ID (interface index), which link-local IPv6 sources need for the HTTP answer.
-
-### i18n
-
-Slang, source files in `app/assets/i18n/` (`<locale>.json` plus `_missing_translations_<locale>.json`), generated output in `app/lib/gen/`. Translations are managed on Weblate; fields prefixed with `@` are metadata for translators and are not used by the app. `app/test/unit/i18n_test.dart` guards the locale set.
-
-### FOSS build
-
-`in_app_purchase` and the donation UI are stripped for F-Droid by `support/scripts/remove_proprietary_dependencies.sh`, which relies on the `# [FOSS_REMOVE]` pubspec marker and `// [FOSS_REMOVE_START]` / `// [FOSS_REMOVE_END]` comment pairs. Preserve those markers when editing `lib/config/init.dart`, `lib/pages/donation/*`, or `lib/provider/purchase_provider.dart`.
-
-## Release notes
-
-`app/pubspec.yaml`'s version must match `#define MyAppVersion` in `support/scripts/compile_windows_exe-inno.iss` and the `version` in `cli/Cargo.toml` (the CLI prints it in its start banner) — CI fails on a mismatch. Platform build commands and release steps are documented in `README.md` ("Building") and `CONTRIBUTING.md` ("Release").
+- Remote `upstream` = `localsend/localsend` (chiều đẩy bị khóa `DISABLED`). Gộp: `git fetch upstream && git merge upstream/main`.
+- Mỗi chỗ sửa trong mã upstream đánh dấu bằng chú thích bắt đầu `tsudev-lotus:` để dễ tìm khi gộp.
+- **Giữ tương thích giao thức LocalSend v2** (cổng 53317, nhóm multicast 224.0.0.167): đó là lý do người dùng
+  chọn sản phẩm - trao đổi tệp được với mọi thiết bị đang chạy LocalSend. Không đổi định dạng gói tin.
+- Mã sinh tự động `app/lib/gen/` ĐƯỢC commit (upstream làm vậy). Sửa JSON dịch xong phải `dart run slang`; CI
+  `fork-ci.yml` chặn nếu mã sinh lệch nguồn.
+- Không bao giờ chép khóa riêng, keystore Android, chứng thư ký mã vào repo (`/secrets` đã ignore).
+- LICENSE (Apache-2.0) giữ nguyên văn; mọi màn hình Giới thiệu phải ghi công LocalSend / Tien Do Nam.
+- Ghi chú upstream: `docs/AGENTS.upstream.md` có toàn bộ hướng dẫn kỹ thuật (isolate, lõi Rust, FOSS build).
+- Định danh cài đặt (`com.tsudev.lotus`, `tsudev_lotus`, AppId Inno) và quy trình phát hành, khóa ký: `docs/vi/PHAT-HANH.md`.
+  Khóa ký APK nằm ngoài repo (`~/.config/tsudev-lotus/keys/`); KHÔNG BAO GIỜ commit.
+- Icon mọi nền tảng sinh bằng `tools/gen_icons.py` từ `support/brand/tsudev-logo-mark.png`; không sửa tay tệp icon.
+- CLI giao diện tiếng Việt viết thẳng trong chuỗi Rust (`cli/src/`); tên lệnh `tsudev-lotus-cli`.

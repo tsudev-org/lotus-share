@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LocalSend</title>
+    <title>tsudev-lotus</title>
     <style>
         body {
             font-family: sans-serif, system-ui;
@@ -68,10 +68,10 @@
     LocalSend requires JavaScript, which is currently disabled. Please enable it and try again.
 </noscript>
 
-<h1 style="padding: 0.5em">LocalSend</h1>
+<h1 style="padding: 0.5em">tsudev-lotus</h1>
 <div id="content">
-    <button id="upload-button" type="button">Upload</button>
-    <p id="drop-hint">Place items to share.</p>
+    <button id="upload-button" type="button">Tải lên</button>
+    <p id="drop-hint">Thả các mục vào đây để chia sẻ.</p>
     <input id="file-input" type="file" multiple style="display: none">
     <p id="status-text"></p>
     <p id="progress-text"></p>
@@ -110,13 +110,13 @@
     function fetchI18n(then) {
       makeRequest('/i18n.json', 'GET', null, function (response) {
         if (response.status !== 200) {
-          alert('Could not load translations. Please reload the page to try again.');
+          alert('Không tải được bản dịch. Hãy tải lại trang.');
           return;
         }
         try {
           i18n = JSON.parse(response.responseText);
         } catch (e) {
-          alert('Could not parse translations. Please reload the page to try again.');
+          alert('Bản dịch bị lỗi. Hãy tải lại trang.');
           return;
         }
         if (i18n.dropHint) {
@@ -181,7 +181,7 @@
     function showProgress(finished, total) {
       var progressText = document.getElementById('progress-text');
       progressText.style.display = 'block';
-      progressText.innerText = finished + '/' + total + ' file(s)';
+      progressText.innerText = finished + '/' + total + ' tệp';
     }
 
     function hideProgress() {
@@ -334,7 +334,7 @@
 
     // A status of 0 means the request never completed (connection lost or aborted by the recipient).
     function errorText(status) {
-      return status ? 'Error: ' + status : 'Error';
+      return status ? 'Lỗi: ' + status : 'Lỗi';
     }
 
     function getKeys(obj) {
