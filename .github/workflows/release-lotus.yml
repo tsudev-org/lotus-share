@@ -212,9 +212,14 @@ jobs:
           out=app/build/app/outputs/flutter-apk
           for pair in "app-release:universal" "app-arm64-v8a-release:arm64-v8a" "app-armeabi-v7a-release:armeabi-v7a" "app-x86_64-release:x86_64"; do
             src="$out/${pair%%:*}.apk"; dst="dist/tsudev-lotus-$V-android-${pair##*:}.apk"
-            "$apksigner" verify --verbose "$src" | grep -q 'Verified using v2 scheme (APK Signature Scheme v2): true'
-            got="$("$apksigner" verify --print-certs "$src" | sed -n 's/^Signer #1 certificate SHA-256 digest: //p')"
-            [[ "$got" == "$want" ]] || { echo "::error::$src ký bằng chứng thư $got, không phải $want"; exit 1; }
+            out="$("$apksigner" verify --verbose --print-certs "$src")"
+            grep -q 'Verified using v2 scheme (APK Signature Scheme v2): true' <<< "$out" \
+              || { echo "$out"; echo "::error::$src chưa ký lược đồ v2"; exit 1; }
+            # Mọi người ký (kể cả dạng "Signer (minSdkVersion=..)" của lược đồ v3.1) phải là chứng thư đã ghim.
+            digests="$(sed -n 's/^Signer.* certificate SHA-256 digest: //p' <<< "$out" | sort -u)"
+            if [[ -z "$digests" || "$digests" != "$want" ]]; then
+              echo "$out"; echo "::error::$src ký bằng chứng thư [$digests], không phải $want"; exit 1
+            fi
             cp "$src" "$dst"
           done
       - name: Xóa khóa khỏi máy chạy
