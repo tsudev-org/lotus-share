@@ -17,16 +17,16 @@ pub struct Config {
 }
 
 const CONFIG_TEMPLATE: &str = "\
-# LocalSend CLI configuration. Command-line flags and environment variables
-# (LOCALSEND_ALIAS, LOCALSEND_PORT, LOCALSEND_DESTINATION) take precedence.
+# Cấu hình tsudev-lotus CLI. Tham số dòng lệnh và biến môi trường
+# (LOCALSEND_ALIAS, LOCALSEND_PORT, LOCALSEND_DESTINATION) được ưu tiên hơn.
 
-# Device name shown to other devices (default: the hostname).
+# Tên thiết bị hiển thị với máy khác (mặc định: tên máy).
 #alias = \"My Device\"
 
-# Port of the HTTP server.
+# Cổng máy chủ HTTP.
 #port = 53317
 
-# Directory where received files are saved (default: the system Downloads folder).
+# Thư mục lưu tệp nhận được (mặc định: thư mục Tải về của hệ thống).
 #destination = \"~/Downloads\"
 ";
 
@@ -65,7 +65,7 @@ fn load(dir: &Path) -> anyhow::Result<Config> {
     let path = dir.join("config.toml");
     match std::fs::read_to_string(&path) {
         Ok(text) => toml::from_str(&text)
-            .with_context(|| format!("Invalid config file: {}", path.display())),
+            .with_context(|| format!("Tệp cấu hình không hợp lệ: {}", path.display())),
         Err(err) if err.kind() == ErrorKind::NotFound => {
             // Best effort: a missing template is no reason to refuse to run.
             let _ = std::fs::write(&path, CONFIG_TEMPLATE);

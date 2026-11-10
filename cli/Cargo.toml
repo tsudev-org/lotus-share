@@ -4,7 +4,7 @@ version = "1.18.2"
 edition = "2024"
 
 [[bin]]
-name = "localsend-cli"
+name = "tsudev-lotus-cli"
 path = "src/main.rs"
 
 [dependencies]

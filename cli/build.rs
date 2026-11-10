@@ -3,12 +3,15 @@ fn main() {
     // Code signing expects ProductName/ProductVersion on all signed binaries.
     if std::env::var_os("CARGO_CFG_WINDOWS").is_some() {
         let mut res = winresource::WindowsResource::new();
-        res.set("ProductName", "LocalSend");
-        res.set("FileDescription", "LocalSend CLI");
-        res.set("CompanyName", "Tien Do Nam");
+        res.set("ProductName", "tsudev-lotus"); // tsudev-lotus
+        res.set("FileDescription", "tsudev-lotus CLI");
+        res.set("CompanyName", "tsudev");
         res.set("OriginalFilename", "localsend-cli.exe");
         res.set("InternalName", "localsend-cli");
-        res.set("LegalCopyright", "Copyright (C) 2022-2026 Tien Do Nam");
+        res.set(
+            "LegalCopyright",
+            "Copyright (C) 2026 tsudev. LocalSend (C) 2022-2026 Tien Do Nam. Apache-2.0",
+        );
         // FileVersion/ProductVersion are derived from CARGO_PKG_VERSION automatically.
         res.compile().expect("failed to compile Windows resources");
     }

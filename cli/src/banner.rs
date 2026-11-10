@@ -17,7 +17,7 @@ pub fn render(storage: &Repository, server: &ServerHandle) -> String {
         .enumerate()
         .map(|(i, line)| {
             let right = match i {
-                1 => "  LocalSend CLI",
+                1 => "  tsudev-lotus CLI",
                 2 => concat!("  v", env!("CARGO_PKG_VERSION")),
                 _ => "",
             };
@@ -27,21 +27,21 @@ pub fn render(storage: &Repository, server: &ServerHandle) -> String {
         .join("\n");
 
     let listening = match listening_lines(&server.local_addresses(), "https") {
-        lines if lines.is_empty() => " - (no network interface found)".to_string(),
+        lines if lines.is_empty() => " - (không tìm thấy giao diện mạng)".to_string(),
         lines => lines.join("\n"),
     };
 
     format!(
-        "{logo}\n\n{} {}\n{} {}\n{} {}\n{} {}\n{}\n{listening}\n\nReady to accept requests.\n\n",
-        "Alias:".green(),
+        "{logo}\n\n{} {}\n{} {}\n{} {}\n{} {}\n{}\n{listening}\n\nSẵn sàng nhận yêu cầu.\n\n",
+        "Tên thiết bị:".green(),
         storage.identity.alias,
-        "Port:".green(),
+        "Cổng:".green(),
         storage.identity.port,
-        "Destination:".green(),
+        "Thư mục lưu:".green(),
         storage.destination.display(),
-        "Config:".green(),
+        "Cấu hình:".green(),
         storage.dir.display(),
-        "Listening on:".green(),
+        "Đang lắng nghe:".green(),
     )
 }
 

@@ -37,13 +37,14 @@ impl App {
     pub(super) async fn toggle_web_share(&mut self) {
         match &self.web {
             Some(WebMode::Share { .. }) => {
-                self.disable_web(Category::Send, "Share via link").await;
+                self.disable_web(Category::Send, "Chia sẻ qua liên kết")
+                    .await;
                 return;
             }
             Some(WebMode::Receive) => {
                 self.ui.log(
                     Category::Send,
-                    "Receive via link is active, press W+R to stop it first",
+                    "Nhận qua liên kết đang bật, nhấn W+R để tắt trước",
                 );
                 return;
             }
@@ -52,7 +53,7 @@ impl App {
         if self.pending.is_some() || self.receive.is_some() {
             self.ui.log(
                 Category::Send,
-                "Share via link: not while a receive is active (the server would restart)",
+                "Chia sẻ qua liên kết: không bật được khi đang nhận tệp (máy chủ sẽ phải khởi động lại)",
             );
             return;
         }
@@ -65,14 +66,14 @@ impl App {
     pub(super) async fn toggle_web_receive(&mut self) {
         match &self.web {
             Some(WebMode::Receive) => {
-                self.disable_web(Category::Receive, "Receive via link")
+                self.disable_web(Category::Receive, "Nhận qua liên kết")
                     .await;
                 return;
             }
             Some(WebMode::Share { .. }) => {
                 self.ui.log(
                     Category::Receive,
-                    "Share via link is active, press W+S to stop it first",
+                    "Chia sẻ qua liên kết đang bật, nhấn W+S để tắt trước",
                 );
                 return;
             }
@@ -81,27 +82,27 @@ impl App {
         if self.pending.is_some() || self.receive.is_some() {
             self.ui.log(
                 Category::Receive,
-                "Receive via link: not while a receive is active (the server would restart)",
+                "Nhận qua liên kết: không bật được khi đang nhận tệp (máy chủ sẽ phải khởi động lại)",
             );
             return;
         }
         if let Err(err) = self.restart_server(CoreWebMode::Upload).await {
             self.ui.log(
                 Category::Receive,
-                &format!("Receive via link: could not restart the server: {err:#}"),
+                &format!("Nhận qua liên kết: không khởi động lại được máy chủ: {err:#}"),
             );
             self.restore_encrypted_server().await;
             return;
         }
         self.web = Some(WebMode::Receive);
         let mut text = format!(
-            "Receive via link enabled, encryption is off\nOpen in a browser to upload files here:\n{}\n",
+            "Đã bật nhận qua liên kết, mã hóa đang TẮT\nMở trong trình duyệt để tải tệp lên máy này:\n{}\n",
             self.web_links(),
         );
         if let Some(qr) = self.web_qr() {
             text.push_str(&format!("\n{qr}\n"));
         }
-        text.push_str("Press W+R again to stop.\n\n");
+        text.push_str("Nhấn W+R lần nữa để tắt.\n\n");
         self.ui.log(Category::Receive, &text);
     }
 
@@ -110,7 +111,7 @@ impl App {
     pub(super) async fn enable_web_share(&mut self, picked: Vec<PathBuf>) {
         let (files, paths, total_bytes) = sending::collect_files(&mut self.ui, picked);
         if files.is_empty() {
-            self.ui.log(Category::Send, "No files selected");
+            self.ui.log(Category::Send, "Chưa chọn tệp nào");
             return;
         }
         let count = files.len();
@@ -122,14 +123,14 @@ impl App {
         if let Err(err) = self.restart_server(web_mode).await {
             self.ui.log(
                 Category::Send,
-                &format!("Share via link: could not restart the server: {err:#}"),
+                &format!("Chia sẻ qua liên kết: không khởi động lại được máy chủ: {err:#}"),
             );
             self.restore_encrypted_server().await;
             return;
         }
         self.web = Some(WebMode::Share { paths });
         let mut text = format!(
-            "Share via link enabled: {count} file{} ({}), encryption is off\nOpen in a browser:\n{}\n",
+            "Đã bật chia sẻ qua liên kết: {count} tệp{} ({}), mã hóa đang TẮT\nMở trong trình duyệt:\n{}\n",
             if count == 1 { "" } else { "s" },
             util::format_bytes(total_bytes),
             self.web_links(),
@@ -137,14 +138,14 @@ impl App {
         if let Some(qr) = self.web_qr() {
             text.push_str(&format!("\n{qr}\n"));
         }
-        text.push_str("Press W+S again to stop sharing.\n\n");
+        text.push_str("Nhấn W+S lần nữa để ngừng chia sẻ.\n\n");
         self.ui.log(Category::Send, &text);
     }
 
     /// The plain-HTTP links of the running server, one per line.
     fn web_links(&self) -> String {
         match crate::banner::listening_lines(&self.server.local_addresses(), "http") {
-            lines if lines.is_empty() => " - (no network interface found)".to_string(),
+            lines if lines.is_empty() => " - (không tìm thấy giao diện mạng)".to_string(),
             lines => lines.join("\n"),
         }
     }
@@ -165,13 +166,12 @@ impl App {
     async fn disable_web(&mut self, category: Category, feature: &str) {
         self.web = None;
         match self.restart_server(CoreWebMode::Disabled).await {
-            Ok(()) => self.ui.log(
-                category,
-                &format!("{feature} disabled, encryption is back on"),
-            ),
+            Ok(()) => self
+                .ui
+                .log(category, &format!("Đã tắt {feature}, mã hóa đã bật lại")),
             Err(err) => self.ui.log(
                 category,
-                &format!("{feature} disabled, but the server could not be restarted: {err:#}"),
+                &format!("Đã tắt {feature}, nhưng không khởi động lại được máy chủ: {err:#}"),
             ),
         }
     }
@@ -182,7 +182,7 @@ impl App {
         if let Err(err) = self.restart_server(CoreWebMode::Disabled).await {
             self.ui.log(
                 Category::Send,
-                &format!("Could not restore the encrypted server: {err:#}"),
+                &format!("Không khôi phục được máy chủ mã hóa: {err:#}"),
             );
         }
     }
@@ -239,7 +239,7 @@ impl App {
                     .unwrap_or_default();
                 self.ui.log(
                     Category::Send,
-                    &format!("Web: {ip} opened the shared link{agent}"),
+                    &format!("Web: {ip} đã mở liên kết chia sẻ{agent}"),
                 );
             }
             WebDownloadEvent::FileDownload {
