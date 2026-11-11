@@ -22,6 +22,7 @@ import 'package:localsend_app/provider/security_provider.dart';
 import 'package:localsend_app/provider/selection/selected_receiving_files_provider.dart';
 import 'package:localsend_app/provider/selection/selected_sending_files_provider.dart';
 import 'package:localsend_app/provider/settings_provider.dart';
+import 'package:localsend_app/util/favorites.dart';
 import 'package:localsend_app/util/native/directories.dart';
 import 'package:localsend_app/util/native/platform_check.dart';
 import 'package:localsend_app/util/native/tray_helper.dart';
@@ -50,6 +51,9 @@ class ReceiveController {
   final ServerUtils server;
 
   ReceiveController(this.server);
+
+  // tsudev-lotus: phiên được nhận diện là của thiết bị yêu thích bằng dấu vân tay mTLS.
+  String? _trustedFavoriteSessionId;
 
   /// A device registered itself on this server.
   Future<void> onRegister(HttpServerRegisterEvent event) async {
@@ -87,6 +91,9 @@ class ReceiveController {
     // self-reported fingerprint in the JSON payload which is only used as fallback
     // when encryption is disabled.
     final senderFingerprint = event.certFingerprint ?? event.info.fingerprint;
+    // tsudev-lotus: chỉ dấu vân tay mTLS mới được so với danh sách yêu thích (xem favorites.dart).
+    final trustedFavorite = server.ref.read(favoritesProvider).findByVerifiedFingerprint(event.certFingerprint);
+    _trustedFavoriteSessionId = trustedFavorite != null ? sessionId : null;
 
     _logger.info('Session Id: $sessionId');
     _logger.info('Destination Directory: $destinationDir');
@@ -97,7 +104,7 @@ class ReceiveController {
           sessionId: sessionId,
           status: SessionStatus.waiting,
           sender: event.info.toDevice(event.ip, withChannel: false).copyWith(fingerprint: senderFingerprint),
-          senderAlias: server.ref.read(favoritesProvider).firstWhereOrNull((e) => e.fingerprint == senderFingerprint)?.alias ?? event.info.alias,
+          senderAlias: trustedFavorite?.alias ?? event.info.alias, // tsudev-lotus: chỉ tin tên yêu thích khi đã xác thực
           files: {
             for (final file in files.values)
               file.id: ReceivingFile(
@@ -129,7 +136,7 @@ class ReceiveController {
     bool quickSave = settings.quickSave && server.getState().session?.message == null;
     final quickSaveFromFavorites = settings.quickSaveFromFavorites && server.getState().session?.message == null;
     if (quickSaveFromFavorites) {
-      final bool isFavorite = server.ref.read(favoritesProvider).any((e) => e.fingerprint == senderFingerprint);
+      final bool isFavorite = trustedFavorite != null; // tsudev-lotus
       if (isFavorite) {
         quickSave = true;
       }
@@ -416,7 +423,7 @@ class ReceiveController {
       bool quickSave = settings.quickSave && !hasError && server.getState().session?.message == null;
       final quickSaveFromFavorites = settings.quickSaveFromFavorites && !hasError && server.getState().session?.message == null;
       if (quickSaveFromFavorites) {
-        final bool isFavorite = server.ref.read(favoritesProvider).any((e) => e.fingerprint == session.sender.fingerprint);
+        final bool isFavorite = _trustedFavoriteSessionId == session.sessionId; // tsudev-lotus
         if (isFavorite) {
           quickSave = true;
         }
