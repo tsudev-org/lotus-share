@@ -5,13 +5,10 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
-- [ ] **CHẶN - deploy website**: `wrangler` trên máy đang đăng nhập tài khoản Cloudflare của dự án UBND, không phải tsudev
-      -> production `lotus.tsudev.com` vẫn là bản trước đổi tên (chưa có `/ung-ho/`, tiêu đề "tsudev-lotus"). Chủ dự án
-      đăng nhập tsudev vào cấu hình RIÊNG (không đổi đăng nhập chung):
-      `! XDG_CONFIG_HOME=$HOME/.config/wrangler-tsudev npx --prefix ~/projects/lotus-share/website wrangler login`, rồi
-      deploy: `cd website && XDG_CONFIG_HOME=$HOME/.config/wrangler-tsudev npm run deploy` (Worker `lotus-share`; tên miền
-      đang gắn Worker `tsudev-lotus` -> gỡ tên miền khỏi Worker cũ trên dashboard trước, hoặc tạm deploy `--name tsudev-lotus`).
-      Dọn: 2 Worker tạo NHẦM 12/11 00:50 trong tài khoản UBND (`lotus-share`, `tsudev-lotus`, chỉ chứa site tĩnh) - chủ dự án xóa.
+- [ ] Dọn Cloudflare (chủ dự án): Worker `tsudev-lotus` ở tài khoản tsudev giờ không gắn tên miền (thay bằng `lotus-share`)
+      - xóa khi chắc chắn; 2 Worker tạo NHẦM 12/11 00:50 ở tài khoản UBND (`lotus-share`, `tsudev-lotus`, chỉ site tĩnh) - xóa.
+      Deploy website: `XDG_CONFIG_HOME=$HOME/.config/wrangler-tsudev npm run deploy` (cấu hình wrangler riêng của tsudev;
+      KHÔNG dùng đăng nhập chung - đang là tài khoản UBND).
 - [ ] Đổi tên thư mục máy `~/projects/tsudev-lotus` -> `~/projects/lotus-share` (chủ dự án làm khi KHÔNG còn phiên nào mở
       trong thư mục; khóa ký đã chuyển sang `~/.config/lotus-share/keys`, symlink tên cũ còn giữ).
 - [ ] Phát hành `v1.18.2-lotus.3` = bản Lotus Share đầu tiên (định danh mới; build thử run 43066623921 xanh mọi nền tảng).
@@ -32,6 +29,8 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 12/11/2026 - Deploy `lotus.tsudev.com` bằng Worker mới `lotus-share` (tài khoản tsudev, cấu hình wrangler riêng). Đã đo:
+  tiêu đề "Lotus Share | tsudev", `/ung-ho/` 200, SHA-256 ảnh QR khớp ghim, Tải về 11 gói không trùng, CSP + HSTS giữ.
 - 12/11/2026 (tsudev-lotus-0e) - **Đổi tên Lotus Share** (PR #21): tên hiển thị 57 ngôn ngữ, CLI, bộ cài, website,
   tài liệu; định danh mới `com.tsudev.lotusshare` / `lotus_share` / AppId `{21D09887-...}` / `lotus-share-cli`; repo đổi
   thành `tsudev-org/lotus-share` (tên cũ chuyển hướng; bảo mật + 3 ruleset giữ nguyên). Logo Lotus Share: bộ công cụ
