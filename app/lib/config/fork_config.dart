@@ -35,8 +35,20 @@ const upstreamRepositoryUrl = 'https://github.com/localsend/localsend';
 /// Người dùng vẫn đổi được trong Cài đặt > Ngôn ngữ.
 const forkDefaultLocaleTag = 'vi';
 
-/// Máy chủ tín hiệu WebRTC mặc định. Tính năng WebRTC hiện TẮT (`webRTCEnabled = false`),
-/// nên ứng dụng không kết nối tới các địa chỉ này. Khi bật, cần dựng máy chủ riêng
-/// (thư mục `server/`) rồi đổi sang tên miền của tsudev.
-const forkDefaultSignalingServers = ['wss://public.localsend.org/v1/ws'];
-const forkDefaultStunServers = ['stun:stun.localsend.org:3478'];
+/// Máy chủ tín hiệu WebRTC mặc định - hạ tầng của tsudev, không phụ thuộc localsend.org.
+/// Tính năng WebRTC hiện TẮT ở thời điểm biên dịch (`webRTCEnabled = false`), nên ứng dụng
+/// không kết nối tới các địa chỉ này. Trước khi bật: dựng máy chủ từ thư mục `server/` tại
+/// `signal.lotus.tsudev.com` (task trong logs/STATE.md).
+const forkDefaultSignalingServers = ['wss://signal.lotus.tsudev.com/v1/ws'];
+
+/// Máy chủ STUN mặc định (Cloudflare, cùng nhà cung cấp hạ tầng với tsudev.com; chỉ dùng khi bật WebRTC).
+const forkDefaultStunServers = ['stun:stun.cloudflare.com:3478'];
+
+/// Kênh ủng hộ hiển thị ở trang "Ủng hộ" - nguồn DUY NHẤT. Chỉ chứa địa chỉ thuộc hệ tsudev
+/// (`tsudev.com`, `*.tsudev.com`, `github.com/tsudev-org`); kiểm thử chặn địa chỉ ngoài hệ.
+/// Danh sách trống thì trang Ủng hộ bị ẩn khỏi Cài đặt.
+const forkSupportLinks = <({String label, String url})>[
+  (label: 'tsudev.com', url: forkEcosystemUrl),
+  (label: 'lotus.tsudev.com', url: forkHomepageUrl),
+  (label: 'GitHub', url: forkRepositoryUrl),
+];

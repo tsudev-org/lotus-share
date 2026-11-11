@@ -545,7 +545,7 @@ class _Translations$donationPage$et extends Translations$donationPage$en {
   String get title => 'Toeta meid rahaliselt';
   @override
   String get info =>
-      'LocalSend põhineb avatud lähtekoodil, on kõikide jaoks vaba ning tasuta kasutatav, ega sisalda reklaame. Kui sulle see rakendus meeldib, siis palun toeta meie arendust.';
+      'tsudev-lotus põhineb avatud lähtekoodil, on kõikide jaoks vaba ning tasuta kasutatav, ega sisalda reklaame. Kui sulle see rakendus meeldib, siis palun toeta meie arendust.';
   @override
   String donate({required Object amount}) => 'Anneta ${amount}';
   @override
@@ -974,7 +974,7 @@ class _Translations$settingsTab$other$et extends Translations$settingsTab$other$
   @override
   String get title => 'Muu teave';
   @override
-  String get support => 'Toeta LocalSendi';
+  String get support => 'Toeta tsudev-lotusi';
   @override
   String get donate => 'Toeta rahaliselt';
   @override

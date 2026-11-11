@@ -152,7 +152,7 @@
     },
     "other": {
       "title": "Besteak",
-      "support": "LocalSend Lagundu",
+      "support": "tsudev-lotus Lagundu",
       "donate": "Dohaintza egin",
       "privacyPolicy": "Pribatutasun politika",
       "termsOfUse": "Erabilera baldintzak"
@@ -312,7 +312,7 @@
   },
   "donationPage": {
     "title": "Egin dohaintza",
-    "info": "LocalSend doakoa da, kode irekikoa eta iragarkirik gabea. Aplikazioa gustuko baduzu, garapena dohaintza batekin lagun dezakezu.",
+    "info": "tsudev-lotus doakoa da, kode irekikoa eta iragarkirik gabea. Aplikazioa gustuko baduzu, garapena dohaintza batekin lagun dezakezu.",
     "donate": "Eman {amount}",
     "thanks": "Eskerrik asko!",
     "restore": "Berreskuratu erosketa"

@@ -152,7 +152,7 @@
     },
     "other": {
       "title": "Outros",
-      "support": "Apoia a LocalSend",
+      "support": "Apoia a tsudev-lotus",
       "donate": "Doar",
       "privacyPolicy": "Política de privacidade",
       "termsOfUse": "Condicións de uso"
@@ -241,7 +241,7 @@
   "receiveOptionsPage": {
     "title": "Opcións",
     "destination": "@:settingsTab.receive.destination",
-    "appDirectory": "(Cartafol Localsend)",
+    "appDirectory": "(Cartafol tsudev-lotus)",
     "saveToGallery": "@:settingsTab.receive.saveToGallery",
     "saveToGalleryOff": "Desactivado automáticamente porque hai cartafois."
   },

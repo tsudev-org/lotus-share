@@ -521,8 +521,8 @@ class _Translations$aboutPage$fr extends Translations$aboutPage$en {
   String get title => 'À propos de tsudev-lotus';
   @override
   List<String> get description => [
-    'Localsend est un logiciel gratuit et open-source qui vous permet de partager de manière sécurisée des fichiers et des messages avec d\'autres appareils connectés à votre réseau local. Une connexion à internet n\'est pas requise.',
-    'Localsend est disponible sur Android, iOS, macOS, Windows et Linux. Vous pouvez accéder à ces téléchargements depuis la page officielle.',
+    'tsudev-lotus est un logiciel gratuit et open-source qui vous permet de partager de manière sécurisée des fichiers et des messages avec d\'autres appareils connectés à votre réseau local. Une connexion à internet n\'est pas requise.',
+    'tsudev-lotus est disponible sur Android, iOS, macOS, Windows et Linux. Vous pouvez accéder à ces téléchargements depuis la page officielle.',
   ];
   @override
   String get author => 'Auteur';
@@ -545,7 +545,7 @@ class _Translations$donationPage$fr extends Translations$donationPage$en {
   String get title => 'Faire une donation';
   @override
   String get info =>
-      'LocalSend est gratuit, open-source et sans aucune pub. Si vous aimez ce logiciel, vous pouvez faire un don pour soutenir son développement.';
+      'tsudev-lotus est gratuit, open-source et sans aucune pub. Si vous aimez ce logiciel, vous pouvez faire un don pour soutenir son développement.';
   @override
   String donate({required Object amount}) => 'Donner ${amount}';
   @override
@@ -974,7 +974,7 @@ class _Translations$settingsTab$other$fr extends Translations$settingsTab$other$
   @override
   String get title => 'Autre';
   @override
-  String get support => 'Soutenir LocalSend';
+  String get support => 'Soutenir tsudev-lotus';
   @override
   String get donate => 'Faire une donation';
   @override

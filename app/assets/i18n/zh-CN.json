@@ -152,7 +152,7 @@
     },
     "other": {
       "title": "其他",
-      "support": "支持 LocalSend",
+      "support": "支持 tsudev-lotus",
       "donate": "捐赠",
       "privacyPolicy": "隐私政策",
       "termsOfUse": "使用条款"
@@ -312,7 +312,7 @@
   },
   "donationPage": {
     "title": "捐赠",
-    "info": "LocalSend 免费、开源、无广告。如果您喜欢这款应用程序，可以捐款支持开发。",
+    "info": "tsudev-lotus 免费、开源、无广告。如果您喜欢这款应用程序，可以捐款支持开发。",
     "donate": "捐款 {amount}",
     "thanks": "非常感谢您的支持！",
     "restore": "恢复购买"

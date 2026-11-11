@@ -542,7 +542,7 @@ class Translations$donationPage$zh_TW extends Translations$donationPage$en {
   @override
   String get title => '贊助';
   @override
-  String get info => 'LocalSend 是免費、開源且沒有任何廣告的。如果您喜歡此應用程式，可以透過捐贈來支持開發。';
+  String get info => 'tsudev-lotus 是免費、開源且沒有任何廣告的。如果您喜歡此應用程式，可以透過捐贈來支持開發。';
   @override
   String donate({required Object amount}) => '贊助 ${amount}';
   @override
@@ -975,7 +975,7 @@ class Translations$settingsTab$other$zh_TW extends Translations$settingsTab$othe
   @override
   String get title => '其他';
   @override
-  String get support => '支持 LocalSend';
+  String get support => '支持 tsudev-lotus';
   @override
   String get donate => '贊助';
   @override

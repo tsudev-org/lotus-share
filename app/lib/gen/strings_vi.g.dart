@@ -548,7 +548,7 @@ class _Translations$donationPage$vi extends Translations$donationPage$en {
   String get title => 'Ủng hộ';
   @override
   String get info =>
-      'tsudev-lotus dựa trên LocalSend - ứng dụng miễn phí, mã nguồn mở, không quảng cáo. Nếu bạn thích, hãy ủng hộ tác giả gốc của LocalSend bằng một khoản đóng góp.';
+      'tsudev-lotus miễn phí, mã nguồn mở, không quảng cáo. Nếu thấy hữu ích, hãy theo dõi và ủng hộ dự án qua các trang của tsudev dưới đây.';
   @override
   String donate({required Object amount}) => 'Ủng hộ ${amount}';
   @override
@@ -1109,7 +1109,7 @@ class _Translations$settingsTab$other$vi extends Translations$settingsTab$other$
   @override
   String get title => 'Khác';
   @override
-  String get support => 'Ủng hộ tác giả LocalSend';
+  String get support => 'Ủng hộ tsudev-lotus';
   @override
   String get donate => 'Ủng hộ';
   @override

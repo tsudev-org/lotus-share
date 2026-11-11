@@ -487,7 +487,7 @@ class _Translations$donationPage$ga extends Translations$donationPage$en {
   String get title => 'Tabhair Síntiús';
   @override
   String get info =>
-      'Tá LocalSend saor in aisce, foinse oscailte agus gan aon fhógraí. Más maith leat an aip, is féidir leat tacú leis an bhforbairt le síntiús.';
+      'Tá tsudev-lotus saor in aisce, foinse oscailte agus gan aon fhógraí. Más maith leat an aip, is féidir leat tacú leis an bhforbairt le síntiús.';
   @override
   String donate({required Object amount}) => 'Tabhair síntiús ${amount}';
   @override
@@ -982,7 +982,7 @@ class _Translations$settingsTab$other$ga extends Translations$settingsTab$other$
   @override
   String get title => 'Eile';
   @override
-  String get support => 'Tacaigh le LocalSend';
+  String get support => 'Tacaigh le tsudev-lotus';
   @override
   String get donate => 'Tabhair Síntiús';
   @override

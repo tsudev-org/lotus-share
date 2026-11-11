@@ -1,18 +1,13 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Security issues
-    url: https://github.com/localsend/localsend/blob/main/CONTRIBUTING.md#security-issues
-    about: Help us address security issues as quickly and effectively as possible
+  - name: Báo lỗ hổng bảo mật (riêng tư)
+    url: https://github.com/tsudev-org/tsudev-lotus/security/advisories/new
+    about: KHÔNG báo lỗ hổng bảo mật bằng issue công khai - xem SECURITY.md
 
-  - name: Get latest LocalSend
-    url: https://localsend.org/download
-    about: Your issue may be version related, so try updating first
+  - name: Tải bản mới nhất
+    url: https://lotus.tsudev.com/tai-ve/
+    about: Lỗi có thể đã được sửa ở bản mới - hãy cập nhật trước khi báo
 
-  - name: GitHub Discussions
-    url: https://github.com/localsend/localsend/discussions
-    about: If you think your issue isn't that serious, you can discuss it here
-
-  - name: Contributing guide
-    url: https://github.com/localsend/localsend/blob/main/CONTRIBUTING.md
-    about: Check our contributing guide if you’re interested or have time
-    
+  - name: Hướng dẫn đóng góp
+    url: https://github.com/tsudev-org/tsudev-lotus/blob/main/CONTRIBUTING.md
+    about: Quy trình báo lỗi, đề xuất tính năng và gửi mã

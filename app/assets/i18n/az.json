@@ -152,7 +152,7 @@
     },
     "other": {
       "title": "Digər",
-      "support": "LocalSend-i dəstəklə",
+      "support": "tsudev-lotus-i dəstəklə",
       "donate": "İanə et",
       "privacyPolicy": "Məxfilik siyasəti",
       "termsOfUse": "İstifadə şərtləri"
@@ -312,7 +312,7 @@
   },
   "donationPage": {
     "title": "İanə et",
-    "info": "LocalSend pulsuz, açıq mənbəlidir və heç bir reklam yoxdur. Proqramı bəyənirsinizsə, ianə ilə inkişafını dəstəkləyə bilərsiniz.",
+    "info": "tsudev-lotus pulsuz, açıq mənbəlidir və heç bir reklam yoxdur. Proqramı bəyənirsinizsə, ianə ilə inkişafını dəstəkləyə bilərsiniz.",
     "donate": "{amount} ianə et",
     "thanks": "Çox təşəkkür edirəm!",
     "restore": "Satın almaları bərpa et"

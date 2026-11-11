@@ -539,13 +539,14 @@ class SettingsTab extends StatelessWidget {
                     await context.push(() => const AboutPage());
                   },
                 ),
-                _ButtonEntry(
-                  label: t.settingsTab.other.support,
-                  buttonLabel: t.settingsTab.other.donate,
-                  onTap: () async {
-                    await context.push(() => const DonationPage());
-                  },
-                ),
+                if (forkSupportLinks.isNotEmpty) // tsudev-lotus: ẩn khi chưa có kênh ủng hộ tsudev
+                  _ButtonEntry(
+                    label: t.settingsTab.other.support,
+                    buttonLabel: t.settingsTab.other.donate,
+                    onTap: () async {
+                      await context.push(() => const DonationPage());
+                    },
+                  ),
                 _ButtonEntry(
                   label: t.settingsTab.other.privacyPolicy,
                   buttonLabel: t.general.open,

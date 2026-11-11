@@ -148,7 +148,7 @@
     },
     "other": {
       "title": "Eile",
-      "support": "Tacaigh le LocalSend",
+      "support": "Tacaigh le tsudev-lotus",
       "donate": "Tabhair Síntiús",
       "privacyPolicy": "Polasaí Príobháideachais",
       "termsOfUse": "Téarmaí Úsáide"
@@ -271,7 +271,7 @@
   },
   "donationPage": {
     "title": "Tabhair Síntiús",
-    "info": "Tá LocalSend saor in aisce, foinse oscailte agus gan aon fhógraí. Más maith leat an aip, is féidir leat tacú leis an bhforbairt le síntiús.",
+    "info": "Tá tsudev-lotus saor in aisce, foinse oscailte agus gan aon fhógraí. Más maith leat an aip, is féidir leat tacú leis an bhforbairt le síntiús.",
     "donate": "Tabhair síntiús {amount}",
     "thanks": "Go raibh míle maith agat!",
     "restore": "Athchóirigh an ceannachán"

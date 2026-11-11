@@ -546,7 +546,7 @@ class _Translations$donationPage$ky extends Translations$donationPage$en {
   String get title => 'Кайрымдуулук кылуу';
   @override
   String get info =>
-      'LocalSend — бул жарнамасыз, акысыз жана ачык булактуу тиркеме. Эгер сизге жакса, ыктыярдуу тартуу менен анын өнүгүшүн колдой аласыз.';
+      'tsudev-lotus - бул жарнамасыз, акысыз жана ачык булактуу тиркеме. Эгер сизге жакса, ыктыярдуу тартуу менен анын өнүгүшүн колдой аласыз.';
   @override
   String donate({required Object amount}) => '${amount} тартуулоо';
   @override
@@ -1058,7 +1058,7 @@ class _Translations$settingsTab$other$ky extends Translations$settingsTab$other$
   @override
   String get title => 'Башка';
   @override
-  String get support => 'LocalSend\'ди колдоо';
+  String get support => 'tsudev-lotus\'ди колдоо';
   @override
   String get donate => 'Кайрымдуулук кылуу';
   @override

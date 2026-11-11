@@ -152,7 +152,7 @@
     },
     "other": {
       "title": "Altres",
-      "support": "Doneu suport al LocalSend",
+      "support": "Doneu suport al tsudev-lotus",
       "donate": "Donació",
       "privacyPolicy": "Política de privadesa",
       "termsOfUse": "Condicions d'ús"
@@ -312,7 +312,7 @@
   },
   "donationPage": {
     "title": "Donació",
-    "info": "El LocalSend és gratuït, de codi obert i sense anuncis. Si us agrada l'aplicació, podeu donar suport al desenvolupament amb una donació.",
+    "info": "El tsudev-lotus és gratuït, de codi obert i sense anuncis. Si us agrada l'aplicació, podeu donar suport al desenvolupament amb una donació.",
     "donate": "Donació: {amount}",
     "thanks": "Moltes gràcies!",
     "restore": "Restaura la compra"
