@@ -2,7 +2,7 @@
 
 - **Mã phiếu**: 20261112-03
 - **Từ**: phiên tsudev-lotus-0e (12/11/2026) - **Đến**: phiên kế tiếp của repo `tsudev-org/lotus-share`
-- **Trạng thái**: MỞ (bước 1 - deploy website - XONG 12/11/2026)
+- **Trạng thái**: ĐÓNG (12/11/2026 - deploy website, phát hành v1.18.2-lotus.3, đổi thư mục máy: XONG)
 - Phiếu `20261111-04` (kết phiên trước): các mục đã xong hoặc chuyển vào STATE.md -> coi như ĐÓNG.
 
 ## 1. Đã làm
@@ -35,3 +35,4 @@ logo, bảng màu, đổi tên repo), #22 (trang Ủng hộ). Chi tiết: `logs/
 ## 5. Kết quả xử lý
 
 -
+- 12/11/2026 (tsudev-lotus-0e): cả 3 bước mục 2 đã xong - xem STATE.md mục Đã hoàn thành.
