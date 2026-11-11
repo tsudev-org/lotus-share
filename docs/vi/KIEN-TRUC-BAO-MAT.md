@@ -47,6 +47,7 @@
 | 10/11/2026 | CI: CodeQL (Rust, Actions), gitleaks toàn lịch sử, `tools/osv_scan.py` (Rust + Dart), Dependabot hằng tháng | Phát hiện sớm lỗ hổng mã và phụ thuộc |
 | 10/11/2026 | Gỡ `winget.yml` của upstream | Workflow tự phát hành lên định danh winget của LocalSend - không thuộc bản fork |
 | 10/11/2026 | Định danh cài đặt riêng (`com.tsudev.lotus`, AppId Inno mới, thư mục cấu hình CLI riêng); AppImage tự cập nhật từ repo tsudev | Không ghi đè/dùng chung dữ liệu, khóa TLS hay luồng cập nhật với LocalSend |
+| 11/11/2026 | Nâng `rustix` 1.1.4 -> 1.1.6 | Vá RUSTSEC-2026-0486 (công bố 11/11/2026, CI `osv_scan` chặn) |
 | 11/11/2026 | Thiết bị yêu thích chỉ được nhận diện bằng dấu vân tay lấy từ chứng thư mTLS; ở chế độ HTTP không còn "Lưu nhanh" hay tên yêu thích cho máy gửi | Ở HTTP, dấu vân tay trong JSON do máy gửi tự khai: máy lạ trong LAN mạo danh thiết bị yêu thích để tệp được lưu không cần bấm Chấp nhận (`app/lib/util/favorites.dart`) |
 | 10/11/2026 | Phát hành: SHA256SUMS ký Sigstore keyless, chứng thực SLSA từng tệp, SBOM SPDX, APK ký khóa tsudev có ghim dấu vân tay | Người dùng kiểm được tệp tải về đến từ đúng workflow, đúng mã nguồn (`docs/vi/PHAT-HANH.md`) |
 
