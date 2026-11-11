@@ -5,13 +5,9 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
-- [ ] Dọn Cloudflare (chủ dự án): Worker `tsudev-lotus` ở tài khoản tsudev giờ không gắn tên miền (thay bằng `lotus-share`)
-      - xóa khi chắc chắn; 2 Worker tạo NHẦM 12/11 00:50 ở tài khoản UBND (`lotus-share`, `tsudev-lotus`, chỉ site tĩnh) - xóa.
-      Deploy website: `XDG_CONFIG_HOME=$HOME/.config/wrangler-tsudev npm run deploy` (cấu hình wrangler riêng của tsudev;
-      KHÔNG dùng đăng nhập chung - đang là tài khoản UBND).
-- [ ] Đổi tên thư mục máy `~/projects/tsudev-lotus` -> `~/projects/lotus-share` (chủ dự án làm khi KHÔNG còn phiên nào mở
-      trong thư mục; khóa ký đã chuyển sang `~/.config/lotus-share/keys`, symlink tên cũ còn giữ).
-- [ ] Phát hành `v1.18.2-lotus.3` = bản Lotus Share đầu tiên (định danh mới; build thử run 43066623921 xanh mọi nền tảng).
+- Deploy website: `cd website && XDG_CONFIG_HOME=$HOME/.config/wrangler-tsudev npm run deploy` (cấu hình wrangler RIÊNG của
+  tsudev - đăng nhập chung là tài khoản UBND; kiểm `wrangler whoami` = dev.nguyentrangtinhsu@...). Sau mỗi bản phát hành
+  phải deploy lại (trang Tải về đọc danh sách tệp lúc build).
 - [ ] Phiếu `~/projects/logs/handover/20261112-02` (kho gói đổi tên `lotus-share`) - sau khi kho gói đổi, sửa lệnh cài ở
       `website/src/pages/tai-ve.astro` và bỏ tiền tố cũ `tsudev-lotus` trong `website/src/lib/noi-dung.ts`.
 - [ ] **Chủ dự án nộp đơn SignPath Foundation** theo phiếu `logs/handover/20261111-03_noi-dung-don-signpath.md`
@@ -29,6 +25,11 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 12/11/2026 - **Phát hành công khai `v1.18.2-lotus.3`** - bản Lotus Share đầu tiên (15 tệp `lotus-share-*`, có DMG macOS).
+  Lần chạy đầu job macOS bị GitHub hủy (máy chạy, chưa chạy bước nào) -> xóa bản nháp, chạy lại job lỗi -> xanh toàn bộ.
+  Đã kiểm trên tệp thật: SHA256SUMS khớp (DMG nằm trong tệp ký), `gh attestation verify` đạt + từ chối tệp sửa 1 byte,
+  CLI in `lotus-share-cli 1.18.2`, APK định danh `com.tsudev.lotusshare`. Website deploy lại: Tải về hiện 1.18.2-lotus.3,
+  11 gói, không trùng. Cloudflare: 3 Worker cũ/nhầm đã được chủ dự án xóa. Thư mục máy đổi thành `~/projects/lotus-share`.
 - 12/11/2026 - Deploy `lotus.tsudev.com` bằng Worker mới `lotus-share` (tài khoản tsudev, cấu hình wrangler riêng). Đã đo:
   tiêu đề "Lotus Share | tsudev", `/ung-ho/` 200, SHA-256 ảnh QR khớp ghim, Tải về 11 gói không trùng, CSP + HSTS giữ.
 - 12/11/2026 (tsudev-lotus-0e) - **Đổi tên Lotus Share** (PR #21): tên hiển thị 57 ngôn ngữ, CLI, bộ cài, website,

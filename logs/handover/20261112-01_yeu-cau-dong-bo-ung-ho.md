@@ -42,3 +42,8 @@ Theo phiếu gốc mục 4: gỡ kênh cũ, `FUNDING.yml`, trang/nút Ủng hộ
     công cụ, FUNDING, `fork_config.dart`.
   - Còn lại: nếu sau này phát hành lên Google Play, phải ẩn lối vào Ủng hộ ở bản Play (cờ build) theo mục 3.5.
 
+## 5. Bổ sung 12/11/2026 - phương án theo nền tảng (đã chốt)
+
+Áp dụng phiếu `~/projects/logs/handover/20261112-02_quyet-dinh-ung-ho-theo-nen-tang.md` (thay mục 3.5 của phiếu gốc):
+web hiện đầy đủ; desktop/Android chỉ nút mở trang web kèm câu "tự nguyện, 100% tới nhà phát triển, không mở khóa gì";
+iOS App Store ẩn hoàn toàn. Ghi một dòng kết quả vào mục 5 của phiếu đó.
