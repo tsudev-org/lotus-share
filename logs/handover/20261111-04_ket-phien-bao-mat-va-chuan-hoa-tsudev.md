@@ -2,7 +2,7 @@
 
 - **Mã phiếu**: 20261111-04
 - **Từ**: phiên tsudev-lotus-0e (11/11/2026) - **Đến**: phiên kế tiếp của `tsudev-lotus`
-- **Trạng thái**: MỞ
+- **Trạng thái**: ĐÓNG (12/11/2026 - việc còn lại chuyển vào STATE.md + phiếu 20261112-03)
 - Phiếu `20261110-01` (kết phiên trước): các mục đã xử lý xong hoặc chuyển vào STATE.md -> coi như ĐÓNG.
 
 ## 1. Đã làm
