@@ -84,11 +84,11 @@
   },
   "channels": [
     "scoop",
-    "brew"
-  ],
-  "planned": [
-    "winget",
+    "brew",
     "apt",
     "rpm"
+  ],
+  "planned": [
+    "winget"
   ]
 }

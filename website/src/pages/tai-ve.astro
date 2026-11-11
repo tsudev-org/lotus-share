@@ -45,7 +45,15 @@ const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? '
 scoop install tsudev/tsudev-lotus</code></pre>
       <h3>macOS - Homebrew</h3>
       <pre tabindex="0"><code>brew install --cask tsudev-org/tap/tsudev-lotus</code></pre>
-      <p>Mã nguồn gói: <a href="https://github.com/tsudev-org/scoop-bucket" target="_blank" rel="noopener noreferrer">tsudev-org/scoop-bucket</a>, <a href="https://github.com/tsudev-org/homebrew-tap" target="_blank" rel="noopener noreferrer">tsudev-org/homebrew-tap</a>. Gói winget đang chờ Microsoft duyệt.</p>
+      <h3>Debian, Ubuntu, Mint - APT</h3>
+      <pre tabindex="0"><code>curl -fsSL https://pkg.tsudev.com/tsudev-archive-keyring.gpg | sudo tee /usr/share/keyrings/tsudev.gpg &gt;/dev/null
+echo "deb [signed-by=/usr/share/keyrings/tsudev.gpg] https://pkg.tsudev.com/apt stable main" | sudo tee /etc/apt/sources.list.d/tsudev.list
+sudo apt update &amp;&amp; sudo apt install tsudev-lotus</code></pre>
+      <h3>Fedora - DNF</h3>
+      <pre tabindex="0"><code>sudo curl -fsSLo /etc/yum.repos.d/tsudev.repo https://pkg.tsudev.com/rpm/tsudev.repo
+sudo dnf install tsudev-lotus</code></pre>
+      <p>Kho APT/RPM ký GPG, vân tay khóa <code>3883 10F4 7FA8 224D 76C0  A9C7 9745 B6AF 3EA3 3C74</code> (đối chiếu tại <a href="https://tsudev.com/apps" target="_blank" rel="noopener noreferrer">tsudev.com/apps</a>); apt và dnf tự từ chối gói không khớp chữ ký. Gói cài vào <code>/opt/tsudev-lotus</code>, lệnh <code>tsudev-lotus</code>, gỡ sạch bằng <code>sudo apt remove tsudev-lotus</code> / <code>sudo dnf remove tsudev-lotus</code>.</p>
+      <p>Mã nguồn gói: <a href="https://github.com/tsudev-org/scoop-bucket" target="_blank" rel="noopener noreferrer">tsudev-org/scoop-bucket</a>, <a href="https://github.com/tsudev-org/homebrew-tap" target="_blank" rel="noopener noreferrer">tsudev-org/homebrew-tap</a>, <a href="https://github.com/tsudev-org/linux-packages" target="_blank" rel="noopener noreferrer">tsudev-org/linux-packages</a>. Gói winget đang chờ Microsoft duyệt.</p>
 
       <h2 id="chon-goi">Chọn gói</h2>
       {theoNenTang.length > 0 ? (
@@ -74,7 +82,7 @@ scoop install tsudev/tsudev-lotus</code></pre>
               <tr><td>Windows 10/11 x64</td><td><code>-windows-x86-64.exe</code> (bộ cài) hoặc <code>.zip</code> (di động)</td></tr>
               <tr><td>Windows 11 ARM64</td><td><code>-windows-arm-64.zip</code></td></tr>
               <tr><td>macOS 12+</td><td><code>.dmg</code> (chip Apple và Intel)</td></tr>
-              <tr><td>Linux x64, ARM64</td><td><code>.AppImage</code>, <code>.deb</code>, <code>.rpm</code>, <code>.tar.gz</code></td></tr>
+              <tr><td>Linux x64</td><td><code>.AppImage</code>, <code>.tar.gz</code> - hoặc cài <code>.deb</code> / <code>.rpm</code> từ kho APT/RPM (mục <a href="#cai-bang-lenh">Cài bằng lệnh</a>)</td></tr>
               <tr><td>Android 5.0+</td><td><code>.apk</code></td></tr>
             </tbody>
           </table>
@@ -110,7 +118,7 @@ scoop install tsudev/tsudev-lotus</code></pre>
       <h2 id="linux">Cài trên Linux</h2>
       <pre tabindex="0"><code>chmod +x tsudev-lotus-&lt;phiên bản&gt;-linux-x86-64.AppImage
 ./tsudev-lotus-&lt;phiên bản&gt;-linux-x86-64.AppImage
-# hoặc: sudo apt install ./tsudev-lotus-&lt;phiên bản&gt;-linux-x86-64.deb</code></pre>
+# hoặc cài từ kho APT/RPM để tự cập nhật: xem mục "Cài bằng lệnh"</code></pre>
       <p>Có tường lửa (ufw, firewalld)? Mở cổng 53317 cho TCP và UDP trong mạng nội bộ: <code>sudo ufw allow from 192.168.0.0/16 to any port 53317</code>.</p>
 
       <h2 id="android">Cài trên Android</h2>
