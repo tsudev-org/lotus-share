@@ -23,7 +23,7 @@
 
 ## 3. Cảnh báo
 
-- Dòng nào sửa trong tệp có em-dash kế thừa thì mất miễn trừ -> thay `—` bằng `-` đúng dòng đó (đã gặp ở be/ky/ru/uk.json).
+- Dòng nào sửa trong tệp có em-dash kế thừa thì mất miễn trừ -> thay em-dash (U+2014) bằng `-` đúng dòng đó (đã gặp ở be/ky/ru/uk.json).
 - Kho apt Ubuntu lỗi DNS 11/11/2026: job Linux của `release-lotus.yml` có thể kẹt ở bước "Thư viện hệ thống".
 
 ## 4. Cổng kiểm
