@@ -12,6 +12,7 @@ const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? '
     <nav class="tai-lieu__menu" aria-label="Tải về">
       <p>Tải về</p>
       <ul>
+        <li><a href="#cai-bang-lenh">Cài bằng lệnh</a></li>
         <li><a href="#chon-goi">Chọn gói</a></li>
         <li><a href="#kiem-tra">Kiểm tra tệp</a></li>
         <li><a href="#windows">Cài trên Windows</a></li>
@@ -36,6 +37,15 @@ const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? '
           </div>
         </>
       )}
+
+      <h2 id="cai-bang-lenh">Cài bằng lệnh</h2>
+      <p>Cách nhanh nhất, tự cập nhật về sau. Gói do chính dự án duy trì, ghim mã SHA-256 của bản phát hành; trình quản lý gói từ chối cài nếu tệp không khớp.</p>
+      <h3>Windows - Scoop</h3>
+      <pre tabindex="0"><code>scoop bucket add tsudev https://github.com/tsudev-org/scoop-bucket
+scoop install tsudev/tsudev-lotus</code></pre>
+      <h3>macOS - Homebrew</h3>
+      <pre tabindex="0"><code>brew install --cask tsudev-org/tap/tsudev-lotus</code></pre>
+      <p>Mã nguồn gói: <a href="https://github.com/tsudev-org/scoop-bucket" target="_blank" rel="noopener noreferrer">tsudev-org/scoop-bucket</a>, <a href="https://github.com/tsudev-org/homebrew-tap" target="_blank" rel="noopener noreferrer">tsudev-org/homebrew-tap</a>. Gói winget đang chờ Microsoft duyệt.</p>
 
       <h2 id="chon-goi">Chọn gói</h2>
       {theoNenTang.length > 0 ? (
