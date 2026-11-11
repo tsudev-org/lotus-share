@@ -30,7 +30,7 @@
 | Kênh truyền | HTTPS (TLS 1.2/1.3, rustls + ring), mặc định BẬT (`ls_https`) | `packages/core/src/http/` |
 | Xác thực hai chiều | Máy khách bắt buộc trình chứng thư (mTLS); máy chủ bỏ qua gói đăng ký có dấu vân tay không khớp chứng thư | `http/server/common/client_cert_verifier.rs` |
 | Ghim chứng thư | Máy khách chỉ chấp nhận chứng thư có đúng dấu vân tay đã biết; kiểm ngay trong bắt tay TLS, trước khi gửi byte dữ liệu nào | `http/client/server_cert_verifier.rs` |
-| Phê duyệt | Mọi phiên nhận tệp cần người dùng bấm Chấp nhận; "Lưu nhanh" mặc định chỉ áp dụng cho thiết bị yêu thích (`QuickSaveMode.paired`) | `app/lib/provider/persistence_provider.dart` |
+| Phê duyệt | Mọi phiên nhận tệp cần người dùng bấm Chấp nhận; "Lưu nhanh" mặc định chỉ áp dụng cho thiết bị yêu thích (`QuickSaveMode.paired`), nhận diện bằng dấu vân tay mTLS (không tin dấu vân tay tự khai ở chế độ HTTP) | `app/lib/provider/persistence_provider.dart` |
 | Mã PIN | Tùy chọn PIN khi nhận; tự sinh 8 ký tự bằng CSPRNG của hệ điều hành (fail-closed, không lùi về bộ sinh thường), bắt buộc tối thiểu 6 ký tự; tối đa 3 lần sai mỗi địa chỉ, sau đó trả 429 | `http/server/common/pin.rs` |
 | Chống quá tải | Tối đa 64 kết nối đồng thời, 8 kết nối mỗi IP; một phiên tải lên tại một thời điểm | `http/server/connection_limit.rs` |
 | Không đi vòng | Máy khách tắt proxy hệ thống và không theo chuyển hướng HTTP | `http/client/mod.rs` |
@@ -48,6 +48,8 @@
 | 10/11/2026 | CI: CodeQL (Rust, Actions), gitleaks toàn lịch sử, `tools/osv_scan.py` (Rust + Dart), Dependabot hằng tháng | Phát hiện sớm lỗ hổng mã và phụ thuộc |
 | 10/11/2026 | Gỡ `winget.yml` của upstream | Workflow tự phát hành lên định danh winget của LocalSend - không thuộc bản fork |
 | 10/11/2026 | Định danh cài đặt riêng (`com.tsudev.lotus`, AppId Inno mới, thư mục cấu hình CLI riêng); AppImage tự cập nhật từ repo tsudev | Không ghi đè/dùng chung dữ liệu, khóa TLS hay luồng cập nhật với LocalSend |
+| 11/11/2026 | Nâng `rustix` 1.1.4 -> 1.1.6 | Vá RUSTSEC-2026-0486 (công bố 11/11/2026, CI `osv_scan` chặn) |
+| 11/11/2026 | Thiết bị yêu thích chỉ được nhận diện bằng dấu vân tay lấy từ chứng thư mTLS; ở chế độ HTTP không còn "Lưu nhanh" hay tên yêu thích cho máy gửi | Ở HTTP, dấu vân tay trong JSON do máy gửi tự khai: máy lạ trong LAN mạo danh thiết bị yêu thích để tệp được lưu không cần bấm Chấp nhận (`app/lib/util/favorites.dart`) |
 | 10/11/2026 | Phát hành: SHA256SUMS ký Sigstore keyless, chứng thực SLSA từng tệp, SBOM SPDX, APK ký khóa tsudev có ghim dấu vân tay | Người dùng kiểm được tệp tải về đến từ đúng workflow, đúng mã nguồn (`docs/vi/PHAT-HANH.md`) |
 
 ## 5. Rủi ro đã chấp nhận (có hạn xem lại)
