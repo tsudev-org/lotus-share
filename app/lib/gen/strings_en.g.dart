@@ -990,6 +990,9 @@ class Translations$tsudev$en {
   /// en: 'Error: {message}'
   String error({required Object message}) => 'Error: ${message}';
 
+  /// en: 'PIN must be at least {n} characters'
+  String pinTooShort({required Object n}) => 'PIN must be at least ${n} characters';
+
   /// en: '(one) {Add {n} app} (other) {Add {n} apps}'
   String addApps({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('en'))(
     n,

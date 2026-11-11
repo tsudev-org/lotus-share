@@ -380,7 +380,8 @@ class _WebSharePageState extends State<WebSharePage> with Refena {
                             context: context,
                             builder: (_) => const PinDialog(
                               obscureText: false,
-                              generateRandom: true,
+                              generateRandom: true, // tsudev-lotus: PIN ngẫu nhiên CSPRNG, tối thiểu 6 ký tự
+                              minLength: pinMinLength,
                             ),
                           );
 

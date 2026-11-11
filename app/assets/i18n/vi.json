@@ -598,6 +598,7 @@
     "debugging": "Gỡ lỗi",
     "selectMultipleApps": "Chọn nhiều ứng dụng",
     "error": "Lỗi: {message}",
+    "pinTooShort": "Mã PIN cần ít nhất {n} ký tự",
     "addApps(param=n)": {
       "other": "Thêm {n} ứng dụng"
     }
