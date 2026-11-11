@@ -1,0 +1,21 @@
+{
+  "ghiChu": "Nguồn DUY NHẤT của các kênh ủng hộ Lotus Share, hiển thị ở https://lotus.tsudev.com/ung-ho/ (ứng dụng, README, nút Sponsor GitHub chỉ trỏ tới trang đó). Mỗi kênh: ten + moTa (bắt buộc) và ít nhất một trong url (https), chiTiet, anhQr (kèm anhQrSha256). Mã VietQR sinh bằng tools/ung-ho/tao-vietqr.py; build kiểm CRC, BIN, số tài khoản và chuỗi băm ảnh. Nguồn chuẩn chung của hệ sinh thái: phiếu ~/projects/logs/handover/20261112-01.",
+  "kenh": [
+    {
+      "ten": "Chuyển khoản ngân hàng (VietQR)",
+      "moTa": "Quét mã bằng ứng dụng ngân hàng hoặc ví điện tử hỗ trợ VietQR/NAPAS 247, hoặc chuyển khoản theo thông tin bên dưới. Nội dung chuyển khoản gợi ý: Ung ho Lotus Share.",
+      "chiTiet": [
+        "Ngân hàng: VIB (Ngân hàng TMCP Quốc Tế Việt Nam)",
+        "Số tài khoản: 056485506",
+        "Chủ tài khoản: NGUYEN TRANG TINH SU"
+      ],
+      "anhQr": "/ung-ho/vietqr-vib.svg",
+      "anhQrSha256": "7209698f1393857607ec7bea95b06349ca8ce332d6fb0c9f1774d6beab4cecae",
+      "vietqr": {
+        "bin": "970441",
+        "soTaiKhoan": "056485506",
+        "payload": "00020101021138530010A0000007270123000697044101090564855060208QRIBFTTA53037045802VN63040B90"
+      }
+    }
+  ]
+}

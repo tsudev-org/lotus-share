@@ -540,7 +540,8 @@ class SettingsTab extends StatelessWidget {
                     await context.push(() => const AboutPage());
                   },
                 ),
-                if (forkSupportLinks.isNotEmpty) // lotus-share: ẩn khi chưa có kênh ủng hộ tsudev
+                if (forkSupportLinks.isNotEmpty &&
+                    !checkPlatform([TargetPlatform.iOS])) // lotus-share: ẩn khi chưa có kênh; iOS (App Store) cấm liên kết quyên góp ra ngoài
                   _ButtonEntry(
                     label: t.settingsTab.other.support,
                     buttonLabel: t.settingsTab.other.donate,
