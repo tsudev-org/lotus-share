@@ -4,7 +4,7 @@
 // public/_headers vẫn áp dụng như trên Pages. Cùng khung với swico.tsudev.com, trafficmonitor.tsudev.com.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tsudev-lotus",
+  "name": "lotus-share",
   "compatibility_date": "2026-11-01",
   "assets": {
     "directory": "./dist",

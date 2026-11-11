@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""tsudev-lotus: sinh TOÀN BỘ icon ứng dụng mọi nền tảng từ một nguồn (BRAND_ASSETS.md mục 7).
+"""Lotus Share: sinh TOÀN BỘ icon ứng dụng mọi nền tảng từ một nguồn (BRAND_ASSETS.md mục 7).
 
-Nguồn: support/brand/tsudev-logo-mark.png - dấu hiệu thu gọn (chỉ hình cú) ở độ phân giải đầy đủ, xuất từ dây chuyền
-thương hiệu chính thức (xem support/brand/README.md). Mọi bản sinh ra chỉ THU NHỎ dấu hiệu bằng LANCZOS, giữ alpha;
-không bao giờ phóng to điểm ảnh của dấu hiệu.
+Nguồn: support/brand/lotus-share/logo-1024.png - logo Lotus Share nền trong suốt, sinh bởi tools/prepare_brand.py từ
+logo-source.png. Đổi logo: thay logo-source.png -> chạy prepare_brand.py -> chạy công cụ này.
 
-    python3 -I tools/gen_icons.py          # cần Pillow
+    python3 -I tools/prepare_brand.py && python3 -I tools/gen_icons.py     # cần Pillow
 
 Ghi đè đúng các tệp icon đang có của upstream (giữ tên tệp, kích thước, chế độ màu) để gộp upstream dễ.
 """
@@ -21,10 +20,10 @@ except ImportError:  # pragma: no cover
 
 ROOT = Path(__file__).resolve().parent.parent
 APP = ROOT / "app"
-SRC = ROOT / "support" / "brand" / "tsudev-logo-mark.png"
+SRC = ROOT / "support" / "brand" / "lotus-share" / "logo-1024.png"
 
-# Token màu tsudev (.standards/tokens, chế độ sáng): nền ứng dụng, nhấn chính.
-BG = (0xEE, 0xF4, 0xFB, 255)
+# Nền icon: trắng - logo Lotus Share được thiết kế trên nền trắng (quầng tím mờ cần nền sáng).
+BG = (0xFF, 0xFF, 0xFF, 255)
 WHITE = (255, 255, 255, 255)
 BLACK = (0, 0, 0, 255)
 RED = (0xD9, 0x2D, 0x20, 255)
@@ -45,7 +44,8 @@ def mark_fit(box: int) -> Image.Image:
 def silhouette(im: Image.Image, color) -> Image.Image:
     """Bản một màu (khay hệ thống, monochrome Android, biểu tượng thanh menu macOS)."""
     solid = Image.new("RGBA", im.size, color)
-    solid.putalpha(im.getchannel("A"))
+    # Bỏ quầng sáng bán trong suốt (alpha thấp), chỉ giữ nét đặc - nếu không bản một màu thành một khối xám.
+    solid.putalpha(im.getchannel("A").point(lambda v: 0 if v < 110 else min(255, (v - 110) * 255 // 90)))
     return solid
 
 
@@ -138,8 +138,8 @@ def main() -> int:
     save(compose(512, 0.76, bg=BG), "android/app/src/main/ic_launcher-playstore.png", mode="RGB")
     bgxml = APP / "android/app/src/main/res/values/ic_launcher_background.xml"
     bgxml.write_text('<?xml version="1.0" encoding="utf-8"?>\n<resources>\n'
-                     '    <!-- tsudev-lotus: nền icon = token bg tsudev (chế độ sáng) -->\n'
-                     '    <color name="ic_launcher_background">#EEF4FB</color>\n</resources>\n', encoding="utf-8")
+                     '    <!-- lotus-share: nền icon trắng, đồng bộ BG trong tools/gen_icons.py -->\n'
+                     '    <color name="ic_launcher_background">#%02X%02X%02X</color>\n</resources>\n' % BG[:3], encoding="utf-8")
 
     # ---- iOS: icon vuông đặc, không kênh alpha (App Store từ chối icon có alpha)
     ios = "ios/Runner/Assets.xcassets/AppIcon.appiconset"

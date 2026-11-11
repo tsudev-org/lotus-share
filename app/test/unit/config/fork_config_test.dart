@@ -1,4 +1,4 @@
-// tsudev-lotus: mọi địa chỉ mặc định của bản fork phải thuộc hệ sinh thái tsudev.
+// lotus-share: mọi địa chỉ mặc định của bản fork phải thuộc hệ sinh thái tsudev.
 import 'package:localsend_app/config/fork_config.dart';
 import 'package:test/test.dart';
 

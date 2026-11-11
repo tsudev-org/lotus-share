@@ -70,5 +70,5 @@ fn dir() -> PathBuf {
         .filter(|path| path.is_absolute())
         .or_else(|| dirs::home_dir().map(|home| home.join(".config")))
         .unwrap_or_else(|| PathBuf::from("."))
-        .join("tsudev-lotus-cli") // tsudev-lotus: thư mục riêng, không dùng chung danh tính với LocalSend CLI
+        .join("lotus-share-cli") // lotus-share: thư mục riêng, không dùng chung danh tính với LocalSend CLI
 }

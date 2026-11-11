@@ -14,7 +14,7 @@ sed -i '/# \[FOSS_REMOVE\]/d' pubspec.yaml
 sed -i "$REGEX_A" lib/config/init.dart
 sed -i "$REGEX_B" lib/config/init.dart
 
-# tsudev-lotus: mua trong ứng dụng (purchase_provider, donation_page_vm) đã gỡ khỏi bản fork.
+# lotus-share: mua trong ứng dụng (purchase_provider, donation_page_vm) đã gỡ khỏi bản fork.
 
 cd ..
 echo "Proprietary dependencies removed."

@@ -43,8 +43,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
   // Translations
 
-  /// en: 'tsudev-lotus'
-  String get appName => 'tsudev-lotus';
+  /// en: 'Lotus Share'
+  String get appName => 'Lotus Share';
 
   late final Translations$general$en general = Translations$general$en.internal(_root);
   late final Translations$receiveTab$en receiveTab = Translations$receiveTab$en.internal(_root);
@@ -318,9 +318,9 @@ class Translations$networkInterfacesPage$en {
   /// en: 'Network Interfaces'
   String get title => 'Network Interfaces';
 
-  /// en: 'By default, tsudev-lotus uses all available network interfaces. You can exclude unwanted networks here. You need to restart the server to apply the changes.'
+  /// en: 'By default, Lotus Share uses all available network interfaces. You can exclude unwanted networks here. You need to restart the server to apply the changes.'
   String get info =>
-      'By default, tsudev-lotus uses all available network interfaces. You can exclude unwanted networks here. You need to restart the server to apply the changes.';
+      'By default, Lotus Share uses all available network interfaces. You can exclude unwanted networks here. You need to restart the server to apply the changes.';
 
   /// en: 'Preview'
   String get preview => 'Preview';
@@ -469,8 +469,8 @@ class Translations$receiveOptionsPage$en {
   /// en: 'Save to folder'
   String get destination => _root.settingsTab.receive.destination;
 
-  /// en: '(tsudev-lotus folder)'
-  String get appDirectory => '(tsudev-lotus folder)';
+  /// en: '(Lotus Share folder)'
+  String get appDirectory => '(Lotus Share folder)';
 
   /// en: 'Save media to gallery'
   String get saveToGallery => _root.settingsTab.receive.saveToGallery;
@@ -569,8 +569,8 @@ class Translations$webSharePage$en {
   /// en: 'The PIN is "{pin}"'
   String pinHint({required Object pin}) => 'The PIN is "${pin}"';
 
-  /// en: 'tsudev-lotus uses a self-signed certificate. You need to accept it in your browser.'
-  String get encryptionHint => 'tsudev-lotus uses a self-signed certificate. You need to accept it in your browser.';
+  /// en: 'Lotus Share uses a self-signed certificate. You need to accept it in your browser.'
+  String get encryptionHint => 'Lotus Share uses a self-signed certificate. You need to accept it in your browser.';
 
   /// en: 'Pending requests: {n}'
   String pendingRequests({required Object n}) => 'Pending requests: ${n}';
@@ -596,11 +596,11 @@ class Translations$aboutPage$en {
 
   // Translations
 
-  /// en: 'About tsudev-lotus'
-  String get title => 'About tsudev-lotus';
+  /// en: 'About Lotus Share'
+  String get title => 'About Lotus Share';
 
   List<String> get description => [
-    'tsudev-lotus is a free, open-source app that allows you to securely share files and messages with nearby devices over your local network without needing an internet connection.',
+    'Lotus Share is a free, open-source app that allows you to securely share files and messages with nearby devices over your local network without needing an internet connection.',
     'This app is available on Android, iOS, macOS, Windows and Linux. You can find all download options on the official homepage.',
   ];
 
@@ -628,9 +628,9 @@ class Translations$donationPage$en {
   /// en: 'Donate'
   String get title => 'Donate';
 
-  /// en: 'tsudev-lotus is free, open-source and without any ads. If you like the app, follow and support the project on the tsudev pages below.'
+  /// en: 'Lotus Share is free, open-source and without any ads. If you like the app, follow and support the project on the tsudev pages below.'
   String get info =>
-      'tsudev-lotus is free, open-source and without any ads. If you like the app, follow and support the project on the tsudev pages below.';
+      'Lotus Share is free, open-source and without any ads. If you like the app, follow and support the project on the tsudev pages below.';
 
   /// en: 'Donate {amount}'
   String donate({required Object amount}) => 'Donate ${amount}';
@@ -815,8 +815,8 @@ class Translations$tray$en {
   /// en: 'Open'
   String get open => _root.general.open;
 
-  /// en: 'Quit tsudev-lotus'
-  String get close => 'Quit tsudev-lotus';
+  /// en: 'Quit Lotus Share'
+  String get close => 'Quit Lotus Share';
 
   /// en: 'Exit'
   String get closeWindows => 'Exit';
@@ -1151,8 +1151,8 @@ class Translations$settingsTab$general$en {
   /// en: 'Autostart: Start hidden'
   String get launchMinimized => 'Autostart: Start hidden';
 
-  /// en: 'Show tsudev-lotus in context menu'
-  String get showInContextMenu => 'Show tsudev-lotus in context menu';
+  /// en: 'Show Lotus Share in context menu'
+  String get showInContextMenu => 'Show Lotus Share in context menu';
 
   /// en: 'Animations'
   String get animations => 'Animations';
@@ -1284,8 +1284,8 @@ class Translations$settingsTab$other$en {
   /// en: 'Other'
   String get title => 'Other';
 
-  /// en: 'Support tsudev-lotus'
-  String get support => 'Support tsudev-lotus';
+  /// en: 'Support Lotus Share'
+  String get support => 'Support Lotus Share';
 
   /// en: 'Donate'
   String get donate => 'Donate';
@@ -1707,9 +1707,9 @@ class Translations$dialogs$localNetworkUnauthorized$en {
   /// en: 'No permission'
   String get title => _root.dialogs.noPermission.title;
 
-  /// en: 'tsudev-lotus can't find other devices without having the permission to scan the local network. Please grant this permission in the settings.'
+  /// en: 'Lotus Share can't find other devices without having the permission to scan the local network. Please grant this permission in the settings.'
   String get description =>
-      'tsudev-lotus can\'t find other devices without having the permission to scan the local network. Please grant this permission in the settings.';
+      'Lotus Share can\'t find other devices without having the permission to scan the local network. Please grant this permission in the settings.';
 
   /// en: 'Settings'
   String get gotoSettings => 'Settings';
@@ -1874,8 +1874,8 @@ class Translations$dialogs$sendModeHelp$en {
   /// en: 'Sends files to multiple recipients. Selection will not be cleared after finished files transfer.'
   String get multiple => 'Sends files to multiple recipients. Selection will not be cleared after finished files transfer.';
 
-  /// en: 'Recipients who do not have tsudev-lotus installed can download the selected files by opening the link in their browser.'
-  String get link => 'Recipients who do not have tsudev-lotus installed can download the selected files by opening the link in their browser.';
+  /// en: 'Recipients who do not have Lotus Share installed can download the selected files by opening the link in their browser.'
+  String get link => 'Recipients who do not have Lotus Share installed can download the selected files by opening the link in their browser.';
 }
 
 // Path: dialogs.zoom

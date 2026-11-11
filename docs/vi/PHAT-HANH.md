@@ -1,4 +1,4 @@
-# Phát hành và ký mã - tsudev-lotus
+# Phát hành và ký mã - Lotus Share
 
 > Workflow: `.github/workflows/release-lotus.yml`. Cập nhật tài liệu này mỗi khi đổi khóa, nền tảng hay chuỗi tin cậy.
 
@@ -6,13 +6,17 @@
 
 | Nền tảng | Định danh | Ghi chú |
 | --- | --- | --- |
-| Android | `applicationId` `com.tsudev.lotus` | `namespace` Kotlin giữ `org.localsend.localsend_app` (nội bộ, gộp upstream dễ) |
-| iOS / macOS | bundle `com.tsudev.lotus`, nhóm ứng dụng `group.com.tsudev.lotus` | `DEVELOPMENT_TEAM` để trống tới khi có tài khoản Apple Developer |
-| Windows | `tsudev_lotus.exe`, bộ cài Inno `AppId` `{E6A866CD-B32E-4718-9EF0-CE04D53F9263}` | Không bao giờ dùng lại AppId của LocalSend: bộ cài sẽ ghi đè/gỡ LocalSend |
-| Linux | ứng dụng GTK `com.tsudev.lotus`, tệp chạy `tsudev_lotus`, gói `tsudev-lotus` | AppImage tự cập nhật từ `gh-releases-zsync|tsudev-org|tsudev-lotus` |
-| CLI | `tsudev-lotus-cli`, cấu hình `~/.config/tsudev-lotus-cli` | Danh tính riêng, không dùng chung với LocalSend CLI |
+| Android | `applicationId` `com.tsudev.lotusshare` | `namespace` Kotlin giữ `org.localsend.localsend_app` (nội bộ, gộp upstream dễ) |
+| iOS / macOS | bundle `com.tsudev.lotusshare`, nhóm ứng dụng `group.com.tsudev.lotusshare` | `DEVELOPMENT_TEAM` để trống tới khi có tài khoản Apple Developer |
+| Windows | `lotus_share.exe`, bộ cài Inno `AppId` `{21D09887-EE8E-478B-B43F-BD492DE6EFE3}` | Không bao giờ dùng lại AppId của LocalSend: bộ cài sẽ ghi đè/gỡ LocalSend |
+| Linux | ứng dụng GTK `com.tsudev.lotusshare`, tệp chạy `lotus_share`, gói `lotus-share` | AppImage tự cập nhật từ `gh-releases-zsync|tsudev-org|lotus-share` |
+| CLI | `lotus-share-cli`, cấu hình `~/.config/lotus-share-cli` | Danh tính riêng, không dùng chung với LocalSend CLI |
 
-Vì định danh và thư mục dữ liệu khác nhau, tsudev-lotus **cài song song** được với LocalSend, nhưng hai ứng dụng
+Định danh đổi từ bản `tsudev-lotus` (`com.tsudev.lotus`, `tsudev_lotus.exe`, AppId `E6A866CD-...`) sang Lotus Share
+ngày 12/11/2026 theo quyết định chủ dự án: bản cũ KHÔNG tự cập nhật; người dùng cài Lotus Share rồi gỡ bản cũ (hướng
+dẫn ở trang Tải về, mục "Đã cài bản tsudev-lotus?").
+
+Vì định danh và thư mục dữ liệu khác nhau, Lotus Share **cài song song** được với LocalSend, nhưng hai ứng dụng
 dùng chung cổng 53317 nên không nên **chạy** cùng lúc trên một máy.
 
 ## 2. Phát hành một bản mới
@@ -23,7 +27,7 @@ dùng chung cổng 53317 nên không nên **chạy** cùng lúc trên một máy
 3. Mọi cổng kiểm xanh trên `main`, rồi gắn nhãn có chú thích và đẩy:
 
    ```bash
-   git tag -a v1.18.2-lotus.1 -m "tsudev-lotus 1.18.2-lotus.1"
+   git tag -a v1.18.2-lotus.1 -m "Lotus Share 1.18.2-lotus.1"
    git push origin v1.18.2-lotus.1
    ```
 
@@ -37,7 +41,7 @@ Chạy tay (Actions > Phát hành > Run workflow) = build thử, có ký và ch�
 
 | Thứ | Ở đâu | Ai giữ |
 | --- | --- | --- |
-| Khóa ký APK (RSA 4096, PKCS12, hạn 30 năm) | `~/.config/tsudev-lotus/keys/android-release.jks` + `key.properties` (0600, NGOÀI repo) | Chủ dự án - **sao lưu ngoại tuyến**: mất khóa = người dùng phải gỡ ứng dụng để cài bản sau |
+| Khóa ký APK (RSA 4096, PKCS12, hạn 30 năm) | `~/.config/lotus-share/keys/android-release.jks` + `key.properties` (0600, NGOÀI repo) | Chủ dự án - **sao lưu ngoại tuyến**: mất khóa = người dùng phải gỡ ứng dụng để cài bản sau |
 | Bản sao cho CI | GitHub Secrets `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD` | Đẩy bằng `tools/day-khoa-ky-android.sh` |
 | Dấu vân tay chứng thư APK | Ghim trong workflow (`ANDROID_CERT_SHA256`) | Secret bị tráo thì phát hành dừng |
 | Ký `SHA256SUMS.txt` | Sigstore keyless (OIDC của GitHub Actions) | Không có khóa nào để lộ |
@@ -55,13 +59,13 @@ sha256sum -c --ignore-missing SHA256SUMS.txt
 # 2) Danh sách băm do đúng workflow phát hành của repo này ký (Sigstore)
 cosign verify-blob SHA256SUMS.txt --bundle SHA256SUMS.txt.sigstore.json \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-  --certificate-identity-regexp '^https://github.com/tsudev-org/tsudev-lotus/\.github/workflows/release-lotus\.yml@refs/tags/v.*-lotus\.[0-9]+$'
+  --certificate-identity-regexp '^https://github.com/tsudev-org/lotus-share/\.github/workflows/release-lotus\.yml@refs/tags/v.*-lotus\.[0-9]+$'
 
 # 3) Tệp được build trên GitHub Actions từ mã nguồn của repo này (chứng thực SLSA)
-gh attestation verify tsudev-lotus-<phiên bản>-windows-x86-64.exe -R tsudev-org/tsudev-lotus
+gh attestation verify lotus-share-<phiên bản>-windows-x86-64.exe -R tsudev-org/lotus-share
 
 # 4) APK ký bằng khóa tsudev (Android SDK build-tools)
-apksigner verify --print-certs tsudev-lotus-<phiên bản>-android-universal.apk   # SHA-256 phải khớp mục 3
+apksigner verify --print-certs lotus-share-<phiên bản>-android-universal.apk   # SHA-256 phải khớp mục 3
 ```
 
 ## 5. Giới hạn hiện tại (nói thẳng với người dùng)
@@ -71,5 +75,5 @@ apksigner verify --print-certs tsudev-lotus-<phiên bản>-android-universal.apk
 - **macOS**: ký ad-hoc (dự án Xcode đặt `CODE_SIGN_IDENTITY = "-"`, ký thủ công, không cần đội ký Apple), chưa công
   chứng; Gatekeeper yêu cầu "Vẫn mở". Có Developer ID thì đổi lại ký tự động + `DEVELOPMENT_TEAM`.
 - **iOS**: chưa phát hành được (App Store/TestFlight cần Apple Developer Program). Người dùng iOS dùng LocalSend trên App
-  Store - tương thích giao thức với tsudev-lotus.
+  Store - tương thích giao thức với Lotus Share.
 - **MSIX / menu chia sẻ Windows 11**: bỏ khỏi bản fork (gói thưa cần chứng thư ký mã); menu chuột phải dùng "Gửi tới".

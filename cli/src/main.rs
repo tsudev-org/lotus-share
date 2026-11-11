@@ -12,7 +12,7 @@ mod util;
 use clap::{ArgAction, Parser, Subcommand};
 use std::path::PathBuf;
 
-// tsudev-lotus: khung trợ giúp tiếng Việt (thay tiêu đề mặc định tiếng Anh của clap).
+// lotus-share: khung trợ giúp tiếng Việt (thay tiêu đề mặc định tiếng Anh của clap).
 const HELP_TEMPLATE: &str = "{about-with-newline}\nCách dùng: {usage}\n\n{all-args}{after-help}";
 
 #[derive(Subcommand)]
@@ -34,10 +34,10 @@ pub enum Command {
     },
 }
 
-/// tsudev-lotus CLI - gửi/nhận tệp trong mạng nội bộ, tương thích LocalSend
+/// lotus-share CLI - gửi/nhận tệp trong mạng nội bộ, tương thích LocalSend
 #[derive(Parser)]
 #[command(
-    name = "tsudev-lotus-cli",
+    name = "lotus-share-cli",
     version,
     about,
     after_help = HELP_SECTIONS,
@@ -73,7 +73,7 @@ pub struct Args {
     pub command: Option<Command>,
 }
 
-// tsudev-lotus: trợ giúp tiếng Việt.
+// lotus-share: trợ giúp tiếng Việt.
 const HELP_SECTIONS: &str = "Sự kiện:\n  \
                              D      Tìm thiết bị\n  \
                              S      Gửi tệp\n  \

@@ -40,7 +40,7 @@ class TranslationsRu extends Translations with BaseTranslations<AppLocale, Trans
 
   // Translations
   @override
-  String get appName => 'tsudev-lotus';
+  String get appName => 'Lotus Share';
   @override
   late final _Translations$general$ru general = _Translations$general$ru._(_root);
   @override
@@ -289,7 +289,7 @@ class _Translations$networkInterfacesPage$ru extends Translations$networkInterfa
   String get title => 'Сетевые интерфейсы';
   @override
   String get info =>
-      'По умолчанию, tsudev-lotus использует все доступные сетевые интерфейсы. Вы можете исключить нежелательные сети здесь. Необходимо перезапустить сервер для применения изменений.';
+      'По умолчанию, Lotus Share использует все доступные сетевые интерфейсы. Вы можете исключить нежелательные сети здесь. Необходимо перезапустить сервер для применения изменений.';
   @override
   String get preview => 'Предосмотр';
   @override
@@ -414,7 +414,7 @@ class _Translations$receiveOptionsPage$ru extends Translations$receiveOptionsPag
   @override
   String get destination => _root.settingsTab.receive.destination;
   @override
-  String get appDirectory => '(Папка tsudev-lotus)';
+  String get appDirectory => '(Папка Lotus Share)';
   @override
   String get saveToGallery => _root.settingsTab.receive.saveToGallery;
   @override
@@ -493,7 +493,7 @@ class _Translations$webSharePage$ru extends Translations$webSharePage$en {
   @override
   String pinHint({required Object pin}) => 'PIN-код: "${pin}"';
   @override
-  String get encryptionHint => 'tsudev-lotus использует самоподписанный сертификат. Вам необходимо принять его в браузере.';
+  String get encryptionHint => 'Lotus Share использует самоподписанный сертификат. Вам необходимо принять его в браузере.';
   @override
   String pendingRequests({required Object n}) => 'Ожидающие запросы: ${n}';
 }
@@ -517,10 +517,10 @@ class _Translations$aboutPage$ru extends Translations$aboutPage$en {
 
   // Translations
   @override
-  String get title => 'О tsudev-lotus';
+  String get title => 'О Lotus Share';
   @override
   List<String> get description => [
-    'tsudev-lotus - это бесплатное приложение с открытым исходным кодом, которое позволяет вам безопасно обмениваться файлами и сообщениями с находящимися поблизости устройствами через локальную сеть, без необходимости подключения к Интернету.',
+    'Lotus Share - это бесплатное приложение с открытым исходным кодом, которое позволяет вам безопасно обмениваться файлами и сообщениями с находящимися поблизости устройствами через локальную сеть, без необходимости подключения к Интернету.',
     'Это приложение доступно для Android, iOS, macOS, Windows и Linux. Вы можете найти все варианты загрузки на официальной домашней странице.',
   ];
   @override
@@ -544,7 +544,7 @@ class _Translations$donationPage$ru extends Translations$donationPage$en {
   String get title => 'Пожертвовать';
   @override
   String get info =>
-      'tsudev-lotus - это бесплатное приложение с открытым исходным кодом и без рекламы. Если оно вам нравится, вы можете поддержать его разработку пожертвованием.';
+      'Lotus Share - это бесплатное приложение с открытым исходным кодом и без рекламы. Если оно вам нравится, вы можете поддержать его разработку пожертвованием.';
   @override
   String donate({required Object amount}) => 'Пожертвовать ${amount}';
   @override
@@ -660,7 +660,7 @@ class _Translations$tray$ru extends Translations$tray$en {
   @override
   String get open => _root.general.open;
   @override
-  String get close => 'Выйти из tsudev-lotus';
+  String get close => 'Выйти из Lotus Share';
   @override
   String get closeWindows => 'Выйти';
 }
@@ -871,7 +871,7 @@ class _Translations$settingsTab$general$ru extends Translations$settingsTab$gene
   @override
   String get launchMinimized => 'Скрытая автозагрузка';
   @override
-  String get showInContextMenu => 'Отображать tsudev-lotus в контекстном меню';
+  String get showInContextMenu => 'Отображать Lotus Share в контекстном меню';
   @override
   String get animations => 'Анимации';
 }
@@ -973,7 +973,7 @@ class _Translations$settingsTab$other$ru extends Translations$settingsTab$other$
   @override
   String get title => 'Другое';
   @override
-  String get support => 'Поддержать tsudev-lotus';
+  String get support => 'Поддержать Lotus Share';
   @override
   String get donate => 'Пожертвовать';
   @override
@@ -1330,7 +1330,7 @@ class _Translations$dialogs$localNetworkUnauthorized$ru extends Translations$dia
   String get title => _root.dialogs.noPermission.title;
   @override
   String get description =>
-      'tsudev-lotus не может найти другие устройства без разрешения на сканирование локальной сети. Пожалуйста, предоставьте это разрешение в настройках.';
+      'Lotus Share не может найти другие устройства без разрешения на сканирование локальной сети. Пожалуйста, предоставьте это разрешение в настройках.';
   @override
   String get gotoSettings => 'Настройки';
 }
@@ -1473,7 +1473,7 @@ class _Translations$dialogs$sendModeHelp$ru extends Translations$dialogs$sendMod
   @override
   String get multiple => 'Отправляет файлы нескольким получателям. Выборка не будет очищена после завершения передачи файлов.';
   @override
-  String get link => 'Получатели, у которых не установлен tsudev-lotus, могут загрузить выбранные файлы, открыв ссылку в своем браузере.';
+  String get link => 'Получатели, у которых не установлен Lotus Share, могут загрузить выбранные файлы, открыв ссылку в своем браузере.';
 }
 
 // Path: dialogs.zoom

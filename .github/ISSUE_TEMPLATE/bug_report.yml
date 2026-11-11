@@ -6,7 +6,7 @@ body:
   - type: checkboxes
     id: confirm
     attributes:
-      label: Đọc [hướng dẫn đóng góp](https://github.com/tsudev-org/tsudev-lotus/blob/main/CONTRIBUTING.md) trước
+      label: Đọc [hướng dẫn đóng góp](https://github.com/tsudev-org/lotus-share/blob/main/CONTRIBUTING.md) trước
       options:
         - label: Tôi đã đọc.
         - label: Báo cáo không đúng mẫu sẽ bị đóng.
@@ -25,7 +25,7 @@ body:
     id: app-version
     attributes:
       label: App version
-      description: Phiên bản tsudev-lotus ghi ở cuối màn hình Cài đặt
+      description: Phiên bản Lotus Share ghi ở cuối màn hình Cài đặt
       placeholder: 1.18.2-lotus.2
     validations:
       required: true

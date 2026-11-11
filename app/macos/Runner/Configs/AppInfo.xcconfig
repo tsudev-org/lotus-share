@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = tsudev-lotus
+PRODUCT_NAME = Lotus Share
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.tsudev.lotus
+PRODUCT_BUNDLE_IDENTIFIER = com.tsudev.lotusshare
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2026 tsudev. LocalSend (C) 2022-2026 Tien Do Nam. Apache-2.0

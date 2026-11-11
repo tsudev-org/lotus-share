@@ -27,9 +27,9 @@
 - Tài liệu tích hợp GitHub Actions: <https://docs.signpath.io> (mục "Trusted build systems" / "GitHub").
 - Ghi lại vào phiếu bàn giao: ngày đọc, điều kiện nào đã đổi so với mục 1.2.
 
-### 1.2. Điều kiện thường gặp và tình trạng của tsudev-lotus (đối chiếu lại ở 1.1)
+### 1.2. Điều kiện thường gặp và tình trạng của Lotus Share (đối chiếu lại ở 1.1)
 
-| Điều kiện | tsudev-lotus | Việc cần làm |
+| Điều kiện | Lotus Share | Việc cần làm |
 | --- | --- | --- |
 | Giấy phép mã nguồn mở được OSI công nhận | Apache-2.0 | Không |
 | Mã nguồn công khai, đang được bảo trì, đã có bản phát hành | Repo công khai, v1.18.2-lotus.2 | Không |
@@ -55,8 +55,8 @@
 ### 1.4. Nộp đơn (chủ dự án làm, agent soạn sẵn nội dung)
 
 1. Agent soạn sẵn câu trả lời cho form trong `logs/handover/` (tên dự án, URL repo, URL trang chính sách, mô tả ngắn,
-   giấy phép, số người đóng góp, nền tảng build = GitHub Actions, tệp cần ký: `tsudev_lotus.exe`, các DLL của ứng dụng,
-   bộ cài `tsudev-lotus-<ver>-windows-x86-64.exe`, CLI `tsudev-lotus-cli-<ver>-windows-x86-64.exe`).
+   giấy phép, số người đóng góp, nền tảng build = GitHub Actions, tệp cần ký: `lotus_share.exe`, các DLL của ứng dụng,
+   bộ cài `lotus-share-<ver>-windows-x86-64.exe`, CLI `lotus-share-cli-<ver>-windows-x86-64.exe`).
 2. Chủ dự án nộp ở trang "Apply" (1.1). Thời gian xét duyệt có thể vài tuần - ghi ngày nộp vào `logs/STATE.md`.
 3. Khi được duyệt, SignPath cấp: tài khoản tổ chức (Organization ID), dự án (project slug), chính sách ký
    (signing policy slug, thường `release-signing`), và cách tạo API token cho CI.
@@ -73,7 +73,7 @@
    1. Build `flutter build windows` -> nén thư mục `Release` thành artifact `windows-unsigned`.
    2. Gửi yêu cầu ký bằng action chính thức của SignPath (tên action và tham số lấy ở 1.1, ghim theo SHA như mọi
       action khác), chờ hoàn tất, tải về thư mục đã ký.
-   3. Kiểm chữ ký tại chỗ: `Get-AuthenticodeSignature tsudev_lotus.exe` phải `Valid`, `SignerCertificate.Subject` chứa
+   3. Kiểm chữ ký tại chỗ: `Get-AuthenticodeSignature lotus_share.exe` phải `Valid`, `SignerCertificate.Subject` chứa
       `SignPath Foundation` - GHIM chuỗi Subject/Thumbprint trong workflow giống cách ghim chứng thư APK.
    4. Dựng ZIP di động từ thư mục đã ký; dựng bộ cài Inno từ thư mục đã ký với `/DSkipSignTool`.
    5. Gửi bộ cài lên SignPath ký lượt 2, kiểm lại như bước 3. (Trình gỡ cài đặt nhúng trong bộ cài sẽ không được ký
@@ -102,13 +102,13 @@
    D-U-N-S - lâu hơn, nên chọn cá nhân nếu muốn kịp đầu tháng 12.
 2. Ghi lại **Team ID** (10 ký tự) - agent sẽ ghim vào workflow.
 3. Trong Certificates, Identifiers & Profiles:
-   - App ID `com.tsudev.lotus` (iOS) và `com.tsudev.lotus` (macOS), kèm `com.tsudev.lotus.ShareExtension`; bật
-     capability **App Groups** với nhóm `group.com.tsudev.lotus` (iOS) - khớp `app/ios/Runner/Runner.entitlements`.
+   - App ID `com.tsudev.lotusshare` (iOS) và `com.tsudev.lotusshare` (macOS), kèm `com.tsudev.lotusshare.ShareExtension`; bật
+     capability **App Groups** với nhóm `group.com.tsudev.lotusshare` (iOS) - khớp `app/ios/Runner/Runner.entitlements`.
    - Chứng thư **Developer ID Application** (macOS ngoài App Store) và **Apple Distribution** (iOS). Xuất `.p12` có
-     mật khẩu, lưu NGOÀI repo: `~/.config/tsudev-lotus/keys/apple/` (quyền 0600), sao lưu ngoại tuyến.
+     mật khẩu, lưu NGOÀI repo: `~/.config/lotus-share/keys/apple/` (quyền 0600), sao lưu ngoại tuyến.
 4. App Store Connect > Users and Access > Integrations: tạo **API key** (vai trò App Manager) -> Issuer ID, Key ID,
    tệp `.p8` (chỉ tải được một lần). Dùng cho `notarytool` và tải bản iOS lên TestFlight.
-5. Tạo ứng dụng trong App Store Connect với bundle `com.tsudev.lotus`, tên "tsudev-lotus".
+5. Tạo ứng dụng trong App Store Connect với bundle `com.tsudev.lotusshare`, tên "Lotus Share".
 
 ### 2.2. Agent làm (sau khi có các thứ ở 2.1)
 
@@ -144,6 +144,6 @@
 ## 3. Phát hành sau đợt này
 
 1. Mọi thay đổi qua PR vào `main` (ruleset: 11 kiểm tra), chủ dự án chạy `gh pr merge <n> --merge --auto --delete-branch`.
-2. Build thử: `gh workflow run release-lotus.yml -R tsudev-org/tsudev-lotus --ref main` -> xanh toàn bộ.
+2. Build thử: `gh workflow run release-lotus.yml -R tsudev-org/lotus-share --ref main` -> xanh toàn bộ.
 3. Chủ dự án gắn nhãn `v<pubspec>-lotus.<n+1>`, duyệt yêu cầu ký trên SignPath, duyệt bản nháp, Publish, rồi
    `cd website && npm run deploy`.

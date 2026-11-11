@@ -12,7 +12,7 @@ class PinDialog extends StatefulWidget {
   final bool obscureText;
   final bool generateRandom;
 
-  /// tsudev-lotus: độ dài tối thiểu khi ĐẶT PIN (0 = không giới hạn, dùng khi nhập PIN của máy khác).
+  /// lotus-share: độ dài tối thiểu khi ĐẶT PIN (0 = không giới hạn, dùng khi nhập PIN của máy khác).
   final int minLength;
 
   const PinDialog({
@@ -92,10 +92,10 @@ class _PinDialogState extends State<PinDialog> {
   }
 }
 
-/// tsudev-lotus: độ dài PIN tối thiểu khi người dùng đặt PIN nhận tệp / chia sẻ qua liên kết.
+/// lotus-share: độ dài PIN tối thiểu khi người dùng đặt PIN nhận tệp / chia sẻ qua liên kết.
 const pinMinLength = 6;
 
-/// tsudev-lotus: sinh PIN bằng bộ sinh số ngẫu nhiên mật mã của hệ điều hành (CSPRNG).
+/// lotus-share: sinh PIN bằng bộ sinh số ngẫu nhiên mật mã của hệ điều hành (CSPRNG).
 /// Truyền thẳng [Random.secure] để nanoid2 KHÔNG âm thầm lùi về [Random] thường khi nền tảng
 /// thiếu nguồn ngẫu nhiên an toàn: khi đó [Random.secure] ném lỗi (fail-closed).
 /// Bảng chữ `noDoppelganger` (49 ký tự, bỏ 0/O/o, 1/l/I, 2/Z, 5/S/s, u/v dễ nhầm); 8 ký tự ~ 2^45 tổ hợp.

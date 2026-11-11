@@ -40,7 +40,7 @@ class TranslationsSr extends Translations with BaseTranslations<AppLocale, Trans
 
   // Translations
   @override
-  String get appName => 'tsudev-lotus';
+  String get appName => 'Lotus Share';
   @override
   late final Translations$general$sr general = Translations$general$sr.internal(_root);
   @override
@@ -291,7 +291,7 @@ class Translations$networkInterfacesPage$sr extends Translations$networkInterfac
   String get title => 'Mrežni interfejsi';
   @override
   String get info =>
-      'Podrazumevano, tsudev-lotus koristi sve dostupne mrežne interfejse. Ovde možete izuzeti neželjene mreže. Morate restartovati server da bi se primenile promene.';
+      'Podrazumevano, Lotus Share koristi sve dostupne mrežne interfejse. Ovde možete izuzeti neželjene mreže. Morate restartovati server da bi se primenile promene.';
   @override
   String get preview => 'Pregled';
   @override
@@ -416,7 +416,7 @@ class Translations$receiveOptionsPage$sr extends Translations$receiveOptionsPage
   @override
   String get destination => _root.settingsTab.receive.destination;
   @override
-  String get appDirectory => '(tsudev-lotus folder)';
+  String get appDirectory => '(Lotus Share folder)';
   @override
   String get saveToGallery => _root.settingsTab.receive.saveToGallery;
   @override
@@ -495,7 +495,7 @@ class Translations$webSharePage$sr extends Translations$webSharePage$en {
   @override
   String pinHint({required Object pin}) => 'PIN je „${pin}“';
   @override
-  String get encryptionHint => 'tsudev-lotus koristi samopotpisani sertifikat. Morate ga prihvatiti u svom pregledaču.';
+  String get encryptionHint => 'Lotus Share koristi samopotpisani sertifikat. Morate ga prihvatiti u svom pregledaču.';
   @override
   String pendingRequests({required Object n}) => 'Zahtevi na čekanju: ${n}';
 }
@@ -519,10 +519,10 @@ class Translations$aboutPage$sr extends Translations$aboutPage$en {
 
   // Translations
   @override
-  String get title => 'O tsudev-lotus-u';
+  String get title => 'O Lotus Share-u';
   @override
   List<String> get description => [
-    'tsudev-lotus je besplatna aplikacija otvorenog koda koja vam omogućava da bezbedno delite fajlove i poruke sa uređajima u blizini preko vaše lokalne mreže, bez potrebe za internet vezom.',
+    'Lotus Share je besplatna aplikacija otvorenog koda koja vam omogućava da bezbedno delite fajlove i poruke sa uređajima u blizini preko vaše lokalne mreže, bez potrebe za internet vezom.',
     'Ova aplikacije je dostupna za Android, iOS, macOS, Windows i Linux. Možete pronaći sve opcije za preuzimanje na zvaničnoj početnoj stranici.',
   ];
   @override
@@ -545,7 +545,7 @@ class Translations$donationPage$sr extends Translations$donationPage$en {
   @override
   String get title => 'Donacija';
   @override
-  String get info => 'tsudev-lotus je besplatan, otvorenog koda i bez ikakvih oglasa. Ako vam se sviđa aplikacija, možete podržati razvoj donacijom.';
+  String get info => 'Lotus Share je besplatan, otvorenog koda i bez ikakvih oglasa. Ako vam se sviđa aplikacija, možete podržati razvoj donacijom.';
   @override
   String donate({required Object amount}) => 'Doniraj ${amount}';
   @override
@@ -748,7 +748,7 @@ class Translations$tray$sr extends Translations$tray$en {
   @override
   String get open => _root.general.open;
   @override
-  String get close => 'Napusti tsudev-lotus';
+  String get close => 'Napusti Lotus Share';
   @override
   String get closeWindows => 'Izađi';
 }
@@ -961,7 +961,7 @@ class Translations$settingsTab$general$sr extends Translations$settingsTab$gener
   @override
   String get launchMinimized => 'Automatsko pokretanje: Pokretanje skriveno';
   @override
-  String get showInContextMenu => 'Prikaži tsudev-lotus u kontekstualnom meniju';
+  String get showInContextMenu => 'Prikaži Lotus Share u kontekstualnom meniju';
   @override
   String get animations => 'Animacije';
 }
@@ -1063,7 +1063,7 @@ class Translations$settingsTab$other$sr extends Translations$settingsTab$other$e
   @override
   String get title => 'Ostalo';
   @override
-  String get support => 'Podržite tsudev-lotus';
+  String get support => 'Podržite Lotus Share';
   @override
   String get donate => 'Doniraj';
   @override
@@ -1420,7 +1420,7 @@ class Translations$dialogs$localNetworkUnauthorized$sr extends Translations$dial
   String get title => _root.dialogs.noPermission.title;
   @override
   String get description =>
-      'tsudev-lotus ne može da pronađe druge uređaje bez dozvole za skeniranje lokalne mreže. Dajte ovu dozvolu u podešavanjima.';
+      'Lotus Share ne može da pronađe druge uređaje bez dozvole za skeniranje lokalne mreže. Dajte ovu dozvolu u podešavanjima.';
   @override
   String get gotoSettings => 'Podešavanja';
 }
@@ -1562,7 +1562,7 @@ class Translations$dialogs$sendModeHelp$sr extends Translations$dialogs$sendMode
   @override
   String get multiple => 'Slanje fajlova više primalaca. Izbor neće biti očišćen nakon završenog prenosa fajlova.';
   @override
-  String get link => 'Primaoci koji nemaju instaliran tsudev-lotus mogu preuzeti izabrane fajlove otvaranjem linka u svom pregledaču.';
+  String get link => 'Primaoci koji nemaju instaliran Lotus Share mogu preuzeti izabrane fajlove otvaranjem linka u svom pregledaču.';
 }
 
 // Path: dialogs.zoom

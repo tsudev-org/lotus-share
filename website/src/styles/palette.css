@@ -1,5 +1,5 @@
 /* Bảng màu đen tuyền + tím của hệ tsudev (phiếu logs/handover/20261110-05 mục 2, quyết định chủ dự án 10/11/2026;
-   khớp tsudev.com). Ghi đè token màu của tokens.css (bản sao nguyên văn từ tsudev-standards, không sửa ở đó).
+   khớp tsudev.com). Bảng màu Lotus (11/11/2026): tím logo làm màu nhấn; cam + xanh của logo chỉ ở quầng sáng tĩnh. Ghi đè token màu của tokens.css (bản sao nguyên văn từ tsudev-standards, không sửa ở đó).
    Chỉ hai chế độ: data-theme="dark" (mặc định) và "light". KHÔNG treo bảng màu vào @media (prefers-color-scheme):
    chỉ public/theme.js được hỏi hệ điều hành (lựa chọn "Hệ thống"). Mọi cặp chữ/nền đạt WCAG AA. */
 [data-theme="dark"] {
@@ -21,6 +21,8 @@
   --focus-ring: #A970FF;
   --accent: #E879F9;
   --glow: rgba(169, 112, 255, 0.16);
+  --glow-cam: rgba(248, 153, 61, 0.09);   /* Lotus: cam của logo (support/brand/lotus-share/accent.json) */
+  --glow-xanh: rgba(40, 140, 231, 0.11);  /* Lotus: xanh của logo */
   --overlay: rgba(0, 0, 0, 0.6);
   color-scheme: dark;
 }
@@ -44,6 +46,8 @@
   --focus-ring: #7C3AED;
   --accent: #A21CAF;
   --glow: rgba(124, 58, 237, 0.10);
+  --glow-cam: rgba(248, 153, 61, 0.08);
+  --glow-xanh: rgba(40, 140, 231, 0.08);
   --overlay: rgba(10, 10, 10, 0.35);
   color-scheme: light;
 }

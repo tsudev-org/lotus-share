@@ -3,8 +3,8 @@ fn main() {
     // Code signing expects ProductName/ProductVersion on all signed binaries.
     if std::env::var_os("CARGO_CFG_WINDOWS").is_some() {
         let mut res = winresource::WindowsResource::new();
-        res.set("ProductName", "tsudev-lotus"); // tsudev-lotus
-        res.set("FileDescription", "tsudev-lotus CLI");
+        res.set("ProductName", "Lotus Share"); // lotus-share
+        res.set("FileDescription", "Lotus Share CLI");
         res.set("CompanyName", "tsudev");
         res.set("OriginalFilename", "localsend-cli.exe");
         res.set("InternalName", "localsend-cli");

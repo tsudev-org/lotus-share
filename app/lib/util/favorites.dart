@@ -14,7 +14,7 @@ extension FavoriteDevicesExt on Iterable<FavoriteDevice> {
   }
 }
 
-// tsudev-lotus: chỉ tin dấu vân tay đã được xác thực bằng chứng thư mTLS.
+// lotus-share: chỉ tin dấu vân tay đã được xác thực bằng chứng thư mTLS.
 // Ở chế độ HTTP (tắt mã hóa), dấu vân tay trong JSON do máy gửi tự khai nên giả được;
 // một máy lạ trong LAN có thể mạo danh thiết bị yêu thích để được "Lưu nhanh" (bỏ qua
 // bước bấm Chấp nhận) hoặc hiện tên quen thuộc. Vì vậy chỉ so khớp khi có dấu vân tay

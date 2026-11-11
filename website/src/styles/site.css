@@ -12,8 +12,12 @@
 html { scroll-padding-top: 5rem; background: var(--bg-base); }
 body {
   margin: 0;
-  /* Quầng tím TĨNH ở đỉnh trang, trên cùng một nền liền mạch */
-  background: radial-gradient(64rem 34rem at 50% -12rem, var(--glow), transparent 70%) no-repeat, var(--bg-base);
+  /* Quầng TĨNH ở đỉnh trang theo ba màu logo Lotus (tím giữa, cam trái, xanh phải), trên một nền liền mạch */
+  background:
+    radial-gradient(40rem 26rem at 22% -10rem, var(--glow-cam), transparent 70%) no-repeat,
+    radial-gradient(40rem 26rem at 78% -10rem, var(--glow-xanh), transparent 70%) no-repeat,
+    radial-gradient(64rem 34rem at 50% -12rem, var(--glow), transparent 70%) no-repeat,
+    var(--bg-base);
   color: var(--text-primary);
   line-height: 1.65;
   font-size: 1rem;
@@ -57,9 +61,9 @@ pre {
 .dau-trang__nut { display: flex; gap: 0.5rem; margin-left: auto; }
 .thuong-hieu { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--text-primary); text-decoration: none; font-weight: 600; font-size: 1.05rem; }
 .thuong-hieu:hover { color: var(--text-primary); }
-.thuong-hieu img { width: auto; height: 2.2rem; }
+.thuong-hieu img { width: 2.5rem; height: 2.5rem; }
 .thuong-hieu--nho { font-size: 1rem; }
-.thuong-hieu--nho img { height: 1.6rem; }
+.thuong-hieu--nho img { width: 1.75rem; height: 1.75rem; }
 .menu { display: flex; gap: 0.15rem; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
 .menu a { display: block; padding: 0.4rem 0.7rem; border-radius: 6px; color: var(--text-secondary); text-decoration: none; font-size: 0.94rem; font-weight: 500; }
 .menu a:hover, .menu a[aria-current="page"] { color: var(--text-primary); }

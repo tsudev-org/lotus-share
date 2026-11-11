@@ -1,4 +1,4 @@
-# tsudev-lotus: tự động đề xuất PR nâng cấp phụ thuộc (bản vá bảo mật). Mỗi tháng một PR cho mỗi hệ sinh thái.
+# lotus-share: tự động đề xuất PR nâng cấp phụ thuộc (bản vá bảo mật). Mỗi tháng một PR cho mỗi hệ sinh thái.
 version: 2
 updates:
   - package-ecosystem: cargo

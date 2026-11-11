@@ -1,5 +1,5 @@
 {
-  "appName": "tsudev-lotus",
+  "appName": "Lotus Share",
   "general": {
     "accept": "Đồng ý",
     "accepted": "Đã đồng ý",
@@ -111,7 +111,7 @@
       "minimizeToTray": "Thu nhỏ xuống khay hệ thống/thanh menu khi đóng",
       "launchAtStartup": "Tự khởi động sau khi đăng nhập",
       "launchMinimized": "Tự khởi động: Chạy ẩn",
-      "showInContextMenu": "Hiển thị tsudev-lotus trong menu chuột phải",
+      "showInContextMenu": "Hiển thị Lotus Share trong menu chuột phải",
       "animations": "Hoạt ảnh"
     },
     "receive": {
@@ -154,7 +154,7 @@
     },
     "other": {
       "title": "Khác",
-      "support": "Ủng hộ tsudev-lotus",
+      "support": "Ủng hộ Lotus Share",
       "donate": "Ủng hộ",
       "privacyPolicy": "Chính sách quyền riêng tư",
       "termsOfUse": "Điều khoản sử dụng"
@@ -182,7 +182,7 @@
   },
   "networkInterfacesPage": {
     "title": "Giao diện mạng",
-    "info": "Mặc định tsudev-lotus dùng mọi giao diện mạng có sẵn. Bạn có thể loại trừ mạng không mong muốn tại đây. Cần khởi động lại máy chủ để áp dụng thay đổi.",
+    "info": "Mặc định Lotus Share dùng mọi giao diện mạng có sẵn. Bạn có thể loại trừ mạng không mong muốn tại đây. Cần khởi động lại máy chủ để áp dụng thay đổi.",
     "preview": "Xem trước",
     "whitelist": "Danh sách cho phép",
     "blacklist": "Danh sách chặn"
@@ -243,7 +243,7 @@
   "receiveOptionsPage": {
     "title": "Tuỳ chọn",
     "destination": "@:settingsTab.receive.destination",
-    "appDirectory": "(Thư mục tsudev-lotus)",
+    "appDirectory": "(Thư mục Lotus Share)",
     "saveToGallery": "@:settingsTab.receive.saveToGallery",
     "saveToGalleryOff": "Đã tự động tắt vì có thư mục."
   },
@@ -295,16 +295,16 @@
     "autoAccept": "Tự động chấp nhận yêu cầu",
     "requirePin": "Yêu cầu mã PIN",
     "pinHint": "Mã PIN là \"{pin}\"",
-    "encryptionHint": "tsudev-lotus dùng chứng chỉ tự ký. Bạn cần chấp nhận chứng chỉ này trong trình duyệt.",
+    "encryptionHint": "Lotus Share dùng chứng chỉ tự ký. Bạn cần chấp nhận chứng chỉ này trong trình duyệt.",
     "pendingRequests": "Yêu cầu chờ: {n}"
   },
   "webReceivePage": {
     "title": "Nhận qua liên kết"
   },
   "aboutPage": {
-    "title": "Thông tin về tsudev-lotus",
+    "title": "Thông tin về Lotus Share",
     "description": [
-      "tsudev-lotus là ứng dụng miễn phí, mã nguồn mở giúp bạn chia sẻ tập tin và tin nhắn một cách an toàn với các thiết bị ở gần qua mạng nội bộ, không cần kết nối Internet.",
+      "Lotus Share là ứng dụng miễn phí, mã nguồn mở giúp bạn chia sẻ tập tin và tin nhắn một cách an toàn với các thiết bị ở gần qua mạng nội bộ, không cần kết nối Internet.",
       "Ứng dụng có cho Android, iOS, macOS, Windows và Linux. Mọi tùy chọn tải về có ở trang chủ chính thức."
     ],
     "author": "Tác giả",
@@ -314,7 +314,7 @@
   },
   "donationPage": {
     "title": "Ủng hộ",
-    "info": "tsudev-lotus miễn phí, mã nguồn mở, không quảng cáo. Nếu thấy hữu ích, hãy theo dõi và ủng hộ dự án qua các trang của tsudev dưới đây.",
+    "info": "Lotus Share miễn phí, mã nguồn mở, không quảng cáo. Nếu thấy hữu ích, hãy theo dõi và ủng hộ dự án qua các trang của tsudev dưới đây.",
     "donate": "Ủng hộ {amount}",
     "thanks": "Xin chân thành cảm ơn!",
     "restore": "Khôi phục giao dịch"
@@ -482,7 +482,7 @@
     },
     "localNetworkUnauthorized": {
       "title": "@:dialogs.noPermission.title",
-      "description": "tsudev-lotus không thể tìm thấy thiết bị khác khi chưa được cấp quyền quét mạng nội bộ. Vui lòng cấp quyền này trong cài đặt.",
+      "description": "Lotus Share không thể tìm thấy thiết bị khác khi chưa được cấp quyền quét mạng nội bộ. Vui lòng cấp quyền này trong cài đặt.",
       "gotoSettings": "Cài đặt"
     },
     "messageInput": {
@@ -529,7 +529,7 @@
       "title": "Chế độ gửi",
       "single": "Gửi tập tin tới một người nhận. Lựa chọn sẽ được xoá sau khi quá trình gửi hoàn thành.",
       "multiple": "Gửi tập tin tới nhiều người nhận. Lựa chọn sẽ không bị xoá.",
-      "link": "Người nhận chưa cài đặt tsudev-lotus có thể nhận tập tin bằng cách mở liên kết trong trình duyệt."
+      "link": "Người nhận chưa cài đặt Lotus Share có thể nhận tập tin bằng cách mở liên kết trong trình duyệt."
     },
     "zoom": {
       "title": "Đường dẫn"
@@ -542,7 +542,7 @@
   "tray": {
     "@info": "Apple Guidelines are very strict about the 'close' wording.",
     "open": "@:general.open",
-    "close": "Thoát tsudev-lotus",
+    "close": "Thoát Lotus Share",
     "closeWindows": "Thoát"
   },
   "web": {

@@ -40,7 +40,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 
   // Translations
   @override
-  String get appName => 'tsudev-lotus';
+  String get appName => 'Lotus Share';
   @override
   late final _Translations$general$vi general = _Translations$general$vi._(_root);
   @override
@@ -293,7 +293,7 @@ class _Translations$networkInterfacesPage$vi extends Translations$networkInterfa
   String get title => 'Giao diện mạng';
   @override
   String get info =>
-      'Mặc định tsudev-lotus dùng mọi giao diện mạng có sẵn. Bạn có thể loại trừ mạng không mong muốn tại đây. Cần khởi động lại máy chủ để áp dụng thay đổi.';
+      'Mặc định Lotus Share dùng mọi giao diện mạng có sẵn. Bạn có thể loại trừ mạng không mong muốn tại đây. Cần khởi động lại máy chủ để áp dụng thay đổi.';
   @override
   String get preview => 'Xem trước';
   @override
@@ -418,7 +418,7 @@ class _Translations$receiveOptionsPage$vi extends Translations$receiveOptionsPag
   @override
   String get destination => _root.settingsTab.receive.destination;
   @override
-  String get appDirectory => '(Thư mục tsudev-lotus)';
+  String get appDirectory => '(Thư mục Lotus Share)';
   @override
   String get saveToGallery => _root.settingsTab.receive.saveToGallery;
   @override
@@ -497,7 +497,7 @@ class _Translations$webSharePage$vi extends Translations$webSharePage$en {
   @override
   String pinHint({required Object pin}) => 'Mã PIN là "${pin}"';
   @override
-  String get encryptionHint => 'tsudev-lotus dùng chứng chỉ tự ký. Bạn cần chấp nhận chứng chỉ này trong trình duyệt.';
+  String get encryptionHint => 'Lotus Share dùng chứng chỉ tự ký. Bạn cần chấp nhận chứng chỉ này trong trình duyệt.';
   @override
   String pendingRequests({required Object n}) => 'Yêu cầu chờ: ${n}';
 }
@@ -521,10 +521,10 @@ class _Translations$aboutPage$vi extends Translations$aboutPage$en {
 
   // Translations
   @override
-  String get title => 'Thông tin về tsudev-lotus';
+  String get title => 'Thông tin về Lotus Share';
   @override
   List<String> get description => [
-    'tsudev-lotus là ứng dụng miễn phí, mã nguồn mở giúp bạn chia sẻ tập tin và tin nhắn một cách an toàn với các thiết bị ở gần qua mạng nội bộ, không cần kết nối Internet.',
+    'Lotus Share là ứng dụng miễn phí, mã nguồn mở giúp bạn chia sẻ tập tin và tin nhắn một cách an toàn với các thiết bị ở gần qua mạng nội bộ, không cần kết nối Internet.',
     'Ứng dụng có cho Android, iOS, macOS, Windows và Linux. Mọi tùy chọn tải về có ở trang chủ chính thức.',
   ];
   @override
@@ -548,7 +548,7 @@ class _Translations$donationPage$vi extends Translations$donationPage$en {
   String get title => 'Ủng hộ';
   @override
   String get info =>
-      'tsudev-lotus miễn phí, mã nguồn mở, không quảng cáo. Nếu thấy hữu ích, hãy theo dõi và ủng hộ dự án qua các trang của tsudev dưới đây.';
+      'Lotus Share miễn phí, mã nguồn mở, không quảng cáo. Nếu thấy hữu ích, hãy theo dõi và ủng hộ dự án qua các trang của tsudev dưới đây.';
   @override
   String donate({required Object amount}) => 'Ủng hộ ${amount}';
   @override
@@ -756,7 +756,7 @@ class _Translations$tray$vi extends Translations$tray$en {
   @override
   String get open => _root.general.open;
   @override
-  String get close => 'Thoát tsudev-lotus';
+  String get close => 'Thoát Lotus Share';
   @override
   String get closeWindows => 'Thoát';
 }
@@ -1009,7 +1009,7 @@ class _Translations$settingsTab$general$vi extends Translations$settingsTab$gene
   @override
   String get launchMinimized => 'Tự khởi động: Chạy ẩn';
   @override
-  String get showInContextMenu => 'Hiển thị tsudev-lotus trong menu chuột phải';
+  String get showInContextMenu => 'Hiển thị Lotus Share trong menu chuột phải';
   @override
   String get animations => 'Hoạt ảnh';
 }
@@ -1111,7 +1111,7 @@ class _Translations$settingsTab$other$vi extends Translations$settingsTab$other$
   @override
   String get title => 'Khác';
   @override
-  String get support => 'Ủng hộ tsudev-lotus';
+  String get support => 'Ủng hộ Lotus Share';
   @override
   String get donate => 'Ủng hộ';
   @override
@@ -1469,7 +1469,7 @@ class _Translations$dialogs$localNetworkUnauthorized$vi extends Translations$dia
   String get title => _root.dialogs.noPermission.title;
   @override
   String get description =>
-      'tsudev-lotus không thể tìm thấy thiết bị khác khi chưa được cấp quyền quét mạng nội bộ. Vui lòng cấp quyền này trong cài đặt.';
+      'Lotus Share không thể tìm thấy thiết bị khác khi chưa được cấp quyền quét mạng nội bộ. Vui lòng cấp quyền này trong cài đặt.';
   @override
   String get gotoSettings => 'Cài đặt';
 }
@@ -1611,7 +1611,7 @@ class _Translations$dialogs$sendModeHelp$vi extends Translations$dialogs$sendMod
   @override
   String get multiple => 'Gửi tập tin tới nhiều người nhận. Lựa chọn sẽ không bị xoá.';
   @override
-  String get link => 'Người nhận chưa cài đặt tsudev-lotus có thể nhận tập tin bằng cách mở liên kết trong trình duyệt.';
+  String get link => 'Người nhận chưa cài đặt Lotus Share có thể nhận tập tin bằng cách mở liên kết trong trình duyệt.';
 }
 
 // Path: dialogs.zoom

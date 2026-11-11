@@ -1,5 +1,5 @@
 {
-  "appName": "tsudev-lotus",
+  "appName": "Lotus Share",
   "general": {
     "accept": "Terima",
     "accepted": "Diterima",
@@ -109,7 +109,7 @@
       "minimizeToTray": "Keluar: Perkecil ke pojok bawah",
       "launchAtStartup": "Mulai otomatis setelah masuk",
       "launchMinimized": "Mulai otomatis: Berjalan di latar",
-      "showInContextMenu": "Tampilkan tsudev-lotus di menu konteks",
+      "showInContextMenu": "Tampilkan Lotus Share di menu konteks",
       "animations": "Animasi"
     },
     "receive": {
@@ -152,7 +152,7 @@
     },
     "other": {
       "title": "Lainnya",
-      "support": "Dukung tsudev-lotus",
+      "support": "Dukung Lotus Share",
       "donate": "Donasi",
       "privacyPolicy": "Kebijakan Privasi",
       "termsOfUse": "Syarat dan Ketentuan Penggunaan"
@@ -180,7 +180,7 @@
   },
   "networkInterfacesPage": {
     "title": "Antarmuka Jaringan",
-    "info": "Secara default, tsudev-lotus menggunakan semua antarmuka jaringan yang tersedia. Anda dapat mengecualikan jaringan yang tidak diinginkan di sini. Anda perlu memulai ulang server untuk menerapkan perubahan.",
+    "info": "Secara default, Lotus Share menggunakan semua antarmuka jaringan yang tersedia. Anda dapat mengecualikan jaringan yang tidak diinginkan di sini. Anda perlu memulai ulang server untuk menerapkan perubahan.",
     "preview": "Pratinjau",
     "whitelist": "Daftar putih",
     "blacklist": "Daftar hitam"
@@ -241,7 +241,7 @@
   "receiveOptionsPage": {
     "title": "Pilihan",
     "destination": "@:settingsTab.receive.destination",
-    "appDirectory": "(folder tsudev-lotus)",
+    "appDirectory": "(folder Lotus Share)",
     "saveToGallery": "@:settingsTab.receive.saveToGallery",
     "saveToGalleryOff": "Dimatikan secara otomatis karena ada direktori."
   },
@@ -293,16 +293,16 @@
     "autoAccept": "Terima permintaan secara otomatis",
     "requirePin": "Memerlukan PIN",
     "pinHint": "PIN-nya adalah \"{pin}\"",
-    "encryptionHint": "tsudev-lotus menggunakan sertifikat self-signed. Anda perlu menerimanya di peramban.",
+    "encryptionHint": "Lotus Share menggunakan sertifikat self-signed. Anda perlu menerimanya di peramban.",
     "pendingRequests": "Banyaknya permintaan yang tertunda: {n}"
   },
   "webReceivePage": {
     "title": "Terima melalui tautan"
   },
   "aboutPage": {
-    "title": "Tentang tsudev-lotus",
+    "title": "Tentang Lotus Share",
     "description": [
-      "tsudev-lotus adalah aplikasi gratis dan bersumber terbuka yang memungkinkan Anda untuk membagikan berkas dan pesan secara aman dengan perangkat lain yang terhubung pada jaringan lokal tanpa memerlukan koneksi internet atau paket data.",
+      "Lotus Share adalah aplikasi gratis dan bersumber terbuka yang memungkinkan Anda untuk membagikan berkas dan pesan secara aman dengan perangkat lain yang terhubung pada jaringan lokal tanpa memerlukan koneksi internet atau paket data.",
       "Aplikasi ini tersedia untuk platform Android, iOS, macOS, Windows, dan Linux. Semua pilihan pengunduhan dapat ditemukan di laman situs resmi kami."
     ],
     "author": "Pembuat",
@@ -312,7 +312,7 @@
   },
   "donationPage": {
     "title": "Donasi",
-    "info": "tsudev-lotus adalah aplikasi gratis, bersumber terbuka, dan bebas iklan. Jika Anda menyukai aplikasi ini, mohon berikan kami dukungan dengan cara memberikan donasi.",
+    "info": "Lotus Share adalah aplikasi gratis, bersumber terbuka, dan bebas iklan. Jika Anda menyukai aplikasi ini, mohon berikan kami dukungan dengan cara memberikan donasi.",
     "donate": "Donasi {amount}",
     "thanks": "Terima kasih banyak!",
     "restore": "Kembalikan dana"
@@ -400,7 +400,7 @@
     },
     "localNetworkUnauthorized": {
       "title": "@:dialogs.noPermission.title",
-      "description": "tsudev-lotus tidak dapat menemukan perangkat lain tanpa izin untuk memindai jaringan lokal. Mohon berikan izin ini di pengaturan.",
+      "description": "Lotus Share tidak dapat menemukan perangkat lain tanpa izin untuk memindai jaringan lokal. Mohon berikan izin ini di pengaturan.",
       "gotoSettings": "Pengaturan"
     },
     "messageInput": {
@@ -447,7 +447,7 @@
       "title": "Mode Pengiriman",
       "single": "Mengirim berkas ke satu penerima. Pilihan penerima akan dihapus setelah selesai membagikan berkas.",
       "multiple": "Mengirim berkas ke beberapa penerima. Pilihan penerima tidak akan dihapus.",
-      "link": "Penerima yang tidak memiliki tsudev-lotus dapat mengunduh berkas yang dipilih dengan membuka tautan di peramban."
+      "link": "Penerima yang tidak memiliki Lotus Share dapat mengunduh berkas yang dipilih dengan membuka tautan di peramban."
     },
     "zoom": {
       "title": "URL"
@@ -460,7 +460,7 @@
   "tray": {
     "@info": "Pedoman Apple sangat ketat mengenai kata-kata 'tutup'.",
     "open": "@:general.open",
-    "close": "Tutup tsudev-lotus",
+    "close": "Tutup Lotus Share",
     "closeWindows": "Keluar"
   },
   "web": {

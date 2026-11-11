@@ -5,12 +5,12 @@ project(runner LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
-# tsudev-lotus: đổi định danh (Flutter đọc dòng dưới bằng regex, KHÔNG thêm chú thích cuối dòng)
-set(BINARY_NAME "tsudev_lotus")
+# lotus-share: đổi định danh (Flutter đọc dòng dưới bằng regex, KHÔNG thêm chú thích cuối dòng)
+set(BINARY_NAME "lotus_share")
 # The unique GTK application identifier for this application. See:
 # https://wiki.gnome.org/HowDoI/ChooseApplicationID
-# tsudev-lotus: đổi định danh (Flutter đọc dòng dưới bằng regex, KHÔNG thêm chú thích cuối dòng)
-set(APPLICATION_ID "com.tsudev.lotus")
+# lotus-share: đổi định danh (Flutter đọc dòng dưới bằng regex, KHÔNG thêm chú thích cuối dòng)
+set(APPLICATION_ID "com.tsudev.lotusshare")
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.

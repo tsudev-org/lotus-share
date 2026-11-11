@@ -1,16 +1,16 @@
-tsudev-lotus
+Lotus Share
 Copyright (c) 2026 tsudev
 
 This product is a modified version of LocalSend
 (https://github.com/localsend/localsend), Copyright (c) 2022-2026 Tien Do Nam
 and the LocalSend contributors, licensed under the Apache License, Version 2.0.
 
-Modifications by tsudev (see git history and comments marked "tsudev-lotus:"):
+Modifications by tsudev (see git history and comments marked "lotus-share:"):
 - Vietnamese as the default UI language; completed Vietnamese translation.
 - Product name, homepage, privacy policy and source links point to tsudev.
 - Updated Rust dependencies with published security fixes.
 - Additional security CI (CodeQL, gitleaks, OSV dependency scan, i18n checks).
 - Product website under website/.
 
-"LocalSend" is the name of the original project. tsudev-lotus is not affiliated
+"LocalSend" is the name of the original project. Lotus Share is not affiliated
 with or endorsed by the LocalSend project.

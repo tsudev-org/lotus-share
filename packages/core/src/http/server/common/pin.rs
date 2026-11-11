@@ -19,7 +19,7 @@ pub(crate) async fn check_pin(
         return Ok(());
     };
 
-    // tsudev-lotus: đếm lần sai theo "chủ thể" thay vì từng địa chỉ - xem `attempt_key`.
+    // lotus-share: đếm lần sai theo "chủ thể" thay vì từng địa chỉ - xem `attempt_key`.
     let ip = attempt_key(ip);
     let mut attempts = pin_attempts.lock().await;
     let count = attempts.get(&ip).copied().unwrap_or(0);
@@ -31,7 +31,7 @@ pub(crate) async fn check_pin(
     }
 
     match query.get("pin") {
-        // tsudev-lotus: so sánh thời gian hằng, không lộ độ dài tiền tố đúng qua thời gian phản hồi.
+        // lotus-share: so sánh thời gian hằng, không lộ độ dài tiền tố đúng qua thời gian phản hồi.
         Some(pin) if constant_time_eq(pin.as_bytes(), required_pin.as_bytes()) => {
             attempts.pop(&ip);
             Ok(())
@@ -50,7 +50,7 @@ pub(crate) async fn check_pin(
     }
 }
 
-/// tsudev-lotus: khóa dùng để đếm số lần nhập PIN sai.
+/// lotus-share: khóa dùng để đếm số lần nhập PIN sai.
 ///
 /// Một máy trong LAN tự sinh được vô số địa chỉ IPv6 trong khối /64 của mình (SLAAC, địa chỉ tạm thời), nên đếm
 /// theo từng địa chỉ IPv6 cho phép đoán PIN không giới hạn bằng cách đổi địa chỉ. Gom IPv6 theo /64 chặn việc
@@ -68,7 +68,7 @@ fn attempt_key(ip: IpAddr) -> IpAddr {
     }
 }
 
-/// tsudev-lotus: so sánh hai chuỗi byte trong thời gian chỉ phụ thuộc độ dài, không phụ thuộc nội dung.
+/// lotus-share: so sánh hai chuỗi byte trong thời gian chỉ phụ thuộc độ dài, không phụ thuộc nội dung.
 fn constant_time_eq(a: &[u8], b: &[u8]) -> bool {
     if a.len() != b.len() {
         return false;

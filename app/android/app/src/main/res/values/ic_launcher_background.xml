@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- tsudev-lotus: nền icon = token bg tsudev (chế độ sáng) -->
-    <color name="ic_launcher_background">#EEF4FB</color>
+    <!-- lotus-share: nền icon trắng, đồng bộ BG trong tools/gen_icons.py -->
+    <color name="ic_launcher_background">#FFFFFF</color>
 </resources>

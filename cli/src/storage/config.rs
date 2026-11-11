@@ -17,7 +17,7 @@ pub struct Config {
 }
 
 const CONFIG_TEMPLATE: &str = "\
-# Cấu hình tsudev-lotus CLI. Tham số dòng lệnh và biến môi trường
+# Cấu hình Lotus Share CLI. Tham số dòng lệnh và biến môi trường
 # (LOCALSEND_ALIAS, LOCALSEND_PORT, LOCALSEND_DESTINATION) được ưu tiên hơn.
 
 # Tên thiết bị hiển thị với máy khác (mặc định: tên máy).

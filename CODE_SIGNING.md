@@ -1,4 +1,4 @@
-# Chính sách ký mã (Code signing policy) - tsudev-lotus
+# Chính sách ký mã (Code signing policy) - Lotus Share
 
 > Trạng thái (11/11/2026): bản Windows/macOS **chưa** có chứng thư ký mã thương mại; đang chuẩn bị đăng ký
 > SignPath Foundation (Windows) và Apple Developer ID (macOS/iOS). Kế hoạch: `docs/vi/KE-HOACH-KY-MA-12-2026.md`.

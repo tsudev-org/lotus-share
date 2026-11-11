@@ -1,10 +1,10 @@
-# Chính sách bảo mật - tsudev-lotus
+# Chính sách bảo mật - Lotus Share
 
 ## Báo cáo lỗ hổng
 
 **Không** mở Issue công khai cho lỗ hổng bảo mật. Dùng một trong hai kênh riêng tư:
 
-1. GitHub: tab **Security** của repo `tsudev-org/tsudev-lotus` > **Report a vulnerability** (Private vulnerability reporting).
+1. GitHub: tab **Security** của repo `tsudev-org/lotus-share` > **Report a vulnerability** (Private vulnerability reporting).
 2. Trang liên hệ của hệ sinh thái: <https://tsudev.com>.
 
 Vui lòng gửi: phiên bản, hệ điều hành, các bước tái hiện, mức ảnh hưởng. Chúng tôi phản hồi trong 72 giờ và
@@ -15,7 +15,7 @@ Lỗ hổng nằm ở phần mã gốc LocalSend (giao thức, lõi Rust) cũng 
 
 ## Phiên bản được hỗ trợ
 
-Chỉ bản phát hành mới nhất tại <https://github.com/tsudev-org/tsudev-lotus/releases/latest>.
+Chỉ bản phát hành mới nhất tại <https://github.com/tsudev-org/lotus-share/releases/latest>.
 
 ## Tham khảo
 

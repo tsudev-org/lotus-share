@@ -11,38 +11,38 @@
   #define ResultDir "D:\inno-result"
 #endif
 
-#define MyAppName "tsudev-lotus"
+#define MyAppName "Lotus Share"
 #define MyAppVersion "1.18.2"
 #define MyAppPublisher "tsudev"
 #define MyAppURL "https://lotus.tsudev.com"
-#define MyAppExeName "tsudev_lotus.exe"
+#define MyAppExeName "lotus_share.exe"
 #define MyAppMsixHelper "localsend_msix_helper.msix"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-; tsudev-lotus: AppId riêng, KHÔNG dùng lại GUID của LocalSend (bộ cài sẽ ghi đè/gỡ LocalSend).
-AppId={{E6A866CD-B32E-4718-9EF0-CE04D53F9263}
+; lotus-share: AppId riêng (đổi 12/11/2026 khi đổi tên Lotus Share; bản tsudev-lotus cũ dùng E6A866CD-...). KHÔNG dùng lại GUID của LocalSend.
+AppId={{21D09887-EE8E-478B-B43F-BD492DE6EFE3}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
-AppUpdatesURL=https://github.com/tsudev-org/tsudev-lotus/releases/latest
+AppUpdatesURL=https://github.com/tsudev-org/lotus-share/releases/latest
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir={#ResultDir}
-OutputBaseFilename=tsudev-lotus-setup
+OutputBaseFilename=lotus-share-setup
 SetupIconFile={#PayloadDir}\logo.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
-; tsudev-lotus: luôn chọn sẵn tiếng Việt, vẫn cho đổi ngôn ngữ ở hộp thoại đầu
+; lotus-share: luôn chọn sẵn tiếng Việt, vẫn cho đổi ngôn ngữ ở hộp thoại đầu
 LanguageDetectionMethod=none
 ShowLanguageDialog=yes
 ; Sign at compile time: the uninstaller is embedded during compilation, so signing the finished
@@ -55,7 +55,7 @@ ArchitecturesInstallIn64BitMode=x64compatible
 ArchitecturesAllowed=x64compatible
 
 [Languages]
-; tsudev-lotus: tiếng Việt đứng đầu = mặc định (vendored như Icelandic, xem ..\build\windows\inno\NGUON-VIETNAMESE.md)
+; lotus-share: tiếng Việt đứng đầu = mặc định (vendored như Icelandic, xem ..\build\windows\inno\NGUON-VIETNAMESE.md)
 Name: "vietnamese"; MessagesFile: "..\build\windows\inno\Vietnamese.isl"
 Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "armenian"; MessagesFile: "compiler:Languages\Armenian.isl"

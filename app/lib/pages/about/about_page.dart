@@ -33,7 +33,7 @@ class AboutPage extends StatelessWidget {
         children: [
           const SizedBox(height: 20),
           const LocalSendLogo(withText: true),
-          // tsudev-lotus: bản quyền bản fork + ghi công dự án gốc (Apache-2.0).
+          // lotus-share: bản quyền bản fork + ghi công dự án gốc (Apache-2.0).
           Text(
             t.tsudev.copyright(year: DateTime.now().year),
             textAlign: TextAlign.center,

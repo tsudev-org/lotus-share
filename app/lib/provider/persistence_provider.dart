@@ -74,7 +74,7 @@ const _themeKey = 'ls_theme'; // now called brightness
 const _colorKey = 'ls_color';
 const _customColorKey = 'ls_custom_color'; // RRGGBB hex, used by ColorMode.custom
 const _localeKey = 'ls_locale';
-const _localeSystemValue = 'system'; // tsudev-lotus
+const _localeSystemValue = 'system'; // lotus-share
 const _portKey = 'ls_port';
 const _networkWhitelistKey = 'ls_network_whitelist';
 const _networkBlacklistKey = 'ls_network_blacklist';
@@ -160,7 +160,7 @@ class PersistenceService {
     }
 
     // Locale configuration upon persistence initialisation to prevent unlocalised Alias generation
-    // tsudev-lotus: chưa chọn ngôn ngữ => tiếng Việt; chọn "theo hệ thống" => lưu giá trị đặc biệt.
+    // lotus-share: chưa chọn ngôn ngữ => tiếng Việt; chọn "theo hệ thống" => lưu giá trị đặc biệt.
     final persistedLocale = prefs.getString(_localeKey);
     if (persistedLocale == null) {
       await LocaleSettings.setLocaleRaw(forkDefaultLocaleTag);
@@ -332,7 +332,7 @@ class PersistenceService {
   AppLocale? getLocale() {
     final value = _prefs.getString(_localeKey);
     if (value == null) {
-      // tsudev-lotus: mặc định tiếng Việt khi người dùng chưa chọn.
+      // lotus-share: mặc định tiếng Việt khi người dùng chưa chọn.
       return AppLocale.values.firstWhereOrNull((locale) => locale.languageTag == forkDefaultLocaleTag);
     }
     if (value == _localeSystemValue) {
@@ -343,7 +343,7 @@ class PersistenceService {
 
   Future<void> setLocale(AppLocale? locale) async {
     if (locale == null) {
-      // tsudev-lotus: ghi nhớ lựa chọn "theo hệ thống" thay vì xóa khóa (xóa khóa = tiếng Việt).
+      // lotus-share: ghi nhớ lựa chọn "theo hệ thống" thay vì xóa khóa (xóa khóa = tiếng Việt).
       await _prefs.setString(_localeKey, _localeSystemValue);
     } else {
       await _prefs.setString(_localeKey, locale.languageTag);

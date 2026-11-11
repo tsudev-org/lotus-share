@@ -40,7 +40,7 @@ class TranslationsMl extends Translations with BaseTranslations<AppLocale, Trans
 
   // Translations
   @override
-  String get appName => 'tsudev-lotus';
+  String get appName => 'Lotus Share';
   @override
   late final _Translations$general$ml general = _Translations$general$ml._(_root);
   @override

@@ -201,7 +201,7 @@ class SettingsTab extends StatelessWidget {
                         context: context,
                         builder: (_) => const PinDialog(
                           obscureText: false,
-                          generateRandom: true, // tsudev-lotus: PIN ngẫu nhiên CSPRNG, tối thiểu 6 ký tự
+                          generateRandom: true, // lotus-share: PIN ngẫu nhiên CSPRNG, tối thiểu 6 ký tự
                           minLength: pinMinLength,
                         ),
                       );
@@ -540,7 +540,7 @@ class SettingsTab extends StatelessWidget {
                     await context.push(() => const AboutPage());
                   },
                 ),
-                if (forkSupportLinks.isNotEmpty) // tsudev-lotus: ẩn khi chưa có kênh ủng hộ tsudev
+                if (forkSupportLinks.isNotEmpty) // lotus-share: ẩn khi chưa có kênh ủng hộ tsudev
                   _ButtonEntry(
                     label: t.settingsTab.other.support,
                     buttonLabel: t.settingsTab.other.donate,
@@ -553,7 +553,7 @@ class SettingsTab extends StatelessWidget {
                   buttonLabel: t.general.open,
                   onTap: () async {
                     await launchUrl(
-                      Uri.parse(forkPrivacyUrl), // tsudev-lotus
+                      Uri.parse(forkPrivacyUrl), // lotus-share
                       mode: LaunchMode.externalApplication,
                     );
                   },

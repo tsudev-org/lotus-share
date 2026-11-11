@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "name": "tsudev-lotus",
-  "winget": "tsudev.Lotus",
+  "name": "lotus-share",
+  "winget": "tsudev.LotusShare",
   "homepage": "https://lotus.tsudev.com",
   "license": "Apache-2.0",
   "description": {
@@ -9,38 +9,38 @@
     "en": "Share files between nearby devices over the local network, no Internet needed - Vietnamese, security-hardened LocalSend"
   },
   "release": {
-    "repo": "tsudev-org/tsudev-lotus",
+    "repo": "tsudev-org/lotus-share",
     "tagRegex": "^v(?<version>\\d+\\.\\d+\\.\\d+)(?:-lotus\\.(?<revision>\\d+))?$",
     "sums": "SHA256SUMS.txt"
   },
   "assets": {
     "windows-x64": {
-      "file": "tsudev-lotus-{version}-windows-x86-64.zip",
+      "file": "lotus-share-{version}-windows-x86-64.zip",
       "kind": "portable",
-      "bin": "tsudev_lotus.exe"
+      "bin": "lotus_share.exe"
     },
     "windows-x64-installer": {
-      "file": "tsudev-lotus-{version}-windows-x86-64.exe",
+      "file": "lotus-share-{version}-windows-x86-64.exe",
       "kind": "installer",
       "installer": "inno"
     },
     "linux-x64": {
-      "file": "tsudev-lotus-{version}-linux-x86-64.tar.gz",
+      "file": "lotus-share-{version}-linux-x86-64.tar.gz",
       "kind": "tar",
-      "bin": "tsudev_lotus"
+      "bin": "lotus_share"
     },
     "macos-universal": {
-      "file": "tsudev-lotus-{version}-macos.dmg",
+      "file": "lotus-share-{version}-macos.dmg",
       "kind": "dmg",
-      "app": "tsudev-lotus.app"
+      "app": "Lotus Share.app"
     },
     "android-universal": {
-      "file": "tsudev-lotus-{version}-android-universal.apk",
+      "file": "lotus-share-{version}-android-universal.apk",
       "kind": "apk"
     }
   },
   "linux": {
-    "command": "tsudev-lotus",
+    "command": "lotus-share",
     "icon": "data/flutter_assets/assets/img/logo-512.png",
     "desktop": {
       "name": "tsudev Lotus",
@@ -60,7 +60,7 @@
         "LAN",
         "Files"
       ],
-      "wmClass": "com.tsudev.lotus"
+      "wmClass": "com.tsudev.lotusshare"
     },
     "deb": {
       "depends": [
