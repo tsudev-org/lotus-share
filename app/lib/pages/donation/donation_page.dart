@@ -25,7 +25,16 @@ class DonationPage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          const SizedBox(height: 50),
+          const SizedBox(height: 16),
+          // lotus-share: điều kiện ủng hộ ngang hàng của Google Play (phiếu ~/projects/logs/handover/20261112-02).
+          Center(
+            child: Text(
+              t.tsudev.donationVoluntary,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+          ),
+          const SizedBox(height: 34),
           Wrap(
             alignment: WrapAlignment.center,
             children: [

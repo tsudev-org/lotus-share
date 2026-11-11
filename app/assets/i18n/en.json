@@ -591,6 +591,7 @@
     "selectMultipleApps": "Select multiple apps",
     "error": "Error: {message}",
     "pinTooShort": "PIN must be at least {n} characters",
+    "donationVoluntary": "Donations are voluntary, go 100% to the developer and do not unlock any features.",
     "addApps(param=n)": {
       "one": "Add {n} app",
       "other": "Add {n} apps"

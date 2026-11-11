@@ -884,6 +884,8 @@ class _Translations$tsudev$vi extends Translations$tsudev$en {
   @override
   String pinTooShort({required Object n}) => 'Mã PIN cần ít nhất ${n} ký tự';
   @override
+  String get donationVoluntary => 'Ủng hộ tự nguyện, 100% tới nhà phát triển, không mở khóa tính năng nào.';
+  @override
   String addApps({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('vi'))(
     n,
     other: 'Thêm ${n} ứng dụng',
