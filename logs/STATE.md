@@ -1,16 +1,26 @@
-# STATE.md - Trạng thái project tsudev-lotus
+# STATE.md - Trạng thái project Lotus Share (repo tsudev-org/lotus-share, trước đây tsudev-lotus)
 
 > Agent đọc file này ở đầu mỗi phiên và cập nhật ở cuối mỗi phiên.
 > Quy trình: `.standards/docs/AGENT_PROTOCOL.md`.
 
 ## Hàng đợi task (làm từ trên xuống)
 
+- [ ] **CHẶN - deploy website**: `wrangler` trên máy đang đăng nhập tài khoản Cloudflare của dự án UBND, không phải tsudev
+      -> production `lotus.tsudev.com` vẫn là bản trước đổi tên (chưa có `/ung-ho/`, tiêu đề "tsudev-lotus"). Chủ dự án
+      đăng nhập tsudev vào cấu hình RIÊNG (không đổi đăng nhập chung):
+      `! XDG_CONFIG_HOME=$HOME/.config/wrangler-tsudev npx --prefix ~/projects/lotus-share/website wrangler login`, rồi
+      deploy: `cd website && XDG_CONFIG_HOME=$HOME/.config/wrangler-tsudev npm run deploy` (Worker `lotus-share`; tên miền
+      đang gắn Worker `tsudev-lotus` -> gỡ tên miền khỏi Worker cũ trên dashboard trước, hoặc tạm deploy `--name tsudev-lotus`).
+      Dọn: 2 Worker tạo NHẦM 12/11 00:50 trong tài khoản UBND (`lotus-share`, `tsudev-lotus`, chỉ chứa site tĩnh) - chủ dự án xóa.
+- [ ] Đổi tên thư mục máy `~/projects/tsudev-lotus` -> `~/projects/lotus-share` (chủ dự án làm khi KHÔNG còn phiên nào mở
+      trong thư mục; khóa ký đã chuyển sang `~/.config/lotus-share/keys`, symlink tên cũ còn giữ).
+- [ ] Phát hành `v1.18.2-lotus.3` = bản Lotus Share đầu tiên (định danh mới; build thử run 43066623921 xanh mọi nền tảng).
+- [ ] Phiếu `~/projects/logs/handover/20261112-02` (kho gói đổi tên `lotus-share`) - sau khi kho gói đổi, sửa lệnh cài ở
+      `website/src/pages/tai-ve.astro` và bỏ tiền tố cũ `tsudev-lotus` trong `website/src/lib/noi-dung.ts`.
 - [ ] **Chủ dự án nộp đơn SignPath Foundation** theo phiếu `logs/handover/20261111-03_noi-dung-don-signpath.md`
       (nội dung điền sẵn; trang `lotus.tsudev.com/chinh-sach-ky-ma/` đã có). Ghi ngày nộp vào mục Quyết định.
 - [ ] **Đầu tháng 12/2026 - ký mã Apple (macOS công chứng, iOS TestFlight)** khi chủ dự án có Apple Developer; tích hợp
       SignPath khi đơn được duyệt. Kế hoạch: `docs/vi/KE-HOACH-KY-MA-12-2026.md` mục 1.5, 2.
-- [ ] Phát hành `v1.18.2-lotus.3` (gồm bản sửa bảo mật PR #17, chuẩn hóa tsudev PR #18, PIN CSPRNG) - cần chủ dự án
-      gắn nhãn (nhãn `v*-lotus.*` chỉ quản trị tạo).
 - [ ] Dựng máy chủ tín hiệu `signal.lotus.tsudev.com` từ `server/` trước khi bật WebRTC (mặc định đã trỏ về đó).
 - [ ] Gói .deb/.rpm cho Linux (cấu hình `app/linux/packaging/` đã đổi tên, workflow chưa dựng), Linux ARM64, Windows ARM64.
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
@@ -22,6 +32,13 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 12/11/2026 (tsudev-lotus-0e) - **Đổi tên Lotus Share** (PR #21): tên hiển thị 57 ngôn ngữ, CLI, bộ cài, website,
+  tài liệu; định danh mới `com.tsudev.lotusshare` / `lotus_share` / AppId `{21D09887-...}` / `lotus-share-cli`; repo đổi
+  thành `tsudev-org/lotus-share` (tên cũ chuyển hướng; bảo mật + 3 ruleset giữ nguyên). Logo Lotus Share: bộ công cụ
+  `prepare_brand.py` -> `gen_icons.py` -> `brand_assets.py` (icon mọi nền tảng, favicon, PWA, AVIF/WebP, OG). Bảng màu
+  Lotus (app AA 4.81-9.06; quầng 3 màu trên web). Build thử đủ nền tảng xanh (run 43066623921).
+- 12/11/2026 - Trang Ủng hộ `/ung-ho/` (PR #22, phiếu 20261112-01): VietQR một nguồn, ghim SHA-256, kiểm lúc build; app chỉ
+  mở trang, ẩn trên iOS; FUNDING.yml + CODEOWNERS.
 - 11/11/2026 (phiên tsudev-lotus-0e) - Bảo mật: thiết bị yêu thích chỉ tin dấu vân tay mTLS (chặn mạo danh để "Lưu
   nhanh" ở chế độ HTTP, PR #17); PIN nhận tệp/chia sẻ liên kết sinh 8 ký tự bằng CSPRNG fail-closed, tối thiểu 6 ký tự;
   vá `rustix` RUSTSEC-2026-0486. Rà soát: uuid v4 (CryptoRNG), session/token lõi Rust (getrandom) đều an toàn.
@@ -78,6 +95,10 @@
 
 ## Quyết định quan trọng
 
+- 11-12/11/2026 - Chủ dự án: tên **Lotus Share**, slug `lotus-share`; dùng logo riêng (lệch BRAND_ASSETS, đề xuất ở
+  tsudev-standards phiếu 20261112-01); ĐỔI cả định danh cài đặt (bản tsudev-lotus cũ không tự cập nhật - trang Tải về có
+  hướng dẫn); bảng màu Lotus giữ 3 chế độ. Agent giữ: alias `tsudev-lotus` trong keystore APK (đổi là hỏng ký), tên gói
+  nội bộ `localsend_app`/crate `localsend` (cầu nối Rust-Flutter + gộp bản vá upstream - chờ chủ dự án quyết riêng).
 - 11/11/2026 - Chủ dự án giao agent chọn phương án đổi tên: GIỮ tên nội bộ (`localsend_app`, crate `localsend`,
   package Kotlin) để gộp được bản vá bảo mật upstream; mọi thứ người dùng/khách GitHub thấy là tsudev. Ghi công
   LocalSend / Tien Do Nam (LICENSE, NOTICE, Giới thiệu, trang Bản quyền) là nghĩa vụ Apache-2.0 - không gỡ.
