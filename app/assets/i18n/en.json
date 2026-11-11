@@ -590,6 +590,7 @@
     "debugging": "Debugging",
     "selectMultipleApps": "Select multiple apps",
     "error": "Error: {message}",
+    "pinTooShort": "PIN must be at least {n} characters",
     "addApps(param=n)": {
       "one": "Add {n} app",
       "other": "Add {n} apps"

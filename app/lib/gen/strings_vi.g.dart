@@ -882,6 +882,8 @@ class _Translations$tsudev$vi extends Translations$tsudev$en {
   @override
   String error({required Object message}) => 'Lỗi: ${message}';
   @override
+  String pinTooShort({required Object n}) => 'Mã PIN cần ít nhất ${n} ký tự';
+  @override
   String addApps({required num n}) => (_root.$meta.cardinalResolver ?? PluralResolvers.cardinal('vi'))(
     n,
     other: 'Thêm ${n} ứng dụng',

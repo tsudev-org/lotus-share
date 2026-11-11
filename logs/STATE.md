@@ -5,13 +5,15 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
-- [ ] **Đầu tháng 12/2026 - ký mã Windows (SignPath Foundation) + Apple (macOS công chứng, iOS TestFlight)**, khi chủ dự
-      án đã có Apple Developer. Kế hoạch từng bước: `docs/vi/KE-HOACH-KY-MA-12-2026.md`. Việc làm được NGAY (tháng
-      11, không cần Apple): đọc điều kiện SignPath (mục 1.1), làm trang chính sách ký mã (mục 1.3), soạn sẵn nội dung
-      đơn (mục 1.4) để chủ dự án nộp sớm - xét duyệt có thể mất vài tuần.
+- [ ] **Chủ dự án nộp đơn SignPath Foundation** theo phiếu `logs/handover/20261111-03_noi-dung-don-signpath.md`
+      (nội dung điền sẵn; trang `lotus.tsudev.com/chinh-sach-ky-ma/` đã có). Ghi ngày nộp vào mục Quyết định.
+- [ ] **Đầu tháng 12/2026 - ký mã Apple (macOS công chứng, iOS TestFlight)** khi chủ dự án có Apple Developer; tích hợp
+      SignPath khi đơn được duyệt. Kế hoạch: `docs/vi/KE-HOACH-KY-MA-12-2026.md` mục 1.5, 2.
+- [ ] Phát hành `v1.18.2-lotus.3` (gồm bản sửa bảo mật PR #17, chuẩn hóa tsudev PR #18, PIN CSPRNG) - cần chủ dự án
+      gắn nhãn (nhãn `v*-lotus.*` chỉ quản trị tạo).
+- [ ] Dựng máy chủ tín hiệu `signal.lotus.tsudev.com` từ `server/` trước khi bật WebRTC (mặc định đã trỏ về đó).
 - [ ] Gói .deb/.rpm cho Linux (cấu hình `app/linux/packaging/` đã đổi tên, workflow chưa dựng), Linux ARM64, Windows ARM64.
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
-- [ ] Khi bật WebRTC: dựng máy chủ tín hiệu riêng từ `server/` và đổi `forkDefaultSignalingServers`.
 
 ## Đang thực hiện
 
@@ -20,6 +22,14 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 11/11/2026 (phiên tsudev-lotus-0e) - Bảo mật: thiết bị yêu thích chỉ tin dấu vân tay mTLS (chặn mạo danh để "Lưu
+  nhanh" ở chế độ HTTP, PR #17); PIN nhận tệp/chia sẻ liên kết sinh 8 ký tự bằng CSPRNG fail-closed, tối thiểu 6 ký tự;
+  vá `rustix` RUSTSEC-2026-0486. Rà soát: uuid v4 (CryptoRNG), session/token lõi Rust (getrandom) đều an toàn.
+- 11/11/2026 - Chuẩn hóa hệ tsudev (PR #18): trang Ủng hộ chỉ dẫn tsudev.com / lotus.tsudev.com / GitHub
+  (`forkSupportLinks`); gỡ `in_app_purchase` + StoreKit + `FUNDING.yml`; 56 tệp dịch đổi tên sản phẩm; máy chủ
+  tín hiệu/STUN không còn localsend.org; issue template, CONTRIBUTING, CODE_SIGNING viết lại; trang
+  `/chinh-sach-ky-ma/`. Build thử đủ nền tảng run 43051435568 (macOS/Android/Windows/CLI xanh; Linux kẹt apt Ubuntu).
+- 11/11/2026 - CI website: cài Chromium không qua apt (kho Ubuntu lỗi DNS làm job quá giờ).
 - 10/11/2026 - Phiếu `20261110-05` (giao diện đen + tím kiểu Supabase): website + app (mặc định Tối, màu nhấn tím).
   Chi tiết: mục Kết quả của phiếu. PR #11 đã merge; trang Tải về production không còn gói trùng (đã đo).
 - 10/11/2026 - **Phát hành công khai `v1.18.2-lotus.2`** (bản mới nhất, 15 tệp): Windows exe/zip, Linux AppImage/zsync/
@@ -68,6 +78,11 @@
 
 ## Quyết định quan trọng
 
+- 11/11/2026 - Chủ dự án giao agent chọn phương án đổi tên: GIỮ tên nội bộ (`localsend_app`, crate `localsend`,
+  package Kotlin) để gộp được bản vá bảo mật upstream; mọi thứ người dùng/khách GitHub thấy là tsudev. Ghi công
+  LocalSend / Tien Do Nam (LICENSE, NOTICE, Giới thiệu, trang Bản quyền) là nghĩa vụ Apache-2.0 - không gỡ.
+- 11/11/2026 - Trang Ủng hộ: chỉ địa chỉ thuộc hệ tsudev (kiểm thử `fork_config_test.dart` chặn); chủ dự án sẽ bổ sung
+  kênh ủng hộ mới vào `forkSupportLinks`.
 - 10/11/2026 - Tên miền website: `lotus.tsudev.com` (tên miền con 1 cấp, cùng kiểu `files.`, `trafficmonitor.`, `compass.`).
 - 10/11/2026 - Giữ tương thích giao thức LocalSend v2 (cổng 53317, multicast 224.0.0.167): giá trị cốt lõi của sản phẩm.
 - 10/11/2026 - Giữ tên gói Dart/crate (`localsend_app`, `localsend`) và định danh nền tảng ở bước đầu để gộp upstream dễ;

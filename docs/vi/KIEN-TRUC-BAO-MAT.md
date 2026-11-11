@@ -31,7 +31,7 @@
 | Xác thực hai chiều | Máy khách bắt buộc trình chứng thư (mTLS); máy chủ bỏ qua gói đăng ký có dấu vân tay không khớp chứng thư | `http/server/common/client_cert_verifier.rs` |
 | Ghim chứng thư | Máy khách chỉ chấp nhận chứng thư có đúng dấu vân tay đã biết; kiểm ngay trong bắt tay TLS, trước khi gửi byte dữ liệu nào | `http/client/server_cert_verifier.rs` |
 | Phê duyệt | Mọi phiên nhận tệp cần người dùng bấm Chấp nhận; "Lưu nhanh" mặc định chỉ áp dụng cho thiết bị yêu thích (`QuickSaveMode.paired`), nhận diện bằng dấu vân tay mTLS (không tin dấu vân tay tự khai ở chế độ HTTP) | `app/lib/provider/persistence_provider.dart` |
-| Mã PIN | Tùy chọn PIN khi nhận; tối đa 3 lần sai mỗi địa chỉ, sau đó trả 429 | `http/server/common/pin.rs` |
+| Mã PIN | Tùy chọn PIN khi nhận; tự sinh 8 ký tự bằng CSPRNG của hệ điều hành (fail-closed, không lùi về bộ sinh thường), bắt buộc tối thiểu 6 ký tự; tối đa 3 lần sai mỗi địa chỉ, sau đó trả 429 | `http/server/common/pin.rs` |
 | Chống quá tải | Tối đa 64 kết nối đồng thời, 8 kết nối mỗi IP; một phiên tải lên tại một thời điểm | `http/server/connection_limit.rs` |
 | Không đi vòng | Máy khách tắt proxy hệ thống và không theo chuyển hướng HTTP | `http/client/mod.rs` |
 | Lọc mạng | Danh sách cho phép/chặn giao diện mạng (Cài đặt > Mạng) | `app/lib/util/network_interfaces.dart` |
@@ -41,6 +41,7 @@
 
 | Ngày | Thay đổi | Lý do |
 | --- | --- | --- |
+| 11/11/2026 | PIN nhận tệp/chia sẻ qua liên kết tự sinh 8 ký tự bằng `Random.secure` (ném lỗi thay vì lùi về `Random`), tối thiểu 6 ký tự | Trước đây PIN nhận tệp do người dùng tự gõ, chấp nhận cả 1 ký tự; nanoid2 có thể âm thầm dùng bộ sinh không an toàn (`app/lib/widget/dialogs/pin_dialog.dart`) |
 | 10/11/2026 | Nâng `rustls` 0.23.46, `rustls-webpki` 0.103.16, `webpki-roots`/`webpki-root-certs` 1.0.11, `tokio` 1.54.1, `h2` 0.4.20, `lru` 0.18.5 | Vá RUSTSEC-2026-0285/0346/0348/0349 (rustls), 0382 (webpki), 0381/0383 (gốc tin cậy emSign), 0386 (tokio), 0258 (h2), 0253 (lru) |
 | 10/11/2026 | So sánh PIN thời gian hằng; đếm số lần sai theo khối /64 với IPv6 | Chặn đoán PIN bằng cách xoay vòng địa chỉ IPv6 (mỗi máy LAN tự sinh được vô số địa chỉ trong /64 của mình) |
 | 10/11/2026 | Máy chủ tín hiệu WebRTC lấy từ cấu hình thay vì địa chỉ viết cứng; bỏ lệnh in khóa riêng ra nhật ký | Chuẩn bị tự dựng máy chủ tín hiệu; không để khóa riêng xuất hiện trong log |

@@ -3,7 +3,7 @@
 - **Mã phiếu**: 20261110-01
 - **Từ**: phiên projects-55 (Claude, 10/11/2026) - **Đến**: phiên kế tiếp của repo `tsudev-lotus`
 - **Thời điểm**: 20:30 10/11/2026
-- **Trạng thái**: MỞ
+- **Trạng thái**: ĐÓNG (11/11/2026, phiên tsudev-lotus-0e - việc còn lại chuyển vào STATE.md và phiếu 20261111-04)
 - **Nhánh git**: `fix/trang-tai-ve` (PR #11, chờ chủ dự án merge). `main` = `56b7eaba` + bản phát hành `v1.18.2-lotus.2`.
 
 ## 0. Đọc trước khi làm gì

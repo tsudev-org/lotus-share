@@ -201,7 +201,8 @@ class SettingsTab extends StatelessWidget {
                         context: context,
                         builder: (_) => const PinDialog(
                           obscureText: false,
-                          generateRandom: false,
+                          generateRandom: true, // tsudev-lotus: PIN ngẫu nhiên CSPRNG, tối thiểu 6 ký tự
+                          minLength: pinMinLength,
                         ),
                       );
 
