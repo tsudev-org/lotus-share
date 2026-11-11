@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "name": "tsudev-lotus",
+  "winget": "tsudev.Lotus",
+  "homepage": "https://lotus.tsudev.com",
+  "license": "Apache-2.0",
+  "description": {
+    "vi": "Gửi tệp giữa các thiết bị trong cùng mạng, không cần Internet - bản Việt hóa, gia cố bảo mật của LocalSend",
+    "en": "Share files between nearby devices over the local network, no Internet needed - Vietnamese, security-hardened LocalSend"
+  },
+  "release": {
+    "repo": "tsudev-org/tsudev-lotus",
+    "tagRegex": "^v(?<version>\\d+\\.\\d+\\.\\d+)(?:-lotus\\.(?<revision>\\d+))?$",
+    "sums": "SHA256SUMS.txt"
+  },
+  "assets": {
+    "windows-x64": {
+      "file": "tsudev-lotus-{version}-windows-x86-64.zip",
+      "kind": "portable",
+      "bin": "tsudev_lotus.exe"
+    },
+    "windows-x64-installer": {
+      "file": "tsudev-lotus-{version}-windows-x86-64.exe",
+      "kind": "installer",
+      "installer": "inno"
+    },
+    "linux-x64": {
+      "file": "tsudev-lotus-{version}-linux-x86-64.tar.gz",
+      "kind": "tar",
+      "bin": "tsudev_lotus"
+    },
+    "macos-universal": {
+      "file": "tsudev-lotus-{version}-macos.dmg",
+      "kind": "dmg",
+      "app": "tsudev-lotus.app"
+    },
+    "android-universal": {
+      "file": "tsudev-lotus-{version}-android-universal.apk",
+      "kind": "apk"
+    }
+  },
+  "linux": {
+    "command": "tsudev-lotus",
+    "icon": "data/flutter_assets/assets/img/logo-512.png",
+    "desktop": {
+      "name": "tsudev Lotus",
+      "genericName": {
+        "vi": "Chia sẻ tệp trong mạng nội bộ",
+        "en": "Local network file sharing"
+      },
+      "categories": [
+        "GTK",
+        "Network",
+        "FileTransfer",
+        "Utility"
+      ],
+      "keywords": [
+        "LocalSend",
+        "Sharing",
+        "LAN",
+        "Files"
+      ],
+      "wmClass": "com.tsudev.lotus"
+    },
+    "deb": {
+      "depends": [
+        "libc6 (>= 2.34)",
+        "libgtk-3-0 | libgtk-3-0t64",
+        "libayatana-appindicator3-1",
+        "libegl1",
+        "xdg-user-dirs"
+      ],
+      "section": "net"
+    },
+    "rpm": {
+      "depends": [
+        "libgtk-3.so.0()(64bit)",
+        "libayatana-appindicator3.so.1()(64bit)",
+        "libEGL.so.1()(64bit)",
+        "xdg-user-dirs"
+      ],
+      "group": "Applications/Internet"
+    }
+  },
+  "channels": [
+    "scoop",
+    "brew"
+  ],
+  "planned": [
+    "winget",
+    "apt",
+    "rpm"
+  ]
+}
