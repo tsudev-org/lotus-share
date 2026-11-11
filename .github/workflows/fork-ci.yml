@@ -87,7 +87,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - name: Cài Chromium cho kiểm tra trong trình duyệt
-        run: npx playwright install --with-deps chromium
+        # Kho apt của Ubuntu đôi khi lỗi DNS (11/11/2026): thử lại, rồi chỉ cài trình duyệt - runner
+        # GitHub đã có sẵn thư viện hệ thống của Chrome. Bước kiểm tra phía sau vẫn chạy thật.
+        run: |
+          for i in 1 2; do
+            npx playwright install --with-deps chromium && exit 0
+            echo "::warning::Cài phụ thuộc hệ thống lỗi (lần $i), thử lại sau 30 giây"
+            sleep 30
+          done
+          npx playwright install chromium
       - name: Kiểm tra khả năng truy cập (axe-core, WCAG 2.2 AA, Sáng + Tối, CSP production)
         run: npm run check:a11y
       - name: Kiểm tra bộ chọn giao diện (3 lựa chọn, mặc định Tối, không nháy màu, bàn phím, CSP production)
