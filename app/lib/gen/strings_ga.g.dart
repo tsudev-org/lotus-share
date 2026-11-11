@@ -40,7 +40,7 @@ class TranslationsGa extends Translations with BaseTranslations<AppLocale, Trans
 
   // Translations
   @override
-  String get appName => 'tsudev-lotus';
+  String get appName => 'Lotus Share';
   @override
   late final _Translations$general$ga general = _Translations$general$ga._(_root);
   @override
@@ -283,7 +283,7 @@ class _Translations$networkInterfacesPage$ga extends Translations$networkInterfa
   String get title => 'Comhéadain Líonra';
   @override
   String get info =>
-      'De réir réamhshocraithe, úsáideann tsudev-lotus na comhéadain líonra go léir atá ar fáil. Is féidir leat líonraí nach dteastaíonn a eisiamh anseo. Ní mór duit an freastalaí a atosú chun na hathruithe a chur i bhfeidhm.';
+      'De réir réamhshocraithe, úsáideann Lotus Share na comhéadain líonra go léir atá ar fáil. Is féidir leat líonraí nach dteastaíonn a eisiamh anseo. Ní mór duit an freastalaí a atosú chun na hathruithe a chur i bhfeidhm.';
   @override
   String get preview => 'Réamhamharc';
   @override
@@ -372,7 +372,7 @@ class _Translations$receiveOptionsPage$ga extends Translations$receiveOptionsPag
   @override
   String get destination => _root.settingsTab.receive.destination;
   @override
-  String get appDirectory => '(Fillteán tsudev-lotus)';
+  String get appDirectory => '(Fillteán Lotus Share)';
   @override
   String get saveToGallery => _root.settingsTab.receive.saveToGallery;
   @override
@@ -447,7 +447,7 @@ class _Translations$webSharePage$ga extends Translations$webSharePage$en {
   @override
   String pinHint({required Object pin}) => 'Is é an UAP ná "${pin}"';
   @override
-  String get encryptionHint => 'Úsáideann tsudev-lotus teastas féinshínithe. Ní mór duit glacadh leis i do bhrabhsálaí.';
+  String get encryptionHint => 'Úsáideann Lotus Share teastas féinshínithe. Ní mór duit glacadh leis i do bhrabhsálaí.';
   @override
   String pendingRequests({required Object n}) => 'Iarratais ar feitheamh: ${n}';
 }
@@ -460,10 +460,10 @@ class _Translations$aboutPage$ga extends Translations$aboutPage$en {
 
   // Translations
   @override
-  String get title => 'Maidir le tsudev-lotus';
+  String get title => 'Maidir le Lotus Share';
   @override
   List<String> get description => [
-    'Is aip foinse oscailte saor in aisce é tsudev-lotus a ligeann duit comhaid agus teachtaireachtaí a roinnt go slán le gléasanna in aice láimhe thar do líonra áitiúil gan nasc idirlín a bheith ag teastáil.',
+    'Is aip foinse oscailte saor in aisce é Lotus Share a ligeann duit comhaid agus teachtaireachtaí a roinnt go slán le gléasanna in aice láimhe thar do líonra áitiúil gan nasc idirlín a bheith ag teastáil.',
     'Tá an aip seo ar fáil ar Android, iOS, macOS, Windows agus Linux. Is féidir leat na roghanna íoslódála go léir a fháil ar an leathanach baile oifigiúil.',
   ];
   @override
@@ -487,7 +487,7 @@ class _Translations$donationPage$ga extends Translations$donationPage$en {
   String get title => 'Tabhair Síntiús';
   @override
   String get info =>
-      'Tá tsudev-lotus saor in aisce, foinse oscailte agus gan aon fhógraí. Más maith leat an aip, is féidir leat tacú leis an bhforbairt le síntiús.';
+      'Tá Lotus Share saor in aisce, foinse oscailte agus gan aon fhógraí. Más maith leat an aip, is féidir leat tacú leis an bhforbairt le síntiús.';
   @override
   String donate({required Object amount}) => 'Tabhair síntiús ${amount}';
   @override
@@ -673,7 +673,7 @@ class _Translations$tray$ga extends Translations$tray$en {
   @override
   String get open => _root.general.open;
   @override
-  String get close => 'Scoir tsudev-lotus';
+  String get close => 'Scoir Lotus Share';
   @override
   String get closeWindows => 'Scoir';
 }
@@ -884,7 +884,7 @@ class _Translations$settingsTab$general$ga extends Translations$settingsTab$gene
   @override
   String get launchMinimized => 'Uaththosú: Tosaigh i bhfolach';
   @override
-  String get showInContextMenu => 'Taispeáin tsudev-lotus sa roghchlár comhthéacs';
+  String get showInContextMenu => 'Taispeáin Lotus Share sa roghchlár comhthéacs';
   @override
   String get animations => 'Beochana';
 }
@@ -982,7 +982,7 @@ class _Translations$settingsTab$other$ga extends Translations$settingsTab$other$
   @override
   String get title => 'Eile';
   @override
-  String get support => 'Tacaigh le tsudev-lotus';
+  String get support => 'Tacaigh le Lotus Share';
   @override
   String get donate => 'Tabhair Síntiús';
   @override
@@ -1266,7 +1266,7 @@ class _Translations$dialogs$localNetworkUnauthorized$ga extends Translations$dia
   String get title => _root.dialogs.noPermission.title;
   @override
   String get description =>
-      'Ní féidir le tsudev-lotus gléasanna eile a aimsiú gan cead a bheith aige an líonra áitiúil a scanadh. Deonaigh an cead seo sna socruithe le do thoil.';
+      'Ní féidir le Lotus Share gléasanna eile a aimsiú gan cead a bheith aige an líonra áitiúil a scanadh. Deonaigh an cead seo sna socruithe le do thoil.';
   @override
   String get gotoSettings => 'Socruithe';
 }
@@ -1412,7 +1412,7 @@ class _Translations$dialogs$sendModeHelp$ga extends Translations$dialogs$sendMod
   String get multiple => 'Seolann sé comhaid chuig ilfhaighteoirí. Ní ghlanfar an rogha tar éis aistriú comhad a bheith críochnaithe.';
   @override
   String get link =>
-      'Is féidir le faighteoirí nach bhfuil tsudev-lotus suiteáilte acu na comhaid roghnaithe a íoslódáil tríd an nasc a oscailt ina mbrabhsálaí.';
+      'Is féidir le faighteoirí nach bhfuil Lotus Share suiteáilte acu na comhaid roghnaithe a íoslódáil tríd an nasc a oscailt ina mbrabhsálaí.';
 }
 
 // Path: dialogs.zoom

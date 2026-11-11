@@ -1,11 +1,11 @@
 # Project-level configuration.
 cmake_minimum_required(VERSION 3.14)
-project(tsudev_lotus LANGUAGES CXX)
+project(lotus_share LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
-# tsudev-lotus: đổi định danh (Flutter đọc dòng dưới bằng regex, KHÔNG thêm chú thích cuối dòng)
-set(BINARY_NAME "tsudev_lotus")
+# lotus-share: đổi định danh (Flutter đọc dòng dưới bằng regex, KHÔNG thêm chú thích cuối dòng)
+set(BINARY_NAME "lotus_share")
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.
@@ -75,7 +75,7 @@ set(INSTALL_BUNDLE_LIB_DIR "${CMAKE_INSTALL_PREFIX}")
 install(TARGETS ${BINARY_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}"
   COMPONENT Runtime)
 
-# tsudev-lotus: bỏ MSIX helper của upstream (gói thưa cần chứng thư ký mã của LocalSend); menu chuột phải dùng
+# lotus-share: bỏ MSIX helper của upstream (gói thưa cần chứng thư ký mã của LocalSend); menu chuột phải dùng
 # lối tắt "Gửi tới" (context_menu_helper.dart).
 install(FILES
   "${BINARY_NAME}.exe.manifest"

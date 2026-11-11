@@ -52,7 +52,7 @@ class ReceiveController {
 
   ReceiveController(this.server);
 
-  // tsudev-lotus: phiên được nhận diện là của thiết bị yêu thích bằng dấu vân tay mTLS.
+  // lotus-share: phiên được nhận diện là của thiết bị yêu thích bằng dấu vân tay mTLS.
   String? _trustedFavoriteSessionId;
 
   /// A device registered itself on this server.
@@ -91,7 +91,7 @@ class ReceiveController {
     // self-reported fingerprint in the JSON payload which is only used as fallback
     // when encryption is disabled.
     final senderFingerprint = event.certFingerprint ?? event.info.fingerprint;
-    // tsudev-lotus: chỉ dấu vân tay mTLS mới được so với danh sách yêu thích (xem favorites.dart).
+    // lotus-share: chỉ dấu vân tay mTLS mới được so với danh sách yêu thích (xem favorites.dart).
     final trustedFavorite = server.ref.read(favoritesProvider).findByVerifiedFingerprint(event.certFingerprint);
     _trustedFavoriteSessionId = trustedFavorite != null ? sessionId : null;
 
@@ -104,7 +104,7 @@ class ReceiveController {
           sessionId: sessionId,
           status: SessionStatus.waiting,
           sender: event.info.toDevice(event.ip, withChannel: false).copyWith(fingerprint: senderFingerprint),
-          senderAlias: trustedFavorite?.alias ?? event.info.alias, // tsudev-lotus: chỉ tin tên yêu thích khi đã xác thực
+          senderAlias: trustedFavorite?.alias ?? event.info.alias, // lotus-share: chỉ tin tên yêu thích khi đã xác thực
           files: {
             for (final file in files.values)
               file.id: ReceivingFile(
@@ -136,7 +136,7 @@ class ReceiveController {
     bool quickSave = settings.quickSave && server.getState().session?.message == null;
     final quickSaveFromFavorites = settings.quickSaveFromFavorites && server.getState().session?.message == null;
     if (quickSaveFromFavorites) {
-      final bool isFavorite = trustedFavorite != null; // tsudev-lotus
+      final bool isFavorite = trustedFavorite != null; // lotus-share
       if (isFavorite) {
         quickSave = true;
       }
@@ -423,7 +423,7 @@ class ReceiveController {
       bool quickSave = settings.quickSave && !hasError && server.getState().session?.message == null;
       final quickSaveFromFavorites = settings.quickSaveFromFavorites && !hasError && server.getState().session?.message == null;
       if (quickSaveFromFavorites) {
-        final bool isFavorite = _trustedFavoriteSessionId == session.sessionId; // tsudev-lotus
+        final bool isFavorite = _trustedFavoriteSessionId == session.sessionId; // lotus-share
         if (isFavorite) {
           quickSave = true;
         }

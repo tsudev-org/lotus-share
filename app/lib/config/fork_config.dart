@@ -1,11 +1,11 @@
-// tsudev-lotus: cấu hình tập trung của bản fork.
+// lotus-share: cấu hình tập trung của bản fork.
 //
 // Mọi giá trị khác với LocalSend gốc (tên hiển thị, URL, ngôn ngữ mặc định, máy chủ)
 // gom về MỘT tệp này để khi gộp upstream chỉ cần đối chiếu một chỗ.
 // Đổi bất kỳ giá trị nào ở đây cần chủ dự án duyệt (xem AGENTS.md mục B.3).
 
 /// Tên sản phẩm hiển thị cho người dùng.
-const forkProductName = 'tsudev-lotus';
+const forkProductName = 'Lotus Share';
 
 /// Tên chủ sở hữu bản fork, dùng ở dòng bản quyền.
 const forkOwner = 'tsudev';
@@ -17,10 +17,10 @@ const forkHomepageUrl = 'https://lotus.tsudev.com';
 const forkPrivacyUrl = 'https://tsudev.com/privacy';
 
 /// Kho mã nguồn của bản fork.
-const forkRepositoryUrl = 'https://github.com/tsudev-org/tsudev-lotus';
+const forkRepositoryUrl = 'https://github.com/tsudev-org/lotus-share';
 
 /// Trang phát hành, nơi người dùng tải bản cập nhật.
-const forkReleasesUrl = 'https://github.com/tsudev-org/tsudev-lotus/releases/latest';
+const forkReleasesUrl = 'https://github.com/tsudev-org/lotus-share/releases/latest';
 
 /// Trang chủ hệ sinh thái.
 const forkEcosystemUrl = 'https://tsudev.com';

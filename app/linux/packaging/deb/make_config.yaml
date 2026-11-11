@@ -1,5 +1,5 @@
-display_name: tsudev-lotus
-package_name: tsudev-lotus
+display_name: Lotus Share
+package_name: lotus-share
 maintainer:
   name: tsudev
   email: noreply@tsudev.com
@@ -21,9 +21,9 @@ dependencies:
   - xdg-user-dirs
 
 postinstall_scripts:
-  - echo "Đã cài tsudev-lotus"
+  - echo "Đã cài Lotus Share"
 postuninstall_scripts:
-  - if [ "$1" = "remove" ]; then echo "Đã gỡ tsudev-lotus"; fi
+  - if [ "$1" = "remove" ]; then echo "Đã gỡ Lotus Share"; fi
 
 keywords:
   - Sharing
@@ -42,4 +42,4 @@ startup_notify: true
 # Must match the GTK application id set in linux/CMakeLists.txt, otherwise the
 # desktop environment cannot map the running window back to this desktop entry.
 # https://github.com/localsend/localsend/pull/3355
-startup_wm_class: com.tsudev.lotus
+startup_wm_class: com.tsudev.lotusshare

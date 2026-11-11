@@ -1,5 +1,5 @@
 {
-  "name": "tsudev-lotus-website",
+  "name": "lotus-share-website",
   "private": true,
   "type": "module",
   "description": "Trang sản phẩm lotus.tsudev.com (Astro, trang tĩnh, không JavaScript phía trình duyệt)",

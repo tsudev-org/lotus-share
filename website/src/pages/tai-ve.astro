@@ -5,9 +5,9 @@ import { banMoiNhat, NEN_TANG, RELEASES_URL, REPO, REPO_URL } from '../lib/noi-d
 const ban = await banMoiNhat();
 const mb = (b: number) => `${(b / 1024 / 1024).toFixed(1).replace('.', ',')} MB`;
 const theoNenTang = NEN_TANG.map((nt) => ({ ...nt, goi: ban?.goi.filter((g) => g.nenTang === nt.ma) ?? [] })).filter((nt) => nt.goi.length > 0);
-const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? 'tsudev-lotus-<phiên bản>-windows-x86-64.exe';
+const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? 'lotus-share-<phiên bản>-windows-x86-64.exe';
 ---
-<Trang tieuDe="Tải về" moTa="Tải tsudev-lotus cho Windows, macOS, Linux và Android; mã SHA-256 của từng gói, cách kiểm tra tệp tải về và hướng dẫn cài đặt từng hệ điều hành." duongDan="/tai-ve/">
+<Trang tieuDe="Tải về" moTa="Tải Lotus Share cho Windows, macOS, Linux và Android; mã SHA-256 của từng gói, cách kiểm tra tệp tải về và hướng dẫn cài đặt từng hệ điều hành." duongDan="/tai-ve/">
   <div class="khung tai-lieu">
     <nav class="tai-lieu__menu" aria-label="Tải về">
       <p>Tải về</p>
@@ -19,18 +19,19 @@ const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? '
         <li><a href="#macos">Cài trên macOS</a></li>
         <li><a href="#linux">Cài trên Linux</a></li>
         <li><a href="#android">Cài trên Android</a></li>
+        <li><a href="#chuyen-doi">Đã cài bản tsudev-lotus?</a></li>
         <li><a href="#tuong-thich">Dùng cùng LocalSend</a></li>
       </ul>
     </nav>
     <article class="van-ban">
       {ban ? (
         <>
-          <h1>Tải tsudev-lotus {ban.phienBan}</h1>
+          <h1>Tải Lotus Share {ban.phienBan}</h1>
           <p>Phát hành ngày {ban.ngay}. Mọi gói được GitHub Actions build từ mã nguồn công khai; trang này chỉ dẫn tới <a href={ban.url} target="_blank" rel="noopener noreferrer">trang phát hành trên GitHub</a>, không lưu bản sao.</p>
         </>
       ) : (
         <>
-          <h1>Tải tsudev-lotus</h1>
+          <h1>Tải Lotus Share</h1>
           <div class="chu-y">
             <p><strong>Bản phát hành đầu tiên đang được chuẩn bị.</strong> Khi có, danh sách gói kèm mã SHA-256 sẽ hiện ngay tại đây và ở <a href={RELEASES_URL} target="_blank" rel="noopener noreferrer">trang phát hành trên GitHub</a>.</p>
             <p>Trong lúc chờ, bạn có thể tự build từ <a href={REPO_URL} target="_blank" rel="noopener noreferrer">mã nguồn</a> (cần Flutter 3.47.9 và Rust), hoặc theo dõi repo trên GitHub (Watch, chọn Releases) để được báo khi có bản mới.</p>
@@ -39,6 +40,7 @@ const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? '
       )}
 
       <h2 id="cai-bang-lenh">Cài bằng lệnh</h2>
+      <p>Kho gói vẫn dùng tên gói cũ <code>tsudev-lotus</code> cho tới khi chuyển sang <code>lotus-share</code>; trang này sẽ cập nhật lệnh khi kho gói đổi xong.</p>
       <p>Cách nhanh nhất, tự cập nhật về sau. Gói do chính dự án duy trì, ghim mã SHA-256 của bản phát hành; trình quản lý gói từ chối cài nếu tệp không khớp.</p>
       <h3>Windows - Scoop</h3>
       <pre tabindex="0"><code>scoop bucket add tsudev https://github.com/tsudev-org/scoop-bucket
@@ -96,7 +98,7 @@ sudo dnf install tsudev-lotus</code></pre>
       <p>Windows (PowerShell):</p>
       <pre tabindex="0"><code>Get-FileHash .\{vd} -Algorithm SHA256</code></pre>
       <p>macOS, Linux:</p>
-      <pre tabindex="0"><code>sha256sum tsudev-lotus-*.AppImage     # macOS: shasum -a 256 tsudev-lotus-*.dmg</code></pre>
+      <pre tabindex="0"><code>sha256sum lotus-share-*.AppImage     # macOS: shasum -a 256 lotus-share-*.dmg</code></pre>
       <div class="chu-y">
         <p><strong>Chỉ tải từ trang này hoặc từ <a href={`${REPO_URL}/releases`} target="_blank" rel="noopener noreferrer">github.com/{REPO}</a>.</strong> Mọi trang khác tự xưng "bản chính thức" đều không liên quan tới tsudev.</p>
         <p>Bản Windows hiện chưa có chứng thư ký mã nên SmartScreen có thể cảnh báo ở lần chạy đầu: chọn <em>Thông tin thêm</em>, rồi <em>Vẫn chạy</em> sau khi đã kiểm SHA-256.</p>
@@ -117,8 +119,8 @@ sudo dnf install tsudev-lotus</code></pre>
       </ol>
 
       <h2 id="linux">Cài trên Linux</h2>
-      <pre tabindex="0"><code>chmod +x tsudev-lotus-&lt;phiên bản&gt;-linux-x86-64.AppImage
-./tsudev-lotus-&lt;phiên bản&gt;-linux-x86-64.AppImage
+      <pre tabindex="0"><code>chmod +x lotus-share-&lt;phiên bản&gt;-linux-x86-64.AppImage
+./lotus-share-&lt;phiên bản&gt;-linux-x86-64.AppImage
 # hoặc cài từ kho APT/RPM để tự cập nhật: xem mục "Cài bằng lệnh"</code></pre>
       <p>Có tường lửa (ufw, firewalld)? Mở cổng 53317 cho TCP và UDP trong mạng nội bộ: <code>sudo ufw allow from 192.168.0.0/16 to any port 53317</code>.</p>
 
@@ -129,10 +131,18 @@ sudo dnf install tsudev-lotus</code></pre>
       </ol>
       <p>Mọi APK ký bằng khóa của tsudev. Dấu vân tay SHA-256 của chứng thư ký (đối chiếu bằng <code>apksigner verify --print-certs</code>):</p>
       <pre tabindex="0"><code>ad1be603b39b0c211c3ac4c4f890e1c85509209807a029380738089399be1f45</code></pre>
-      <p>Mã định danh ứng dụng là <code>com.tsudev.lotus</code>, nên tsudev-lotus cài song song được với LocalSend.</p>
+      <p>Mã định danh ứng dụng là <code>com.tsudev.lotusshare</code>, nên Lotus Share cài song song được với LocalSend.</p>
+
+      <h2 id="chuyen-doi">Đã cài bản tsudev-lotus?</h2>
+      <p>Từ ngày 11/11/2026 ứng dụng đổi tên thành <strong>Lotus Share</strong> với định danh mới (<code>com.tsudev.lotusshare</code>), nên hệ điều hành coi đây là một ứng dụng khác: bản cũ <strong>không tự cập nhật</strong> sang Lotus Share.</p>
+      <ol>
+        <li>Cài Lotus Share theo hướng dẫn ở trên.</li>
+        <li>Gỡ bản cũ tên <em>tsudev-lotus</em> (Windows: Cài đặt &gt; Ứng dụng; Android: giữ biểu tượng &gt; Gỡ cài đặt; macOS: kéo vào Thùng rác; Linux: xóa tệp AppImage cũ).</li>
+        <li>Thiết bị yêu thích và cài đặt không chuyển sang được: thêm lại thiết bị yêu thích và so dấu vân tay trên hai máy.</li>
+      </ol>
 
       <h2 id="tuong-thich">Dùng cùng LocalSend</h2>
-      <p>tsudev-lotus nói cùng giao thức với LocalSend, nên máy cài tsudev-lotus gửi và nhận được với máy cài LocalSend (kể cả bản trên App Store, Google Play). Hai ứng dụng dùng cùng cổng 53317, vì vậy <strong>không chạy cả hai trên cùng một máy</strong> cùng lúc.</p>
+      <p>Lotus Share nói cùng giao thức với LocalSend, nên máy cài Lotus Share gửi và nhận được với máy cài LocalSend (kể cả bản trên App Store, Google Play). Hai ứng dụng dùng cùng cổng 53317, vì vậy <strong>không chạy cả hai trên cùng một máy</strong> cùng lúc.</p>
     </article>
   </div>
 </Trang>

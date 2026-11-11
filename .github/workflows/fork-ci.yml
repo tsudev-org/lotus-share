@@ -1,4 +1,4 @@
-# tsudev-lotus: kiểm tra riêng của bản fork - bản dịch tiếng Việt, mã dịch sinh tự động khớp nguồn,
+# lotus-share: kiểm tra riêng của bản fork - bản dịch tiếng Việt, mã dịch sinh tự động khớp nguồn,
 # và cổng kiểm quy ước tsudev. (Phân tích/test Dart + Rust của upstream nằm ở ci.yml.)
 name: Kiểm tra bản fork
 

@@ -1,5 +1,5 @@
-# Báo cáo lỗ hổng bảo mật của tsudev-lotus (RFC 9116)
-Contact: https://github.com/tsudev-org/tsudev-lotus/security/advisories/new
+# Báo cáo lỗ hổng bảo mật của Lotus Share (RFC 9116)
+Contact: https://github.com/tsudev-org/lotus-share/security/advisories/new
 Expires: 2027-11-01T00:00:00.000Z
 Preferred-Languages: vi, en
 Canonical: https://lotus.tsudev.com/.well-known/security.txt

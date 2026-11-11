@@ -1,11 +1,11 @@
 [Desktop Entry]
-Name=tsudev-lotus
+Name=Lotus Share
 GenericName=Chia sẻ tệp trong mạng nội bộ
 Comment=Gửi tệp và tin nhắn giữa các thiết bị trong cùng mạng Wi-Fi, không cần Internet
-Exec=tsudev_lotus
-Icon=tsudev-lotus
+Exec=lotus_share
+Icon=lotus-share
 Type=Application
 Terminal=false
 Categories=Utility;Network;FileTransfer;
 Keywords=share;lan;wifi;localsend;chia sẻ;
-StartupWMClass=com.tsudev.lotus
+StartupWMClass=com.tsudev.lotusshare

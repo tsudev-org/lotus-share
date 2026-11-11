@@ -143,6 +143,13 @@ extension InputDecorationThemeExt on InputDecorationThemeData {
 const tsudevPurpleDark = Color(0xFFA970FF);
 const tsudevPurpleLight = Color(0xFF7C3AED);
 
+// lotus-share: bảng màu Lotus rút từ logo (support/brand/lotus-share/accent.json: tím #7014B0, xanh #288CE7,
+// cam #F8993D), chỉnh sắc độ để chữ trên/dưới màu đạt WCAG AA ở từng chế độ.
+const lotusBlueDark = Color(0xFF5EA8F2);
+const lotusBlueLight = Color(0xFF1F6FC5);
+const lotusOrangeDark = Color(0xFFF8993D);
+const lotusOrangeLight = Color(0xFFB45309);
+
 ColorScheme _determineColorScheme(ColorMode mode, Color customColor, Brightness brightness, DynamicColors? dynamicColors) {
   // tsudev: màu nhấn tím của hệ tsudev (phiếu logs/handover/20261110-05 mục 2) - Tối #A970FF, Sáng #7C3AED.
   // fidelity giữ sắc độ của màu gốc thay vì làm nhạt như tonalSpot mặc định.
@@ -150,6 +157,11 @@ ColorScheme _determineColorScheme(ColorMode mode, Color customColor, Brightness 
     seedColor: brightness == Brightness.dark ? tsudevPurpleDark : tsudevPurpleLight,
     brightness: brightness,
     dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
+    // lotus-share: màu phụ (xanh) và màu thứ ba (cam) lấy từ logo Lotus.
+    secondary: brightness == Brightness.dark ? lotusBlueDark : lotusBlueLight,
+    onSecondary: brightness == Brightness.dark ? const Color(0xFF0A0A0A) : Colors.white,
+    tertiary: brightness == Brightness.dark ? lotusOrangeDark : lotusOrangeLight,
+    onTertiary: brightness == Brightness.dark ? const Color(0xFF0A0A0A) : Colors.white,
   );
 
   final colorScheme = switch (mode) {

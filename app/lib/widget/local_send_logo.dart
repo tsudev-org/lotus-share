@@ -9,7 +9,7 @@ class LocalSendLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // tsudev-lotus: dấu hiệu tsudev giữ nguyên màu (BRAND_ASSETS mục 8 cấm đổi màu), không tô màu chủ đạo như logo gốc.
+    // lotus-share: dấu hiệu tsudev giữ nguyên màu (BRAND_ASSETS mục 8 cấm đổi màu), không tô màu chủ đạo như logo gốc.
     final logo = Assets.img.logo512.image(
       width: 200,
       height: 200,
@@ -20,7 +20,7 @@ class LocalSendLogo extends StatelessWidget {
         children: [
           logo,
           const Text(
-            forkProductName, // tsudev-lotus
+            forkProductName, // lotus-share
             style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),

@@ -1,4 +1,4 @@
-// tsudev-lotus: kiểm thử chỉ tin thiết bị yêu thích qua dấu vân tay mTLS.
+// lotus-share: kiểm thử chỉ tin thiết bị yêu thích qua dấu vân tay mTLS.
 import 'package:localsend_app/model/persistence/favorite_device.dart';
 import 'package:localsend_app/util/favorites.dart';
 import 'package:test/test.dart';

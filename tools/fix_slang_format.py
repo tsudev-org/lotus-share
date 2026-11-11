@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""tsudev-lotus: trả app/lib/gen/strings.g.dart về đúng định dạng của upstream sau `dart run slang`.
+"""lotus-share: trả app/lib/gen/strings.g.dart về đúng định dạng của upstream sau `dart run slang`.
 
 slang ghi `zhTw(...);` trên một dòng, còn bản upstream (định dạng bằng dart format kiểu "tall")
 để dấu `;` ở dòng riêng. Không sửa thì mỗi lần sinh lại đều có diff nhiễu và xung đột khi gộp upstream.

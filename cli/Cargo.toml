@@ -4,7 +4,7 @@ version = "1.18.2"
 edition = "2024"
 
 [[bin]]
-name = "tsudev-lotus-cli"
+name = "lotus-share-cli"
 path = "src/main.rs"
 
 [dependencies]

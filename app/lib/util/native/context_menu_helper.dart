@@ -57,7 +57,7 @@ Future<bool> isContextMenuEnabled() async {
   }
 }
 
-const _windowsFileName = 'tsudev-lotus'; // tsudev-lotus
+const _windowsFileName = 'lotus-share'; // lotus-share
 
 String _getWindowsFilePath(String appName) {
   final appData = Platform.environment['APPDATA'];

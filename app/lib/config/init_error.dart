@@ -64,7 +64,7 @@ class _ErrorAppState extends State<_ErrorApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '$forkProductName: Error', // tsudev-lotus
+      title: '$forkProductName: Error', // lotus-share
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: TextFormField(

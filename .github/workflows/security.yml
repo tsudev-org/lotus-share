@@ -1,4 +1,4 @@
-# tsudev-lotus: cổng kiểm bảo mật - phân tích tĩnh (CodeQL cho Rust + GitHub Actions), quét lộ bí mật (gitleaks),
+# lotus-share: cổng kiểm bảo mật - phân tích tĩnh (CodeQL cho Rust + GitHub Actions), quét lộ bí mật (gitleaks),
 # soát lỗ hổng phụ thuộc Rust + Dart (OSV.dev). Mọi action ghim theo SHA commit; quyền token ở mức tối thiểu.
 name: Bảo mật
 

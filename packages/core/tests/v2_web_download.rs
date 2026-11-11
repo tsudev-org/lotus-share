@@ -244,7 +244,7 @@ async fn test_web_page() {
     let response = client.get(&base_url).send().await.unwrap();
     assert_eq!(response.status().as_u16(), 200);
     let body = response.text().await.unwrap();
-    assert!(body.contains("tsudev-lotus")); // tsudev-lotus: trang web đã đổi tên
+    assert!(body.contains("Lotus Share")); // lotus-share: trang web đã đổi tên
     assert!(body.contains("prepare-download"));
 
     let response = client
@@ -331,7 +331,7 @@ async fn test_upload_page() {
     let response = client.get(&base_url).send().await.unwrap();
     assert_eq!(response.status().as_u16(), 200);
     let body = response.text().await.unwrap();
-    assert!(body.contains("tsudev-lotus")); // tsudev-lotus: trang web đã đổi tên
+    assert!(body.contains("Lotus Share")); // lotus-share: trang web đã đổi tên
     assert!(body.contains("prepare-upload"));
     // The download page is not served without web download.
     assert!(!body.contains("prepare-download"));

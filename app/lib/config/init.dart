@@ -320,7 +320,7 @@ Future<void> postInit(BuildContext context, Ref ref, bool appStart) async {
     await ref.read(persistenceProvider).setWhatsNew(version.version);
   });
 
-  // tsudev-lotus: bỏ mua trong ứng dụng (gắn tài khoản cửa hàng của bản gốc).
+  // lotus-share: bỏ mua trong ứng dụng (gắn tài khoản cửa hàng của bản gốc).
 }
 
 class _HandleShareIntentAction extends AsyncGlobalAction {

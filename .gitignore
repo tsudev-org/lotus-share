@@ -24,7 +24,7 @@
 /support/build/msix/content/resources.pri
 
 # ================================================================
-# tsudev-lotus: bộ .gitignore chuẩn của hệ tsudev (.standards/templates/gitignore)
+# lotus-share: bộ .gitignore chuẩn của hệ tsudev (.standards/templates/gitignore)
 # ================================================================
 # ============================================================
 # .GITIGNORE CHUẨN TOÀN HỆ SINH THÁI tsudev - base v2.0.0
@@ -334,13 +334,13 @@ tauri.conf.local.json
 pkg/
 wasm-pack.log
 
-# tsudev-lotus: website sản phẩm
+# lotus-share: website sản phẩm
 /website/node_modules/
 /website/dist/
 /website/.astro/
 /website/.wrangler/
 
-# tsudev-lotus: ngoại lệ - các mẫu chuẩn `core`, `build/`, `bin/` ở trên vô tình khớp thư mục MÃ NGUỒN của repo
+# lotus-share: ngoại lệ - các mẫu chuẩn `core`, `build/`, `bin/` ở trên vô tình khớp thư mục MÃ NGUỒN của repo
 # (lõi Rust packages/core, tài nguyên đóng gói support/build, công cụ cargokit). Thiếu các dòng này thì tệp
 # mới thêm vào đó bị git bỏ qua im lặng.
 !/packages/core/

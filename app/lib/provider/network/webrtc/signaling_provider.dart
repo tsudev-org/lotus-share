@@ -81,11 +81,11 @@ class _SetupSignalingConnection extends AsyncGlobalAction {
 
     // TODO: Use persistent key
     final key = await crypto.generateKeyPair();
-    // tsudev-lotus: bỏ lệnh in khóa bí mật ra nhật ký (kể cả bản debug).
+    // lotus-share: bỏ lệnh in khóa bí mật ra nhật ký (kể cả bản debug).
 
     LsSignalingConnection? connection;
     final stream = connect(
-      uri: signalingServer, // tsudev-lotus: dùng máy chủ đã cấu hình thay vì địa chỉ cứng
+      uri: signalingServer, // lotus-share: dùng máy chủ đã cấu hình thay vì địa chỉ cứng
       info: ProposingClientInfo(
         alias: settings.alias,
         version: protocolVersion,

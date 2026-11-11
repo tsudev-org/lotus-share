@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""tsudev-lotus: kiểm tra bản dịch tiếng Việt và các điểm riêng của fork.
+"""lotus-share: kiểm tra bản dịch tiếng Việt và các điểm riêng của fork.
 
 Chạy từ gốc repo:  python3 -I tools/check_i18n_vi.py
 Mã thoát khác 0 = có lỗi (CI chặn merge).
@@ -8,7 +8,7 @@ Kiểm:
   1. vi.json có ĐỦ mọi khóa của en.json (kể cả dạng số nhiều), không thừa khóa lạ.
   2. Tham số {abc} trong bản dịch tiếng Việt khớp bản tiếng Anh (thiếu tham số => app hiển thị sai).
   3. Không còn chuỗi tiếng Việt y hệt tiếng Anh, trừ danh sách cho phép (thuật ngữ như IP, GIF, OLED).
-  4. Tên sản phẩm (appName) là tsudev-lotus ở mọi ngôn ngữ.
+  4. Tên sản phẩm (appName) là Lotus Share ở mọi ngôn ngữ.
   5. Ngôn ngữ mặc định trong fork_config.dart là "vi".
   6. Mã giao diện không viết cứng URL localsend.org (phải đi qua fork_config.dart), trừ chú thích.
 """
@@ -24,7 +24,7 @@ I18N = ROOT / "app" / "assets" / "i18n"
 APP_LIB = ROOT / "app" / "lib"
 FORK_CONFIG = APP_LIB / "config" / "fork_config.dart"
 
-PRODUCT_NAME = "tsudev-lotus"
+PRODUCT_NAME = "Lotus Share"
 # Chuỗi được phép giống hệt tiếng Anh: thuật ngữ, ký hiệu, định dạng số.
 SAME_AS_EN_ALLOWED = {
     "receiveTab.infoBox.ip",

@@ -1,4 +1,4 @@
-# tsudev-lotus
+# Lotus Share
 
 Chia sẻ tệp và tin nhắn giữa các thiết bị trong cùng mạng nội bộ (Wi-Fi, LAN) - không cần Internet, không cần
 tài khoản, không qua máy chủ trung gian. Giao diện tiếng Việt mặc định, cấu hình bảo mật chặt.
@@ -6,13 +6,13 @@ tài khoản, không qua máy chủ trung gian. Giao diện tiếng Việt mặc
 Một sản phẩm của [tsudev](https://tsudev.com).
 
 - Trang sản phẩm: <https://lotus.tsudev.com>
-- Tải bản phát hành: <https://github.com/tsudev-org/tsudev-lotus/releases/latest>
+- Tải bản phát hành: <https://github.com/tsudev-org/lotus-share/releases/latest>
 - Dựa trên [LocalSend](https://github.com/localsend/localsend) của Tien Do Nam (Giấy phép Apache 2.0).
   Tài liệu gốc tiếng Anh: [README.upstream.md](README.upstream.md).
 
 ## Điểm khác so với LocalSend gốc
 
-| Hạng mục | tsudev-lotus |
+| Hạng mục | Lotus Share |
 | --- | --- |
 | Ngôn ngữ | Tiếng Việt mặc định cho người dùng mới (vẫn chọn được "Theo hệ thống" hoặc 60+ ngôn ngữ khác); bản dịch tiếng Việt đủ 100% khóa, kể cả tên thiết bị ngẫu nhiên kiểu "Xoài Thông Minh" |
 | Tương thích | Giữ nguyên giao thức LocalSend v2: gửi/nhận được với mọi máy đang chạy LocalSend |

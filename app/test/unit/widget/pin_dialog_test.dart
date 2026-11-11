@@ -1,4 +1,4 @@
-// tsudev-lotus: PIN sinh bằng CSPRNG, đủ dài, chỉ dùng bảng chữ không gây nhầm lẫn.
+// lotus-share: PIN sinh bằng CSPRNG, đủ dài, chỉ dùng bảng chữ không gây nhầm lẫn.
 import 'package:localsend_app/widget/dialogs/pin_dialog.dart';
 import 'package:nanoid2/nanoid2.dart';
 import 'package:test/test.dart';

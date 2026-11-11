@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""tsudev-lotus: soát lỗ hổng đã công bố của MỌI phụ thuộc (Rust + Dart) qua cơ sở dữ liệu OSV.dev.
+"""lotus-share: soát lỗ hổng đã công bố của MỌI phụ thuộc (Rust + Dart) qua cơ sở dữ liệu OSV.dev.
 
 Đọc Cargo.lock và pubspec.lock ở gốc repo, gửi danh sách <tên gói, phiên bản> (dữ liệu công khai, không gửi mã
 nguồn hay thông tin máy) tới https://api.osv.dev, rồi so với danh sách chấp nhận rủi ro có ghi chép bên dưới.
@@ -20,7 +20,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 API = "https://api.osv.dev/v1"
-UA = {"Content-Type": "application/json", "User-Agent": "tsudev-lotus-osv-scan"}
+UA = {"Content-Type": "application/json", "User-Agent": "lotus-share-osv-scan"}
 
 # Rủi ro đã chấp nhận: MỖI dòng phải có lý do và hạn xem lại (DD/MM/YYYY). Hết hạn => quét trượt lại.
 ACCEPTED: dict[str, tuple[str, str]] = {

@@ -1,9 +1,9 @@
 # Website lotus.tsudev.com
 
-Trang sản phẩm của tsudev-lotus: [Astro](https://astro.build) dựng trang tĩnh; JavaScript phía trình duyệt chỉ có
+Trang sản phẩm của Lotus Share: [Astro](https://astro.build) dựng trang tĩnh; JavaScript phía trình duyệt chỉ có
 `public/theme.js` (bộ chọn giao diện Sáng/Tối/Hệ thống ở chân trang, mặc định Tối, khóa `tsudev-theme` như tsudev.com;
 nạp chặn trong `<head>`, CSP `script-src 'self'`, không script nội tuyến),
-host trên Cloudflare Workers Static Assets (Worker `tsudev-lotus`, không có mã chạy; tên miền con `lotus.tsudev.com`
+host trên Cloudflare Workers Static Assets (Worker `lotus-share`, không có mã chạy; tên miền con `lotus.tsudev.com`
 của hệ tsudev.com, cấu hình ở `wrangler.jsonc`). Cùng khung với `files.tsudev.com` (repo tsudev-files).
 
 * Tài liệu lấy trực tiếp từ tệp của repo (`SECURITY.md`, `docs/vi/KIEN-TRUC-BAO-MAT.md`, `CHANGELOG.md`, `LICENSE`,
@@ -35,5 +35,5 @@ npm run deploy       # build rồi `wrangler deploy` (cần `npx wrangler login`
 chứng chỉ). Rồi đổi trang chủ của repo:
 
 ```bash
-gh repo edit tsudev-org/tsudev-lotus --homepage https://lotus.tsudev.com
+gh repo edit tsudev-org/lotus-share --homepage https://lotus.tsudev.com
 ```

@@ -111,7 +111,7 @@ Future<bool> isAutoStartHidden() async {
   }
 }
 
-const _windowsRegistryKeyValue = 'tsudev-lotus'; // tsudev-lotus
+const _windowsRegistryKeyValue = 'lotus-share'; // lotus-share
 
 RegistryKey _getWindowsRegistryKey() {
   return Registry.openPath(

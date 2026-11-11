@@ -1,4 +1,4 @@
-# tsudev-lotus: quy trình phát hành và ký mã.
+# lotus-share: quy trình phát hành và ký mã.
 #
 # Kích hoạt: đẩy nhãn `v<phiên bản pubspec>-lotus.<n>` (vd v1.18.2-lotus.1), hoặc chạy tay (build thử, không phát hành).
 # Sản phẩm: Windows (bộ cài + ZIP), Linux (AppImage + tar.gz), Android (APK ký bằng khóa tsudev), macOS (DMG ký ad-hoc),
@@ -87,7 +87,7 @@ jobs:
           $rel = "app\build\windows\x64\runner\Release"
           Copy-Item support\build\windows\x64\*.dll $rel
           New-Item -ItemType Directory -Force dist | Out-Null
-          Compress-Archive -Path "$rel\*" -DestinationPath "dist\tsudev-lotus-$env:V-windows-x86-64.zip"
+          Compress-Archive -Path "$rel\*" -DestinationPath "dist\lotus-share-$env:V-windows-x86-64.zip"
           $payload = "$env:RUNNER_TEMP\inno"; $result = "$env:RUNNER_TEMP\inno-result"
           New-Item -ItemType Directory -Force $payload, $result | Out-Null
           Copy-Item "$rel\*" $payload -Recurse
@@ -95,7 +95,7 @@ jobs:
           # Chưa có chứng thư Authenticode: bộ cài không ký Authenticode, được bảo chứng bằng SHA256SUMS ký Sigstore
           # và chứng thực nguồn gốc (xem đầu tệp). Có chứng thư thì bỏ /DSkipSignTool và truyền /SMySignTool=...
           iscc /DSkipSignTool /DSkipMsixHelper "/DPayloadDir=$payload" "/DResultDir=$result" support\scripts\compile_windows_exe-inno.iss
-          Move-Item "$result\tsudev-lotus-setup.exe" "dist\tsudev-lotus-$env:V-windows-x86-64.exe"
+          Move-Item "$result\lotus-share-setup.exe" "dist\lotus-share-$env:V-windows-x86-64.exe"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: windows
@@ -132,10 +132,10 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p dist AppDir
-          tar -C app/build/linux/x64/release/bundle -czf "dist/tsudev-lotus-$V-linux-x86-64.tar.gz" .
+          tar -C app/build/linux/x64/release/bundle -czf "dist/lotus-share-$V-linux-x86-64.tar.gz" .
           cp -r app/build/linux/x64/release/bundle/* AppDir/
           for s in 32 128 256; do
-            install -Dm644 "app/assets/img/logo-$s.png" "AppDir/usr/share/icons/hicolor/${s}x${s}/apps/tsudev-lotus.png"
+            install -Dm644 "app/assets/img/logo-$s.png" "AppDir/usr/share/icons/hicolor/${s}x${s}/apps/lotus-share.png"
           done
           sed "s/^    version: .*/    version: $V/" support/build/appimage/AppImageBuilder_x86_64.yml > AppImageBuilder.yml
       # appimage-builder chạy apt-get bên trong; máy chủ gói Ubuntu đôi khi đang đồng bộ ("Mirror sync in progress")
@@ -158,7 +158,7 @@ jobs:
           APP_VERSION: ${{ needs.prepare.outputs.version }}
         with:
           recipe: ./AppImageBuilder.yml
-      - run: mv tsudev-lotus-"$V"-linux-x86-64.AppImage* dist/
+      - run: mv lotus-share-"$V"-linux-x86-64.AppImage* dist/
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: linux
@@ -189,6 +189,7 @@ jobs:
           fi
           umask 077
           printf '%s' "$KS_B64" | base64 -d > "$RUNNER_TEMP/release.jks"
+          # Alias "tsudev-lotus" nằm TRONG keystore thật (tạo 10/11/2026) - giữ nguyên, đổi là hỏng ký APK.
           printf 'storePassword=%s\nkeyPassword=%s\nkeyAlias=tsudev-lotus\nstoreFile=%s\n' "$KS_PW" "$KS_PW" "$RUNNER_TEMP/release.jks" > app/android/key.properties
       - name: Cài Flutter (ghim tag + commit)
         run: |
@@ -211,7 +212,7 @@ jobs:
           mkdir -p dist
           apkdir=app/build/app/outputs/flutter-apk
           for pair in "app-release:universal" "app-arm64-v8a-release:arm64-v8a" "app-armeabi-v7a-release:armeabi-v7a" "app-x86_64-release:x86_64"; do
-            src="$apkdir/${pair%%:*}.apk"; dst="dist/tsudev-lotus-$V-android-${pair##*:}.apk"
+            src="$apkdir/${pair%%:*}.apk"; dst="dist/lotus-share-$V-android-${pair##*:}.apk"
             out="$("$apksigner" verify --verbose --print-certs "$src")"
             grep -q 'Verified using v2 scheme (APK Signature Scheme v2): true' <<< "$out" \
               || { echo "$out"; echo "::error::$src chưa ký lược đồ v2"; exit 1; }
@@ -267,11 +268,11 @@ jobs:
       - name: Ký ad-hoc + DMG
         run: |
           set -euo pipefail
-          app="app/build/macos/Build/Products/Release/tsudev-lotus.app"
+          app="app/build/macos/Build/Products/Release/Lotus Share.app"
           codesign --force --deep --sign - "$app"
           codesign --verify --deep --strict "$app"
           mkdir -p dist staging && cp -R "$app" staging/ && ln -s /Applications staging/Applications
-          hdiutil create -volname tsudev-lotus -srcfolder staging -ov -format UDZO "dist/tsudev-lotus-$V-macos.dmg"
+          hdiutil create -volname "Lotus Share" -srcfolder staging -ov -format UDZO "dist/lotus-share-$V-macos.dmg"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: macos
@@ -285,10 +286,10 @@ jobs:
       matrix:
         include:
           - os: ubuntu-22.04
-            exe: tsudev-lotus-cli
+            exe: lotus-share-cli
             out: linux-x86-64
           - os: windows-2025
-            exe: tsudev-lotus-cli.exe
+            exe: lotus-share-cli.exe
             out: windows-x86-64.exe
     runs-on: ${{ matrix.os }}
     timeout-minutes: 40
@@ -299,9 +300,9 @@ jobs:
       - name: Build (Cargo.lock bắt buộc khớp)
         shell: bash
         run: |
-          cargo build --release --locked -p localsend-cli  # gói giữ tên upstream, tệp chạy: tsudev-lotus-cli
+          cargo build --release --locked -p localsend-cli  # gói giữ tên upstream, tệp chạy: lotus-share-cli
           mkdir -p dist
-          cp "target/release/${{ matrix.exe }}" "dist/tsudev-lotus-cli-${{ needs.prepare.outputs.version }}-${{ matrix.out }}"
+          cp "target/release/${{ matrix.exe }}" "dist/lotus-share-cli-${{ needs.prepare.outputs.version }}-${{ matrix.out }}"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: cli-${{ matrix.os }}
@@ -334,7 +335,7 @@ jobs:
         with:
           path: .
           format: spdx-json
-          output-file: dist/tsudev-lotus-${{ needs.prepare.outputs.version }}-sbom.spdx.json
+          output-file: dist/lotus-share-${{ needs.prepare.outputs.version }}-sbom.spdx.json
           upload-artifact: false
           upload-release-assets: false
       - name: SHA256SUMS
@@ -359,7 +360,7 @@ jobs:
         run: |
           set -euo pipefail
           cat > notes.md <<EOF
-          Bản phát hành tsudev-lotus $V (dựa trên LocalSend $V). Kiểm chứng tệp tải về: docs/vi/PHAT-HANH.md.
+          Bản phát hành Lotus Share $V (dựa trên LocalSend $V). Kiểm chứng tệp tải về: docs/vi/PHAT-HANH.md.
 
           - Dấu vân tay chứng thư ký APK (SHA-256): \`$ANDROID_CERT_SHA256\`
           - SHA256SUMS.txt ký bằng Sigstore (SHA256SUMS.txt.sigstore.json); mọi tệp có chứng thực nguồn gốc SLSA.
@@ -367,4 +368,4 @@ jobs:
           EOF
           sed -i 's/^          //' notes.md
           gh release create "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --draft --verify-tag \
-            --title "tsudev-lotus $V (${TAG#v$V-})" --notes-file notes.md
+            --title "Lotus Share $V (${TAG#v$V-})" --notes-file notes.md

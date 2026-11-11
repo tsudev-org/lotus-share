@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Báo lỗ hổng bảo mật (riêng tư)
-    url: https://github.com/tsudev-org/tsudev-lotus/security/advisories/new
+    url: https://github.com/tsudev-org/lotus-share/security/advisories/new
     about: KHÔNG báo lỗ hổng bảo mật bằng issue công khai - xem SECURITY.md
 
   - name: Tải bản mới nhất
@@ -9,5 +9,5 @@ contact_links:
     about: Lỗi có thể đã được sửa ở bản mới - hãy cập nhật trước khi báo
 
   - name: Hướng dẫn đóng góp
-    url: https://github.com/tsudev-org/tsudev-lotus/blob/main/CONTRIBUTING.md
+    url: https://github.com/tsudev-org/lotus-share/blob/main/CONTRIBUTING.md
     about: Quy trình báo lỗi, đề xuất tính năng và gửi mã
