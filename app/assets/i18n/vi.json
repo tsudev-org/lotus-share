@@ -599,6 +599,7 @@
     "selectMultipleApps": "Chọn nhiều ứng dụng",
     "error": "Lỗi: {message}",
     "pinTooShort": "Mã PIN cần ít nhất {n} ký tự",
+    "donationVoluntary": "Ủng hộ tự nguyện, 100% tới nhà phát triển, không mở khóa tính năng nào.",
     "addApps(param=n)": {
       "other": "Thêm {n} ứng dụng"
     }
