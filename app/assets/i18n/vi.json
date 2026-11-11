@@ -154,7 +154,7 @@
     },
     "other": {
       "title": "Khác",
-      "support": "Ủng hộ tác giả LocalSend",
+      "support": "Ủng hộ tsudev-lotus",
       "donate": "Ủng hộ",
       "privacyPolicy": "Chính sách quyền riêng tư",
       "termsOfUse": "Điều khoản sử dụng"
@@ -314,7 +314,7 @@
   },
   "donationPage": {
     "title": "Ủng hộ",
-    "info": "tsudev-lotus dựa trên LocalSend - ứng dụng miễn phí, mã nguồn mở, không quảng cáo. Nếu bạn thích, hãy ủng hộ tác giả gốc của LocalSend bằng một khoản đóng góp.",
+    "info": "tsudev-lotus miễn phí, mã nguồn mở, không quảng cáo. Nếu thấy hữu ích, hãy theo dõi và ủng hộ dự án qua các trang của tsudev dưới đây.",
     "donate": "Ủng hộ {amount}",
     "thanks": "Xin chân thành cảm ơn!",
     "restore": "Khôi phục giao dịch"

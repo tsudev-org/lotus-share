@@ -59,8 +59,3 @@ bool checkPlatformWithFileSystem() {
 bool checkPlatformIsNotWaylandDesktop() {
   return !checkPlatform([TargetPlatform.linux]) || !_isWayland;
 }
-
-/// This platform supports payment (in-app purchase)
-bool checkPlatformSupportPayment() {
-  return checkPlatform([TargetPlatform.android, TargetPlatform.iOS, TargetPlatform.macOS]);
-}

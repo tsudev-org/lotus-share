@@ -6,10 +6,10 @@ body:
   - type: checkboxes
     id: confirm
     attributes:
-      label: Read [this](https://github.com/localsend/localsend/issues/528) before anything
+      label: Đọc [hướng dẫn đóng góp](https://github.com/tsudev-org/tsudev-lotus/blob/main/CONTRIBUTING.md) trước
       options:
-        - label: I have read it.
-        - label: Issues not fitting are closed.
+        - label: Tôi đã đọc.
+        - label: Báo cáo không đúng mẫu sẽ bị đóng.
 
   - type: checkboxes
     id: duplication
@@ -25,8 +25,8 @@ body:
     id: app-version
     attributes:
       label: App version
-      description: Enter the LocalSend app version shown at the bottom of the Settings screen
-      placeholder: 1.18.2 (64)
+      description: Phiên bản tsudev-lotus ghi ở cuối màn hình Cài đặt
+      placeholder: 1.18.2-lotus.2
     validations:
       required: true
 

@@ -152,7 +152,7 @@
     },
     "other": {
       "title": "Overig",
-      "support": "LocalSend steunen",
+      "support": "tsudev-lotus steunen",
       "donate": "Doneren",
       "privacyPolicy": "Privacybeleid",
       "termsOfUse": "Gebruiksvoorwaarden"
@@ -312,7 +312,7 @@
   },
   "donationPage": {
     "title": "Doneren",
-    "info": "LocalSend is gratis, opensource en advertentievrij. Als je de app graag gebruikt, kun je de ontwikkeling steunen middels een donatie.",
+    "info": "tsudev-lotus is gratis, opensource en advertentievrij. Als je de app graag gebruikt, kun je de ontwikkeling steunen middels een donatie.",
     "donate": "{amount} doneren",
     "thanks": "Ontzettend bedankt!",
     "restore": "Aankoop herstellen"

@@ -546,7 +546,7 @@ class _Translations$donationPage$bn extends Translations$donationPage$en {
   String get title => 'ডোনেট';
   @override
   String get info =>
-      'LocalSend ফ্রী, ওপেন সোর্স এবং কোনো অ্যাড ছাড়াই। আপনি যদি অ্যাপটি পছন্দ করেন তবে আপনি একটি ডোনেশন দিয়ে ডেভেলপমেন্টকে সাপোর্ট করতে পারেন।';
+      'tsudev-lotus ফ্রী, ওপেন সোর্স এবং কোনো অ্যাড ছাড়াই। আপনি যদি অ্যাপটি পছন্দ করেন তবে আপনি একটি ডোনেশন দিয়ে ডেভেলপমেন্টকে সাপোর্ট করতে পারেন।';
   @override
   String donate({required Object amount}) => 'ডোনেট ${amount}';
   @override

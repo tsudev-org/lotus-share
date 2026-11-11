@@ -152,7 +152,7 @@
     },
     "other": {
       "title": "Muut",
-      "support": "Tue LocalSendia",
+      "support": "Tue tsudev-lotusia",
       "donate": "Lahjoita",
       "privacyPolicy": "Tietosuojakäytäntö",
       "termsOfUse": "Käyttöehdot"
@@ -312,7 +312,7 @@
   },
   "donationPage": {
     "title": "Lahjoita",
-    "info": "LocalSend on ilmainen, avoimen lähdekoodin sovellus ilman mainoksia. Voit tukea projektia lahjoituksella, jos pidät sovelluksesta.",
+    "info": "tsudev-lotus on ilmainen, avoimen lähdekoodin sovellus ilman mainoksia. Voit tukea projektia lahjoituksella, jos pidät sovelluksesta.",
     "donate": "Lahjoita {amount}",
     "thanks": "Suuret kiitokset!",
     "restore": "Palauta ostos"

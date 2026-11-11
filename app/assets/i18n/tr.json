@@ -152,7 +152,7 @@
     },
     "other": {
       "title": "Diğer",
-      "support": "LocalSend'i destekle",
+      "support": "tsudev-lotus'i destekle",
       "donate": "Bağış yap",
       "privacyPolicy": "Gizlilik politikası",
       "termsOfUse": "Kullanım koşulları"
@@ -312,7 +312,7 @@
   },
   "donationPage": {
     "title": "Bağış yap",
-    "info": "LocalSend ücretsiz, açık kaynaklı ve reklamsız bir uygulamadır. Eğer uygulamayı beğendiyseniz, bağış yaparak uygulamanın gelişimine katkıda bulunabilirsiniz.",
+    "info": "tsudev-lotus ücretsiz, açık kaynaklı ve reklamsız bir uygulamadır. Eğer uygulamayı beğendiyseniz, bağış yaparak uygulamanın gelişimine katkıda bulunabilirsiniz.",
     "donate": "Bağışta bulun {amount}",
     "thanks": "Çok teşekkür ederim!",
     "restore": "Satın alınanları geri yükle"

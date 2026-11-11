@@ -414,7 +414,7 @@ class _Translations$receiveOptionsPage$gl extends Translations$receiveOptionsPag
   @override
   String get destination => _root.settingsTab.receive.destination;
   @override
-  String get appDirectory => '(Cartafol Localsend)';
+  String get appDirectory => '(Cartafol tsudev-lotus)';
   @override
   String get saveToGallery => _root.settingsTab.receive.saveToGallery;
   @override
@@ -973,7 +973,7 @@ class _Translations$settingsTab$other$gl extends Translations$settingsTab$other$
   @override
   String get title => 'Outros';
   @override
-  String get support => 'Apoia a LocalSend';
+  String get support => 'Apoia a tsudev-lotus';
   @override
   String get donate => 'Doar';
   @override

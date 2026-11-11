@@ -152,7 +152,7 @@
     },
     "other": {
       "title": "Iba Pa",
-      "support": "Suportahan ang LocalSend",
+      "support": "Suportahan ang tsudev-lotus",
       "donate": "Mag-donate",
       "privacyPolicy": "Patakaran sa Privacy",
       "termsOfUse": "Mga Tuntunin sa Paggamit"
@@ -312,7 +312,7 @@
   },
   "donationPage": {
     "title": "Mag-donate",
-    "info": "Ang LocalSend ay libre, open-source, at walang anumang mga ad. Kung iyong nagustuhan ang app, maaari mong suportahan ang development sa pamamagitan ng donasyon.",
+    "info": "Ang tsudev-lotus ay libre, open-source, at walang anumang mga ad. Kung iyong nagustuhan ang app, maaari mong suportahan ang development sa pamamagitan ng donasyon.",
     "donate": "Mag-donate ng {amount}",
     "thanks": "Maraming salamat!",
     "restore": "Restore purchase"

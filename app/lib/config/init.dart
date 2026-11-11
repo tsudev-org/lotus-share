@@ -19,7 +19,6 @@ import 'package:localsend_app/provider/network/server/server_provider.dart';
 import 'package:localsend_app/provider/network/webrtc/signaling_provider.dart';
 import 'package:localsend_app/provider/persistence_provider.dart';
 // [FOSS_REMOVE_START]
-import 'package:localsend_app/provider/purchase_provider.dart';
 // [FOSS_REMOVE_END]
 import 'package:localsend_app/provider/selection/selected_sending_files_provider.dart';
 import 'package:localsend_app/provider/settings_provider.dart';
@@ -321,12 +320,7 @@ Future<void> postInit(BuildContext context, Ref ref, bool appStart) async {
     await ref.read(persistenceProvider).setWhatsNew(version.version);
   });
 
-  // [FOSS_REMOVE_START]
-  if (checkPlatformSupportPayment()) {
-    // ignore: unawaited_futures
-    ref.redux(purchaseProvider).dispatchAsync(InitPurchaseStream());
-  }
-  // [FOSS_REMOVE_END]
+  // tsudev-lotus: bỏ mua trong ứng dụng (gắn tài khoản cửa hàng của bản gốc).
 }
 
 class _HandleShareIntentAction extends AsyncGlobalAction {

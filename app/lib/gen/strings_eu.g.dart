@@ -544,7 +544,7 @@ class _Translations$donationPage$eu extends Translations$donationPage$en {
   String get title => 'Egin dohaintza';
   @override
   String get info =>
-      'LocalSend doakoa da, kode irekikoa eta iragarkirik gabea. Aplikazioa gustuko baduzu, garapena dohaintza batekin lagun dezakezu.';
+      'tsudev-lotus doakoa da, kode irekikoa eta iragarkirik gabea. Aplikazioa gustuko baduzu, garapena dohaintza batekin lagun dezakezu.';
   @override
   String donate({required Object amount}) => 'Eman ${amount}';
   @override
@@ -973,7 +973,7 @@ class _Translations$settingsTab$other$eu extends Translations$settingsTab$other$
   @override
   String get title => 'Besteak';
   @override
-  String get support => 'LocalSend Lagundu';
+  String get support => 'tsudev-lotus Lagundu';
   @override
   String get donate => 'Dohaintza egin';
   @override

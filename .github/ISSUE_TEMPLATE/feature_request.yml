@@ -6,10 +6,10 @@ body:
   - type: checkboxes
     id: confirm
     attributes:
-      label: Read [this](https://github.com/localsend/localsend/issues/528) before anything
+      label: Đọc [hướng dẫn đóng góp](https://github.com/tsudev-org/tsudev-lotus/blob/main/CONTRIBUTING.md) trước
       options:
-        - label: I have read it.
-        - label: Issues not fitting are closed.
+        - label: Tôi đã đọc.
+        - label: Báo cáo không đúng mẫu sẽ bị đóng.
 
   - type: checkboxes
     id: duplication

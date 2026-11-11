@@ -14,17 +14,7 @@ sed -i '/# \[FOSS_REMOVE\]/d' pubspec.yaml
 sed -i "$REGEX_A" lib/config/init.dart
 sed -i "$REGEX_B" lib/config/init.dart
 
-sed -i "$REGEX_A" lib/pages/donation/donation_page.dart
-sed -i "$REGEX_B" lib/pages/donation/donation_page.dart
-
-sed -i "$REGEX_A" lib/pages/donation/donation_page_vm.dart
-sed -i "$REGEX_B" lib/pages/donation/donation_page_vm.dart
-
-# Remove files completely
-rm lib/provider/purchase_provider.dart
-
-# Refer to donationPageNoopVmProvider instead of donationPageVmProvider
-sed -i 's/donationPageVmProvider/donationPageNoopVmProvider/g' lib/pages/donation/donation_page.dart
+# tsudev-lotus: mua trong ứng dụng (purchase_provider, donation_page_vm) đã gỡ khỏi bản fork.
 
 cd ..
 echo "Proprietary dependencies removed."

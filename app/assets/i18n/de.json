@@ -152,7 +152,7 @@
     },
     "other": {
       "title": "Weitere",
-      "support": "LocalSend unterstützen",
+      "support": "tsudev-lotus unterstützen",
       "donate": "Spenden",
       "privacyPolicy": "Datenschutzerklärung",
       "termsOfUse": "Nutzungsbedingungen"
@@ -312,7 +312,7 @@
   },
   "donationPage": {
     "title": "Spenden",
-    "info": "LocalSend ist kostenlos, quelloffen und frei von Werbung. Wenn dir diese App gefällt, kannst du die Entwicklung mit einer Spende unterstützen.",
+    "info": "tsudev-lotus ist kostenlos, quelloffen und frei von Werbung. Wenn dir diese App gefällt, kannst du die Entwicklung mit einer Spende unterstützen.",
     "donate": "Spende {amount}",
     "thanks": "Vielen Dank für deine Unterstützung!",
     "restore": "Käufe wiederherstellen"

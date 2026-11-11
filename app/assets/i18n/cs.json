@@ -152,7 +152,7 @@
     },
     "other": {
       "title": "Ostatní",
-      "support": "Podpora LocalSend",
+      "support": "Podpora tsudev-lotus",
       "donate": "Darovat",
       "privacyPolicy": "Zásady ochrany osobních údajů",
       "termsOfUse": "Podmínky použití"
@@ -312,7 +312,7 @@
   },
   "donationPage": {
     "title": "Darovat",
-    "info": "LocalSend je zdarma, open source a bez reklam. Pokud se vám aplikace líbí, můžete její vývoj podpořit darem.",
+    "info": "tsudev-lotus je zdarma, open source a bez reklam. Pokud se vám aplikace líbí, můžete její vývoj podpořit darem.",
     "donate": "Darovat {amount}",
     "thanks": "Děkuji mnohokrát!",
     "restore": "Obnovit"

@@ -628,8 +628,9 @@ class Translations$donationPage$en {
   /// en: 'Donate'
   String get title => 'Donate';
 
-  /// en: 'LocalSend is free, open-source and without any ads. If you like the app, you can support the development with a donation.'
-  String get info => 'LocalSend is free, open-source and without any ads. If you like the app, you can support the development with a donation.';
+  /// en: 'tsudev-lotus is free, open-source and without any ads. If you like the app, follow and support the project on the tsudev pages below.'
+  String get info =>
+      'tsudev-lotus is free, open-source and without any ads. If you like the app, follow and support the project on the tsudev pages below.';
 
   /// en: 'Donate {amount}'
   String donate({required Object amount}) => 'Donate ${amount}';
@@ -1280,8 +1281,8 @@ class Translations$settingsTab$other$en {
   /// en: 'Other'
   String get title => 'Other';
 
-  /// en: 'Support LocalSend'
-  String get support => 'Support LocalSend';
+  /// en: 'Support tsudev-lotus'
+  String get support => 'Support tsudev-lotus';
 
   /// en: 'Donate'
   String get donate => 'Donate';

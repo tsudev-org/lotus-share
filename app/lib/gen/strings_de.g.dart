@@ -544,7 +544,7 @@ class _Translations$donationPage$de extends Translations$donationPage$en {
   String get title => 'Spenden';
   @override
   String get info =>
-      'LocalSend ist kostenlos, quelloffen und frei von Werbung. Wenn dir diese App gefällt, kannst du die Entwicklung mit einer Spende unterstützen.';
+      'tsudev-lotus ist kostenlos, quelloffen und frei von Werbung. Wenn dir diese App gefällt, kannst du die Entwicklung mit einer Spende unterstützen.';
   @override
   String donate({required Object amount}) => 'Spende ${amount}';
   @override
@@ -973,7 +973,7 @@ class _Translations$settingsTab$other$de extends Translations$settingsTab$other$
   @override
   String get title => 'Weitere';
   @override
-  String get support => 'LocalSend unterstützen';
+  String get support => 'tsudev-lotus unterstützen';
   @override
   String get donate => 'Spenden';
   @override

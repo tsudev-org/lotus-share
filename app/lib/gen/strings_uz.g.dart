@@ -544,7 +544,7 @@ class _Translations$donationPage$uz extends Translations$donationPage$en {
   String get title => 'Xayriya';
   @override
   String get info =>
-      'LocalSend bepul, ochiq manbali va reklamasiz. Agar ilova sizga yoqqan boʻlsa, xayriya bilan rivojlanishni qoʻllab-quvvatlashingiz mumkin.';
+      'tsudev-lotus bepul, ochiq manbali va reklamasiz. Agar ilova sizga yoqqan boʻlsa, xayriya bilan rivojlanishni qoʻllab-quvvatlashingiz mumkin.';
   @override
   String donate({required Object amount}) => '${amount} xayriya qilish';
   @override
@@ -973,7 +973,7 @@ class _Translations$settingsTab$other$uz extends Translations$settingsTab$other$
   @override
   String get title => 'Boshqa';
   @override
-  String get support => 'LocalSendni qoʻllab-quvvatlash';
+  String get support => 'tsudev-lotusni qoʻllab-quvvatlash';
   @override
   String get donate => 'Xayriya';
   @override

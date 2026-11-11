@@ -546,7 +546,7 @@ class _Translations$donationPage$ta extends Translations$donationPage$en {
   String get title => 'தானம்';
   @override
   String get info =>
-      'LocalSend இலவசம், திறந்த மூலமாக உள்ளது மற்றும் விளம்பரங்களின்றி உள்ளது. செயலியை நீங்கள் விரும்பினால், ஒரு தானம் மூலம் வளர்ச்சியை ஆதரிக்கலாம்.';
+      'tsudev-lotus இலவசம், திறந்த மூலமாக உள்ளது மற்றும் விளம்பரங்களின்றி உள்ளது. செயலியை நீங்கள் விரும்பினால், ஒரு தானம் மூலம் வளர்ச்சியை ஆதரிக்கலாம்.';
   @override
   String donate({required Object amount}) => '${amount} தானம் செய்யவும்';
   @override
@@ -1058,7 +1058,7 @@ class _Translations$settingsTab$other$ta extends Translations$settingsTab$other$
   @override
   String get title => 'மற்றவை';
   @override
-  String get support => 'LocalSend ஐ ஆதரிக்க';
+  String get support => 'tsudev-lotus ஐ ஆதரிக்க';
   @override
   String get donate => 'நன்கொடை';
   @override

@@ -546,7 +546,7 @@ class _Translations$donationPage$km extends Translations$donationPage$en {
   String get title => 'ការឧបត្ថម្ភ';
   @override
   String get info =>
-      'LocalSend ជាកម្មវិធីដែលឥតគិតថ្លៃ, បើកបង្ហាញប្រភពកូដជាសាធារណៈ និងមិនមានការបង្ហាញនូវផ្ទាំងពាណិជ្ជកម្មរំខានឡើយ។ ប្រសិនបើអ្នកពេញចិត្តកម្មវិធីនេះ​ និងចង់ជួយពួកយើង, អ្នកអាចចូលរួមលើកស្ទួយការអភិវឌ្ឍន៍កម្មវិធីនេះជាមួយពួកយើងតាមរយៈការឧបត្ថម្ភជាថវិកា។';
+      'tsudev-lotus ជាកម្មវិធីដែលឥតគិតថ្លៃ, បើកបង្ហាញប្រភពកូដជាសាធារណៈ និងមិនមានការបង្ហាញនូវផ្ទាំងពាណិជ្ជកម្មរំខានឡើយ។ ប្រសិនបើអ្នកពេញចិត្តកម្មវិធីនេះ​ និងចង់ជួយពួកយើង, អ្នកអាចចូលរួមលើកស្ទួយការអភិវឌ្ឍន៍កម្មវិធីនេះជាមួយពួកយើងតាមរយៈការឧបត្ថម្ភជាថវិកា។';
   @override
   String donate({required Object amount}) => 'ឧបត្ថម្ភចំនួន ${amount}';
   @override
@@ -1058,7 +1058,7 @@ class _Translations$settingsTab$other$km extends Translations$settingsTab$other$
   @override
   String get title => 'ផ្សេងៗ';
   @override
-  String get support => 'ជួយគាំទ្រ LocalSend';
+  String get support => 'ជួយគាំទ្រ tsudev-lotus';
   @override
   String get donate => 'ការឧបត្ថម្ភ';
   @override

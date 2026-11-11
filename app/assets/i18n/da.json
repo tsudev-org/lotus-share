@@ -152,7 +152,7 @@
     },
     "other": {
       "title": "Andet",
-      "support": "Støt LocalSend",
+      "support": "Støt tsudev-lotus",
       "donate": "Donér",
       "privacyPolicy": "Privatlivspolitik",
       "termsOfUse": "Brugsbetingelser"
@@ -312,7 +312,7 @@
   },
   "donationPage": {
     "title": "Donér",
-    "info": "LocalSend er gratis, open source og uden annoncer. Hvis du kan lide appen, kan du støtte udviklingen med en donation.",
+    "info": "tsudev-lotus er gratis, open source og uden annoncer. Hvis du kan lide appen, kan du støtte udviklingen med en donation.",
     "donate": "Donér {amount}",
     "thanks": "Tusind tak for din støtte!",
     "restore": "Gendan køb"
