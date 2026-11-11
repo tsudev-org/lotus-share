@@ -1,0 +1,4 @@
+# Công cụ VietQR cho trang Ủng hộ (tools/ung-ho/tao-vietqr.py). Chạy tay, không chạy trong CI.
+segno==1.6.6
+opencv-python-headless==5.0.0.93
+numpy==2.5.4

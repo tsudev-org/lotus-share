@@ -44,10 +44,15 @@ const forkDefaultSignalingServers = ['wss://signal.lotus.tsudev.com/v1/ws'];
 /// Máy chủ STUN mặc định (Cloudflare, cùng nhà cung cấp hạ tầng với tsudev.com; chỉ dùng khi bật WebRTC).
 const forkDefaultStunServers = ['stun:stun.cloudflare.com:3478'];
 
+/// Trang Ủng hộ chính thức (kênh duy nhất, nguồn dữ liệu website/src/data/ung-ho.json). App chỉ MỞ trang này,
+/// không tự hiển thị số tài khoản/QR (phiếu ~/projects/logs/handover/20261112-01 mục 3).
+const forkSupportPageUrl = 'https://lotus.tsudev.com/ung-ho/';
+
 /// Kênh ủng hộ hiển thị ở trang "Ủng hộ" - nguồn DUY NHẤT. Chỉ chứa địa chỉ thuộc hệ tsudev
 /// (`tsudev.com`, `*.tsudev.com`, `github.com/tsudev-org`); kiểm thử chặn địa chỉ ngoài hệ.
 /// Danh sách trống thì trang Ủng hộ bị ẩn khỏi Cài đặt.
 const forkSupportLinks = <({String label, String url})>[
+  (label: 'lotus.tsudev.com/ung-ho', url: forkSupportPageUrl),
   (label: 'tsudev.com', url: forkEcosystemUrl),
   (label: 'lotus.tsudev.com', url: forkHomepageUrl),
   (label: 'GitHub', url: forkRepositoryUrl),

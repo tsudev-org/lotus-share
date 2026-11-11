@@ -1,0 +1,36 @@
+---
+// Trang Ủng hộ: nơi DUY NHẤT liệt kê cách ủng hộ Lotus Share (ứng dụng, README, nút Sponsor GitHub đều trỏ về đây).
+// Dữ liệu: src/data/ung-ho.json, kiểm lúc build ở src/lib/ung-ho.ts (VietQR, SHA-256 ảnh QR). Chép mô hình từ tsudev-files.
+import TaiLieu from '../components/TaiLieu.astro';
+import { REPO_URL } from '../lib/noi-dung';
+import { KENH } from '../lib/ung-ho';
+---
+<TaiLieu tieuDe="Ủng hộ" moTa="Cách ủng hộ Lotus Share, ứng dụng gửi tệp trong mạng nội bộ miễn phí của hệ sinh thái tsudev: kênh ủng hộ chính thức và những cách đóng góp không tốn tiền." duongDan="/ung-ho/">
+  <h1>Ủng hộ Lotus Share</h1>
+  <p>Lotus Share miễn phí, mã nguồn mở, không quảng cáo, không thu thập dữ liệu. Mọi đóng góp đều dành cho việc phát triển Lotus Share và hệ sinh thái <a href="https://tsudev.com" target="_blank" rel="noopener noreferrer">tsudev</a>.</p>
+
+  <h2 id="kenh-ung-ho">Kênh ủng hộ</h2>
+  {KENH.length > 0 ? (
+    <ul class="kenh-ung-ho">
+      {KENH.map((k) => (
+        <li>
+          {k.url ? <a href={k.url} target="_blank" rel="noopener noreferrer"><strong>{k.ten}</strong></a> : <strong>{k.ten}</strong>}
+          <span>{k.moTa}</span>
+          {k.chiTiet.length > 0 && <span class="kenh-ung-ho__chi-tiet">{k.chiTiet.map((d) => <span>{d}</span>)}</span>}
+          {k.anhQr && <img src={k.anhQr} alt={k.vietqr ? `Mã QR chuyển khoản tới tài khoản ${k.vietqr.soTaiKhoan}` : `Mã QR ${k.ten}`} width="200" height="200" loading="lazy">}
+        </li>
+      ))}
+    </ul>
+    <p>Đây là kênh ủng hộ duy nhất của Lotus Share. Trước khi chuyển, hãy kiểm tra tên chủ tài khoản ứng dụng ngân hàng hiển thị khớp với thông tin trên; đừng chuyển tiền theo số tài khoản hay mã QR ở bất kỳ nơi nào khác tự nhận là tsudev.</p>
+  ) : (
+    <p>Kênh ủng hộ tài chính chính thức đang được chuẩn bị và sẽ được công bố tại trang này. Trang này là nơi duy nhất công bố kênh ủng hộ.</p>
+  )}
+
+  <h2 id="khong-ton-tien">Ủng hộ không tốn tiền</h2>
+  <ul>
+    <li>Gắn sao cho <a href={REPO_URL} target="_blank" rel="noopener noreferrer">mã nguồn trên GitHub</a> để nhiều người tìm thấy dự án hơn.</li>
+    <li><a href={`${REPO_URL}/issues`} target="_blank" rel="noopener noreferrer">Báo lỗi hoặc góp ý</a>: mô tả các bước tái hiện giúp sửa lỗi nhanh hơn nhiều.</li>
+    <li>Góp bản dịch, tài liệu hoặc mã theo <a href={`${REPO_URL}/blob/main/CONTRIBUTING.md`} target="_blank" rel="noopener noreferrer">hướng dẫn đóng góp</a>.</li>
+    <li>Giới thiệu Lotus Share với bạn bè, đồng nghiệp cần gửi tệp giữa các máy mà không muốn tải tệp lên Internet.</li>
+  </ul>
+</TaiLieu>

@@ -1,0 +1,7 @@
+# Kênh ủng hộ (số tài khoản, mã QR) và công cụ sinh mã: chỉ chủ dự án duyệt - chống tráo tài khoản nhận tiền.
+/website/src/data/ung-ho.json @tsudev-tsudev
+/website/src/lib/ung-ho.ts @tsudev-tsudev
+/website/public/ung-ho/ @tsudev-tsudev
+/tools/ung-ho/ @tsudev-tsudev
+/.github/FUNDING.yml @tsudev-tsudev
+/app/lib/config/fork_config.dart @tsudev-tsudev

@@ -3,7 +3,7 @@
 - **Mã phiếu**: 20261112-01
 - **Từ**: phiên tsudev-files-01 (12/11/2026), theo yêu cầu trực tiếp của chủ dự án
 - **Đến**: phiên làm việc trên `tsudev-lotus`
-- **Trạng thái**: CHỜ NHẬN
+- **Trạng thái**: ĐÓNG (12/11/2026, phiên tsudev-lotus-0e - nhánh `feat/ung-ho`)
 
 ## 1. Đọc trước
 
@@ -31,3 +31,14 @@ Theo phiếu gốc mục 4: gỡ kênh cũ, `FUNDING.yml`, trang/nút Ủng hộ
 ## 4. Kết quả xử lý (phiên nhận điền, và ghi một dòng vào phiếu gốc mục 6)
 
 -
+- 12/11/2026 (tsudev-lotus-0e): làm theo bản tham chiếu tsudev-files.
+  - Web: `lotus.tsudev.com/ung-ho/` - dữ liệu một nguồn `website/src/data/ung-ho.json`, kiểm lúc build ở
+    `website/src/lib/ung-ho.ts` (CRC VietQR, NAPAS, BIN + số tài khoản, SHA-256 ảnh QR ghim; chặn tienisto/ko-fi/
+    localsend.org). Đã thử tráo ảnh QR 1 byte -> build dừng. Ảnh `vietqr-vib.svg` chép nguyên (SHA-256 `7209698f...`).
+    Liên kết ở chân mọi trang + sitemap; `tools/ung-ho/tao-vietqr.py` chép kèm.
+  - App: trang Ủng hộ chỉ MỞ trang web (không hiển thị số tài khoản/QR trong app); ẩn trên iOS (App Store).
+    Mua trong ứng dụng + StoreKit + kênh Tienisto đã gỡ từ PR #18. Android hiện chỉ phân phối APK trực tiếp.
+  - GitHub: `.github/FUNDING.yml` -> `custom: https://lotus.tsudev.com/ung-ho/`; `CODEOWNERS` cho dữ liệu, ảnh QR,
+    công cụ, FUNDING, `fork_config.dart`.
+  - Còn lại: nếu sau này phát hành lên Google Play, phải ẩn lối vào Ủng hộ ở bản Play (cờ build) theo mục 3.5.
+
