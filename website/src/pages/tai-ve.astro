@@ -92,6 +92,7 @@ sudo dnf install tsudev-lotus</code></pre>
 
       <h2 id="kiem-tra">Kiểm tra tệp trước khi chạy</h2>
       <p>So mã SHA-256 của tệp bạn tải với mã ghi ở trên (hoặc trong tệp <code>SHA256SUMS.txt</code> của bản phát hành). Tệp <code>SHA256SUMS.txt</code> được ký bằng Sigstore và mọi gói có chứng thực nguồn gốc bản build (SLSA), nên bạn kiểm được gói đến từ đúng quy trình phát hành của repo này: xem <a href={`${REPO_URL}/blob/main/docs/vi/PHAT-HANH.md#4-người-dùng-kiểm-chứng-tệp-tải-về`} target="_blank" rel="noopener noreferrer">hướng dẫn kiểm chứng</a>.</p>
+      <p>Cách bản phát hành được build và ký: <a href="/chinh-sach-ky-ma/">Chính sách ký mã (Code signing policy)</a>.</p>
       <p>Windows (PowerShell):</p>
       <pre tabindex="0"><code>Get-FileHash .\{vd} -Algorithm SHA256</code></pre>
       <p>macOS, Linux:</p>

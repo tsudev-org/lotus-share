@@ -1,8 +1,12 @@
-# Chính sách ký mã - tsudev-lotus
+# Chính sách ký mã (Code signing policy) - tsudev-lotus
 
 > Trạng thái (11/11/2026): bản Windows/macOS **chưa** có chứng thư ký mã thương mại; đang chuẩn bị đăng ký
 > SignPath Foundation (Windows) và Apple Developer ID (macOS/iOS). Kế hoạch: `docs/vi/KE-HOACH-KY-MA-12-2026.md`.
 > Trang này sẽ cập nhật ngay khi việc ký được bật.
+
+Khi được SignPath Foundation duyệt, bản Windows sẽ ký theo câu ghi công sau:
+
+Free code signing provided by [SignPath.io](https://about.signpath.io), certificate by [SignPath Foundation](https://signpath.org)
 
 ## Bản phát hành được tạo thế nào
 
@@ -19,8 +23,14 @@
 
 - Tác giả (committer), người duyệt (reviewer): [@tsudev-tsudev](https://github.com/tsudev-tsudev)
 - Người phê duyệt ký (approver): [@tsudev-tsudev](https://github.com/tsudev-tsudev)
+- Mọi thành viên bật xác thực nhiều lớp (MFA) cho GitHub và SignPath. Mỗi yêu cầu ký được người phê duyệt duyệt tay.
+- Thay đổi từ dự án gốc (LocalSend) chỉ vào `main` qua Pull Request được duyệt như mọi thay đổi khác.
 
 ## Quyền riêng tư
 
 Chính sách quyền riêng tư chung của hệ sinh thái: <https://tsudev.com/privacy>. Ứng dụng chỉ trao đổi dữ liệu trực
 tiếp giữa các thiết bị trong mạng nội bộ; không gửi dữ liệu ra Internet, không có telemetry.
+
+This program will not transfer any information to other networked systems unless specifically requested by the user
+or the person installing or operating it. (Thiết bị chỉ phát tên máy trong mạng nội bộ để tìm nhau khi người dùng mở
+ứng dụng; tính năng WebRTC qua Internet đang tắt.)

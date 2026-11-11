@@ -1,0 +1,6 @@
+---
+import TaiLieu from '../components/TaiLieu.astro';
+import { renderMd } from '../lib/noi-dung';
+const { html } = renderMd('CODE_SIGNING.md');
+---
+<TaiLieu tieuDe="Chính sách ký mã" moTa="Chính sách ký mã (Code signing policy) của tsudev-lotus: cách bản phát hành được build, ký và kiểm chứng; vai trò trong nhóm và quyền riêng tư." duongDan="/chinh-sach-ky-ma/" html={html} nguon="CODE_SIGNING.md" />
