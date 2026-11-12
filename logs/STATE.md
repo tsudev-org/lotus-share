@@ -10,14 +10,12 @@
   phải deploy lại (trang Tải về đọc danh sách tệp lúc build).
 - [ ] winget `tsudev.LotusShare`: chờ Microsoft duyệt PR microsoft/winget-pkgs#478033 (đã đóng #477225 `tsudev.Lotus`). Khi
       merge: chuyển `winget` từ `planned` sang `channels` trong `packaging/package.json`, thêm lệnh winget vào trang Tải về.
-- [ ] **SignPath Foundation: ĐÃ NỘP ĐƠN 12/11/2026, chờ duyệt** (org `tsudev-org` đã bắt buộc 2FA - đo 12/11/2026).
-      Đầu mỗi phiên: hỏi chủ dự án có email từ SignPath chưa (agent không đọc được hộp thư).
-      - SignPath hỏi thêm (thường về quan hệ fork): trả lời theo `docs/vi/HUONG-DAN-KY-MA.md` mục A5.
-      - Được duyệt: chủ dự án làm A6 (MFA SignPath, Trusted Build System GitHub.com, CI user + token) rồi chạy
-        `tools/dat-bien-signpath.sh`. Agent kiểm `gh variable list` / `gh secret list` có đủ `SIGNPATH_*` rồi làm
-        `docs/vi/KE-HOACH-KY-MA-12-2026.md` mục 1.5 (artifact configuration XML, bước ký trong `release-lotus.yml`,
-        build thử) -> 1.6 (trang chính sách ký mã: "đã bật", phát hành bản đã ký, trả lời SmartScreen trên Tải về).
-      - Bị từ chối: ghi lý do vào mục Quyết định, báo chủ dự án; phương án dự phòng ở KE-HOACH mục 1.2.
+- [ ] **Ký mã Windows - SignPath Foundation TỪ CHỐI đơn đầu (email 12/11/2026 21:49)**: chưa đủ tín hiệu được biết đến
+      công khai (sao/fork/người đóng góp GitHub, bài viết, thảo luận bên ngoài), không phải đánh giá chất lượng; mời nộp
+      lại khi dự án được biết đến rộng hơn, hoặc dùng gói SignPath trả phí. CHỜ CHỦ DỰ ÁN chọn: (a) nộp lại sau (đề xuất:
+      sau vài tháng có người dùng, sao GitHub, bài giới thiệu) - giữ nguyên `CODE_SIGNING.md`, `tools/dat-bien-signpath.sh`,
+      KE-HOACH mục 1.5; (b) chứng thư trả phí (tốn tiền - lệch hạ tầng 0 đồng, chủ dự án quyết). Trong lúc chờ: bản Windows
+      chưa ký, trang Tải về hướng dẫn SmartScreen + kiểm SHA256SUMS/chứng thực.
 - [ ] **Tháng 12/2026, khi chủ dự án có MacBook - ký mã Apple (macOS Developer ID + công chứng, iOS TestFlight)**.
       CHƯA làm gì trước thời điểm đó. Chủ dự án làm `docs/vi/HUONG-DAN-KY-MA.md` phần B trên MacBook (B1-B4, xin quyền
       multicast B3 ngay sau khi đăng ký vì Apple duyệt tay; chứng thư theo B5 "Trên MacBook"), chạy
@@ -180,6 +178,8 @@
   bản quyền gốc trong LICENSE/NOTICE/thông tin tệp chạy (Apache-2.0 mục 4c bắt buộc); trong app chỉ hiện ở Giấy phép.
 - 12/11/2026 - Chủ dự án: bản cũ phải hiện hộp thoại bắt buộc cập nhật; áp dụng cả hệ (phiếu 20261112-04). Phiên bản
   2.0.0+65; so sánh bằng số build.
+- 12/11/2026 - SignPath Foundation từ chối đơn đầu (lý do: dự án chưa đủ mức độ được biết đến công khai; mời nộp
+  lại). Bản Windows tiếp tục chưa ký Authenticode; `CODE_SIGNING.md` ghi trạng thái thật.
 - 13/11/2026 - Agent: `v2.0.0-lotus.6` bỏ (CLI sai nhóm multicast, chưa từng công khai), phát hành `v2.0.0-lotus.7` giữ
   build 65. Nhãn chỉ dùng một lần; bản kế tiếp là build 66.
 

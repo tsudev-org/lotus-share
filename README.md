@@ -24,8 +24,8 @@ Chi tiết mô hình bảo mật: [docs/vi/KIEN-TRUC-BAO-MAT.md](docs/vi/KIEN-TR
 
 1. Mỗi thiết bị tự sinh một chứng thư TLS riêng; **dấu vân tay** (SHA-256 của chứng thư) là danh tính của máy.
 2. Các máy tìm nhau bằng gói multicast UDP trong mạng nội bộ (cổng 53420), trả lời bằng HTTPS.
-3. Tệp truyền trực tiếp giữa hai máy qua HTTPS, cả hai phía xác thực chứng thư của nhau (mTLS). Không có dữ liệu
-   nào đi ra Internet.
+3. Tệp truyền trực tiếp giữa hai máy qua HTTPS, cả hai phía xác thực chứng thư của nhau (mTLS). Tệp và tin nhắn
+   không đi ra Internet; Internet chỉ dùng để tải tệp số phiên bản công khai khi mở ứng dụng (`docs/vi/CAP-NHAT-BAT-BUOC.md`).
 
 ## Phát triển
 
