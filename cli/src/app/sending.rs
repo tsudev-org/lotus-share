@@ -42,7 +42,7 @@ pub(super) enum Payload {
 
 /// Returns the `--text` argument, or stdin when it is `-`. A single trailing
 /// line break is dropped from stdin, like shell command substitution does, so
-/// that `echo hi | localsend-cli send --text -` sends "hi".
+/// that `echo hi | lotus-share-cli send --text -` sends "hi".
 pub(super) fn read_text(arg: &str) -> anyhow::Result<Bytes> {
     let text = match arg {
         "-" => {
@@ -367,7 +367,7 @@ impl App {
             return;
         }
         // When the device list is open, the picker takes over its alternate
-        // screen — leaving and re-entering it would flash the main screen.
+        // screen - leaving and re-entering it would flash the main screen.
         let handoff = match std::mem::replace(&mut self.overlay, Overlay::None) {
             Overlay::DeviceList(list) => {
                 list.close_keeping_screen();
@@ -465,7 +465,7 @@ mod tests {
                 .unwrap()
                 .as_nanos();
             let path = std::env::temp_dir().join(format!(
-                "localsend-cli-{name}-{}-{nonce}",
+                "lotus-share-cli-{name}-{}-{nonce}",
                 std::process::id()
             ));
             fs::create_dir_all(&path).unwrap();

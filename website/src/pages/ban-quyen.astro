@@ -1,18 +1,18 @@
 ---
 import TaiLieu from '../components/TaiLieu.astro';
-import { docTep, UPSTREAM_URL } from '../lib/noi-dung';
+import { docTep } from '../lib/noi-dung';
 const giayPhep = docTep('LICENSE');
 const thongBao = docTep('NOTICE');
 ---
-<TaiLieu tieuDe="Bản quyền" moTa="Bản quyền và giấy phép của Lotus Share: giấy phép Apache 2.0 của LocalSend gốc nguyên văn, ghi công tác giả Tien Do Nam và thông báo sửa đổi." duongDan="/ban-quyen/">
+<TaiLieu tieuDe="Bản quyền" moTa="Bản quyền và giấy phép của Lotus Share: toàn văn Giấy phép Apache 2.0, tệp thông báo NOTICE và tóm tắt quyền, nghĩa vụ khi dùng lại mã nguồn." duongDan="/ban-quyen/">
   <h1>Bản quyền</h1>
-  <p>Lotus Share là bản phái sinh của <a href={UPSTREAM_URL} target="_blank" rel="noopener noreferrer">LocalSend</a>, tác phẩm của Tien Do Nam và những người đóng góp cho LocalSend. Toàn bộ mã nguồn, kể cả phần tsudev sửa đổi, phát hành theo Giấy phép Apache 2.0 dưới đây. "LocalSend" là tên của dự án gốc; Lotus Share không liên kết và không được dự án LocalSend bảo trợ.</p>
+  <p>Lotus Share là sản phẩm của tsudev. Toàn bộ mã nguồn phát hành theo Giấy phép Apache 2.0 dưới đây; thông báo bản quyền bắt buộc theo giấy phép nằm trong tệp NOTICE và LICENSE.</p>
 
-  <h2 id="thong-bao-sua-doi">Thông báo sửa đổi (NOTICE, nguyên văn)</h2>
+  <h2 id="thong-bao-sua-doi">Thông báo (NOTICE, nguyên văn)</h2>
   <pre class="giay-phep" tabindex="0" lang="en">{thongBao}</pre>
 
   <h2 id="giay-phep-apache">Giấy phép Apache 2.0 (nguyên văn)</h2>
   <pre class="giay-phep" tabindex="0" lang="en">{giayPhep}</pre>
   <p>Tóm tắt không chính thức: bạn được dùng, sao chép, sửa, phân phối, kể cả cho mục đích thương mại, miễn là giữ thông báo bản quyền, giấy phép và tệp NOTICE, và ghi rõ các tệp đã sửa. Giấy phép cũng cấp quyền sử dụng bằng sáng chế của người đóng góp. Phần mềm được cung cấp "nguyên trạng", không kèm bảo đảm. Khi có khác biệt, bản tiếng Anh ở trên có giá trị.</p>
-  <p>Các thư viện bên thứ ba giữ giấy phép riêng; danh sách đầy đủ xem trong ứng dụng ở Cài đặt, Giới thiệu, <em>Giấy phép thư viện bên thứ ba</em>.</p>
+  <p>Các thư viện bên thứ ba giữ giấy phép riêng; danh sách đầy đủ xem trong ứng dụng ở Cài đặt, Giới thiệu, <em>Giấy phép và bản quyền</em>.</p>
 </TaiLieu>

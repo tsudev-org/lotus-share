@@ -35,6 +35,14 @@
 - Xuất bản kho `pkg.tsudev.com` (linux-packages, Environment `packages`) cần duyệt mỗi lần. Chủ dự án đã cho agent tự
   duyệt (12/11/2026; quyền ghi ở `.claude/settings.local.json` của máy này):
   `gh api -X POST repos/tsudev-org/linux-packages/actions/runs/<id>/pending_deployments -F 'environment_ids[]=26928270657' -f state=approved -f comment=...`
+- [ ] **Đổi tên nội bộ** `localsend_app` -> gói Dart mới, `packages/localsend_isolates`, crate `localsend`/`localsend-cli`/
+      `rust_lib_localsend_app`, package Kotlin + tên kênh `org.localsend.localsend_app/*`, icon khay
+      `org.localsend.localsend_app-tray`, workspace `_localsend_workspace`. Cần sinh lại mã flutter_rust_bridge và build thử
+      `release-lotus.yml` mọi nền tảng. Người dùng không thấy; làm PR riêng.
+- [ ] CLI `lotus-share-cli`: kiểm `phien-ban.json` như ứng dụng (`docs/vi/CAP-NHAT-BAT-BUOC.md` mục 4).
+- [ ] Thử thật lotus.6: laptop Linux (máy bạn báo không thấy) chạy `bash chan-doan-mang.sh` trong gói tar.gz; Windows
+      mở bản 2.0 thấy tên tiếng Việt mới, thấy cả Android + Linux.
+- [ ] Phiếu cả hệ `~/projects/logs/handover/20261112-04_yeu-cau-bat-buoc-cap-nhat-he-sinh-thai.md`: theo dõi mục Kết quả.
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
 
 ## Đang thực hiện
@@ -157,6 +165,13 @@
   của Microsoft, không có trình tự cập nhật hay telemetry.
 
 ## Quyết định quan trọng
+
+- 12/11/2026 - **Chủ dự án: Lotus Share là sản phẩm độc lập**, loại bỏ cấu hình/cơ chế/thông tin LocalSend. THAY THẾ các
+  quyết định cũ "giữ tương thích giao thức LocalSend v2" và "giữ tên nội bộ để gộp upstream": giao thức riêng (cổng
+  53420, `224.0.0.168`, `/api/lotus/v2/`), không gộp upstream nữa, bỏ remote `upstream` + `.standards-upstream`. Giữ dòng
+  bản quyền gốc trong LICENSE/NOTICE/thông tin tệp chạy (Apache-2.0 mục 4c bắt buộc); trong app chỉ hiện ở Giấy phép.
+- 12/11/2026 - Chủ dự án: bản cũ phải hiện hộp thoại bắt buộc cập nhật; áp dụng cả hệ (phiếu 20261112-04). Phiên bản
+  2.0.0+65; so sánh bằng số build.
 
 - 12/11/2026 - Chủ dự án nộp đơn SignPath Foundation (Windows). Ký mã Apple (macOS + iOS) dời sang tháng 12/2026, làm
   khi có MacBook - không đăng ký Apple Developer trước đó.

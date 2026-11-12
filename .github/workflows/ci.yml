@@ -117,13 +117,6 @@ jobs:
           echo "CLI version is $VERSION"
           echo "cli_version=$VERSION" >> $GITHUB_ENV
 
-      - name: Extract version from MSIX helper manifest
-        id: msix_version
-        run: |
-          VERSION=$(grep -o ' Version="[0-9.]*"' support/build/msix/content/AppxManifest.xml | sed 's/ Version="//' | sed 's/"//')
-          echo "MSIX helper version is $VERSION"
-          echo "msix_version=$VERSION" >> $GITHUB_ENV
-
       - name: Extract version from AppImage recipes
         id: appimage_version
         run: |
@@ -134,9 +127,9 @@ jobs:
           echo "AppImage arm_64 version is $VERSION_ARM_64"
           echo "appimage_arm_64_version=$VERSION_ARM_64" >> $GITHUB_ENV
 
-      - name: Compare pubspec, Inno Setup, CLI, MSIX helper and AppImage versions
+      - name: Compare pubspec, Inno Setup, CLI and AppImage versions
         run: |
-          if [ "$pubspec_version" != "$inno_version" ] || [ "$pubspec_version" != "$cli_version" ] || [ "$pubspec_version.0" != "$msix_version" ] || [ "$pubspec_version" != "$appimage_x86_64_version" ] || [ "$pubspec_version" != "$appimage_arm_64_version" ]; then
+          if [ "$pubspec_version" != "$inno_version" ] || [ "$pubspec_version" != "$cli_version" ] || [ "$pubspec_version" != "$appimage_x86_64_version" ] || [ "$pubspec_version" != "$appimage_arm_64_version" ]; then
             echo "Version mismatch detected!"
             exit 1
           else

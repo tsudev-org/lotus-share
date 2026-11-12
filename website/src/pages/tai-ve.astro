@@ -26,7 +26,6 @@ const nhanhPhu = nhanh.slice(4);
         <li><a href="#android">Cài trên Android</a></li>
         <li><a href="#khong-thay-nhau">Không thấy thiết bị?</a></li>
         <li><a href="#chuyen-doi">Đã cài bản tsudev-lotus?</a></li>
-        <li><a href="#tuong-thich">Dùng cùng LocalSend</a></li>
       </ul>
     </nav>
     <article class="van-ban">
@@ -146,7 +145,7 @@ sudo dnf install lotus-share</code></pre>
       <pre tabindex="0"><code>chmod +x lotus-share-&lt;phiên bản&gt;-linux-x86-64.AppImage
 ./lotus-share-&lt;phiên bản&gt;-linux-x86-64.AppImage
 # hoặc cài từ kho APT/RPM để tự cập nhật: xem mục "Cài bằng lệnh"</code></pre>
-      <p>Có tường lửa (ufw, firewalld)? Mở cổng 53317 cho TCP và UDP trong mạng nội bộ: <code>sudo ufw allow from 192.168.0.0/16 to any port 53317</code>.</p>
+      <p>Có tường lửa (ufw, firewalld)? Mở cổng 53420 cho TCP và UDP trong mạng nội bộ: <code>sudo ufw allow from 192.168.0.0/16 to any port 53420</code>.</p>
 
       <h2 id="android">Cài trên Android</h2>
       <ol>
@@ -155,15 +154,16 @@ sudo dnf install lotus-share</code></pre>
       </ol>
       <p>Mọi APK ký bằng khóa của tsudev. Dấu vân tay SHA-256 của chứng thư ký (đối chiếu bằng <code>apksigner verify --print-certs</code>):</p>
       <pre tabindex="0"><code>ad1be603b39b0c211c3ac4c4f890e1c85509209807a029380738089399be1f45</code></pre>
-      <p>Mã định danh ứng dụng là <code>com.tsudev.lotusshare</code>, nên Lotus Share cài song song được với LocalSend.</p>
+      <p>Mã định danh ứng dụng là <code>com.tsudev.lotusshare</code>.</p>
 
       <h2 id="khong-thay-nhau">Mở ứng dụng trên cả hai máy mà không thấy nhau?</h2>
-      <p>Lotus Share tìm thiết bị bằng gói tin multicast và broadcast trong mạng nội bộ, rồi quét mạng nếu sau 1 giây chưa thấy ai. Kiểm tra lần lượt:</p>
+      <p>Lotus Share tìm thiết bị bằng gói tin multicast và broadcast trong mạng nội bộ, rồi quét cả mạng sau 1 giây để tìm máy mà gói tin không tới được. Kiểm tra lần lượt:</p>
       <ol>
         <li><strong>Cùng một mạng</strong>: điện thoại và máy tính nối cùng Wi-Fi (không phải Wi-Fi khách, không dùng dữ liệu di động). Một số bộ phát tách băng tần 2,4 GHz và 5 GHz thành hai mạng.</li>
+        <li><strong>Cùng phiên bản</strong>: mọi thiết bị cần chạy Lotus Share 2.0 trở lên (giao thức riêng từ 2.0). Bản cũ hơn sẽ được yêu cầu cập nhật khi mở.</li>
         <li><strong>Windows</strong>: chạy <em>Lotus Share - Sửa lỗi kết nối</em> trong menu Start. Hay gặp nhất: tường lửa chặn vì mạng đặt là Công cộng, hoặc từng bấm Hủy ở hộp thoại tường lửa.</li>
+        <li><strong>Linux</strong>: tường lửa ufw (Linux Mint) hoặc firewalld (Fedora) chặn kết nối đến. Trong ứng dụng: Cài đặt &gt; Khắc phục sự cố &gt; <em>Sửa lỗi tự động</em>; hoặc chạy <code>bash chan-doan-mang.sh --sua</code> trong thư mục giải nén gói tar.gz.</li>
         <li><strong>Android</strong>: cấp quyền <em>Thiết bị ở gần</em> / <em>Mạng cục bộ</em> khi được hỏi; tắt chế độ tiết kiệm pin cho Lotus Share; tắt VPN hoặc DNS riêng chặn mạng nội bộ.</li>
-        <li><strong>Chỉ chạy một ứng dụng</strong> dùng cổng 53317 trên mỗi máy: tắt LocalSend hoặc bản tsudev-lotus cũ (kể cả biểu tượng ở khay hệ thống).</li>
         <li><strong>Wi-Fi cơ quan, quán cà phê</strong> thường bật <em>cách ly thiết bị</em>: các máy không nói chuyện được với nhau. Cách nhanh nhất: bật điểm phát Wi-Fi trên điện thoại cho máy tính kết nối vào.</li>
         <li>Vẫn không thấy: trên một máy, ở tab Gửi chọn <strong>Gửi thủ công</strong> và nhập địa chỉ IP hiện ở tab Nhận của máy kia.</li>
       </ol>
@@ -176,9 +176,6 @@ sudo dnf install lotus-share</code></pre>
         <li>Đã cài bằng lệnh: APT, DNF và Homebrew tự chuyển sang Lotus Share khi cập nhật (<code>sudo apt upgrade</code>, <code>sudo dnf upgrade</code>, <code>brew upgrade</code>); sau đó gỡ gói chuyển tiếp nếu muốn (<code>sudo apt remove tsudev-lotus</code>). Scoop: <code>scoop uninstall tsudev-lotus</code> rồi <code>scoop install tsudev/lotus-share</code>.</li>
         <li>Thiết bị yêu thích và cài đặt không chuyển sang được: thêm lại thiết bị yêu thích và so dấu vân tay trên hai máy.</li>
       </ol>
-
-      <h2 id="tuong-thich">Dùng cùng LocalSend</h2>
-      <p>Lotus Share nói cùng giao thức với LocalSend, nên máy cài Lotus Share gửi và nhận được với máy cài LocalSend (kể cả bản trên App Store, Google Play). Hai ứng dụng dùng cùng cổng 53317, vì vậy <strong>không chạy cả hai trên cùng một máy</strong> cùng lúc.</p>
     </article>
   </div>
 </Trang>

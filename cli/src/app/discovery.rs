@@ -95,8 +95,8 @@ pub(super) fn refresh_paired_channels(
     }
 }
 
-/// Feeds a device confirmed outside of discovery — it registered with our
-/// HTTP server, or it sent a transfer request — into the discovery store;
+/// Feeds a device confirmed outside of discovery - it registered with our
+/// HTTP server, or it sent a transfer request - into the discovery store;
 /// a device new to the store comes back as a `Discovered` event.
 pub(super) fn device_confirmed(
     discovery: &Arc<DiscoveryHandle>,

@@ -25,4 +25,4 @@ Cần Pillow >= 11 (có WebP + AVIF). Bản một màu (khay, đơn sắc) bỏ 
 ## Quy ước
 
 Logo riêng thay dấu hiệu chung tsudev là ngoại lệ có chủ đích (quyết định chủ dự án 11/11/2026), ghi ở `AGENTS.md`
-mục B.4 và đề xuất sửa `BRAND_ASSETS.md` ở `tsudev-standards` (phiếu `20261112-01_de-xuat-logo-rieng-tung-san-pham.md`). Logo LocalSend không dùng ở bất kỳ đâu.
+mục B.4 và đề xuất sửa `BRAND_ASSETS.md` ở `tsudev-standards` (phiếu `20261112-01_de-xuat-logo-rieng-tung-san-pham.md`).

@@ -19,12 +19,10 @@ class ShortcutWatcher extends StatelessWidget {
     return Shortcuts(
       shortcuts: {
         // LogicalKeySet requires an exact pressed-key match, which fails with Num Lock enabled on Linux.
-        // https://github.com/localsend/localsend/issues/3481
         // The select button on AndroidTV needs this to work
         SingleActivator(LogicalKeyboardKey.select): const ActivateIntent(),
 
         // Add Control+Q binding for Linux
-        // https://github.com/localsend/localsend/issues/194
         if (checkPlatform([TargetPlatform.linux])) SingleActivator(LogicalKeyboardKey.keyQ, control: true): _ExitAppIntent(),
         // Add Control+, to open settings for macOS
         if (checkPlatform([TargetPlatform.macOS])) SingleActivator(LogicalKeyboardKey.comma, meta: true): _OpenSettingsIntent(),

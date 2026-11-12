@@ -139,7 +139,7 @@ void main() {
     final client = HttpClient();
 
     Future<(int, String)> prepareUpload(List<String> fileIds, {required int size}) async {
-      final req = await client.postUrl(Uri.parse('http://127.0.0.1:$_port/api/localsend/v2/prepare-upload'));
+      final req = await client.postUrl(Uri.parse('http://127.0.0.1:$_port/api/lotus/v2/prepare-upload'));
       req.headers.contentType = ContentType.json;
       req.write(
         jsonEncode({
@@ -171,7 +171,7 @@ void main() {
     // [senderAbort] completes (like the sender's cancellation token).
     Future<int> upload(String sessionId, String fileId, String token, int size, {bool abortable = false}) async {
       final req = await client.postUrl(
-        Uri.parse('http://127.0.0.1:$_port/api/localsend/v2/upload?sessionId=$sessionId&fileId=$fileId&token=$token'),
+        Uri.parse('http://127.0.0.1:$_port/api/lotus/v2/upload?sessionId=$sessionId&fileId=$fileId&token=$token'),
       );
       req.headers.contentLength = size;
       var aborted = false;

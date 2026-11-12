@@ -28,14 +28,14 @@ use tokio::sync::{Mutex, mpsc, oneshot};
 /// including the interface scope, which the Rust HTTP client accepts back as
 /// a host.
 pub enum RsServerEvent {
-    /// A device registered itself via `POST /api/localsend/v2/register`.
+    /// A device registered itself via `POST /api/lotus/v2/register`.
     ///
     /// On TLS, this event is only emitted when `info.fingerprint` matches the
     /// fingerprint of the client certificate verified during the mTLS
     /// handshake, so the fingerprint cannot be spoofed.
     Register { ip: String, info: RegisterDtoV2 },
 
-    /// A sender requests to upload files via `POST /api/localsend/v2/prepare-upload`.
+    /// A sender requests to upload files via `POST /api/lotus/v2/prepare-upload`.
     PrepareUpload {
         /// The session ID the upload session will have when the request is accepted.
         session_id: String,
@@ -49,7 +49,7 @@ pub enum RsServerEvent {
         files: HashMap<String, FileDto>,
     },
 
-    /// An accepted file is being uploaded via `POST /api/localsend/v2/upload`.
+    /// An accepted file is being uploaded via `POST /api/lotus/v2/upload`.
     FileUpload {
         session_id: String,
         file_id: String,
@@ -68,13 +68,13 @@ pub enum RsServerEvent {
     /// no longer needs to be answered.
     PrepareUploadAborted { session_id: String },
 
-    /// `POST /api/localsend/v2/cancel` was received for a session this server
+    /// `POST /api/lotus/v2/cancel` was received for a session this server
     /// does not manage: the remote device cancels a transfer this application
     /// is currently *sending* to it. The application must verify that [ip]
     /// matches the target of the send session before cancelling it.
     CancelReceived { ip: String, session_id: String },
 
-    /// A web client requests to download the shared files via `POST /api/localsend/v2/prepare-download`.
+    /// A web client requests to download the shared files via `POST /api/lotus/v2/prepare-download`.
     ///
     /// Must be answered with [RsHttpServer::respond_prepare_download].
     WebPrepareDownload {
@@ -83,7 +83,7 @@ pub enum RsServerEvent {
         user_agent: Option<String>,
     },
 
-    /// A web client downloads an offered file via `GET /api/localsend/v2/download`.
+    /// A web client downloads an offered file via `GET /api/lotus/v2/download`.
     ///
     /// Must be answered with [RsHttpServer::respond_file_download].
     WebFileDownload {
@@ -93,7 +93,7 @@ pub enum RsServerEvent {
     },
 
     /// Another application instance requested the running application to show itself
-    /// via `POST /api/localsend/v2/show`.
+    /// via `POST /api/lotus/v2/show`.
     Show {
         /// Command-line arguments forwarded by the other application instance.
         args: Vec<String>,

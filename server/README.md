@@ -1,3 +1,3 @@
-# LocalSend Signaling Server
+# Lotus Share Signaling Server
 
-A signaling server for LocalSend. Using Rust and WebSockets.
+A signaling server for Lotus Share. Using Rust and WebSockets.

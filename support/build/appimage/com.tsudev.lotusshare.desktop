@@ -7,5 +7,5 @@ Icon=lotus-share
 Type=Application
 Terminal=false
 Categories=Utility;Network;FileTransfer;
-Keywords=share;lan;wifi;localsend;chia sẻ;
+Keywords=share;lan;wifi;lotus;chia sẻ;
 StartupWMClass=com.tsudev.lotusshare

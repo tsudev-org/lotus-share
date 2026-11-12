@@ -6,8 +6,8 @@ fn main() {
         res.set("ProductName", "Lotus Share"); // lotus-share
         res.set("FileDescription", "Lotus Share CLI");
         res.set("CompanyName", "tsudev");
-        res.set("OriginalFilename", "localsend-cli.exe");
-        res.set("InternalName", "localsend-cli");
+        res.set("OriginalFilename", "lotus-share-cli.exe");
+        res.set("InternalName", "lotus-share-cli");
         res.set(
             "LegalCopyright",
             "Copyright (C) 2026 tsudev. LocalSend (C) 2022-2026 Tien Do Nam. Apache-2.0",

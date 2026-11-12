@@ -13,11 +13,10 @@
 #endif
 
 #define MyAppName "Lotus Share"
-#define MyAppVersion "1.18.2"
+#define MyAppVersion "2.0.0"
 #define MyAppPublisher "tsudev"
 #define MyAppURL "https://lotus.tsudev.com"
 #define MyAppExeName "lotus_share.exe"
-#define MyAppMsixHelper "localsend_msix_helper.msix"
 ; lotus-share: tên quy tắc Tường lửa Windows (bộ cài tạo, gỡ cài đặt xóa) và công cụ chẩn đoán mạng đi kèm.
 #define MyFirewallRule "Lotus Share"
 #define MyNetDoctor "chan-doan-mang.ps1"
@@ -25,7 +24,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-; lotus-share: AppId riêng (đổi 12/11/2026 khi đổi tên Lotus Share; bản tsudev-lotus cũ dùng E6A866CD-...). KHÔNG dùng lại GUID của LocalSend.
+; lotus-share: AppId riêng (đổi 12/11/2026 khi đổi tên Lotus Share; bản tsudev-lotus cũ dùng E6A866CD-...).
 AppId={{21D09887-EE8E-478B-B43F-BD492DE6EFE3}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
@@ -117,18 +116,13 @@ Name: "firewall"; Description: "{cm:FirewallTask}"; GroupDescription: "{cm:Firew
 Source: "{#PayloadDir}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#PayloadDir}\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#PayloadDir}\data\*"; DestDir: "{app}\data"; Flags: ignoreversion recursesubdirs createallsubdirs
-; Unsigned builds pass /DSkipMsixHelper: Add-AppxPackage rejects unsigned packages, so ship without the MSIX helper (like the portable zip)
-#ifndef SkipMsixHelper
-Source: "{#PayloadDir}\{#MyAppExeName}.manifest"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#PayloadDir}\{#MyAppMsixHelper}"; DestDir: "{app}"; Flags: ignoreversion
-#endif
 Source: "{#MyNetDoctor}"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}";
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
-; lotus-share: lối tắt công cụ chẩn đoán + sửa lỗi kết nối (tường lửa, loại mạng, card mạng ảo, cổng 53317).
+; lotus-share: lối tắt công cụ chẩn đoán + sửa lỗi kết nối (tường lửa, loại mạng, card mạng ảo, cổng 53420).
 Name: "{autoprograms}\{cm:NetDoctorName}"; Filename: "{sys}\WindowsPowerShell\v1.0\powershell.exe"; Parameters: "-NoProfile -ExecutionPolicy Bypass -File ""{app}\{#MyNetDoctor}"""; IconFilename: "{app}\{#MyAppExeName}"
 
 [Run]
@@ -139,21 +133,14 @@ Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall delete rule name=
 Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall add rule name=""{#MyFirewallRule}"" dir=in action=allow program=""{app}\{#MyAppExeName}"" protocol=TCP profile=any enable=yes"; StatusMsg: "{cm:FirewallStatus}"; Flags: runhidden; Tasks: firewall
 Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall add rule name=""{#MyFirewallRule}"" dir=in action=allow program=""{app}\{#MyAppExeName}"" protocol=UDP profile=any enable=yes"; StatusMsg: "{cm:FirewallStatus}"; Flags: runhidden; Tasks: firewall
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
-#ifndef SkipMsixHelper
-Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command Add-AppxPackage .\localsend_msix_helper.msix -ExternalLocation $(Get-Location)"; WorkingDir: {app}; Flags: nowait runhidden
-#endif
 
 [UninstallRun]
 ; lotus-share: gỡ cài đặt xóa sạch quy tắc tường lửa gắn với tệp chương trình.
 Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall delete rule name=all program=""{app}\{#MyAppExeName}"""; Flags: runhidden; RunOnceId: "LotusShareFirewall"; Check: IsAdminInstallMode
-#ifndef SkipMsixHelper
-Filename: "powershell.exe"; Parameters: "-ExecutionPolicy Bypass -Command Get-AppxPackage LocalSend.App | Remove-AppxPackage"; Flags: nowait runhidden
-#endif
 
 [Code]
 // lotus-share: chuyển từ bản cũ "tsudev-lotus" (đổi tên 12/11/2026, AppId khác nên Inno không tự cài đè). Hai bản
-// cùng chạy thì tranh cổng 53317 và bản mở sau không bật được máy chủ nhận tệp => các thiết bị không thấy nhau.
-// Không đụng tới LocalSend gốc (người dùng có thể chủ ý giữ).
+// cùng chạy thì tranh cổng 53420 và bản mở sau không bật được máy chủ nhận tệp => các thiết bị không thấy nhau.
 const
   LegacyUninstallKey = 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{E6A866CD-B32E-4718-9EF0-CE04D53F9263}_is1';
   RunKey = 'Software\Microsoft\Windows\CurrentVersion\Run';

@@ -20,7 +20,7 @@ pub enum ApiVersion {
 impl<'a> TargetUrl<'a> {
     pub fn to_string(&self) -> String {
         let base = format!(
-            "{}://{}:{}/api/localsend/{}{}",
+            "{}://{}:{}/api/lotus/{}{}",
             self.protocol,
             // A scoped IPv6 address (`fe80::1%3`) cannot be represented in a
             // URL and becomes a synthetic host name instead.
@@ -60,7 +60,7 @@ mod tests {
                 version: ApiVersion::V2,
                 protocol: "https",
                 host: "192.168.1.1".to_string(),
-                port: 53317,
+                port: 53420,
                 path: "/prepare-download",
                 params: &[("pin", pin), ("sessionId", "session-1")],
             }
@@ -86,12 +86,12 @@ mod tests {
             version: ApiVersion::V2,
             protocol: "https",
             host: "192.168.1.1".to_string(),
-            port: 53317,
+            port: 53420,
             path: "/register",
             params: &[],
         }
         .to_string();
-        assert_eq!(url, "https://192.168.1.1:53317/api/localsend/v2/register");
+        assert_eq!(url, "https://192.168.1.1:53420/api/lotus/v2/register");
     }
 
     #[test]
@@ -100,12 +100,12 @@ mod tests {
             version: ApiVersion::V2,
             protocol: "https",
             host: "::1".to_string(),
-            port: 53317,
+            port: 53420,
             path: "/register",
             params: &[],
         }
         .to_string();
-        assert_eq!(url, "https://[::1]:53317/api/localsend/v2/register");
+        assert_eq!(url, "https://[::1]:53420/api/lotus/v2/register");
     }
 
     #[test]
@@ -114,14 +114,14 @@ mod tests {
             version: ApiVersion::V2,
             protocol: "https",
             host: "fe80::1%3".to_string(),
-            port: 53317,
+            port: 53420,
             path: "/register",
             params: &[],
         }
         .to_string();
         assert_eq!(
             url,
-            "https://fe80--1s3.scoped.localsend.internal:53317/api/localsend/v2/register"
+            "https://fe80--1s3.scoped.lotus.internal:53420/api/lotus/v2/register"
         );
     }
 
@@ -131,11 +131,11 @@ mod tests {
             version: ApiVersion::V2,
             protocol: "http",
             host: "192.168.1.1".to_string(),
-            port: 53317,
+            port: 53420,
             path: "/info",
             params: &[],
         }
         .to_string();
-        assert_eq!(url, "http://192.168.1.1:53317/api/localsend/v2/info");
+        assert_eq!(url, "http://192.168.1.1:53420/api/lotus/v2/info");
     }
 }

@@ -37,8 +37,8 @@ xuất tại repo `tsudev-standards` theo `.standards/docs/SYNC.md` mục 1.
 ### B.1. Repo này là gì
 
 - **Loại**: ứng dụng đa nền tảng (Windows, macOS, Linux, Android, iOS) + công cụ dòng lệnh + website sản phẩm
-- **Stack**: Flutter/Dart (giao diện) trên lõi Rust (giao thức, HTTPS, mã hóa); fork của `localsend/localsend`
-  (Apache-2.0). Kiến trúc gốc: [`docs/AGENTS.upstream.md`](docs/AGENTS.upstream.md); bảo mật:
+- **Stack**: Flutter/Dart (giao diện) trên lõi Rust (giao thức, HTTPS, mã hóa); Apache-2.0, sản phẩm độc lập từ 2.0
+  (giao thức, cấu hình, định danh riêng). Kiến trúc: [`docs/KIEN-TRUC-KY-THUAT.md`](docs/KIEN-TRUC-KY-THUAT.md); bảo mật:
   [`docs/vi/KIEN-TRUC-BAO-MAT.md`](docs/vi/KIEN-TRUC-BAO-MAT.md)
 - **Mức phân loại dữ liệu cao nhất**: D3 (tệp người dùng truyền giữa các thiết bị; khóa TLS riêng của thiết bị)
 - **Người liên hệ khi có sự cố**: tsudev-tsudev
@@ -57,8 +57,7 @@ cd .. && python3 -I tools/check_i18n_vi.py   # bản dịch tiếng Việt đủ
 (cd packages/core && cargo test --features full)
 ```
 
-Sau `dart run slang`, slang 4.x định dạng `app/lib/gen/strings.g.dart` khác bản upstream một dòng (dấu `;` cuối
-enum). Chạy `python3 -I tools/fix_slang_format.py` để trả về đúng định dạng upstream, tránh diff nhiễu.
+Sau `dart run slang`, chạy `python3 -I tools/fix_slang_format.py` (dấu `;` cuối enum về dòng riêng), tránh diff nhiễu.
 
 ### B.3. Ranh giới sở hữu file
 
@@ -67,30 +66,34 @@ enum). Chạy `python3 -I tools/fix_slang_format.py` để trả về đúng đ�
 | `app/lib/config/fork_config.dart` (tên, URL, ngôn ngữ mặc định, máy chủ) | Chủ dự án - mọi thay đổi cần duyệt |
 | `app/assets/i18n/vi.json`, nhóm khóa `tsudev` trong `en.json` | Agent/người dịch; giữ đồng bộ khóa với `en.json` |
 | `website/` | Agent website |
-| `tools/`, `docs/vi/`, `.github/workflows/security.yml`, `.github/workflows/fork-ci.yml` | Riêng của fork |
-| Phần còn lại của `app/`, `packages/`, `cli/`, `server/` | Mã upstream - sửa tối thiểu, ghi chú `lotus-share:` tại chỗ sửa |
+| Giao thức mạng (cổng, nhóm multicast, `/api/lotus/`, định dạng gói tin) | Chủ dự án - đổi là thay đổi phá vỡ, phải nâng `toiThieu` ở `website/public/phien-ban.json` |
+| `website/public/phien-ban.json` (bắt buộc cập nhật) | Chủ dự án duyệt khi nâng `toiThieu` |
+| `packages/vendor/` | Phụ thuộc chép nguyên văn; sửa thì ghi chú `lotus-share:` |
+| Phần còn lại | Agent |
 
 ### B.4. Điểm lệch chuẩn đã biết
 
 | Lệch ở đâu | Vì sao | Kế hoạch |
 | --- | --- | --- |
-| Em-dash trong mã + bản dịch kế thừa upstream (71 dòng) | Sửa sẽ gây xung đột mỗi lần gộp upstream | Ngoại lệ 3 của quy ước v3.3.0 (`.standards-upstream`); CI chặn thật, xác minh trực tuyến. Gộp upstream xong MUST nâng `ref` |
-| `namespace`/package Kotlin `org.localsend.localsend_app`, tên kênh nền tảng, gói Dart `localsend_app`, crate `localsend` | Nội bộ, người dùng không thấy; đổi thì mỗi lần gộp upstream xung đột hàng trăm tệp | Giữ. Định danh cài đặt đã đổi: xem `docs/vi/PHAT-HANH.md` mục 1 |
-| Workflow của upstream (`build_*.yml`, `release.yml`) | Cần secret ký mã của LocalSend | Không dùng; phát hành bằng `release-lotus.yml` |
+| Tên nội bộ `localsend_app`, `localsend_isolates`, crate `localsend`, package Kotlin `org.localsend.localsend_app`, tên kênh nền tảng | Người dùng không thấy; đổi cần build thử mọi nền tảng (cầu nối Rust-Flutter sinh mã) | Đổi trong task riêng (logs/STATE.md); định danh cài đặt đã riêng: `docs/vi/PHAT-HANH.md` mục 1 |
 | Tên gói `lotus-share` (Scoop, Homebrew, APT, RPM; winget `tsudev.LotusShare`) thay khuôn `tsudev-<ten>` (PACKAGING.md mục 2) | Đổi tên sản phẩm 12/11/2026 (chủ dự án). Tên cũ `tsudev-lotus` vẫn nhận bản mới: APT gói chuyển tiếp, RPM Provides+Obsoletes, cask/manifest tên cũ deprecate (CI kiểm nâng cấp thật) | Đề xuất ở `tsudev-standards` phiếu `logs/handover/20261112-02_de-xuat-ten-goi-thuong-hieu-rieng.md`; ngoại lệ ghi đích danh `tenRieng` ở `linux-packages/products.json` |
 | Logo riêng Lotus Share làm icon/favicon thay dấu hiệu chung tsudev (BRAND_ASSETS mục 12.3) | Quyết định chủ dự án 11/11/2026: mỗi sản phẩm có điểm nhấn riêng | Đề xuất ở `tsudev-standards` phiếu `logs/handover/20261112-01_de-xuat-logo-rieng-tung-san-pham.md` (đã bổ sung Lotus Share); chân trang website vẫn ghi `© tsudev` |
 
 ### B.5. Việc riêng của repo cần biết trước khi sửa
 
-- Remote `upstream` = `localsend/localsend` (chiều đẩy bị khóa `DISABLED`). Gộp: `git fetch upstream && git merge upstream/main`.
-- Mỗi chỗ sửa trong mã upstream đánh dấu bằng chú thích bắt đầu `lotus-share:` để dễ tìm khi gộp.
-- **Giữ tương thích giao thức LocalSend v2** (cổng 53317, nhóm multicast 224.0.0.167): đó là lý do người dùng
-  chọn sản phẩm - trao đổi tệp được với mọi thiết bị đang chạy LocalSend. Không đổi định dạng gói tin.
-- Mã sinh tự động `app/lib/gen/` ĐƯỢC commit (upstream làm vậy). Sửa JSON dịch xong phải `dart run slang`; CI
+- **Không còn gộp mã LocalSend** (từ 12/11/2026, quyết định chủ dự án): không có remote `upstream`, không tham chiếu
+  giao thức/cấu hình/thương hiệu LocalSend. Lỗ hổng trong mã bắt nguồn từ đó: tự vá.
+- **Giao thức riêng** từ 2.0: cổng 53420, nhóm multicast `224.0.0.168` / `ff12::1075:5ea0`, API `/api/lotus/v2/`
+  (`docs/vi/KHAM-PHA-THIET-BI.md`). Bản 1.x không nói chuyện được với 2.x.
+- **Bắt buộc cập nhật**: ứng dụng đọc `https://lotus.tsudev.com/phien-ban.json` (nguồn `website/public/phien-ban.json`),
+  so số build; xem `docs/vi/CAP-NHAT-BAT-BUOC.md`.
+- Mã sinh tự động `app/lib/gen/` ĐƯỢC commit. Sửa JSON dịch xong phải `dart run slang`; CI
   `fork-ci.yml` chặn nếu mã sinh lệch nguồn.
 - Không bao giờ chép khóa riêng, keystore Android, chứng thư ký mã vào repo (`/secrets` đã ignore).
-- LICENSE (Apache-2.0) giữ nguyên văn; mọi màn hình Giới thiệu phải ghi công LocalSend / Tien Do Nam.
-- Ghi chú upstream: `docs/AGENTS.upstream.md` có toàn bộ hướng dẫn kỹ thuật (isolate, lõi Rust, FOSS build).
+- LICENSE giữ nguyên văn (kể cả dòng bản quyền gốc - Apache-2.0 mục 4c bắt buộc giữ thông báo bản quyền trong mã
+  nguồn); NOTICE + LICENSE hiện trong ứng dụng ở Giới thiệu > Giấy phép và bản quyền (`app/assets/legal/`, test
+  `legal_assets_test.dart` chặn lệch). Không thêm ghi công ở chỗ khác.
+- Hướng dẫn kỹ thuật (isolate, lõi Rust, FOSS build): `docs/KIEN-TRUC-KY-THUAT.md`.
 - Định danh cài đặt (`com.tsudev.lotusshare`, `lotus_share`, AppId Inno) và quy trình phát hành, khóa ký: `docs/vi/PHAT-HANH.md`.
   Khóa ký APK nằm ngoài repo (`~/.config/lotus-share/keys/`); KHÔNG BAO GIỜ commit.
 - Logo/icon: thay `support/brand/lotus-share/logo-source.png` -> `tools/prepare_brand.py` (tách nền, bản 1024, WebP/AVIF,

@@ -105,7 +105,7 @@ impl Default for Options<'_> {
 ///
 /// `name` must already be a single path segment; this does not split paths and
 /// will replace any separator it finds. Callers holding a peer-supplied path
-/// should take the last segment first — see [`sanitize_path`].
+/// should take the last segment first - see [`sanitize_path`].
 pub fn sanitize(name: &str, rules: Rules) -> String {
     sanitize_with(name, rules, &Options::default())
 }
@@ -191,8 +191,8 @@ pub fn is_valid(name: &str, rules: Rules) -> bool {
     true
 }
 
-/// Sanitizes a peer-supplied *path* — a name that may carry directory
-/// components, as protocol v2 allows for folder transfers — into a single
+/// Sanitizes a peer-supplied *path* - a name that may carry directory
+/// components, as protocol v2 allows for folder transfers - into a single
 /// legal file name.
 ///
 /// Only the last segment survives, so `../../etc/passwd` becomes `passwd`:
@@ -261,7 +261,7 @@ mod tests {
                 sanitize("holiday photo (1).jpg", rules),
                 "holiday photo (1).jpg"
             );
-            assert_eq!(sanitize("Ünïcödé — 文件.txt", rules), "Ünïcödé — 文件.txt");
+            assert_eq!(sanitize("Ünïcödé - 文件.txt", rules), "Ünïcödé - 文件.txt");
         }
     }
 
@@ -309,7 +309,7 @@ mod tests {
     }
 
     /// Truncation must not leave a trailing `.` or ` ` behind on Windows-like
-    /// rules — the cut can land right after one.
+    /// rules - the cut can land right after one.
     #[test]
     fn test_truncation_does_not_expose_trailing_run() {
         let dot = format!("{}.{}", "a".repeat(254), "b".repeat(10));
@@ -396,7 +396,7 @@ mod tests {
         );
     }
 
-    /// `is_valid` must agree with `sanitize` (up to NFC normalization) —
+    /// `is_valid` must agree with `sanitize` (up to NFC normalization) -
     /// otherwise a name the UI accepts still gets rewritten on save, or vice
     /// versa.
     #[test]

@@ -17,7 +17,7 @@ ngày 12/11/2026 theo quyết định chủ dự án: bản cũ KHÔNG tự cậ
 dẫn ở trang Tải về, mục "Đã cài bản tsudev-lotus?").
 
 Từ bản sau `1.18.2-lotus.4`, bộ cài Windows tự gỡ im lặng bản `tsudev-lotus` cũ (cùng máy, theo AppId cũ), tắt tiến
-trình `tsudev_lotus.exe` và xóa khóa tự khởi động cũ, vì hai bản chạy song song tranh cổng 53317.
+trình `tsudev_lotus.exe` và xóa khóa tự khởi động cũ, vì hai bản chạy song song tranh cổng 53420.
 
 **Tên tệp phát hành** (từ bản sau `1.18.2-lotus.4`): bộ cài Windows `lotus-share-<ver>-windows-<x86-64|arm-64>-setup.exe`
 (trước đó không có hậu tố `-setup`, dễ nhầm với CLI `.exe`), bản di động `...-windows-<arch>.zip` (giữ nguyên - Scoop
@@ -25,19 +25,22 @@ dùng), kèm `chan-doan-mang.ps1`. Đường dẫn ngắn luôn trỏ bản mớ
 windows-arm|android-universal|linux-arm>` (sinh lúc build website vào `_redirects`, xem `docs/vi/KHAM-PHA-THIET-BI.md`
 cho phần tường lửa của bộ cài).
 
-Vì định danh và thư mục dữ liệu khác nhau, Lotus Share **cài song song** được với LocalSend, nhưng hai ứng dụng
-dùng chung cổng 53317 nên không nên **chạy** cùng lúc trên một máy.
+Từ 2.0 Lotus Share có định danh, thư mục cấu hình (Windows `%APPDATA%\Lotus Share`) và giao thức mạng riêng (cổng
+53420, xem `docs/vi/KHAM-PHA-THIET-BI.md`), không dùng chung gì với ứng dụng khác.
 
 ## 2. Phát hành một bản mới
 
-1. Gộp upstream nếu cần (`git fetch upstream && git merge upstream/main`), nâng `ref` trong `.standards-upstream`.
-2. Phiên bản theo upstream: `app/pubspec.yaml`, `support/scripts/compile_windows_exe-inno.iss` (`MyAppVersion`),
-   `cli/Cargo.toml` phải trùng nhau (CI upstream kiểm). Bản phát hành riêng của fork đánh số `-lotus.<n>`.
+1. Phiên bản: `app/pubspec.yaml` (`x.y.z+<số build>`), `support/scripts/compile_windows_exe-inno.iss` (`MyAppVersion`),
+   `cli/Cargo.toml`, `support/build/appimage/*.yml` phải trùng nhau (CI `packaging` kiểm). Nhãn phát hành
+   `v<x.y.z>-lotus.<n>`. **Số build tăng sau mỗi bản phát hành** - kiểm tra cập nhật so sánh bằng số build.
+2. Cập nhật `website/public/phien-ban.json` (xem `docs/vi/CAP-NHAT-BAT-BUOC.md`): `moiNhat` = số build mới; nâng
+   `toiThieu` khi bản cũ không còn dùng được (đổi giao thức, lỗ hổng bảo mật). Deploy website SAU khi bản phát hành
+   đã Publish, để người dùng bị yêu cầu cập nhật luôn tải được bản mới.
 3. Mọi cổng kiểm xanh trên `main`, rồi gắn nhãn có chú thích và đẩy:
 
    ```bash
-   git tag -a v1.18.2-lotus.1 -m "Lotus Share 1.18.2-lotus.1"
-   git push origin v1.18.2-lotus.1
+   git tag -a v2.0.0-lotus.6 -m "Lotus Share 2.0.0-lotus.6"
+   git push origin v2.0.0-lotus.6
    ```
 
 4. Workflow build Windows (x64 + ARM64), Linux (x64 + ARM64), Android, macOS, CLI (x64 + ARM64); sinh SBOM, `SHA256SUMS.txt`, ký Sigstore, chứng thực SLSA, rồi
@@ -89,6 +92,5 @@ apksigner verify --print-certs lotus-share-<phiên bản>-android-universal.apk 
   Foundation (miễn phí cho mã nguồn mở) hoặc Azure Trusted Signing khi có ngân sách; workflow chỉ cần bỏ `/DSkipSignTool`.
 - **macOS**: ký ad-hoc (dự án Xcode đặt `CODE_SIGN_IDENTITY = "-"`, ký thủ công, không cần đội ký Apple), chưa công
   chứng; Gatekeeper yêu cầu "Vẫn mở". Có Developer ID thì đổi lại ký tự động + `DEVELOPMENT_TEAM`.
-- **iOS**: chưa phát hành được (App Store/TestFlight cần Apple Developer Program). Người dùng iOS dùng LocalSend trên App
-  Store - tương thích giao thức với Lotus Share.
-- **MSIX / menu chia sẻ Windows 11**: bỏ khỏi bản fork (gói thưa cần chứng thư ký mã); menu chuột phải dùng "Gửi tới".
+- **iOS**: chưa phát hành được (App Store/TestFlight cần Apple Developer Program, kế hoạch tháng 12/2026).
+- **MSIX / menu chia sẻ Windows 11**: không dùng (gói thưa cần chứng thư ký mã); menu chuột phải dùng "Gửi tới".

@@ -33,10 +33,10 @@ pub const DEFAULT_MULTICAST_GROUP: Ipv4Addr = Ipv4Addr::new(224, 0, 0, 167);
 /// IPv6 discovery is a LocalSend extension on top of protocol v2.2, so IPv4
 /// remains the baseline and IPv6 is announced in parallel.
 pub const DEFAULT_MULTICAST_GROUP_V6: Ipv6Addr =
-    Ipv6Addr::new(0xff12, 0, 0, 0, 0, 0, 0xfd3a, 0xe420);
+    Ipv6Addr::new(0xff12, 0, 0, 0, 0, 0, 0x1075, 0x5ea0);
 
 /// The default multicast port, identical to the default HTTP server port.
-pub const DEFAULT_PORT: u16 = 53317;
+pub const DEFAULT_PORT: u16 = 53420;
 
 /// Delays before each message of an announcement burst.
 ///
@@ -420,7 +420,7 @@ mod tests {
             device_model: None,
             device_type: Some(DeviceType::Desktop),
             fingerprint: "my-fingerprint".to_string(),
-            port: 53317,
+            port: 53420,
             protocol: ProtocolType::Https,
             download: false,
         };

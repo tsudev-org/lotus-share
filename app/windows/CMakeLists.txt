@@ -75,7 +75,7 @@ set(INSTALL_BUNDLE_LIB_DIR "${CMAKE_INSTALL_PREFIX}")
 install(TARGETS ${BINARY_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}"
   COMPONENT Runtime)
 
-# lotus-share: bỏ MSIX helper của upstream (gói thưa cần chứng thư ký mã của LocalSend); menu chuột phải dùng
+# lotus-share: không dùng MSIX helper (gói thưa cần chứng thư ký mã); menu chuột phải dùng
 # lối tắt "Gửi tới" (context_menu_helper.dart).
 install(FILES
   "${BINARY_NAME}.exe.manifest"

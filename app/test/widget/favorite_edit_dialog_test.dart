@@ -13,7 +13,7 @@ const _favorite = FavoriteDevice(
   id: 'device-id',
   fingerprint: 'fingerprint',
   ip: '192.168.1.2',
-  port: 53317,
+  port: 53420,
   alias: 'Nearby device',
 );
 

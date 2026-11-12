@@ -3,7 +3,7 @@
 //! Accepting a connection fails for reasons that say nothing about the
 //! listener: the peer can go away before the handshake completes, or the
 //! process can momentarily run out of file descriptors. The server has to keep
-//! accepting afterwards — nothing tells the application that it stopped, so a
+//! accepting afterwards - nothing tells the application that it stopped, so a
 //! device would silently stop receiving files until the app is restarted.
 //!
 //! This test lowers the descriptor limit of its own process, which is why it
@@ -43,7 +43,7 @@ async fn info_status(port: u16) -> std::io::Result<String> {
     let mut stream = tokio::net::TcpStream::connect(("127.0.0.1", port)).await?;
     stream
         .write_all(
-            b"GET /api/localsend/v2/info HTTP/1.1\r\nHost: 127.0.0.1\r\nConnection: close\r\n\r\n",
+            b"GET /api/lotus/v2/info HTTP/1.1\r\nHost: 127.0.0.1\r\nConnection: close\r\n\r\n",
         )
         .await?;
     let mut buf = Vec::new();

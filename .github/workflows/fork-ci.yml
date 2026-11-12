@@ -60,10 +60,7 @@ jobs:
           persist-credentials: false
       - name: Bản sao quy ước không bị sửa
         run: ./scripts/sync-standards.sh --check
-      # Em-dash kế thừa upstream được miễn theo dòng (quy ước v3.3.0, ngoại lệ 3, `.standards-upstream`).
       - name: Cổng kiểm quy ước
-        env:
-          STANDARDS_VERIFY_UPSTREAM: '1'   # quy ước v3.3.0: xác minh .standards-upstream với github.com/localsend/localsend
         run: ./scripts/check-standards.sh
 
   website:

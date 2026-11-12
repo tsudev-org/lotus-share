@@ -244,8 +244,8 @@ impl DiscoveryHandle {
     /// multicast does not reach, by sending it a register request.
     ///
     /// On success the device is put into the store (and emitted, as
-    /// `Discovered` or `Updated`), and its full stored state — all known
-    /// channels and logs — is returned.
+    /// `Discovered` or `Updated`), and its full stored state - all known
+    /// channels and logs - is returned.
     /// Returns `None` when the address answered with this device's own
     /// fingerprint, i.e. the device discovered itself.
     pub async fn discover(

@@ -23,8 +23,8 @@ pub(crate) struct MulticastSocket {
 }
 
 /// Binds and joins the multicast groups on every interface that passes
-/// `filter`: one IPv4 socket per interface address, and — when `group_v6` is
-/// set — one IPv6 socket per interface.
+/// `filter`: one IPv4 socket per interface address, and - when `group_v6` is
+/// set - one IPv6 socket per interface.
 ///
 /// One socket per interface is required because a socket only sends on a single
 /// interface.

@@ -20,8 +20,6 @@
 # macOS
 .DS_Store
 
-# Generated at build time by makepri (see support/scripts/compile_windows_msix_helper.ps1)
-/support/build/msix/content/resources.pri
 
 # ================================================================
 # lotus-share: bộ .gitignore chuẩn của hệ tsudev (.standards/templates/gitignore)

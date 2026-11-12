@@ -186,8 +186,8 @@ impl DeviceStore {
     }
 
     /// Adds or updates a device, logging the confirmation on it. Returns the
-    /// event describing what happened — [`DiscoveryEvent::Discovered`] for a
-    /// new device, [`DiscoveryEvent::Updated`] for a known one — and the
+    /// event describing what happened - [`DiscoveryEvent::Discovered`] for a
+    /// new device, [`DiscoveryEvent::Updated`] for a known one - and the
     /// stored state after the merge.
     ///
     /// Channels are merged by endpoint: a rediscovery over a known address
@@ -271,7 +271,7 @@ mod tests {
             fingerprint: fingerprint.to_string(),
             channel: DeviceChannel::Http(HttpChannel {
                 host: host.to_string(),
-                port: 53317,
+                port: 53420,
                 protocol: ProtocolType::Https,
             }),
             download: false,
@@ -388,7 +388,7 @@ mod tests {
         channels.sort();
         assert_eq!(
             channels,
-            [("192.168.0.10", 54000), ("fe80::1%3", 53317)],
+            [("192.168.0.10", 54000), ("fe80::1%3", 53420)],
             "a known address must be replaced, not duplicated"
         );
     }

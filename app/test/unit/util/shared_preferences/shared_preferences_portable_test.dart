@@ -6,15 +6,14 @@ void main() {
   test('should put settings.json next to the executable', () {
     expect(
       buildSettingsPath(
-        executablePath: path.join('opt', 'localsend', 'localsend_app'),
+        executablePath: path.join('opt', 'lotus-share', 'lotus_share'),
         fallbackDirectory: () => fail('The fallback should not be used when the executable is known'),
       ),
-      path.join('opt', 'localsend', 'settings.json'),
+      path.join('opt', 'lotus-share', 'settings.json'),
     );
   });
 
   test('should fall back to the working directory when the executable is unknown', () {
-    // https://github.com/localsend/localsend/issues/3021
     expect(
       buildSettingsPath(
         executablePath: null,

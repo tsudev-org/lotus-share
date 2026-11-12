@@ -148,12 +148,12 @@
             <key>NSMenuItem</key>
             <dict>
                 <key>default</key>
-                <string>Send to LocalSend</string>
+                <string>Gửi bằng Lotus Share</string>
             </dict>
             <key>NSMessage</key>
             <string>handleSendTextService</string>
             <key>NSPortName</key>
-            <string>LocalSend</string>
+            <string>$(PRODUCT_NAME)</string>
             <key>NSSendTypes</key>
             <array>
                 <string>public.plain-text</string>

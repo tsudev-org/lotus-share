@@ -34,7 +34,7 @@ pub enum Command {
     },
 }
 
-/// lotus-share CLI - gửi/nhận tệp trong mạng nội bộ, tương thích LocalSend
+/// lotus-share CLI - gửi/nhận tệp trong mạng nội bộ
 #[derive(Parser)]
 #[command(
     name = "lotus-share-cli",
@@ -58,15 +58,15 @@ pub struct Args {
     version: Option<bool>,
 
     /// Tên thiết bị hiển thị với máy khác [mặc định: config.toml, không có thì tên máy]
-    #[arg(long, env = "LOCALSEND_ALIAS")]
+    #[arg(long, env = "LOTUS_SHARE_ALIAS")]
     pub alias: Option<String>,
 
-    /// Cổng máy chủ HTTP [mặc định: config.toml, không có thì 53317]
-    #[arg(long, env = "LOCALSEND_PORT")]
+    /// Cổng máy chủ HTTP [mặc định: config.toml, không có thì 53420]
+    #[arg(long, env = "LOTUS_SHARE_PORT")]
     pub port: Option<u16>,
 
     /// Thư mục lưu tệp nhận được [mặc định: config.toml, không có thì thư mục Tải về]
-    #[arg(long, env = "LOCALSEND_DESTINATION")]
+    #[arg(long, env = "LOTUS_SHARE_DESTINATION")]
     pub destination: Option<PathBuf>,
 
     #[command(subcommand)]
@@ -86,7 +86,7 @@ const HELP_SECTIONS: &str = "Sự kiện:\n  \
                              Y/N/P  Chấp nhận / Từ chối / Chấp nhận và ghép đôi yêu cầu đến\n  \
                              Ctrl+C Hủy lượt truyền hoặc yêu cầu hiện tại, hoặc thoát khi rảnh\n \
                              \nBiến môi trường:\n  \
-                             XDG_CONFIG_HOME, LOCALSEND_ALIAS, LOCALSEND_PORT, LOCALSEND_DESTINATION";
+                             XDG_CONFIG_HOME, LOTUS_SHARE_ALIAS, LOTUS_SHARE_PORT, LOTUS_SHARE_DESTINATION";
 
 fn main() -> anyhow::Result<()> {
     let args = Args::parse();
@@ -101,7 +101,7 @@ mod tests {
 
     #[test]
     fn accepts_mixed_send_paths() {
-        let args = Args::try_parse_from(["localsend-cli", "send", "one.txt", "two.txt", "backup"])
+        let args = Args::try_parse_from(["lotus-share-cli", "send", "one.txt", "two.txt", "backup"])
             .unwrap();
 
         let Some(Command::Send { to, paths, .. }) = args.command else {
@@ -121,7 +121,7 @@ mod tests {
     #[test]
     fn accepts_a_destination_alias() {
         let args =
-            Args::try_parse_from(["localsend-cli", "send", "--to", "Cute Tomato", "one.txt"])
+            Args::try_parse_from(["lotus-share-cli", "send", "--to", "Cute Tomato", "one.txt"])
                 .unwrap();
 
         let Some(Command::Send { to, paths, .. }) = args.command else {
@@ -134,7 +134,7 @@ mod tests {
     #[test]
     fn accepts_a_destination_ip() {
         let args =
-            Args::try_parse_from(["localsend-cli", "send", "--to", "192.168.27.26", "one.txt"])
+            Args::try_parse_from(["lotus-share-cli", "send", "--to", "192.168.27.26", "one.txt"])
                 .unwrap();
 
         let Some(Command::Send { to, paths, .. }) = args.command else {
@@ -146,13 +146,13 @@ mod tests {
 
     #[test]
     fn requires_at_least_one_send_path() {
-        assert!(Args::try_parse_from(["localsend-cli", "send"]).is_err());
+        assert!(Args::try_parse_from(["lotus-share-cli", "send"]).is_err());
     }
 
     #[test]
     fn accepts_a_text_message() {
         let args =
-            Args::try_parse_from(["localsend-cli", "send", "--to", "Phone", "--text", "hello"])
+            Args::try_parse_from(["lotus-share-cli", "send", "--to", "Phone", "--text", "hello"])
                 .unwrap();
 
         let Some(Command::Send { to, text, paths }) = args.command else {
@@ -167,7 +167,7 @@ mod tests {
     fn rejects_text_together_with_paths() {
         assert!(
             Args::try_parse_from([
-                "localsend-cli",
+                "lotus-share-cli",
                 "send",
                 "--to",
                 "Phone",
@@ -181,12 +181,12 @@ mod tests {
 
     #[test]
     fn requires_a_destination_for_text() {
-        assert!(Args::try_parse_from(["localsend-cli", "send", "--text", "hello"]).is_err());
+        assert!(Args::try_parse_from(["lotus-share-cli", "send", "--text", "hello"]).is_err());
     }
 
     #[test]
     fn accepts_interactive_mode_without_a_command() {
-        let args = Args::try_parse_from(["localsend-cli"]).unwrap();
+        let args = Args::try_parse_from(["lotus-share-cli"]).unwrap();
 
         assert!(args.command.is_none());
     }

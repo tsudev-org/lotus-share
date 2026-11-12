@@ -10,9 +10,6 @@
 Vui lòng gửi: phiên bản, hệ điều hành, các bước tái hiện, mức ảnh hưởng. Chúng tôi phản hồi trong 72 giờ và
 công bố bản vá kèm ghi công (nếu bạn muốn).
 
-Lỗ hổng nằm ở phần mã gốc LocalSend (giao thức, lõi Rust) cũng sẽ được báo lại cho dự án gốc theo
-<https://github.com/localsend/localsend/security>.
-
 ## Phiên bản được hỗ trợ
 
 Chỉ bản phát hành mới nhất tại <https://github.com/tsudev-org/lotus-share/releases/latest>.

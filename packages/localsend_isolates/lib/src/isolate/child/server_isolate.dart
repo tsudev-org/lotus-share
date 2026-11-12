@@ -722,7 +722,6 @@ Future<void> _handleFileUpload({
       if (Platform.isAndroid && path != null) {
         // Scan before reporting success so Android can handle the saved file correctly
         // when it is moved to Trash, allowing another file with the same name.
-        // https://github.com/localsend/localsend/issues/2007
         await scanFileAndroid(path: path);
       }
     }

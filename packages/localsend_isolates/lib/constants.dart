@@ -11,7 +11,7 @@ const protocolVersion = '2.2';
 
 /// The default http server port and
 /// and multicast port.
-const defaultPort = 53317;
+const defaultPort = 53420;
 
 /// The default discovery timeout in milliseconds.
 /// This is the time the discovery server waits for responses.
@@ -21,4 +21,4 @@ const defaultDiscoveryTimeout = 500;
 /// The default multicast group should be 224.0.0.0/24
 /// because on some Android devices this is the only IP range
 /// that can receive UDP multicast messages.
-const defaultMulticastGroup = '224.0.0.167';
+const defaultMulticastGroup = '224.0.0.168';

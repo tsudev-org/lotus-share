@@ -58,7 +58,7 @@ void main() {
         id: '$index',
         fingerprint: '$index',
         ip: '192.168.1.${index + 1}',
-        port: 53317,
+        port: 53420,
         alias: 'Device $index',
       ),
     );
@@ -77,7 +77,7 @@ void main() {
               signalingId: null,
               ip: '192.168.1.100',
               version: '2.0',
-              port: 53317,
+              port: 53420,
               alias: 'This device',
               https: false,
               fingerprint: 'TEST',

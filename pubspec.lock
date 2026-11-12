@@ -308,11 +308,9 @@ packages:
   device_apps:
     dependency: "direct overridden"
     description:
-      path: "."
-      ref: "5dc7956d938541254d2e175766b3b84ea38bb85b"
-      resolved-ref: "5dc7956d938541254d2e175766b3b84ea38bb85b"
-      url: "https://github.com/Tienisto/device_apps.git"
-    source: git
+      path: "packages/vendor/device_apps"
+      relative: true
+    source: path
     version: "2.2.0"
   device_info_plus:
     dependency: transitive
@@ -1194,11 +1192,9 @@ packages:
   permission_handler_windows:
     dependency: "direct overridden"
     description:
-      path: "."
-      ref: "2dadd8afbf81e0e3e4791d7144e689555e58f649"
-      resolved-ref: "2dadd8afbf81e0e3e4791d7144e689555e58f649"
-      url: "https://github.com/localsend/permission_handler_windows_noop.git"
-    source: git
+      path: "packages/vendor/permission_handler_windows"
+      relative: true
+    source: path
     version: "0.1.2"
   petitparser:
     dependency: transitive

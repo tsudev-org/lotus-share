@@ -96,6 +96,11 @@ const _verifyChecksums = 'ls_verify_checksums';
 const _advancedSettingsKey = 'ls_advanced_settings';
 const _whatsNewKey = 'ls_whats_new';
 
+// lotus-share: bắt buộc cập nhật - số build tối thiểu lớn nhất từng biết (giữ khi mất Internet) và bản mới nhất
+// người dùng đã bấm "Để sau".
+const _updateMinBuildKey = 'ls_update_min_build';
+const _updateDismissedBuildKey = 'ls_update_dismissed_build';
+
 final persistenceProvider = Provider<PersistenceService>((ref) {
   throw Exception('persistenceProvider not initialized');
 });
@@ -208,7 +213,7 @@ class PersistenceService {
   static Future<void> _initColorSetting(SharedPreferences prefs, bool supportsDynamicColors) async {
     await prefs.setString(
       _colorKey,
-      ColorMode.localsend.name, // tsudev: tím của hệ tsudev ở mọi nền tảng; màu động Android vẫn chọn được trong Cài đặt
+      ColorMode.lotus.name, // tsudev: tím của hệ tsudev ở mọi nền tảng; màu động Android vẫn chọn được trong Cài đặt
     );
   }
 
@@ -277,6 +282,21 @@ class PersistenceService {
 
   String getAlias() {
     return _prefs.getString(_aliasKey) ?? generateRandomAlias();
+  }
+
+  int? getUpdateMinimumBuild() => _prefs.getInt(_updateMinBuildKey);
+
+  /// Chỉ tăng, không giảm: tệp phiên bản cũ trong bộ nhớ đệm không mở khóa được bản đã bị chặn.
+  Future<void> raiseUpdateMinimumBuild(int build) async {
+    if (build > (getUpdateMinimumBuild() ?? 0)) {
+      await _prefs.setInt(_updateMinBuildKey, build);
+    }
+  }
+
+  int? getUpdateDismissedBuild() => _prefs.getInt(_updateDismissedBuildKey);
+
+  Future<void> setUpdateDismissedBuild(int build) async {
+    await _prefs.setInt(_updateDismissedBuildKey, build);
   }
 
   Future<void> setAlias(String alias) async {

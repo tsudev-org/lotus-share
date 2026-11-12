@@ -27,7 +27,7 @@ import 'package:localsend_app/widget/dialogs/quick_save_notice.dart';
 import 'package:localsend_app/widget/dialogs/text_field_tv.dart';
 import 'package:localsend_app/widget/dialogs/text_field_with_actions.dart';
 import 'package:localsend_app/widget/labeled_checkbox.dart';
-import 'package:localsend_app/widget/local_send_logo.dart';
+import 'package:localsend_app/widget/lotus_share_logo.dart';
 import 'package:localsend_app/widget/responsive_list_view.dart';
 import 'package:localsend_isolates/constants.dart';
 import 'package:localsend_isolates/model/device.dart';
@@ -100,7 +100,7 @@ class SettingsTab extends StatelessWidget {
                         : null,
                   ),
 
-                  /// Wayland does window position handling, so there's no need for it. See [https://github.com/localsend/localsend/issues/544]
+                  /// Wayland does window position handling, so there's no need for it.
                   if (vm.advanced && checkPlatformIsNotWaylandDesktop())
                     _BooleanEntry(
                       label: defaultTargetPlatform == TargetPlatform.windows
@@ -588,7 +588,7 @@ class SettingsTab extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            const LocalSendLogo(withText: true),
+            const LotusShareLogo(withText: true),
             const SizedBox(height: 5),
             ref
                 .watch(versionProvider)
@@ -601,10 +601,6 @@ class SettingsTab extends StatelessWidget {
                 ),
             Text(
               t.tsudev.copyright(year: DateTime.now().year),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              t.tsudev.basedOn,
               textAlign: TextAlign.center,
             ),
             Center(
@@ -797,7 +793,7 @@ extension on ColorMode {
   String get humanName {
     return switch (this) {
       ColorMode.system => t.settingsTab.general.colorOptions.system,
-      ColorMode.localsend => t.appName,
+      ColorMode.lotus => t.appName,
       ColorMode.oled => t.settingsTab.general.colorOptions.oled,
       ColorMode.yaru => 'Yaru',
       ColorMode.custom => t.settingsTab.general.colorOptions.custom,

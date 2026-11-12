@@ -27,7 +27,7 @@ use uuid::Uuid;
 /// Events emitted by the v2 HTTP server that must be handled by the application.
 #[derive(Debug)]
 pub enum ServerEventV2 {
-    /// A device registered itself via `POST /api/localsend/v2/register`.
+    /// A device registered itself via `POST /api/lotus/v2/register`.
     ///
     /// On TLS, this event is only emitted when `info.fingerprint` matches the
     /// SHA-256 fingerprint of the client certificate verified during the mTLS
@@ -40,7 +40,7 @@ pub enum ServerEventV2 {
         info: RegisterDtoV2,
     },
 
-    /// A sender requests to upload files via `POST /api/localsend/v2/prepare-upload`.
+    /// A sender requests to upload files via `POST /api/lotus/v2/prepare-upload`.
     ///
     /// The application must answer on `decision_tx`.
     /// Dropping `decision_tx` results in a 500 response.
@@ -69,7 +69,7 @@ pub enum ServerEventV2 {
         decision_tx: oneshot::Sender<PrepareUploadDecisionV2>,
     },
 
-    /// An accepted file is being uploaded via `POST /api/localsend/v2/upload`.
+    /// An accepted file is being uploaded via `POST /api/lotus/v2/upload`.
     ///
     /// The application must answer on `target_tx` with where the file content
     /// should go (a stream to consume itself, a path, or a file descriptor).
@@ -106,7 +106,7 @@ pub enum ServerEventV2 {
         session_id: String,
     },
 
-    /// `POST /api/localsend/v2/cancel` was received for a session this server
+    /// `POST /api/lotus/v2/cancel` was received for a session this server
     /// does not manage. This happens when the remote device cancels a transfer
     /// that this application is currently *sending* to it: the session ID is
     /// the one issued by the remote device during prepare-upload.
@@ -148,7 +148,7 @@ pub enum SessionEndReasonV2 {
     /// All accepted files reached a final state (finished or failed).
     Finished,
 
-    /// The sender cancelled the session via `POST /api/localsend/v2/cancel`.
+    /// The sender cancelled the session via `POST /api/lotus/v2/cancel`.
     Cancelled,
 }
 
@@ -171,7 +171,7 @@ pub(crate) async fn register(
             // Not awaited: registrations arrive in bursts (every device on the
             // network answers an announcement, and a peer scanning its subnet
             // registers with everyone), so the channel fills up easily. Waiting
-            // would block this request handler — and every later one — until
+            // would block this request handler - and every later one - until
             // the application catches up, which is what makes the device stop
             // answering `register` altogether.
             //

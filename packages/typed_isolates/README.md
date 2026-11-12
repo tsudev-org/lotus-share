@@ -2,7 +2,7 @@
 
 Create isolates and communicate with them in a **type-safe** manner.
 
-Dart's raw `Isolate` / `SendPort` API is untyped — every message is `dynamic`.
+Dart's raw `Isolate` / `SendPort` API is untyped - every message is `dynamic`.
 This package wraps the boilerplate and gives you a connector with statically-typed
 send and receive channels.
 
@@ -10,9 +10,9 @@ send and receive channels.
 
 Three type parameters describe the isolate:
 
-- `R` — the type of messages the main isolate **receives** from the child.
-- `S` — the type of messages the main isolate **sends** to the child.
-- `P` — the type of the parameter passed to the child on startup.
+- `R` - the type of messages the main isolate **receives** from the child.
+- `S` - the type of messages the main isolate **sends** to the child.
+- `P` - the type of the parameter passed to the child on startup.
 
 ## Usage
 
@@ -58,24 +58,24 @@ Future<void> _childTask(
 
 `IsolateConnector` exposes:
 
-- `receiveFromIsolate` — a broadcast `Stream<R>` of messages from the child.
-- `sendToIsolate(S message)` — send a typed message to the child.
-- `isolate` — the underlying `Isolate` (e.g. call `.kill()` to stop it).
+- `receiveFromIsolate` - a broadcast `Stream<R>` of messages from the child.
+- `sendToIsolate(S message)` - send a typed message to the child.
+- `isolate` - the underlying `Isolate` (e.g. call `.kill()` to stop it).
 
 ## Request / response tasks
 
 For a request-and-reply pattern (correlating each response with its request),
 the package ships a small set of DTOs you can use as your `S` / `R` payloads:
 
-- `IsolateTask<T>` — a request carrying an `id` and a `data` payload.
-- `IsolateTaskResult<T>` (`IsolateTaskSuccessResult` / `IsolateTaskErrorResult`) —
+- `IsolateTask<T>` - a request carrying an `id` and a `data` payload.
+- `IsolateTaskResult<T>` (`IsolateTaskSuccessResult` / `IsolateTaskErrorResult`) -
   a single response matched to the request `id`.
-- `IsolateTaskStreamResult<T>` — a streamed response (`.event`, `.done`, `.error`)
+- `IsolateTaskStreamResult<T>` - a streamed response (`.event`, `.done`, `.error`)
   for tasks that emit multiple values over time, plus `IsolateTaskStreamAckResult`
   to acknowledge receipt of an event.
 
 When your connector sends bare `IsolateTask`s and receives
-`IsolateTaskStreamResult`s, `sendTaskAndListenStream` does the whole round-trip —
+`IsolateTaskStreamResult`s, `sendTaskAndListenStream` does the whole round-trip -
 it assigns an id, sends the task, and returns a `Stream` of the results:
 
 ```dart
