@@ -22,6 +22,11 @@
       CHƯA làm gì trước thời điểm đó. Chủ dự án làm `docs/vi/HUONG-DAN-KY-MA.md` phần B trên MacBook (B1-B4, xin quyền
       multicast B3 ngay sau khi đăng ký vì Apple duyệt tay; chứng thư theo B5 "Trên MacBook"), chạy
       `tools/day-khoa-apple.sh`; agent làm `KE-HOACH-KY-MA-12-2026.md` mục 2.2 và chạy thử app trên MacBook thật.
+- [ ] **Thử thật khám phá thiết bị (nhánh `fix/kham-pha-thiet-bi`)** sau khi có bản build: laptop Windows cài mới bằng
+      `-setup.exe` (mạng đặt Công cộng) + điện thoại Android cùng Wi-Fi - hai chiều thấy nhau; kiểm quy tắc tường lửa
+      tạo/xóa khi cài/gỡ, bộ cài gỡ được `tsudev-lotus` cũ (máy phát triển đang có bản cũ ở `C:\Program Files\tsudev-lotus`).
+      Chi tiết + công cụ: `docs/vi/KHAM-PHA-THIET-BI.md`. Bản phát hành kế tiếp: deploy lại website để `/tai/*` trỏ tệp
+      `-setup.exe` mới; kiểm `curl -sI https://lotus.tsudev.com/tai/windows` = 302.
 - [ ] Dựng máy chủ tín hiệu `signal.lotus.tsudev.com` từ `server/` trước khi bật WebRTC (mặc định đã trỏ về đó).
 - Xuất bản kho `pkg.tsudev.com` (linux-packages, Environment `packages`) cần duyệt mỗi lần. Chủ dự án đã cho agent tự
   duyệt (12/11/2026; quyền ghi ở `.claude/settings.local.json` của máy này):
@@ -34,6 +39,13 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 12/11/2026 - **Sửa "không thấy nhau" + chuẩn hóa bộ cài/tải về** (nhánh `fix/kham-pha-thiet-bi`): lõi Rust gửi thêm
+  broadcast có hướng song song multicast + chống trả lời trùng; Android giữ MulticastLock; card mạng ảo/VPN xếp cuối
+  khi quét; bộ cài Inno tạo/xóa quy tắc tường lửa theo chương trình (xóa cả quy tắc Chặn), tự gỡ `tsudev-lotus` cũ, xóa
+  khóa tự khởi động khi gỡ; công cụ `chan-doan-mang.ps1` (menu Start + ZIP; đã chạy thật trên máy phát triển); bộ cài
+  đổi tên `-setup.exe`; website khối Tải nhanh + `/tai/<nen-tang>` (302, `_redirects`) + mục "Không thấy thiết bị?".
+  Phiếu đồng bộ cả hệ: `~/projects/logs/handover/20261112-03_yeu-cau-bo-cai-chuan-tuong-lua-chan-doan-mang.md`.
 
 - 12/11/2026 - Chủ dự án bật bắt buộc 2FA ở org `tsudev-org` (đã đo) và nộp đơn SignPath Foundation. Kho
   `pkg.tsudev.com` đã xuất bản lotus.4 (đo: `lotus-share`/`tsudev-lotus` 1.18.2-4 cho amd64 + arm64, RPM aarch64).

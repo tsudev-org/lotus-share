@@ -59,7 +59,7 @@
 
 1. Agent soạn sẵn câu trả lời cho form trong `logs/handover/` (tên dự án, URL repo, URL trang chính sách, mô tả ngắn,
    giấy phép, số người đóng góp, nền tảng build = GitHub Actions, tệp cần ký: `lotus_share.exe`, các DLL của ứng dụng,
-   bộ cài `lotus-share-<ver>-windows-x86-64.exe`, CLI `lotus-share-cli-<ver>-windows-x86-64.exe`).
+   bộ cài `lotus-share-<ver>-windows-x86-64-setup.exe`, CLI `lotus-share-cli-<ver>-windows-x86-64.exe`).
 2. Chủ dự án nộp ở trang "Apply" (1.1). Thời gian xét duyệt có thể vài tuần - ghi ngày nộp vào `logs/STATE.md`.
 3. Khi được duyệt, SignPath cấp: tài khoản tổ chức (Organization ID), dự án (project slug), chính sách ký
    (signing policy slug, thường `release-signing`), và cách tạo API token cho CI.

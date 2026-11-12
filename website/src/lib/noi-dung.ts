@@ -117,8 +117,9 @@ export interface BanPhatHanh { tag: string; phienBan: string; ngay: string; url:
  * <tên>-<phiên bản>-<nền tảng>-<kiến trúc>.<đuôi>). Thứ tự = thứ tự hiển thị.
  */
 export const NEN_TANG: { ma: string; ten: string; mau: RegExp }[] = [
-  { ma: 'windows-x64', ten: 'Windows 10/11 (x64)', mau: /^lotus-share-\d[^-]*-windows-x86-64\.(exe|zip|msix)$/ },
-  { ma: 'windows-arm64', ten: 'Windows 11 trên ARM (ARM64)', mau: /^lotus-share-\d[^-]*-windows-arm-64\.(exe|zip|msix)$/ },
+  // Bộ cài `-setup.exe` từ bản sau 1.18.2-lotus.4; bản cũ đặt tên bộ cài `-windows-x86-64.exe`, vẫn nhận.
+  { ma: 'windows-x64', ten: 'Windows 10/11 (x64)', mau: /^lotus-share-\d[^-]*-windows-x86-64(-setup)?\.(exe|zip|msix)$/ },
+  { ma: 'windows-arm64', ten: 'Windows 11 trên ARM (ARM64)', mau: /^lotus-share-\d[^-]*-windows-arm-64(-setup)?\.(exe|zip|msix)$/ },
   { ma: 'macos', ten: 'macOS 12+ (chip Apple và Intel)', mau: /\.dmg$/ },
   { ma: 'linux-x64', ten: 'Linux x64', mau: /-linux-x86-64\.(AppImage|deb|rpm|tar\.gz)$/ },
   { ma: 'linux-arm64', ten: 'Linux ARM64', mau: /-linux-arm-64\.(AppImage|deb|rpm|tar\.gz)$/ },
@@ -180,4 +181,31 @@ export function banMoiNhat(): Promise<BanPhatHanh | null> {
     };
   })();
   return boNho;
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// Tải nhanh: một nút cho mỗi hệ điều hành + đường dẫn ngắn cố định lotus.tsudev.com/tai/<ma> (chuyển hướng 302 tới tệp
+// của bản mới nhất, sinh lúc build vào dist/_redirects - xem pages/tai/chuyen-huong.txt.ts và scripts/tao-chuyen-huong.mjs).
+
+export interface GoiNhanh { ma: string; nhan: string; moTa: string; goi: GoiTai }
+
+const NHANH: { ma: string; nhan: string; moTa: string; mau: RegExp }[] = [
+  { ma: 'windows', nhan: 'Windows 10/11', moTa: 'Bộ cài .exe (x64), tự mở tường lửa', mau: /-windows-x86-64(-setup)?\.exe$/ },
+  { ma: 'android', nhan: 'Android', moTa: 'APK (arm64, hầu hết điện thoại)', mau: /-android-arm64-v8a\.apk$/ },
+  { ma: 'macos', nhan: 'macOS 12+', moTa: 'Ảnh đĩa .dmg (Apple và Intel)', mau: /-macos\.dmg$/ },
+  { ma: 'linux', nhan: 'Linux', moTa: 'AppImage x64, chạy ngay', mau: /-linux-x86-64\.AppImage$/ },
+  { ma: 'windows-arm', nhan: 'Windows ARM64', moTa: 'Bộ cài .exe (ARM64)', mau: /^lotus-share-\d[^-]*-windows-arm-64(-setup)?\.exe$/ },
+  { ma: 'android-universal', nhan: 'Android (máy cũ)', moTa: 'APK mọi kiến trúc', mau: /-android-universal\.apk$/ },
+  { ma: 'linux-arm', nhan: 'Linux ARM64', moTa: 'AppImage ARM64', mau: /-linux-arm-64\.AppImage$/ },
+];
+
+/** Gói khuyến nghị theo hệ điều hành, theo thứ tự hiển thị; bỏ qua mục bản phát hành không có tệp tương ứng. */
+export function goiNhanh(ban: BanPhatHanh | null): GoiNhanh[] {
+  if (!ban) return [];
+  const out: GoiNhanh[] = [];
+  for (const n of NHANH) {
+    const goi = ban.goi.find((g) => n.mau.test(g.ten) && !g.ten.includes('-cli-'));
+    if (goi) out.push({ ma: n.ma, nhan: n.nhan, moTa: n.moTa, goi });
+  }
+  return out;
 }

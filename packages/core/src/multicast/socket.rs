@@ -14,6 +14,11 @@ pub(crate) struct MulticastSocket {
     /// The group address announcements are sent to through this socket.
     pub(crate) target: SocketAddr,
 
+    /// lotus-share: the directed broadcast address the same announcement is also sent to
+    /// (IPv4 only), for networks that drop multicast. Receivers bind the wildcard address on
+    /// the same port, so LocalSend v2 devices receive it unchanged.
+    pub(crate) broadcast_target: Option<SocketAddr>,
+
     pub(crate) socket: Arc<UdpSocket>,
 }
 
@@ -45,6 +50,11 @@ pub(crate) fn bind_multicast_sockets(
                 sockets.push(MulticastSocket {
                     description,
                     target: SocketAddr::from(SocketAddrV4::new(group, port)),
+                    // lotus-share: only when SO_BROADCAST could be enabled on this socket.
+                    broadcast_target: interface
+                        .broadcast
+                        .filter(|_| socket2::SockRef::from(&socket).set_broadcast(true).is_ok())
+                        .map(|broadcast| SocketAddr::from(SocketAddrV4::new(broadcast, port))),
                     socket: Arc::new(socket),
                 });
             }
@@ -72,6 +82,7 @@ pub(crate) fn bind_multicast_sockets(
                             0,
                             interface.index,
                         )),
+                        broadcast_target: None, // lotus-share: IPv6 has no broadcast
                         socket: Arc::new(socket),
                     });
                 }

@@ -20,7 +20,7 @@
       "bin": "lotus_share.exe"
     },
     "windows-x64-installer": {
-      "file": "lotus-share-{version}-windows-x86-64.exe",
+      "file": "lotus-share-{version}-windows-x86-64-setup.exe",
       "kind": "installer",
       "installer": "inno"
     },
@@ -30,7 +30,7 @@
       "bin": "lotus_share.exe"
     },
     "windows-arm64-installer": {
-      "file": "lotus-share-{version}-windows-arm-64.exe",
+      "file": "lotus-share-{version}-windows-arm-64-setup.exe",
       "kind": "installer",
       "installer": "inno"
     },
