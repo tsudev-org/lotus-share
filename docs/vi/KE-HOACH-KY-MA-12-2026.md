@@ -4,6 +4,9 @@
 > Hai việc làm cùng đợt vì cùng đụng `.github/workflows/release-lotus.yml`, `docs/vi/PHAT-HANH.md`, trang Tải về, và
 > cùng kết thúc bằng một bản phát hành mới (`v<phiên bản>-lotus.<n+1>`).
 >
+> **Việc của chủ dự án** (đơn SignPath, tài khoản/chứng thư Apple): làm theo [`HUONG-DAN-KY-MA.md`](HUONG-DAN-KY-MA.md).
+> Tài liệu này là phần việc của AGENT. Đối chiếu điều khoản SignPath + tài liệu action lần gần nhất: 12/11/2026.
+>
 > **Bắt buộc trước khi làm**: các chi tiết về SignPath dưới đây viết theo hiểu biết tại thời điểm lập kế hoạch. Agent
 > `MUST` đọc lại trang chính thức (mục 1.1) và sửa tài liệu này nếu điều kiện, URL hay tên tham số đã đổi.
 
@@ -63,10 +66,15 @@
 
 ### 1.5. Tích hợp vào `release-lotus.yml` (sau khi được duyệt)
 
-1. **Secret/biến** (chủ dự án tự đặt - agent bị chặn ghi secret):
-   - Secret `SIGNPATH_API_TOKEN` (token của người dùng CI trong SignPath, quyền "submitter").
-   - Biến repo (Variables, không bí mật): `SIGNPATH_ORGANIZATION_ID`, `SIGNPATH_PROJECT_SLUG`, `SIGNPATH_POLICY_SLUG`.
-   - Agent soạn script `tools/dat-bien-signpath.sh` giống `tools/day-khoa-ky-android.sh` cho chủ dự án chạy.
+1. **Secret/biến** - chủ dự án chạy `tools/dat-bien-signpath.sh` (đã có): secret `SIGNPATH_API_TOKEN` (người dùng CI,
+   vai trò Submitter); Variables `SIGNPATH_ORGANIZATION_ID`, `SIGNPATH_PROJECT_SLUG`, `SIGNPATH_POLICY_SLUG`.
+   Action đã đối chiếu 12/11/2026: `signpath/github-action-submit-signing-request@v3` (ghim SHA khi dùng). Đầu vào:
+   `api-token`, `organization-id`, `project-slug`, `signing-policy-slug`, `artifact-configuration-slug` (tùy chọn),
+   `github-artifact-id` (BẮT BUỘC: `outputs.artifact-id` của bước `actions/upload-artifact` có `id`),
+   `wait-for-completion` (mặc định true), `wait-for-completion-timeout-in-seconds` (mặc định 600 - nâng lên vì người
+   duyệt bấm tay), `output-artifact-directory` (thiếu thì không tải bản đã ký về). `upload-artifact` mặc định nén ZIP nên
+   gốc cấu hình artifact phải là `<zip-file>`; dùng `archive: false` thì đặt `skip-decompress: true`. Repo công khai:
+   không cần thêm quyền `actions: read`.
 2. **Cấu hình artifact trên SignPath** (artifact configuration, XML): khai báo gói ZIP chứa `*.exe`, `*.dll` của
    ứng dụng cần ký Authenticode; cấu hình thứ hai cho bộ cài Inno đơn lẻ.
 3. **Thứ tự ký trong job Windows** (bộ cài nhúng các tệp đã ký nên phải ký 2 lượt):
@@ -79,6 +87,7 @@
    5. Gửi bộ cài lên SignPath ký lượt 2, kiểm lại như bước 3. (Trình gỡ cài đặt nhúng trong bộ cài sẽ không được ký
       Authenticode - chấp nhận được; ghi vào `docs/vi/PHAT-HANH.md` mục 5.)
    6. CLI Windows: thêm vào yêu cầu ký lượt 1 (hoặc lượt riêng).
+   7. Làm cho CẢ job `windows-arm64` và CLI ARM64 (thêm từ 12/11/2026): tệp `*-windows-arm-64.*`.
 4. Mỗi yêu cầu ký cần **người phê duyệt bấm duyệt** trên SignPath (theo chính sách) - workflow sẽ chờ. Ghi vào
    `docs/vi/PHAT-HANH.md` mục 2: sau khi đẩy nhãn, mở SignPath để duyệt.
 5. Thử trước bằng `gh workflow run release-lotus.yml --ref <nhánh>` (build thử, KHÔNG gắn nhãn) - SignPath có chính
@@ -112,8 +121,13 @@
 
 ### 2.2. Agent làm (sau khi có các thứ ở 2.1)
 
-1. Script `tools/day-khoa-apple.sh` cho chủ dự án chạy (đẩy secret): `APPLE_DEVID_P12_BASE64`, `APPLE_DIST_P12_BASE64`,
-   `APPLE_P12_PASSWORD`, `APPLE_ASC_KEY_ID`, `APPLE_ASC_ISSUER_ID`, `APPLE_ASC_KEY_P8_BASE64`, `APPLE_TEAM_ID`.
+1. Script `tools/day-khoa-apple.sh` (đã có) - Secrets `APPLE_DEVID_P12_BASE64`, `APPLE_DIST_P12_BASE64` (.p12 3DES),
+   `APPLE_P12_PASSWORD`, `APPLE_ASC_KEY_P8_BASE64`; Variables (không bí mật) `APPLE_TEAM_ID`, `APPLE_ASC_KEY_ID`,
+   `APPLE_ASC_ISSUER_ID`. Ghim Team ID trong workflow và so với `vars.APPLE_TEAM_ID`.
+   Trước đó dọn mã: bỏ `aps-environment` khỏi `app/ios/Runner/Runner.entitlements` (không dùng push - tránh phải bật
+   Push Notifications); thêm `app/ios/Runner/PrivacyInfo.xcprivacy` (chưa có ở cấp ứng dụng; khai API "required reason"
+   mà mã Dart/Rust dùng, đối chiếu manifest của từng plugin). Quyền multicast phải được Apple duyệt (HUONG-DAN B3) - chưa
+   duyệt thì TestFlight build được nhưng không tìm thấy thiết bị.
 2. Mã nguồn:
    - `app/ios/Runner.xcodeproj/project.pbxproj`, `app/macos/Runner.xcodeproj/project.pbxproj`: `DEVELOPMENT_TEAM` =
      Team ID. macOS: bản Release ký thủ công bằng "Developer ID Application", bật Hardened Runtime; giữ ad-hoc cho
@@ -128,8 +142,9 @@
       `TeamIdentifier` đã ghim -> sai thì dừng (giống kiểm APK).
    5. Xóa keychain tạm (`if: always()`).
 4. Job iOS mới (runner macOS): `flutter build ipa --release --export-options-plist=...` (ký Apple Distribution), tải lên
-   TestFlight bằng `xcrun altool --upload-app` hoặc `xcrun notarytool`-tương đương cho App Store (kiểm tên lệnh hiện
-   hành ở tài liệu Apple). IPA KHÔNG đưa vào GitHub Release (người dùng iOS cài qua TestFlight/App Store).
+   TestFlight bằng `xcrun altool --upload-package <ipa> --type ios --apiKey <KEYID> --apiIssuer <ISSUER>` (khóa `.p8`
+   đặt ở `~/.appstoreconnect/private_keys/`). `--upload-app` đã deprecated; `altool` KHÔNG còn dùng cho công chứng
+   (macOS dùng `notarytool`). Kiểm cờ bằng `xcrun altool --help` trên Xcode của máy chạy trước khi viết. IPA KHÔNG đưa vào GitHub Release (người dùng iOS cài qua TestFlight/App Store).
 5. Kiểm trước khi gửi duyệt App Store: chuỗi xin quyền đã tiếng Việt (`Info.plist`), tệp `PrivacyInfo.xcprivacy`
    (kiểm có chưa), không còn mua trong ứng dụng dẫn tiền về tác giả gốc trên bản iOS (cân nhắc bỏ
    `in_app_purchase` như bản Android, hoặc giữ nếu chủ dự án đồng ý - quyết định của chủ dự án).
