@@ -22,9 +22,11 @@
       CHƯA làm gì trước thời điểm đó. Chủ dự án làm `docs/vi/HUONG-DAN-KY-MA.md` phần B trên MacBook (B1-B4, xin quyền
       multicast B3 ngay sau khi đăng ký vì Apple duyệt tay; chứng thư theo B5 "Trên MacBook"), chạy
       `tools/day-khoa-apple.sh`; agent làm `KE-HOACH-KY-MA-12-2026.md` mục 2.2 và chạy thử app trên MacBook thật.
-- [ ] **Phát hành `v1.18.2-lotus.5`** (chờ chủ dự án đồng ý): mang bản sửa khám phá thiết bị (PR #35) tới người dùng.
-      Trang Tải về đã mô tả bộ cài mới (tường lửa, `-setup.exe`) nhưng tệp hiện tại vẫn là lotus.4 - phát hành sớm.
-- [ ] **Thử thật khám phá thiết bị (PR #35)** sau khi có bản build: laptop Windows cài mới bằng
+- [ ] **CHỦ DỰ ÁN duyệt xuất bản kho pkg.tsudev.com cho lotus.5**: run linux-packages 43206677590 đang chờ Environment
+      `packages` (lệnh duyệt của agent bị bộ phân loại auto mode chặn ở phiên lotus-share-d7). Duyệt ở
+      https://github.com/tsudev-org/linux-packages/actions/runs/43206677590 (Review deployments) hoặc thêm quyền cho lệnh
+      `gh api -X POST .../pending_deployments`. Sau đó đo: `lotus-share 1.18.2-5` trong Packages của apt amd64/arm64.
+- [ ] **Thử thật khám phá thiết bị (PR #35, có trong lotus.5)**: laptop Windows cài mới bằng
       `-setup.exe` (mạng đặt Công cộng) + điện thoại Android cùng Wi-Fi - hai chiều thấy nhau; kiểm quy tắc tường lửa
       tạo/xóa khi cài/gỡ, bộ cài gỡ được `tsudev-lotus` cũ (máy phát triển đang có bản cũ ở `C:\Program Files\tsudev-lotus`).
       Chi tiết + công cụ: `docs/vi/KHAM-PHA-THIET-BI.md`. Bản phát hành kế tiếp: deploy lại website để `/tai/*` trỏ tệp
@@ -41,6 +43,12 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 12/11/2026 (lotus-share-d7) - **Phát hành `v1.18.2-lotus.5`** (chủ dự án đồng ý): sửa khám phá thiết bị + bộ cài tường
+  lửa (PR #35). 22 tệp, bộ cài mang tên `-setup.exe`. Đã kiểm trên tệp thật: SHA256SUMS khớp, `gh attestation verify` đạt
+  + từ chối tệp sửa 1 byte, APK có `CHANGE_WIFI_MULTICAST_STATE`, ZIP Windows có `chan-doan-mang.ps1`. Website deploy lại,
+  `/tai/windows` -> `...-windows-x86-64-setup.exe` lotus.5. Scoop + Homebrew tự lên lotus.5 (đo tệp trong repo). Kho
+  pkg.tsudev.com: chờ chủ dự án duyệt (mục đầu hàng đợi).
 
 - 12/11/2026 (lotus-share-d7) - **Sửa "không thấy nhau" + chuẩn hóa bộ cài/tải về** (PR #35, đã gộp; website đã deploy,
   đo `/tai/windows` = 302). Build thử run 43191034629 xanh mọi nền tảng; bộ cài x64 cài/gỡ thật (chế độ người dùng)
