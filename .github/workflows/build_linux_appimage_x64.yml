@@ -14,7 +14,7 @@ jobs:
       version: ${{ steps.get_version.outputs.version }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Get version from AppImage recipe
         id: get_version
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Install dependencies
         run: |
@@ -90,7 +90,7 @@ jobs:
           test -f "LocalSend-${{ needs.build.outputs.version }}-linux-x86-64.AppImage.zsync"
 
       - name: Upload AppImage files
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: appimage-x86-64-result
           path: |
