@@ -884,6 +884,10 @@ class _Translations$tsudev$vi extends Translations$tsudev$en {
     n,
     other: 'Thêm ${n} ứng dụng',
   );
+  @override
+  late final _Translations$tsudev$updateRequired$vi updateRequired = _Translations$tsudev$updateRequired$vi._(_root);
+  @override
+  late final _Translations$tsudev$updateAvailable$vi updateAvailable = _Translations$tsudev$updateAvailable$vi._(_root);
 }
 
 // Path: receiveTab.infoBox
@@ -1619,6 +1623,44 @@ class _Translations$dialogs$zoom$vi extends Translations$dialogs$zoom$en {
   // Translations
   @override
   String get title => 'Đường dẫn';
+}
+
+// Path: tsudev.updateRequired
+class _Translations$tsudev$updateRequired$vi extends Translations$tsudev$updateRequired$en {
+  _Translations$tsudev$updateRequired$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+  final TranslationsVi _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'Cần cập nhật Lotus Share';
+  @override
+  String body({required Object current, required Object latest}) =>
+      'Phiên bản ${current} đã ngừng hỗ trợ và không còn kết nối được với các thiết bị khác. Hãy cài Lotus Share ${latest} để tiếp tục sử dụng.';
+  @override
+  String bodyLatest({required Object current}) =>
+      'Phiên bản ${current} đã ngừng hỗ trợ và không còn kết nối được với các thiết bị khác. Hãy cài bản Lotus Share mới nhất để tiếp tục sử dụng.';
+  @override
+  String get download => 'Tải bản mới';
+  @override
+  String get exit => 'Thoát';
+}
+
+// Path: tsudev.updateAvailable
+class _Translations$tsudev$updateAvailable$vi extends Translations$tsudev$updateAvailable$en {
+  _Translations$tsudev$updateAvailable$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+  final TranslationsVi _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String title({required Object latest}) => 'Đã có Lotus Share ${latest}';
+  @override
+  String body({required Object current}) => 'Bạn đang dùng phiên bản ${current}. Bản mới có sửa lỗi và cải tiến.';
+  @override
+  String get download => 'Tải bản mới';
+  @override
+  String get later => 'Để sau';
 }
 
 // Path: settingsTab.general.brightnessOptions

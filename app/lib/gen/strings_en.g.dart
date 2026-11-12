@@ -993,6 +993,9 @@ class Translations$tsudev$en {
     one: 'Add ${n} app',
     other: 'Add ${n} apps',
   );
+
+  late final Translations$tsudev$updateRequired$en updateRequired = Translations$tsudev$updateRequired$en.internal(_root);
+  late final Translations$tsudev$updateAvailable$en updateAvailable = Translations$tsudev$updateAvailable$en.internal(_root);
 }
 
 // Path: receiveTab.infoBox
@@ -1882,6 +1885,53 @@ class Translations$dialogs$zoom$en {
 
   /// en: 'URL'
   String get title => 'URL';
+}
+
+// Path: tsudev.updateRequired
+class Translations$tsudev$updateRequired$en {
+  Translations$tsudev$updateRequired$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Lotus Share needs an update'
+  String get title => 'Lotus Share needs an update';
+
+  /// en: 'Version {current} is no longer supported and cannot connect to other devices. Install Lotus Share {latest} to continue.'
+  String body({required Object current, required Object latest}) =>
+      'Version ${current} is no longer supported and cannot connect to other devices. Install Lotus Share ${latest} to continue.';
+
+  /// en: 'Version {current} is no longer supported and cannot connect to other devices. Install the latest Lotus Share to continue.'
+  String bodyLatest({required Object current}) =>
+      'Version ${current} is no longer supported and cannot connect to other devices. Install the latest Lotus Share to continue.';
+
+  /// en: 'Download'
+  String get download => 'Download';
+
+  /// en: 'Quit'
+  String get exit => 'Quit';
+}
+
+// Path: tsudev.updateAvailable
+class Translations$tsudev$updateAvailable$en {
+  Translations$tsudev$updateAvailable$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Lotus Share {latest} is available'
+  String title({required Object latest}) => 'Lotus Share ${latest} is available';
+
+  /// en: 'You are using version {current}. The new version includes fixes and improvements.'
+  String body({required Object current}) => 'You are using version ${current}. The new version includes fixes and improvements.';
+
+  /// en: 'Download'
+  String get download => 'Download';
+
+  /// en: 'Later'
+  String get later => 'Later';
 }
 
 // Path: settingsTab.general.brightnessOptions
