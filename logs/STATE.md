@@ -8,13 +8,13 @@
 - Deploy website: `cd website && XDG_CONFIG_HOME=$HOME/.config/wrangler-tsudev npm run deploy` (cấu hình wrangler RIÊNG của
   tsudev - đăng nhập chung là tài khoản UBND; kiểm `wrangler whoami` = dev.nguyentrangtinhsu@...). Sau mỗi bản phát hành
   phải deploy lại (trang Tải về đọc danh sách tệp lúc build).
-- [ ] **winget `tsudev.LotusShare`** (chủ dự án): manifest đã đẩy lên nhánh `tsudev-tsudev/winget-pkgs:tsudev.LotusShare-1.18.2`
-      (SHA-256 bộ cài khớp). Việc còn lại - phiên agent bị chặn quyền mở PR ở kho công khai Microsoft: mở PR từ nhánh đó
-      vào `microsoft/winget-pkgs` và đóng PR #477225 (`tsudev.Lotus`, chưa từng được duyệt), xóa nhánh `tsudev.Lotus-1.18.2`.
-- [ ] **Chủ dự án nộp đơn SignPath Foundation** theo phiếu `logs/handover/20261111-03_noi-dung-don-signpath.md`
-      (nội dung điền sẵn; trang `lotus.tsudev.com/chinh-sach-ky-ma/` đã có). Ghi ngày nộp vào mục Quyết định.
-- [ ] **Đầu tháng 12/2026 - ký mã Apple (macOS công chứng, iOS TestFlight)** khi chủ dự án có Apple Developer; tích hợp
-      SignPath khi đơn được duyệt. Kế hoạch: `docs/vi/KE-HOACH-KY-MA-12-2026.md` mục 1.5, 2.
+- [ ] winget `tsudev.LotusShare`: chờ Microsoft duyệt PR microsoft/winget-pkgs#478033 (đã đóng #477225 `tsudev.Lotus`). Khi
+      merge: chuyển `winget` từ `planned` sang `channels` trong `packaging/package.json`, thêm lệnh winget vào trang Tải về.
+- [ ] **Chủ dự án nộp đơn SignPath Foundation** theo `docs/vi/HUONG-DAN-KY-MA.md` phần A (bật bắt buộc 2FA ở org
+      `tsudev-org` TRƯỚC - đo 12/11/2026 chưa bật). Ghi ngày nộp vào mục Quyết định.
+- [ ] **Đầu tháng 12/2026 - ký mã Apple (macOS công chứng, iOS TestFlight)**: chủ dự án làm `docs/vi/HUONG-DAN-KY-MA.md`
+      phần B (xin quyền multicast B3 sớm), chạy `tools/day-khoa-apple.sh`; agent làm `KE-HOACH-KY-MA-12-2026.md` mục 2.2.
+      Tích hợp SignPath (mục 1.5) khi đơn được duyệt và chủ dự án đã chạy `tools/dat-bien-signpath.sh`.
 - [ ] Dựng máy chủ tín hiệu `signal.lotus.tsudev.com` từ `server/` trước khi bật WebRTC (mặc định đã trỏ về đó).
 - [ ] AppImage Linux ARM64 (công thức `support/build/appimage/` chỉ x86_64). Kiểm cài gói `.deb`/`.rpm` arm64 trong
       CI `linux-packages` (hiện chỉ cài thử amd64).
@@ -27,6 +27,10 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 12/11/2026 (lotus-share-fc) - winget: PR microsoft/winget-pkgs#478033 `tsudev.LotusShare` 1.18.2 (SHA-256 bộ cài khớp
+  tệp tải về), đóng #477225, xóa nhánh `tsudev.Lotus-1.18.2`. Hướng dẫn chủ dự án `docs/vi/HUONG-DAN-KY-MA.md` (SignPath
+  đối chiếu điều khoản cùng ngày; Apple: tạo chứng thư bằng openssl không cần Mac, quyền multicast) + 2 script đẩy bí
+  mật; trang chính sách ký mã thêm phần tiếng Anh theo nhãn vai trò SignPath yêu cầu.
 - 12/11/2026 (lotus-share-fc) - **ARM64**: `release-lotus.yml` thêm Windows ARM64 (bộ cài Inno `/DArm64` + ZIP, MSVC
   Redist ARM64 từ Visual Studio của máy chạy), Linux ARM64 (tar.gz), CLI Linux/Windows ARM64; job ARM `continue-on-error`.
   Build thử run 43139703302 xanh toàn bộ; đã tải artifact kiểm: ELF aarch64, PE 0xAA64 (exe, lõi Rust, vcruntime).

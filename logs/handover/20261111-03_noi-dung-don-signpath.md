@@ -21,28 +21,19 @@ Khớp mục 1.2 của kế hoạch, cộng thêm:
   liên kết ở chân mọi trang + mục Kiểm tra tệp của trang Tải về.
 - **MFA** bắt buộc cho mọi thành viên trên GitHub và SignPath.
 
-## 2. Nội dung điền đơn (https://signpath.org/apply)
+## 2. Nội dung điền đơn
 
-| Ô | Nội dung |
-| --- | --- |
-| Project name | tsudev-lotus |
-| Repository | https://github.com/tsudev-org/tsudev-lotus |
-| Homepage / download page | https://lotus.tsudev.com (tải về: https://lotus.tsudev.com/tai-ve/) |
-| Code signing policy URL | https://lotus.tsudev.com/chinh-sach-ky-ma/ |
-| License | Apache-2.0 (OSI) |
-| Description | Cross-platform app to share files and messages between nearby devices on the local network, without Internet or accounts. Vietnamese-first fork of LocalSend (Apache-2.0, signed by SignPath) with tsudev hardening; protocol-compatible with LocalSend v2. Fork relationship is stated in README, NOTICE and the About screen; upstream changes are merged via reviewed pull requests. |
-| Build system | GitHub Actions, GitHub-hosted runners, workflow `.github/workflows/release-lotus.yml`, triggered by immutable admin-only tags `v*-lotus.*` |
-| Files to sign | `tsudev_lotus.exe` and app DLLs built from this repo; installer `tsudev-lotus-<ver>-windows-x86-64.exe`; CLI `tsudev-lotus-cli-<ver>-windows-x86-64.exe` |
-| Team | Author/Reviewer/Approver: tsudev-tsudev (MFA enabled) |
-| Existing release | v1.18.2-lotus.2 (https://github.com/tsudev-org/tsudev-lotus/releases) |
+**THAY THẾ (12/11/2026)**: bảng cũ dùng tên `tsudev-lotus` đã lỗi thời (sản phẩm đổi tên Lotus Share, repo
+`tsudev-org/lotus-share`). Nội dung đơn, câu trả lời về fork và các bước làm theo
+[`docs/vi/HUONG-DAN-KY-MA.md`](../../docs/vi/HUONG-DAN-KY-MA.md) phần A.
 
 ## 3. Việc chủ dự án làm
 
-1. Bật MFA cho `tsudev-tsudev` (nếu chưa) và "Require two-factor authentication" ở org `tsudev-org`.
-2. Nộp đơn với nội dung mục 2; ghi ngày nộp vào `logs/STATE.md` (mục Quyết định quan trọng).
-3. Nếu SignPath đòi "visible fork": cân nhắc nhờ GitHub Support gắn quan hệ fork, hoặc trả lời bằng các bằng chứng ở
-   mục 1. KHÔNG xóa/tạo lại repo (vi phạm quy tắc tên repo trong CLAUDE.md toàn cục, gãy updater).
+Theo `docs/vi/HUONG-DAN-KY-MA.md` mục A1-A7. Đo 12/11/2026: org `tsudev-org` CHƯA bật bắt buộc 2FA (mục A2).
 
 ## 4. Kết quả xử lý
 
+- 12/11/2026 (lotus-share-fc): đọc lại signpath.org/terms + docs.signpath.io (GitHub); viết hướng dẫn từng bước
+  `docs/vi/HUONG-DAN-KY-MA.md`, script `tools/dat-bien-signpath.sh`; trang chính sách thêm phần tiếng Anh với nhãn
+  "Committers and reviewers" / "Approvers". Chờ chủ dự án nộp đơn.
 -
