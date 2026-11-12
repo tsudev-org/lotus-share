@@ -1,4 +1,5 @@
 # appimage-builder recipe see https://appimage-builder.readthedocs.io for details
+# lotus-share: nguồn apt arm64 ở ports.ubuntu.com (archive.ubuntu.com chỉ có amd64/i386); dựng bằng requirements-arm64.txt.
 version: 1
 script:
   # Workaround for error in Github Actions (https://github.com/AppImageCrafters/appimage-builder/issues/271)
@@ -19,16 +20,16 @@ AppDir:
       - arm64
     allow_unauthenticated: true
     sources:
-      - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy main restricted
-      - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted
-      - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy universe
-      - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy-updates universe
-      - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy multiverse
-      - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy-updates multiverse
-      - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
-      - sourceline: deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted
-      - sourceline: deb http://security.ubuntu.com/ubuntu/ jammy-security universe
-      - sourceline: deb http://security.ubuntu.com/ubuntu/ jammy-security multiverse
+      - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy main restricted
+      - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-updates main restricted
+      - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy universe
+      - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-updates universe
+      - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy multiverse
+      - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-updates multiverse
+      - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-backports main restricted universe multiverse
+      - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-security main restricted
+      - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-security universe
+      - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-security multiverse
     include:
       - libayatana-appindicator3-1:arm64
       - librsvg2-common:arm64
@@ -65,6 +66,6 @@ AppDir:
 #      image: appimagecrafters/tests-env:ubuntu-xenial
 #      command: ./AppRun
 AppImage:
-  arch: arm_64
+  arch: aarch64  # lotus-share: tên runtime AppImageKit là runtime-aarch64 (runtime-arm_64 không tồn tại)
   file_name: !ENV 'lotus-share-${APP_VERSION}-linux-arm-64.AppImage'
   update-information: gh-releases-zsync|tsudev-org|lotus-share|latest|lotus-share-*-linux-arm-64.AppImage.zsync

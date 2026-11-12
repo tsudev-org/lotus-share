@@ -39,7 +39,8 @@ Chạy tay (Actions > Phát hành > Run workflow) = build thử, có ký và ch�
 
 Job ARM64 (`windows-arm64` trên `windows-11-arm`, `linux-arm64` trên `ubuntu-22.04-arm`, CLI ARM64) và macOS chạy
 `continue-on-error`: lỗi ở đó không chặn bản x64, nhưng bản phát hành sẽ THIẾU gói đó - kiểm danh sách tệp trước khi
-Publish. Linux ARM64 chưa có AppImage (công thức `AppImageBuilder` chỉ x86_64); gói `.deb`/`.rpm` arm64 do kho
+Publish. AppImage Linux ARM64 dựng bằng appimage-builder chạy thẳng trên máy ARM (ảnh Docker của action chỉ có
+amd64), phụ thuộc Python ghim hash ở `support/build/appimage/requirements-arm64.txt`; gói `.deb`/`.rpm` arm64 do kho
 `pkg.tsudev.com` dựng từ tar.gz.
 
 ## 3. Khóa và chứng thư
