@@ -1,6 +1,6 @@
 # Nhật ký thay đổi - Lotus Share
 
-## 2.0.0 (lotus.6)
+## 2.0.0 (lotus.7)
 
 Lotus Share trở thành sản phẩm độc lập của tsudev, có giao thức mạng, cấu hình và định danh riêng.
 
