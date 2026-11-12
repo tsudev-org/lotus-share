@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.media.MediaScannerConnection
 import android.net.Uri
+import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
@@ -46,6 +47,34 @@ class MainActivity : FlutterActivity() {
     /// replay them through the regular plugin path.
     private val pendingShareIntents = mutableListOf<Intent>()
     private var shareIntentReady = false
+
+    // lotus-share: many Wi-Fi drivers drop multicast (and on some devices broadcast) packets
+    // unless an app holds a MulticastLock, so the phone never hears other devices' announcements.
+    // Held only while the app is visible to limit battery use; in the background the phone
+    // stays discoverable through its own announcements and the HTTP subnet scan of the peers.
+    private var multicastLock: WifiManager.MulticastLock? = null
+
+    override fun onStart() {
+        super.onStart()
+        try {
+            val wifi = applicationContext.getSystemService(Context.WIFI_SERVICE) as? WifiManager
+            val lock = multicastLock ?: wifi?.createMulticastLock("lotus-share-discovery")?.also {
+                it.setReferenceCounted(false)
+                multicastLock = it
+            }
+            lock?.acquire()
+        } catch (e: Exception) {
+            // Missing permission or no Wi-Fi hardware (some TVs): discovery falls back to the subnet scan.
+        }
+    }
+
+    override fun onStop() {
+        try {
+            multicastLock?.takeIf { it.isHeld }?.release()
+        } catch (e: Exception) {
+        }
+        super.onStop()
+    }
 
     override fun onNewIntent(intent: Intent) {
         if (!shareIntentReady && (intent.action == Intent.ACTION_SEND || intent.action == Intent.ACTION_SEND_MULTIPLE)) {

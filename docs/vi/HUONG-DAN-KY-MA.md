@@ -78,7 +78,7 @@ information...". Chân trang chủ và trang Tải về có liên kết "Code si
 | Short description | Cross-platform app to share files and messages between nearby devices on the local network, without Internet or accounts. |
 | Long description / notes | Lotus Share is a Vietnamese-first, security-hardened fork of LocalSend (Apache-2.0, whose Windows releases are signed via SignPath). It stays protocol-compatible with LocalSend v2. Release binaries are built only on GitHub-hosted runners by `.github/workflows/release-lotus.yml` from immutable, admin-only tags `v*-lotus.*`; every change to `main`, including upstream merges, requires a reviewed pull request and all required checks. Releases already ship SHA256SUMS signed with Sigstore and SLSA build provenance. |
 | Build system | GitHub Actions (GitHub-hosted runners, github.com) |
-| Files to sign | `lotus_share.exe` and the app DLLs built from this repository; Inno Setup installer `lotus-share-<version>-windows-x86-64.exe` and `-windows-arm-64.exe`; CLI `lotus-share-cli-<version>-windows-x86-64.exe` and `-windows-arm-64.exe` |
+| Files to sign | `lotus_share.exe` and the app DLLs built from this repository; Inno Setup installer `lotus-share-<version>-windows-x86-64-setup.exe` and `-windows-arm-64-setup.exe` (up to 1.18.2-lotus.4 without the `-setup` suffix); CLI `lotus-share-cli-<version>-windows-x86-64.exe` and `-windows-arm-64.exe` |
 | Number of maintainers / team | 1 - @tsudev-tsudev (author, reviewer, approver), MFA enabled on GitHub and SignPath |
 | Existing releases | https://github.com/tsudev-org/lotus-share/releases (latest v1.18.2-lotus.3) |
 | Upstream / fork | Fork of https://github.com/localsend/localsend - see A5 |

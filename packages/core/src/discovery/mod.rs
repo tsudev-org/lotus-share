@@ -472,6 +472,9 @@ pub async fn start(config: DiscoveryConfig, stop_rx: oneshot::Receiver<()>) -> D
     tokio::spawn({
         let state = state.clone();
         async move {
+            // lotus-share: the same announcement arrives several times (multicast plus directed
+            // broadcast, and once per bound socket on Linux), answer each sender only once.
+            let mut recent_answers = RecentAnswers::default();
             while let Some(event) = multicast_rx.recv().await {
                 match event {
                     MulticastEvent::Discovered {
@@ -480,6 +483,14 @@ pub async fn start(config: DiscoveryConfig, stop_rx: oneshot::Receiver<()>) -> D
                         message,
                     } => {
                         if !state.answering.load(Ordering::Relaxed) {
+                            continue;
+                        }
+
+                        if !recent_answers.should_answer(
+                            &message.fingerprint,
+                            ip,
+                            std::time::Instant::now(),
+                        ) {
                             continue;
                         }
 
@@ -498,6 +509,29 @@ pub async fn start(config: DiscoveryConfig, stop_rx: oneshot::Receiver<()>) -> D
     });
 
     DiscoveryHandle { multicast, state }
+}
+
+/// lotus-share: suppresses answering the same device (fingerprint + address) again within
+/// [`RecentAnswers::WINDOW`]. Copies of one datagram arrive within milliseconds, while the
+/// announcement burst of a device spans 2.6 s, so later bursts are still answered.
+#[derive(Default)]
+struct RecentAnswers {
+    answered: std::collections::HashMap<(String, IpAddr), std::time::Instant>,
+}
+
+impl RecentAnswers {
+    const WINDOW: std::time::Duration = std::time::Duration::from_millis(300);
+
+    fn should_answer(&mut self, fingerprint: &str, ip: IpAddr, now: std::time::Instant) -> bool {
+        self.answered
+            .retain(|_, at| now.saturating_duration_since(*at) < Self::WINDOW);
+        let key = (fingerprint.to_string(), ip);
+        if self.answered.contains_key(&key) {
+            return false;
+        }
+        self.answered.insert(key, now);
+        true
+    }
 }
 
 /// Answers an announcement with a register request, as the protocol requires.
@@ -585,5 +619,29 @@ fn confirmed_device(
             protocol,
         }),
         download: response.download,
+    }
+}
+
+#[cfg(test)]
+mod lotus_share_tests {
+    use super::RecentAnswers;
+    use std::net::IpAddr;
+    use std::time::{Duration, Instant};
+
+    #[test]
+    fn test_duplicate_announcements_are_answered_once() {
+        let mut recent = RecentAnswers::default();
+        let ip: IpAddr = "192.168.1.42".parse().unwrap();
+        let other: IpAddr = "192.168.1.43".parse().unwrap();
+        let now = Instant::now();
+
+        assert!(recent.should_answer("abc", ip, now));
+        // Multicast + broadcast copies of the same datagram.
+        assert!(!recent.should_answer("abc", ip, now + Duration::from_millis(5)));
+        // Another device, or the same device on another address, is answered.
+        assert!(recent.should_answer("def", ip, now));
+        assert!(recent.should_answer("abc", other, now));
+        // The next message of the announcement burst (>= 400 ms later) is answered again.
+        assert!(recent.should_answer("abc", ip, now + Duration::from_millis(400)));
     }
 }

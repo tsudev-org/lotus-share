@@ -73,6 +73,11 @@ pub(crate) struct LocalInterfaceV4 {
 
     /// The IPv4 address of the interface, used to join the multicast group.
     pub(crate) address: Ipv4Addr,
+
+    /// lotus-share: the directed broadcast address of the subnet (e.g. `192.168.1.255`), if the
+    /// subnet has one. Announcements are also sent there, because many Wi-Fi access points,
+    /// routers with IGMP snooping and Android devices without a multicast lock drop multicast.
+    pub(crate) broadcast: Option<Ipv4Addr>,
 }
 
 /// A local interface that an IPv6 multicast socket can be bound to.
@@ -103,6 +108,8 @@ pub(crate) fn local_interfaces(filter: &InterfaceFilter) -> std::io::Result<Loca
         name: String,
         index: Option<u32>,
         addresses: Vec<IpAddr>,
+        // lotus-share: broadcast address per IPv4 address, same order as the V4 entries of `addresses`.
+        broadcasts: Vec<Option<Ipv4Addr>>,
     }
 
     // Filters apply to an interface as a whole, so all of its addresses have to
@@ -113,6 +120,16 @@ pub(crate) fn local_interfaces(filter: &InterfaceFilter) -> std::io::Result<Loca
             continue;
         }
 
+        // lotus-share: keep the broadcast address of each IPv4 address.
+        let broadcast = match &interface.addr {
+            if_addrs::IfAddr::V4(v4) => Some(
+                v4.broadcast
+                    .or_else(|| directed_broadcast(v4.ip, v4.prefixlen))
+                    .filter(|b| is_usable_broadcast(*b, v4.ip, v4.prefixlen)),
+            ),
+            if_addrs::IfAddr::V6(_) => None,
+        };
+
         match by_name
             .iter_mut()
             .find(|entry| entry.name == interface.name)
@@ -120,11 +137,15 @@ pub(crate) fn local_interfaces(filter: &InterfaceFilter) -> std::io::Result<Loca
             Some(entry) => {
                 entry.index = entry.index.or(interface.index);
                 entry.addresses.push(interface.ip());
+                if let Some(broadcast) = broadcast {
+                    entry.broadcasts.push(broadcast);
+                }
             }
             None => by_name.push(Entry {
                 name: interface.name.clone(),
                 index: interface.index,
                 addresses: vec![interface.ip()],
+                broadcasts: broadcast.into_iter().collect(),
             }),
         }
     }
@@ -144,12 +165,14 @@ pub(crate) fn local_interfaces(filter: &InterfaceFilter) -> std::io::Result<Loca
         }
 
         let mut has_v6 = false;
+        let mut broadcasts = entry.broadcasts.iter();
         for address in &entry.addresses {
             match address {
                 // IPv4 group membership is joined per address.
                 IpAddr::V4(address) => result.v4.push(LocalInterfaceV4 {
                     name: entry.name.clone(),
                     address: *address,
+                    broadcast: broadcasts.next().copied().flatten(),
                 }),
                 IpAddr::V6(_) => has_v6 = true,
             }
@@ -183,12 +206,73 @@ pub fn local_interface_addresses(filter: &InterfaceFilter) -> std::io::Result<Ve
         .collect())
 }
 
+/// lotus-share: the directed broadcast address of `ip/prefixlen` (host bits all set).
+fn directed_broadcast(ip: Ipv4Addr, prefixlen: u8) -> Option<Ipv4Addr> {
+    if prefixlen == 0 || prefixlen > 32 {
+        return None;
+    }
+    let mask = u32::MAX.checked_shl(32 - u32::from(prefixlen)).unwrap_or(0);
+    Some(Ipv4Addr::from(u32::from(ip) | !mask))
+}
+
+/// lotus-share: only real subnet broadcasts are used. `/31` and `/32` (point-to-point links,
+/// most VPNs) have none, and the limited broadcast `255.255.255.255` would leave through an
+/// arbitrary interface on some platforms.
+fn is_usable_broadcast(broadcast: Ipv4Addr, ip: Ipv4Addr, prefixlen: u8) -> bool {
+    (1..=30).contains(&prefixlen)
+        && broadcast != ip
+        && !broadcast.is_unspecified()
+        && broadcast != Ipv4Addr::BROADCAST
+        && !broadcast.is_multicast()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
 
     fn ip(address: &str) -> IpAddr {
         address.parse().unwrap()
+    }
+
+    #[test]
+    fn test_directed_broadcast() {
+        let ip = |s: &str| s.parse::<Ipv4Addr>().unwrap();
+        assert_eq!(
+            directed_broadcast(ip("192.168.1.42"), 24),
+            Some(ip("192.168.1.255"))
+        );
+        assert_eq!(
+            directed_broadcast(ip("10.1.2.3"), 8),
+            Some(ip("10.255.255.255"))
+        );
+        assert_eq!(
+            directed_broadcast(ip("172.20.5.9"), 20),
+            Some(ip("172.20.15.255"))
+        );
+        assert_eq!(directed_broadcast(ip("192.168.1.42"), 0), None);
+    }
+
+    #[test]
+    fn test_usable_broadcast() {
+        let ip = |s: &str| s.parse::<Ipv4Addr>().unwrap();
+        assert!(is_usable_broadcast(
+            ip("192.168.1.255"),
+            ip("192.168.1.42"),
+            24
+        ));
+        assert!(is_usable_broadcast(
+            ip("169.254.255.255"),
+            ip("169.254.3.4"),
+            16
+        ));
+        // Point-to-point links and host routes have no broadcast address.
+        assert!(!is_usable_broadcast(ip("10.0.0.1"), ip("10.0.0.0"), 31));
+        assert!(!is_usable_broadcast(ip("100.64.0.7"), ip("100.64.0.7"), 32));
+        assert!(!is_usable_broadcast(
+            ip("255.255.255.255"),
+            ip("192.168.1.42"),
+            24
+        ));
     }
 
     #[test]

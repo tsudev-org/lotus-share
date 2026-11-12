@@ -16,6 +16,15 @@
 ngày 12/11/2026 theo quyết định chủ dự án: bản cũ KHÔNG tự cập nhật; người dùng cài Lotus Share rồi gỡ bản cũ (hướng
 dẫn ở trang Tải về, mục "Đã cài bản tsudev-lotus?").
 
+Từ bản sau `1.18.2-lotus.4`, bộ cài Windows tự gỡ im lặng bản `tsudev-lotus` cũ (cùng máy, theo AppId cũ), tắt tiến
+trình `tsudev_lotus.exe` và xóa khóa tự khởi động cũ, vì hai bản chạy song song tranh cổng 53317.
+
+**Tên tệp phát hành** (từ bản sau `1.18.2-lotus.4`): bộ cài Windows `lotus-share-<ver>-windows-<x86-64|arm-64>-setup.exe`
+(trước đó không có hậu tố `-setup`, dễ nhầm với CLI `.exe`), bản di động `...-windows-<arch>.zip` (giữ nguyên - Scoop
+dùng), kèm `chan-doan-mang.ps1`. Đường dẫn ngắn luôn trỏ bản mới nhất: `lotus.tsudev.com/tai/<windows|android|macos|linux|
+windows-arm|android-universal|linux-arm>` (sinh lúc build website vào `_redirects`, xem `docs/vi/KHAM-PHA-THIET-BI.md`
+cho phần tường lửa của bộ cài).
+
 Vì định danh và thư mục dữ liệu khác nhau, Lotus Share **cài song song** được với LocalSend, nhưng hai ứng dụng
 dùng chung cổng 53317 nên không nên **chạy** cùng lúc trên một máy.
 
@@ -68,7 +77,7 @@ cosign verify-blob SHA256SUMS.txt --bundle SHA256SUMS.txt.sigstore.json \
   --certificate-identity-regexp '^https://github.com/tsudev-org/lotus-share/\.github/workflows/release-lotus\.yml@refs/tags/v.*-lotus\.[0-9]+$'
 
 # 3) Tệp được build trên GitHub Actions từ mã nguồn của repo này (chứng thực SLSA)
-gh attestation verify lotus-share-<phiên bản>-windows-x86-64.exe -R tsudev-org/lotus-share
+gh attestation verify lotus-share-<phiên bản>-windows-x86-64-setup.exe -R tsudev-org/lotus-share
 
 # 4) APK ký bằng khóa tsudev (Android SDK build-tools)
 apksigner verify --print-certs lotus-share-<phiên bản>-android-universal.apk   # SHA-256 phải khớp mục 3

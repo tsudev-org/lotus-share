@@ -1,17 +1,22 @@
 ---
 import Trang from '../layouts/Trang.astro';
-import { banMoiNhat, NEN_TANG, RELEASES_URL, REPO, REPO_URL } from '../lib/noi-dung';
+import { banMoiNhat, goiNhanh, NEN_TANG, RELEASES_URL, REPO, REPO_URL } from '../lib/noi-dung';
 
 const ban = await banMoiNhat();
 const mb = (b: number) => `${(b / 1024 / 1024).toFixed(1).replace('.', ',')} MB`;
 const theoNenTang = NEN_TANG.map((nt) => ({ ...nt, goi: ban?.goi.filter((g) => g.nenTang === nt.ma) ?? [] })).filter((nt) => nt.goi.length > 0);
-const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? 'lotus-share-<phiên bản>-windows-x86-64.exe';
+const laBoCaiWin = (ten: string) => /-windows-x86-64(-setup)?\.exe$/.test(ten) && !ten.includes('-cli-');
+const vd = ban?.goi.find((g) => laBoCaiWin(g.ten))?.ten ?? 'lotus-share-<phiên bản>-windows-x86-64-setup.exe';
+const nhanh = goiNhanh(ban);
+const nhanhChinh = nhanh.slice(0, 4);
+const nhanhPhu = nhanh.slice(4);
 ---
 <Trang tieuDe="Tải về" moTa="Tải Lotus Share cho Windows, macOS, Linux và Android; mã SHA-256 của từng gói, cách kiểm tra tệp tải về và hướng dẫn cài đặt từng hệ điều hành." duongDan="/tai-ve/">
   <div class="khung tai-lieu">
     <nav class="tai-lieu__menu" aria-label="Tải về">
       <p>Tải về</p>
       <ul>
+        <li><a href="#tai-nhanh">Tải nhanh</a></li>
         <li><a href="#cai-bang-lenh">Cài bằng lệnh</a></li>
         <li><a href="#chon-goi">Chọn gói</a></li>
         <li><a href="#kiem-tra">Kiểm tra tệp</a></li>
@@ -19,6 +24,7 @@ const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? '
         <li><a href="#macos">Cài trên macOS</a></li>
         <li><a href="#linux">Cài trên Linux</a></li>
         <li><a href="#android">Cài trên Android</a></li>
+        <li><a href="#khong-thay-nhau">Không thấy thiết bị?</a></li>
         <li><a href="#chuyen-doi">Đã cài bản tsudev-lotus?</a></li>
         <li><a href="#tuong-thich">Dùng cùng LocalSend</a></li>
       </ul>
@@ -36,6 +42,25 @@ const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? '
             <p><strong>Bản phát hành đầu tiên đang được chuẩn bị.</strong> Khi có, danh sách gói kèm mã SHA-256 sẽ hiện ngay tại đây và ở <a href={RELEASES_URL} target="_blank" rel="noopener noreferrer">trang phát hành trên GitHub</a>.</p>
             <p>Trong lúc chờ, bạn có thể tự build từ <a href={REPO_URL} target="_blank" rel="noopener noreferrer">mã nguồn</a> (cần Flutter 3.47.9 và Rust), hoặc theo dõi repo trên GitHub (Watch, chọn Releases) để được báo khi có bản mới.</p>
           </div>
+        </>
+      )}
+
+      {nhanh.length > 0 && (
+        <>
+          <h2 id="tai-nhanh">Tải nhanh</h2>
+          <p>Một tệp cho mỗi hệ điều hành, đủ dùng cho hầu hết máy. Đường dẫn ngắn luôn trỏ tới bản mới nhất, tiện gửi cho người khác hoặc in mã QR.</p>
+          <div class="goi">
+            {nhanhChinh.map((n) => (
+              <div class="goi__muc">
+                <div>
+                  <p class="goi__loai">{n.nhan}</p>
+                  <p class="goi__ten">{n.moTa} · {mb(n.goi.kichThuoc)} · <code>lotus.tsudev.com/tai/{n.ma}</code></p>
+                </div>
+                <a class="nut nut--chinh" href={n.goi.url}>Tải về<span class="an-di"> cho {n.nhan}</span></a>
+              </div>
+            ))}
+          </div>
+          {nhanhPhu.length > 0 && <p>Khác: {nhanhPhu.map((n, i) => (<>{i > 0 && ', '}<a href={n.goi.url}>{n.nhan}</a> (<code>/tai/{n.ma}</code>)</>))}. Đủ mọi gói kèm SHA-256 ở mục <a href="#chon-goi">Chọn gói</a>.</p>}
         </>
       )}
 
@@ -68,7 +93,7 @@ sudo dnf install lotus-share</code></pre>
                     <p class="goi__loai">{g.loai}</p>
                     <p class="goi__ten">{g.ten} · {mb(g.kichThuoc)}</p>
                   </div>
-                  <a class={`nut ${g.ten.endsWith('-windows-x86-64.exe') ? 'nut--chinh' : 'nut--phu'}`} href={g.url}>Tải về<span class="an-di"> {g.ten}</span></a>
+                  <a class={`nut ${laBoCaiWin(g.ten) ? 'nut--chinh' : 'nut--phu'}`} href={g.url}>Tải về<span class="an-di"> {g.ten}</span></a>
                   {g.sha256 && <p class="goi__bam">SHA-256: {g.sha256}</p>}
                 </div>
               ))}
@@ -80,7 +105,7 @@ sudo dnf install lotus-share</code></pre>
           <table>
             <thead><tr><th scope="col">Hệ điều hành</th><th scope="col">Gói</th></tr></thead>
             <tbody>
-              <tr><td>Windows 10/11 x64</td><td><code>-windows-x86-64.exe</code> (bộ cài) hoặc <code>.zip</code> (di động)</td></tr>
+              <tr><td>Windows 10/11 x64</td><td><code>-windows-x86-64-setup.exe</code> (bộ cài) hoặc <code>.zip</code> (di động)</td></tr>
               <tr><td>Windows 11 ARM64</td><td><code>-windows-arm-64.zip</code></td></tr>
               <tr><td>macOS 12+</td><td><code>.dmg</code> (chip Apple và Intel)</td></tr>
               <tr><td>Linux x64</td><td><code>.AppImage</code>, <code>.tar.gz</code> - hoặc cài <code>.deb</code> / <code>.rpm</code> từ kho APT/RPM (mục <a href="#cai-bang-lenh">Cài bằng lệnh</a>)</td></tr>
@@ -105,9 +130,9 @@ sudo dnf install lotus-share</code></pre>
 
       <h2 id="windows">Cài trên Windows 10/11</h2>
       <ol>
-        <li>Chạy bộ cài <code>.exe</code>, hoặc giải nén bản <code>.zip</code> vào một thư mục cố định rồi chạy tệp chương trình.</li>
-        <li>Lần chạy đầu, Tường lửa Windows hỏi quyền truy cập mạng: chọn <strong>Mạng riêng tư</strong> (Private). Không cấp quyền thì các máy khác không thấy máy bạn.</li>
-        <li>Nếu mạng đang đặt là <em>Công cộng</em>, đổi sang <em>Riêng tư</em> trong Cài đặt, Mạng và Internet, hoặc mở cổng TCP/UDP 53317 cho mạng đó.</li>
+        <li>Chạy bộ cài <code>-setup.exe</code> và giữ dấu chọn <strong>Cho phép Lotus Share qua Tường lửa Windows</strong> (mặc định): bộ cài tự tạo quy tắc cho phép, xóa quy tắc chặn cũ, và tự gỡ bản <em>tsudev-lotus</em> cũ nếu có. Gỡ cài đặt sẽ xóa sạch các quy tắc này.</li>
+        <li>Bản di động <code>.zip</code>: giải nén vào một thư mục cố định rồi chạy <code>lotus_share.exe</code>. Lần chạy đầu, Tường lửa Windows hỏi quyền: đánh dấu <strong>cả hai</strong> loại mạng rồi bấm Cho phép. Lỡ bấm Hủy thì chạy công cụ chẩn đoán bên dưới để sửa.</li>
+        <li>Không thấy thiết bị khác: mở menu Start, chạy <strong>Lotus Share - Sửa lỗi kết nối</strong> (bản .zip: nhấp phải <code>chan-doan-mang.ps1</code>, chọn <em>Run with PowerShell</em>). Công cụ kiểm tường lửa, loại mạng, card mạng ảo/VPN, quét mạng tìm thiết bị đang mở Lotus Share, rồi đề nghị sửa.</li>
       </ol>
 
       <h2 id="macos">Cài trên macOS 12 trở lên</h2>
@@ -132,11 +157,22 @@ sudo dnf install lotus-share</code></pre>
       <pre tabindex="0"><code>ad1be603b39b0c211c3ac4c4f890e1c85509209807a029380738089399be1f45</code></pre>
       <p>Mã định danh ứng dụng là <code>com.tsudev.lotusshare</code>, nên Lotus Share cài song song được với LocalSend.</p>
 
+      <h2 id="khong-thay-nhau">Mở ứng dụng trên cả hai máy mà không thấy nhau?</h2>
+      <p>Lotus Share tìm thiết bị bằng gói tin multicast và broadcast trong mạng nội bộ, rồi quét mạng nếu sau 1 giây chưa thấy ai. Kiểm tra lần lượt:</p>
+      <ol>
+        <li><strong>Cùng một mạng</strong>: điện thoại và máy tính nối cùng Wi-Fi (không phải Wi-Fi khách, không dùng dữ liệu di động). Một số bộ phát tách băng tần 2,4 GHz và 5 GHz thành hai mạng.</li>
+        <li><strong>Windows</strong>: chạy <em>Lotus Share - Sửa lỗi kết nối</em> trong menu Start. Hay gặp nhất: tường lửa chặn vì mạng đặt là Công cộng, hoặc từng bấm Hủy ở hộp thoại tường lửa.</li>
+        <li><strong>Android</strong>: cấp quyền <em>Thiết bị ở gần</em> / <em>Mạng cục bộ</em> khi được hỏi; tắt chế độ tiết kiệm pin cho Lotus Share; tắt VPN hoặc DNS riêng chặn mạng nội bộ.</li>
+        <li><strong>Chỉ chạy một ứng dụng</strong> dùng cổng 53317 trên mỗi máy: tắt LocalSend hoặc bản tsudev-lotus cũ (kể cả biểu tượng ở khay hệ thống).</li>
+        <li><strong>Wi-Fi cơ quan, quán cà phê</strong> thường bật <em>cách ly thiết bị</em>: các máy không nói chuyện được với nhau. Cách nhanh nhất: bật điểm phát Wi-Fi trên điện thoại cho máy tính kết nối vào.</li>
+        <li>Vẫn không thấy: trên một máy, ở tab Gửi chọn <strong>Gửi thủ công</strong> và nhập địa chỉ IP hiện ở tab Nhận của máy kia.</li>
+      </ol>
+
       <h2 id="chuyen-doi">Đã cài bản tsudev-lotus?</h2>
       <p>Từ ngày 11/11/2026 ứng dụng đổi tên thành <strong>Lotus Share</strong> với định danh mới (<code>com.tsudev.lotusshare</code>), nên hệ điều hành coi đây là một ứng dụng khác: bản cũ <strong>không tự cập nhật</strong> sang Lotus Share.</p>
       <ol>
         <li>Cài Lotus Share theo hướng dẫn ở trên.</li>
-        <li>Gỡ bản cũ tên <em>tsudev-lotus</em> (Windows: Cài đặt &gt; Ứng dụng; Android: giữ biểu tượng &gt; Gỡ cài đặt; macOS: kéo vào Thùng rác; Linux: xóa tệp AppImage cũ).</li>
+        <li>Gỡ bản cũ tên <em>tsudev-lotus</em> (Windows: bộ cài Lotus Share từ bản sau 1.18.2-lotus.4 tự gỡ, hoặc Cài đặt &gt; Ứng dụng; Android: giữ biểu tượng &gt; Gỡ cài đặt; macOS: kéo vào Thùng rác; Linux: xóa tệp AppImage cũ).</li>
         <li>Đã cài bằng lệnh: APT, DNF và Homebrew tự chuyển sang Lotus Share khi cập nhật (<code>sudo apt upgrade</code>, <code>sudo dnf upgrade</code>, <code>brew upgrade</code>); sau đó gỡ gói chuyển tiếp nếu muốn (<code>sudo apt remove tsudev-lotus</code>). Scoop: <code>scoop uninstall tsudev-lotus</code> rồi <code>scoop install tsudev/lotus-share</code>.</li>
         <li>Thiết bị yêu thích và cài đặt không chuyển sang được: thêm lại thiết bị yêu thích và so dấu vân tay trên hai máy.</li>
       </ol>

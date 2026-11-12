@@ -5,7 +5,7 @@
   "description": "Trang sản phẩm lotus.tsudev.com (Astro, trang tĩnh, không JavaScript phía trình duyệt)",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/check-dist.mjs",
+    "build": "astro build && node scripts/tao-chuyen-huong.mjs && node scripts/check-dist.mjs",
     "preview": "astro preview",
     "deploy": "npm run build && wrangler deploy",
     "check:a11y": "node scripts/check-a11y.mjs",
