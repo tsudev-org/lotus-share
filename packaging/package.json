@@ -24,8 +24,23 @@
       "kind": "installer",
       "installer": "inno"
     },
+    "windows-arm64": {
+      "file": "lotus-share-{version}-windows-arm-64.zip",
+      "kind": "portable",
+      "bin": "lotus_share.exe"
+    },
+    "windows-arm64-installer": {
+      "file": "lotus-share-{version}-windows-arm-64.exe",
+      "kind": "installer",
+      "installer": "inno"
+    },
     "linux-x64": {
       "file": "lotus-share-{version}-linux-x86-64.tar.gz",
+      "kind": "tar",
+      "bin": "lotus_share"
+    },
+    "linux-arm64": {
+      "file": "lotus-share-{version}-linux-arm-64.tar.gz",
       "kind": "tar",
       "bin": "lotus_share"
     },
