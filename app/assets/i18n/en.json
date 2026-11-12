@@ -578,15 +578,12 @@
     "sUnitAssetCountLabel": "count"
   },
   "tsudev": {
-    "@info": "lotus-share: strings added by the Lotus Share fork. Not part of upstream LocalSend.",
+    "@info": "lotus-share: strings specific to Lotus Share.",
     "version": "Version: {version}",
     "copyright": "© {year} tsudev",
-    "basedOn": "Based on LocalSend © Tien Do Nam (Apache License 2.0)",
     "homepage": "Homepage",
     "sourceCode": "Source code (GitHub)",
-    "upstreamSourceCode": "Original project: LocalSend (GitHub)",
-    "upstreamCodeberg": "Original project: LocalSend (Codeberg)",
-    "licenseNotices": "License notices",
+    "licenseNotices": "Licenses and notices",
     "debugging": "Debugging",
     "selectMultipleApps": "Select multiple apps",
     "error": "Error: {message}",

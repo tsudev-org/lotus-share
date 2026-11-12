@@ -1,6 +1,6 @@
 part of 'persistence_provider.dart';
 
-const _latestVersion = 4;
+const _latestVersion = 5;
 
 Future<void> _runMigrations(int from) async {
   if (from < 2) {
@@ -14,6 +14,10 @@ Future<void> _runMigrations(int from) async {
   if (from < 4) {
     await _migrate4();
     await SharedPreferencesStorePlatform.instance.setValue('Int', 'flutter.$_version', 4);
+  }
+  if (from < 5) {
+    await _migrate5();
+    await SharedPreferencesStorePlatform.instance.setValue('Int', 'flutter.$_version', 5);
   }
 }
 
@@ -46,5 +50,37 @@ Future<void> _migrate4() async {
     // Match migration 3 and the favorites-only default announced in What's new in 1.18.0.
     final quickSave = value ? QuickSaveMode.on : QuickSaveMode.paired;
     await SharedPreferencesStorePlatform.instance.setValue('String', 'flutter.$_quickSave', quickSave.name);
+  }
+}
+
+/// lotus-share: Lotus Share 2.0 có giao thức riêng (cổng 53420, nhóm 224.0.0.168). Cổng/nhóm đã lưu đúng bằng giá
+/// trị mặc định cũ (bản 1.x) thì bỏ để dùng mặc định mới; giá trị người dùng tự đặt khác thì giữ.
+Future<void> _migrate5() async {
+  _logger.info('Migrating to version 5');
+  final prefs = await SharedPreferencesStorePlatform.instance.getAll();
+  if (prefs['flutter.$_portKey'] == 53317) {
+    await SharedPreferencesStorePlatform.instance.remove('flutter.$_portKey');
+  }
+  if (prefs['flutter.$_multicastGroupKey'] == '224.0.0.167') {
+    await SharedPreferencesStorePlatform.instance.remove('flutter.$_multicastGroupKey');
+  }
+  if (prefs['flutter.$_colorKey'] == 'localsend') {
+    await SharedPreferencesStorePlatform.instance.setValue('String', 'flutter.$_colorKey', ColorMode.lotus.name);
+  }
+  // Thiết bị yêu thích lưu cổng cũ: các máy đó cũng chuyển sang cổng mới khi cập nhật.
+  final favorites = prefs['flutter.$_favorites'];
+  if (favorites is List) {
+    final migrated = [
+      for (final raw in favorites.cast<String>())
+        () {
+          final json = jsonDecode(raw);
+          if (json is Map<String, dynamic> && json['port'] == 53317) {
+            json['port'] = defaultPort;
+            return jsonEncode(json);
+          }
+          return raw;
+        }(),
+    ];
+    await SharedPreferencesStorePlatform.instance.setValue('StringList', 'flutter.$_favorites', migrated);
   }
 }

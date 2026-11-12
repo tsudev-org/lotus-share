@@ -1,4 +1,4 @@
-# lotus-share: dương tính giả đã đọc kỹ - khóa thử nghiệm (test fixture) công khai trong lịch sử upstream LocalSend,
+# lotus-share: dương tính giả đã đọc kỹ - khóa thử nghiệm (test fixture) công khai có trong lịch sử git,
 # không dùng để ký hay mã hóa dữ liệu thật. Đọc ngày 10/11/2026.
 fb17512bdcc6116cba4debdfa571cba7bd016151:packages/core/src/crypto/cert.rs:private-key:248
 0b332bdd6185c4c9d274bcc0d1ce580d26c00d8c:core/src/main.rs:private-key:36

@@ -4,7 +4,7 @@ import '../styles/fonts.css';
 import '../styles/tokens.css';
 import '../styles/palette.css';
 import '../styles/site.css';
-import { REPO_URL, SAN_PHAM, SITE, UPSTREAM_URL } from '../lib/noi-dung';
+import { REPO_URL, SAN_PHAM, SITE } from '../lib/noi-dung';
 
 interface Props {
   tieuDe?: string;     // Tên trang; bỏ trống ở trang chủ
@@ -88,9 +88,8 @@ const dangO = (href: string) => duongDan.startsWith(href);
               <picture><source srcset="/brand/lotus-share-96.avif 1x, /brand/lotus-share-192.avif 2x" type="image/avif"><source srcset="/brand/lotus-share-96.webp 1x, /brand/lotus-share-192.webp 2x" type="image/webp"><img src="/brand/lotus-share-96.png" srcset="/brand/lotus-share-192.png 2x" alt="" width="28" height="28"></picture>
               <span>tsudev</span>
             </a>
-            <p>Lotus Share là bản Việt hóa và gia cố bảo mật của
-              <a href={UPSTREAM_URL} target="_blank" rel="noopener noreferrer">LocalSend</a> (Tien Do Nam và cộng đồng),
-              phát hành theo <a href="/ban-quyen/">giấy phép Apache 2.0</a>.</p>
+            <p>Lotus Share là ứng dụng chia sẻ tệp trong mạng nội bộ của tsudev, mã nguồn mở theo
+              <a href="/ban-quyen/">giấy phép Apache 2.0</a>.</p>
           </div>
           <nav aria-label="Hệ sinh thái tsudev">
             <ul class="chan-trang__lien-ket">

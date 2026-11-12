@@ -42,8 +42,8 @@ function kiemTra(tep, html) {
   for (const a of html.matchAll(/<a [^>]*target="_blank"[^>]*>/g)) {
     if (!a[0].includes('rel="noopener noreferrer"')) loi.push(`${ten}: thiếu rel noopener noreferrer: ${a[0]}`);
   }
-  // Em-dash/en-dash trong phần chữ do trang này viết. Nhật ký thay đổi và giấy phép bên thứ ba sao nguyên văn
-  // từ upstream (ngoại lệ đã ghi trong logs/STATE.md) nên được bỏ qua.
+  // Em-dash/en-dash trong phần chữ do trang này viết. Nhật ký thay đổi và văn bản giấy phép sao
+  // nguyên văn nên được bỏ qua.
   if (!/^\/(nhat-ky|ban-quyen)\//.test(ten)) {
     const chu = html.replace(/<pre[\s\S]*?<\/pre>/g, '').replace(/<[^>]+>/g, ' ');
     if (/[\u2013\u2014]/.test(chu)) loi.push(`${ten}: có em-dash/en-dash trong chữ hiển thị`);

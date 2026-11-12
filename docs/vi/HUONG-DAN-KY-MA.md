@@ -1,5 +1,10 @@
 # Hướng dẫn từng bước cho chủ dự án: nộp đơn SignPath (Windows) và ký mã Apple (macOS, iOS)
 
+> **Ghi chú 12/11/2026**: từ Lotus Share 2.0 sản phẩm độc lập (giao thức, cấu hình, định danh riêng; không còn gộp mã
+> LocalSend). Nội dung đơn SignPath dưới đây là bản ĐÃ NỘP, giữ nguyên để đối chiếu. Nếu SignPath hỏi lại: trả lời trung
+> thực rằng mã nguồn bắt nguồn từ LocalSend (Apache-2.0, giữ thông báo bản quyền trong LICENSE/NOTICE) và từ 2.0 phát
+> triển độc lập.
+
 > Viết 12/11/2026. Điều khoản SignPath đọc lại cùng ngày tại <https://signpath.org/terms>; tài liệu tích hợp tại
 > <https://docs.signpath.io/trusted-build-systems/github>. Phần việc của agent (sửa workflow) nằm ở
 > [`KE-HOACH-KY-MA-12-2026.md`](KE-HOACH-KY-MA-12-2026.md); tài liệu này chỉ gồm việc **chủ dự án** phải tự làm vì
@@ -143,7 +148,7 @@ Dùng một Apple Account (Apple ID) dành cho phát hành, bật **xác thực 
 
 ### B3. Xin quyền Multicast Networking (BẮT BUỘC với iOS - làm sớm)
 
-Lotus Share tìm thiết bị qua multicast (224.0.0.167, cổng 53317). Trên iOS 14+ việc này cần quyền đặc biệt
+Lotus Share tìm thiết bị qua multicast (224.0.0.168, cổng 53420). Trên iOS 14+ việc này cần quyền đặc biệt
 `com.apple.developer.networking.multicast` (đã có trong `app/ios/Runner/Runner.entitlements`); Apple duyệt tay.
 
 1. Mở <https://developer.apple.com/contact/request/networking-multicast> (đăng nhập tài khoản developer).
@@ -151,7 +156,7 @@ Lotus Share tìm thiết bị qua multicast (224.0.0.167, cổng 53317). Trên i
 
 > Lotus Share sends files between nearby devices on the same local network without Internet or accounts. It is
 > protocol-compatible with LocalSend (which uses the same entitlement): devices announce themselves by sending a small
-> JSON packet to the multicast group 224.0.0.167 on UDP port 53317 and listen on that group to discover peers, then
+> JSON packet to the multicast group 224.0.0.168 on UDP port 53420 and listen on that group to discover peers, then
 > transfer files directly over HTTPS. Discovery only runs while the user has the app open, and the user is asked for
 > Local Network permission (NSLocalNetworkUsageDescription) before any traffic.
 

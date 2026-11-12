@@ -33,7 +33,7 @@ pub fn leave_alternate_screen() {
 }
 
 /// Clears the alternate screen without leaving it, for handing it over from
-/// one modal to the next — leaving and re-entering would flash the main
+/// one modal to the next - leaving and re-entering would flash the main
 /// screen in between.
 pub fn clear_alternate_screen() {
     let _ = execute!(

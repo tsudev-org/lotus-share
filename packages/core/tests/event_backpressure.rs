@@ -2,8 +2,8 @@
 
 //! Emitting an informational event must never block the work that produced it.
 //!
-//! Registrations and discoveries arrive in bursts — a subnet scan confirms up
-//! to 255 devices, and every device on the network answers an announcement —
+//! Registrations and discoveries arrive in bursts - a subnet scan confirms up
+//! to 255 devices, and every device on the network answers an announcement -
 //! while the event channels hold a handful of items. Waiting for the
 //! application to catch up would stall an HTTP request handler, or a scan, for
 //! as long as the application is busy.

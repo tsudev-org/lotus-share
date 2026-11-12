@@ -24,7 +24,7 @@ Free code signing provided by [SignPath.io](https://about.signpath.io), certific
 - Tác giả (committer), người duyệt (reviewer): [@tsudev-tsudev](https://github.com/tsudev-tsudev)
 - Người phê duyệt ký (approver): [@tsudev-tsudev](https://github.com/tsudev-tsudev)
 - Mọi thành viên bật xác thực nhiều lớp (MFA) cho GitHub và SignPath. Mỗi yêu cầu ký được người phê duyệt duyệt tay.
-- Thay đổi từ dự án gốc (LocalSend) chỉ vào `main` qua Pull Request được duyệt như mọi thay đổi khác.
+- Mọi thay đổi chỉ vào `main` qua Pull Request được duyệt.
 
 ## Quyền riêng tư
 
@@ -37,10 +37,10 @@ or the person installing or operating it. (Thiết bị chỉ phát tên máy tr
 
 ## Summary in English (for SignPath Foundation reviewers)
 
-Lotus Share is a Vietnamese-first, security-hardened fork of [LocalSend](https://github.com/localsend/localsend)
-(Apache-2.0), protocol-compatible with LocalSend v2. Release binaries are built only by GitHub-hosted runners from
-immutable, admin-only tags `v*-lotus.*` via [`release-lotus.yml`](.github/workflows/release-lotus.yml); every change to
-`main`, including upstream merges, goes through a pull request with all required checks.
+Lotus Share is an independent, Vietnamese-first local file-sharing app by tsudev (Apache-2.0; derived from Apache-2.0
+code, see [NOTICE](NOTICE)). Release binaries are built only by GitHub-hosted runners from immutable, admin-only tags
+`v*-lotus.*` via [`release-lotus.yml`](.github/workflows/release-lotus.yml); every change to `main` goes through a pull
+request with all required checks.
 
 - Committers and reviewers: [@tsudev-tsudev](https://github.com/tsudev-tsudev)
 - Approvers: [@tsudev-tsudev](https://github.com/tsudev-tsudev)

@@ -4,8 +4,8 @@ import { changelogMoiNhat, RELEASES_URL, renderMd } from '../lib/noi-dung';
 // Sáu phiên bản gần nhất; bản đầy đủ ở CHANGELOG.md trên GitHub.
 const { html } = renderMd('CHANGELOG.md', { md: changelogMoiNhat(6), haCap: 0 });
 ---
-<TaiLieu tieuDe="Nhật ký thay đổi" moTa="Nhật ký thay đổi của Lotus Share theo từng phiên bản: tính năng mới, sửa lỗi và bản vá bảo mật kế thừa từ LocalSend gốc, kèm thay đổi riêng của tsudev." duongDan="/nhat-ky/" nguon="CHANGELOG.md">
+<TaiLieu tieuDe="Nhật ký thay đổi" moTa="Nhật ký thay đổi của Lotus Share theo từng phiên bản: tính năng mới, sửa lỗi và bản vá bảo mật." duongDan="/nhat-ky/" nguon="CHANGELOG.md">
   <h1>Nhật ký thay đổi</h1>
-  <p>Lotus Share theo sát phiên bản của LocalSend gốc. Nhật ký dưới đây là của upstream, giữ nguyên tiếng Anh; thay đổi riêng của bản Việt hóa (tiếng Việt, vá phụ thuộc, gia cố bảo mật) ghi ở trang <a href="/bao-mat/kien-truc/">Kiến trúc bảo mật</a> và trong ghi chú của từng <a href={RELEASES_URL} target="_blank" rel="noopener noreferrer">bản phát hành trên GitHub</a>.</p>
-  <div lang="en"><Fragment set:html={html} /></div>
+  <p>Sáu phiên bản gần nhất. Chi tiết từng bản ở <a href={RELEASES_URL} target="_blank" rel="noopener noreferrer">trang phát hành trên GitHub</a>.</p>
+  <div><Fragment set:html={html} /></div>
 </TaiLieu>

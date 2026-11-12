@@ -293,8 +293,8 @@ pub(super) fn verify_cert_from_res(
 }
 
 /// The SHA-256 fingerprint (uppercase hex) of the peer certificate the
-/// response was received over. This — not any fingerprint claimed in the
-/// body — is the peer's identity in HTTPS mode.
+/// response was received over. This - not any fingerprint claimed in the
+/// body - is the peer's identity in HTTPS mode.
 pub(super) fn cert_fingerprint_from_res(response: &Response) -> anyhow::Result<String> {
     let tls_info_ext = response
         .extensions()

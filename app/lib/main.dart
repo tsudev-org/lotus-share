@@ -39,15 +39,15 @@ Future<void> main(List<String> args) async {
       container: container,
       child: SDTFScope(
         child: TranslationProvider(
-          child: const LocalSendApp(),
+          child: const LotusShareApp(),
         ),
       ),
     ),
   );
 }
 
-class LocalSendApp extends StatelessWidget {
-  const LocalSendApp();
+class LotusShareApp extends StatelessWidget {
+  const LotusShareApp();
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,6 @@ class LocalSendApp extends StatelessWidget {
                 break;
               case AppLifecycleState.detached:
                 // The main isolate is only exited when all child isolates are exited.
-                // https://github.com/localsend/localsend/issues/1568
                 ref.redux(parentIsolateProvider).dispatch(IsolateDisposeAction());
                 break;
               default:

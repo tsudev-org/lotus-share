@@ -41,7 +41,7 @@ android {
     }
 
     defaultConfig {
-        // lotus-share: định danh cài đặt riêng (cài song song được với LocalSend). Giữ nguyên `namespace`
+        // lotus-share: định danh cài đặt riêng. Giữ nguyên `namespace`
         // (package Kotlin + tên kênh nền tảng) để gộp upstream ít xung đột.
         applicationId "com.tsudev.lotusshare"
         // You can update the following values to match your application needs.
@@ -90,7 +90,6 @@ flutter {
 }
 
 // To comply with F-Droid version code schema
-// https://github.com/localsend/localsend/issues/1534
 ext.abiCodes = ["x86_64": 1, "armeabi-v7a": 2, "arm64-v8a": 3]
 import com.android.build.OutputFile
 android.applicationVariants.all { variant ->

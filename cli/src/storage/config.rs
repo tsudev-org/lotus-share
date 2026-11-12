@@ -18,20 +18,20 @@ pub struct Config {
 
 const CONFIG_TEMPLATE: &str = "\
 # Cấu hình Lotus Share CLI. Tham số dòng lệnh và biến môi trường
-# (LOCALSEND_ALIAS, LOCALSEND_PORT, LOCALSEND_DESTINATION) được ưu tiên hơn.
+# (LOTUS_SHARE_ALIAS, LOTUS_SHARE_PORT, LOTUS_SHARE_DESTINATION) được ưu tiên hơn.
 
 # Tên thiết bị hiển thị với máy khác (mặc định: tên máy).
 #alias = \"My Device\"
 
 # Cổng máy chủ HTTP.
-#port = 53317
+#port = 53420
 
 # Thư mục lưu tệp nhận được (mặc định: thư mục Tải về của hệ thống).
 #destination = \"~/Downloads\"
 ";
 
 /// Default port of the HTTP server.
-const DEFAULT_PORT: u16 = 53317;
+const DEFAULT_PORT: u16 = 53420;
 
 /// The settings actually used by the app.
 pub struct ResolvedConfig {

@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 void main() {
   const fp = 'A1B2C3';
   const favorites = [
-    FavoriteDevice(id: '1', fingerprint: fp, ip: '192.168.1.5', port: 53317, alias: 'Máy của Mẹ'),
+    FavoriteDevice(id: '1', fingerprint: fp, ip: '192.168.1.5', port: 53420, alias: 'Máy của Mẹ'),
   ];
 
   group('findByVerifiedFingerprint', () {

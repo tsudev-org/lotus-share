@@ -94,6 +94,13 @@ Future<RefenaContainer> preInit(List<String> args) async {
 
   await initI18n();
 
+  // Giấy phép Apache 2.0 + NOTICE của Lotus Share, hiện ở Giới thiệu > Giấy phép và bản quyền.
+  LicenseRegistry.addLicense(() async* {
+    for (final file in ['assets/legal/NOTICE', 'assets/legal/LICENSE']) {
+      yield LicenseEntryWithLineBreaks(['Lotus Share'], await rootBundle.loadString(file));
+    }
+  });
+
   TransferNotification.init(notificationStrings);
 
   bool startHidden = false;
@@ -199,7 +206,6 @@ Future<void> postInit(BuildContext context, Ref ref, bool appStart) async {
 
   if (checkPlatform([TargetPlatform.android])) {
     // On some TVs, requesting a high refresh rate can trigger HDMI resync and blank the display when entering or leaving the app.
-    // https://github.com/localsend/localsend/issues/3452
     if (!ref.read(tvProvider)) {
       try {
         await FlutterDisplayMode.setHighRefreshRate();

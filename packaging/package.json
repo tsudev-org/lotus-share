@@ -5,8 +5,8 @@
   "homepage": "https://lotus.tsudev.com",
   "license": "Apache-2.0",
   "description": {
-    "vi": "Gửi tệp giữa các thiết bị trong cùng mạng, không cần Internet - bản Việt hóa, gia cố bảo mật của LocalSend",
-    "en": "Share files between nearby devices over the local network, no Internet needed - Vietnamese, security-hardened LocalSend"
+    "vi": "Gửi tệp giữa các thiết bị trong cùng mạng, không cần Internet - giao diện tiếng Việt, bảo mật nhiều lớp",
+    "en": "Share files between nearby devices over the local network, no Internet needed - Vietnamese-first, security-hardened"
   },
   "release": {
     "repo": "tsudev-org/lotus-share",
@@ -73,7 +73,7 @@
         "Utility"
       ],
       "keywords": [
-        "LocalSend",
+        "Lotus",
         "Sharing",
         "LAN",
         "Files"

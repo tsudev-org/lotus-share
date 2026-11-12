@@ -31,7 +31,7 @@ pub struct Picker {
     terminal: Terminal<CrosstermBackend<Stdout>>,
 
     /// The picked files with the byte size they had when they were picked, so
-    /// that the summary line does not have to stat them again — they may well
+    /// that the summary line does not have to stat them again - they may well
     /// live in a directory that is no longer listed.
     selected: Vec<(PathBuf, u64)>,
 
@@ -226,7 +226,7 @@ impl Picker {
         let previous = self.explorer.cwd().clone();
         let _ = self.explorer.handle(&Event::Key(key));
         if *self.explorer.cwd() == previous {
-            // Nothing to navigate into — keep the query and the highlight.
+            // Nothing to navigate into - keep the query and the highlight.
             return;
         }
         self.query.clear();
@@ -251,7 +251,7 @@ impl Picker {
     }
 
     /// Highlights the first real entry, skipping the `../` link the explorer
-    /// lands on after every directory change — otherwise Right, pressed twice,
+    /// lands on after every directory change - otherwise Right, pressed twice,
     /// descends and then bounces straight back up.
     fn select_first_entry(&mut self) {
         let skip_parent = self.explorer.cwd().parent().is_some() && self.matches.len() > 1;

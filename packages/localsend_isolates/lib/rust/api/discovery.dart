@@ -15,7 +15,7 @@ import 'package:localsend_isolates/rust/frb_generated.dart';
 /// register request, and keeps the store of confirmed devices.
 ///
 /// Announcements are received from the IPv4 [group] and, as a LocalSend
-/// extension, from the (currently hardcoded) IPv6 group `ff12::fd3a:e420`.
+/// extension, from the (currently hardcoded) IPv6 group `ff12::1075:5ea0`.
 ///
 /// [port] is used both to bind the multicast sockets and as the HTTP server
 /// port announced to other devices. [cert_pem] and [private_key_pem] are this
@@ -26,7 +26,7 @@ import 'package:localsend_isolates/rust/frb_generated.dart';
 ///
 /// Cannot fail besides an invalid [group]: when no multicast socket could be
 /// bound (e.g. the port is taken by another process), discovery still runs
-/// without multicast — see [RsDiscovery::multicast_error] — and still learns
+/// without multicast - see [RsDiscovery::multicast_error] - and still learns
 /// about devices through [RsDiscovery::discover], [RsDiscovery::scan_subnet]
 /// and [RsDiscovery::add_device].
 Future<RsDiscovery> startDiscovery({
@@ -272,8 +272,8 @@ class RsDiscoveredDevice {
 ///
 /// Emitted on [RsDiscovery::listen] for every confirmation (answered
 /// announcements, scan results and devices fed in via
-/// [RsDiscovery::add_device]), so a device re-appears — with its channels
-/// accumulated so far — whenever it re-announces itself or is re-discovered.
+/// [RsDiscovery::add_device]), so a device re-appears - with its channels
+/// accumulated so far - whenever it re-announces itself or is re-discovered.
 class RsStoredDevice {
   final String alias;
 

@@ -16,11 +16,9 @@ theo giấy phép Apache-2.0. Trang sản phẩm: <https://lotus.tsudev.com>.
    (flutter analyze/test, cargo test, CodeQL, gitleaks, quét phụ thuộc, i18n, website).
 3. Sửa chuỗi giao diện: `app/assets/i18n/vi.json` + `en.json`, rồi `dart run slang` và
    `python3 -I tools/fix_slang_format.py`.
-4. Sửa trong phần mã kế thừa: giữ tối thiểu, đánh dấu chú thích `lotus-share:` tại chỗ sửa.
-5. Không đổi định dạng gói tin: Lotus Share giữ tương thích giao thức LocalSend v2.
+4. Đổi giao thức mạng (cổng, nhóm multicast, đường dẫn API, định dạng gói tin) là thay đổi phá vỡ: cần chủ dự án
+   duyệt và nâng phiên bản tối thiểu ở `website/public/phien-ban.json` để bản cũ được yêu cầu cập nhật.
 
-## Ghi công
+## Giấy phép
 
-Lotus Share dựa trên mã nguồn mở LocalSend (c) Tien Do Nam và cộng đồng đóng góp, giấy phép Apache-2.0 (xem
-[NOTICE](NOTICE)). Hướng dẫn đóng góp gốc lưu tại [docs/CONTRIBUTING.upstream.md](docs/CONTRIBUTING.upstream.md)
-để tham khảo kỹ thuật.
+Đóng góp được phát hành theo Apache License 2.0 (xem [LICENSE](LICENSE) và [NOTICE](NOTICE)).

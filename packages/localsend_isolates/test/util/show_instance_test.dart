@@ -1,8 +1,8 @@
-// Regression test for https://github.com/localsend/localsend/issues/3165
+// Regression test for
 //
 // "Send to -> LocalSend" starts a second process with the file paths as
 // arguments. Only the internal `show` handover keeps that process from becoming
-// a duplicate instance that then collides on port 53317.
+// a duplicate instance that then collides on port 53420.
 //
 // Two things made the handover fail:
 //   * it was addressed with `peerProtocolVersion` ('1.0'), which builds the v1
@@ -96,7 +96,7 @@ void main() {
       // cannot express, so an unauthorized answer stands in for it).
       request.response.statusCode = switch (received) {
         _Received(clientCertificate: null) => HttpStatus.unauthorized,
-        _Received(path: != '/api/localsend/v2/show') => HttpStatus.notFound,
+        _Received(path: != '/api/lotus/v2/show') => HttpStatus.notFound,
         _Received(token: != _token) => HttpStatus.forbidden,
         _ => statusCode,
       };
@@ -128,7 +128,7 @@ void main() {
     expect(handedOver, isTrue, reason: 'the running instance accepted the handover');
 
     // Regression: '1.0' used to select the v1 path, which the server does not serve.
-    expect(received.path, '/api/localsend/v2/show');
+    expect(received.path, '/api/lotus/v2/show');
     expect(received.token, _token);
     expect(jsonDecode(received.body!), {'args': args});
 

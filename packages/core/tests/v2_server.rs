@@ -163,7 +163,7 @@ fn sender_info() -> RegisterDtoV2 {
         device_model: Some("Rust".to_string()),
         device_type: None,
         fingerprint: "sender-fingerprint".to_string(),
-        port: 53317,
+        port: 53420,
         protocol: ProtocolType::Http,
         download: false,
     }
@@ -268,25 +268,18 @@ async fn test_register_and_info() {
     assert_eq!(info.fingerprint, "server-fingerprint");
 }
 
-/// Old clients (v1.17 and earlier) probe unknown peers on the legacy v1 route.
+/// lotus-share: the legacy v1 route of the old protocol is gone, and so is the old path prefix.
 #[tokio::test]
-async fn test_info_on_legacy_v1_route() {
+async fn test_legacy_routes_are_gone() {
     let server = start_test_server(None, true, None).await;
 
-    let body: serde_json::Value = reqwest::get(format!(
-        "http://127.0.0.1:{}/api/localsend/v1/info",
-        server.port
-    ))
-    .await
-    .unwrap()
-    .error_for_status()
-    .unwrap()
-    .json()
-    .await
-    .unwrap();
-
-    assert_eq!(body["alias"], "Test Server");
-    assert_eq!(body["fingerprint"], "server-fingerprint");
+    for path in ["/api/lotus/v1/info", "/api/localsend/v2/info"] {
+        let status = reqwest::get(format!("http://127.0.0.1:{}{path}", server.port))
+            .await
+            .unwrap()
+            .status();
+        assert_eq!(status, reqwest::StatusCode::NOT_FOUND, "{path}");
+    }
 }
 
 #[tokio::test]
@@ -912,7 +905,7 @@ async fn test_upload_missing_parameters() {
 
     let response = localsend::reqwest::Client::new()
         .post(format!(
-            "http://127.0.0.1:{}/api/localsend/v2/upload?sessionId=abc",
+            "http://127.0.0.1:{}/api/lotus/v2/upload?sessionId=abc",
             server.port
         ))
         .body("data")
@@ -1054,7 +1047,7 @@ async fn test_prepare_upload_aborted_by_sender_disconnect() {
     let body =
         serde_json::to_string(&prepare_upload_request(&[file_dto("file-a", "a.bin", 5)])).unwrap();
     let request = format!(
-        "POST /api/localsend/v2/prepare-upload HTTP/1.1\r\nHost: 127.0.0.1:{port}\r\nContent-Type: application/json\r\nContent-Length: {}\r\n\r\n{body}",
+        "POST /api/lotus/v2/prepare-upload HTTP/1.1\r\nHost: 127.0.0.1:{port}\r\nContent-Type: application/json\r\nContent-Length: {}\r\n\r\n{body}",
         body.len()
     );
     let mut stream = tokio::net::TcpStream::connect(("127.0.0.1", port))
@@ -1170,7 +1163,7 @@ async fn test_prepare_upload_cancelled_by_session_less_cancel() {
     });
     tokio::time::sleep(Duration::from_millis(200)).await;
 
-    let cancel_url = format!("http://127.0.0.1:{port}/api/localsend/v2/cancel");
+    let cancel_url = format!("http://127.0.0.1:{port}/api/lotus/v2/cancel");
     let cancel_client = localsend::reqwest::Client::new();
 
     // A cancel with a wrong session ID must not cancel the pending request.

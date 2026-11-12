@@ -208,7 +208,7 @@ class PersistenceService {
   static Future<void> _initColorSetting(SharedPreferences prefs, bool supportsDynamicColors) async {
     await prefs.setString(
       _colorKey,
-      ColorMode.localsend.name, // tsudev: tím của hệ tsudev ở mọi nền tảng; màu động Android vẫn chọn được trong Cài đặt
+      ColorMode.lotus.name, // tsudev: tím của hệ tsudev ở mọi nền tảng; màu động Android vẫn chọn được trong Cài đặt
     );
   }
 

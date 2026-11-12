@@ -1,0 +1,10 @@
+Lotus Share
+Copyright (c) 2026 tsudev - https://lotus.tsudev.com
+
+Lotus Share is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Lotus Share is derived from source code originally published under the Apache
+License, Version 2.0 (Copyright 2022-2026 Tien Do Nam). The original copyright
+notice is retained in LICENSE as the license requires. Since version 2.0 Lotus
+Share is an independent product with its own network protocol, settings and
+identity; tsudev changed every file it modified (see git history).

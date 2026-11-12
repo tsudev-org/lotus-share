@@ -12,8 +12,8 @@ use std::path::Path;
 
 /// This device's identity: a self-signed certificate whose SHA-256
 /// fingerprint identifies the device. The certificate is persisted as
-/// `identity.pem` so the fingerprint — and thereby pairings, on both
-/// sides — survives restarts.
+/// `identity.pem` so the fingerprint - and thereby pairings, on both
+/// sides - survives restarts.
 pub struct Identity {
     pub alias: String,
     pub port: u16,

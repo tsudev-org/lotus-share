@@ -4,12 +4,12 @@
 
 .DESCRIPTION
   Kiểm tra lần lượt các nguyên nhân thường gặp khiến điện thoại và máy tính cùng mở Lotus Share nhưng không thấy nhau:
-    1. Lotus Share có đang chạy và nghe cổng (mặc định 53317, TCP + UDP) không.
+    1. Lotus Share có đang chạy và nghe cổng (mặc định 53420, TCP + UDP) không.
     2. Tường lửa Windows: có quy tắc CHO PHÉP chương trình chưa, có quy tắc CHẶN (Windows tự tạo khi bấm Hủy) không,
        chính sách nhóm có cấm quy tắc cục bộ không.
     3. Loại mạng: mạng "Công cộng" (Public) chặn kết nối đến nếu chưa có quy tắc.
     4. Card mạng: card ảo (WSL, Hyper-V, VirtualBox, VMware, Docker) và VPN đang bật.
-    5. Quét mạng LAN (TCP cổng 53317 + /api/localsend/v2/info) tìm mọi thiết bị đang mở Lotus Share/LocalSend, đếm
+    5. Quét mạng LAN (TCP cổng 53420 + /api/lotus/v2/info) tìm mọi thiết bị đang mở Lotus Share, đếm
        thiết bị thấy được qua bảng ARP để nhận ra bộ phát Wi-Fi "cách ly thiết bị" (client isolation).
     6. Không thấy ai: kết nối thử tới điện thoại theo địa chỉ IP hiện trên tab Nhận của điện thoại - phân biệt lỗi
        tường lửa máy này với lỗi mạng (Wi-Fi khách, cách ly thiết bị).
@@ -18,7 +18,7 @@
   Không gửi dữ liệu ra Internet. Chỉ kết nối tới địa chỉ IP trong mạng nội bộ do bạn nhập.
 
 .PARAMETER Port
-  Cổng của Lotus Share (Cài đặt > Mạng > Cổng). Mặc định 53317.
+  Cổng của Lotus Share (Cài đặt > Mạng > Cổng). Mặc định 53420.
 
 .PARAMETER Exe
   Đường dẫn lotus_share.exe. Mặc định: cùng thư mục với tệp này.
@@ -34,7 +34,7 @@
 #>
 [CmdletBinding()]
 param(
-  [int]$Port = 53317,
+  [int]$Port = 53420,
   [string]$Exe = '',
   [string]$PeerIp = '',
   [switch]$Fix,
@@ -122,7 +122,7 @@ if ($udp) { Write-Ok "Có chương trình nghe UDP $Port (khám phá thiết b�
 foreach ($o in $owners) {
   $p = Get-Process -Id $o -ErrorAction SilentlyContinue
   if ($p -and $p.ProcessName -ne 'lotus_share') {
-    Write-Warn "Cổng $Port đang bị '$($p.ProcessName)' (PID $o) dùng - có thể là LocalSend gốc. Hai ứng dụng cùng giao thức, chỉ mở một trong hai."
+    Write-Warn "Cổng $Port đang bị '$($p.ProcessName)' (PID $o) dùng - tắt ứng dụng đó rồi mở lại Lotus Share."
   }
 }
 
@@ -201,11 +201,11 @@ foreach ($c in $configs) {
 if ($real -eq 0) { Write-Bad 'Không có card mạng thật nào đang kết nối (chỉ có card ảo/VPN). Kết nối Wi-Fi/Ethernet cùng mạng với điện thoại.' }
 elseif ($real -gt 1) { Write-Info 'Có nhiều mạng thật cùng lúc: điện thoại phải ở cùng một trong các mạng trên.' }
 
-# 5. Quét mạng tìm thiết bị đang mở Lotus Share / LocalSend (kết nối ĐI, không bị tường lửa máy này chặn).
+# 5. Quét mạng tìm thiết bị đang mở Lotus Share (kết nối ĐI, không bị tường lửa máy này chặn).
 function Get-PeerInfo([string]$ip) {
   foreach ($scheme in 'https', 'http') {
     try {
-      $r = Invoke-RestMethod -Uri "${scheme}://${ip}:$Port/api/localsend/v2/info" -TimeoutSec 3 -ErrorAction Stop
+      $r = Invoke-RestMethod -Uri "${scheme}://${ip}:$Port/api/lotus/v2/info" -TimeoutSec 3 -ErrorAction Stop
       if ($r.alias) { return "$($r.alias) ($($r.deviceModel), $($r.deviceType), $scheme)" }
     } catch { }
   }
@@ -227,7 +227,7 @@ function Test-Hosts([string[]]$ips, [int]$timeoutMs) {
   return $open
 }
 
-Write-Step '5. Quét mạng tìm thiết bị đang mở Lotus Share / LocalSend'
+Write-Step '5. Quét mạng tìm thiết bị đang mở Lotus Share'
 # Chứng thư của thiết bị là tự ký (định danh bằng dấu vân tay), chỉ đọc /info công khai nên bỏ kiểm chứng thư ở bước này.
 try { [System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true } } catch { }
 try { [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12 } catch { }
@@ -245,7 +245,7 @@ foreach ($me in $myIps) {
   foreach ($ip in $open) {
     $info = Get-PeerInfo $ip
     if ($info) { Write-Ok "Thấy ${ip}: $info"; $found++ }
-    else { Write-Info "${ip}:$Port mở nhưng không trả lời như Lotus Share/LocalSend." }
+    else { Write-Info "${ip}:$Port mở nhưng không trả lời như Lotus Share (có thể là bản 1.x - cần cập nhật)." }
   }
   # Sau khi quét, bảng ARP cho biết máy này "thấy" bao nhiêu thiết bị cùng mạng. Chỉ thấy cổng mạng => bộ phát Wi-Fi
   # nhiều khả năng cách ly thiết bị (client isolation) - khi đó không ứng dụng chia sẻ nội bộ nào hoạt động được.
@@ -257,7 +257,7 @@ foreach ($me in $myIps) {
   }
 }
 if ($myIps.Count -gt 0 -and $found -eq 0) {
-  Write-Warn 'Không thấy thiết bị nào khác đang mở Lotus Share/LocalSend trong mạng của máy này.'
+  Write-Warn 'Không thấy thiết bị nào khác đang mở Lotus Share 2.x trong mạng của máy này.'
   Write-Info 'Nếu điện thoại đang mở ứng dụng mà vẫn không thấy: điện thoại ở mạng khác (Wi-Fi khách, dữ liệu di động, Wi-Fi'
   Write-Info 'băng tần khác bị tách mạng) hoặc bộ phát Wi-Fi bật "cách ly thiết bị" (AP/client isolation, hay gặp ở Wi-Fi cơ quan,'
   Write-Info 'quán cà phê). Cách nhanh: bật điểm phát Wi-Fi trên điện thoại cho máy tính kết nối vào (hoặc ngược lại).'

@@ -963,23 +963,14 @@ class Translations$tsudev$en {
   /// en: '© {year} tsudev'
   String copyright({required Object year}) => '© ${year} tsudev';
 
-  /// en: 'Based on LocalSend © Tien Do Nam (Apache License 2.0)'
-  String get basedOn => 'Based on LocalSend © Tien Do Nam (Apache License 2.0)';
-
   /// en: 'Homepage'
   String get homepage => 'Homepage';
 
   /// en: 'Source code (GitHub)'
   String get sourceCode => 'Source code (GitHub)';
 
-  /// en: 'Original project: LocalSend (GitHub)'
-  String get upstreamSourceCode => 'Original project: LocalSend (GitHub)';
-
-  /// en: 'Original project: LocalSend (Codeberg)'
-  String get upstreamCodeberg => 'Original project: LocalSend (Codeberg)';
-
-  /// en: 'License notices'
-  String get licenseNotices => 'License notices';
+  /// en: 'Licenses and notices'
+  String get licenseNotices => 'Licenses and notices';
 
   /// en: 'Debugging'
   String get debugging => 'Debugging';

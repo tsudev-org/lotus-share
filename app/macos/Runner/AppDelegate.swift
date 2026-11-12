@@ -24,7 +24,7 @@ class AppDelegate: FlutterAppDelegate {
     }
     
     override func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        // LocalSend handles the close event manually
+        // Lotus Share handles the close event manually
         return false
     }
     
@@ -36,8 +36,8 @@ class AppDelegate: FlutterAppDelegate {
     override func applicationDidFinishLaunching(_ notification: Notification) {
         NSApplication.shared.servicesProvider = self
         
-        let localsendBrandColor = NSColor(red: 0, green: 0.392, blue: 0.353, alpha: 0.8) // #00645a
-        DockProgress.style = .squircle(color: localsendBrandColor)
+        let brandColor = NSColor(red: 0, green: 0.392, blue: 0.353, alpha: 0.8) // #00645a
+        DockProgress.style = .squircle(color: brandColor)
         
         isLaunchedAsLoginItem = LaunchAtLogin.wasLaunchedAtLogin
         for result in pendingLoginItemResults {
@@ -49,7 +49,7 @@ class AppDelegate: FlutterAppDelegate {
     }
     
     override func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        showLocalSendFromMenuBar()
+        showLotusShareFromMenuBar()
         return false
     }
     
@@ -87,7 +87,7 @@ class AppDelegate: FlutterAppDelegate {
             let menu = NSMenu()
             
             let openString = i18n["open"]!
-            let openItem = NSMenuItem(title: openString, action: #selector(showLocalSendFromMenuBar), keyEquivalent: "o")
+            let openItem = NSMenuItem(title: openString, action: #selector(showLotusShareFromMenuBar), keyEquivalent: "o")
             menu.addItem(openItem)
             
             let quitString = i18n["quit"]!
@@ -109,8 +109,8 @@ class AppDelegate: FlutterAppDelegate {
         }
     }
     
-    @objc func showLocalSendFromMenuBar() {
-        channel?.invokeMethod("showLocalSendFromMenuBar", arguments: nil)
+    @objc func showLotusShareFromMenuBar() {
+        channel?.invokeMethod("showLotusShareFromMenuBar", arguments: nil)
     }
     
     @objc private func quitApp() {
@@ -138,7 +138,7 @@ class AppDelegate: FlutterAppDelegate {
         Defaults[.pendingFiles] = []
         Defaults[.pendingStrings] = []
         
-        self.showLocalSendFromMenuBar()
+        self.showLotusShareFromMenuBar()
     }
     
     // START: handle opened files
@@ -157,9 +157,9 @@ class AppDelegate: FlutterAppDelegate {
                 result(FlutterError(code: "WINDOW_UNAVAILABLE", message: "Main window is unavailable", details: nil))
                 return
             }
-            result(window.setFrameUsingName("LocalSendMainWindow"))
+            result(window.setFrameUsingName("LotusShareMainWindow"))
         case "configureWindowFrameAutosave":
-            let windowFrameStorageName = "LocalSendMainWindow"
+            let windowFrameStorageName = "LotusShareMainWindow"
             guard let arguments = call.arguments as? [String: Any],
                   let enabled = arguments["enabled"] as? Bool else {
                 result(FlutterError(code: "INVALID_ARGUMENT", message: "Expected window frame autosave options", details: nil))

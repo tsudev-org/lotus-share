@@ -1,5 +1,4 @@
-// lotus-share: trang "Ủng hộ" chỉ dẫn tới kênh của hệ sinh thái tsudev (fork_config.dart).
-// Bản gốc dùng mua trong ứng dụng và tài khoản ủng hộ của tác giả LocalSend; bản fork đã gỡ cả hai.
+// Trang "Ủng hộ" chỉ dẫn tới kênh của hệ sinh thái tsudev (fork_config.dart).
 import 'package:flutter/material.dart';
 import 'package:localsend_app/config/fork_config.dart';
 import 'package:localsend_app/gen/strings.g.dart';

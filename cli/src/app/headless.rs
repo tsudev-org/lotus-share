@@ -1,5 +1,5 @@
 //! The headless `send --to` mode: discover the destination, send the files
-//! or the text message, exit with the transfer result. There is no keyboard and no overlay — only
+//! or the text message, exit with the transfer result. There is no keyboard and no overlay - only
 //! the network events a send needs are handled, and incoming transfer
 //! requests are declined.
 

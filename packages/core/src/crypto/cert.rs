@@ -44,7 +44,7 @@ pub fn generate_self_signed() -> anyhow::Result<SelfSignedCert> {
     params.distinguished_name = rcgen::DistinguishedName::new();
     params
         .distinguished_name
-        .push(rcgen::DnType::CommonName, "LocalSend User");
+        .push(rcgen::DnType::CommonName, "Lotus Share");
     let certificate = params.self_signed(&key_pair)?;
 
     Ok(SelfSignedCert {

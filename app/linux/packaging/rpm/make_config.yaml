@@ -1,9 +1,9 @@
 display_name: Lotus Share
-packager: Tienisto
-packagerEmail: dev.tien.donam@gmail.com
+packager: tsudev
+packagerEmail: noreply@tsudev.com
 url: https://lotus.tsudev.com
 buildArch: x86_64
-license: MIT
+license: Apache-2.0
 
 icon: assets/img/logo-512.png
 
@@ -17,7 +17,7 @@ keywords:
   - Files
 
 generic_name: Chia sẻ tệp trong mạng nội bộ
-summary: Chia sẻ tệp trong mạng nội bộ, không cần Internet (tương thích LocalSend)
+summary: Chia sẻ tệp trong mạng nội bộ, không cần Internet
 group: Applications/Utilities
 
 categories:

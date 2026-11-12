@@ -7,7 +7,6 @@ export const SAN_PHAM = 'Lotus Share';
 export const REPO = 'tsudev-org/lotus-share';
 export const REPO_URL = `https://github.com/${REPO}`;
 export const RELEASES_URL = `${REPO_URL}/releases/latest`;
-export const UPSTREAM_URL = 'https://github.com/localsend/localsend';
 export const SITE = 'https://lotus.tsudev.com';
 
 // Gốc repo: build chạy trong thư mục website/ (npm run build), nên gốc là thư mục cha.
@@ -98,7 +97,7 @@ export function renderMd(tepMd: string, opts: { boTieuDeDau?: boolean; md?: stri
   return { html, tieuDe };
 }
 
-/** `soMuc` mục `## x.y.z` mới nhất của CHANGELOG (nhật ký của upstream, tiếng Anh). */
+/** `soMuc` mục `## x.y.z` mới nhất của CHANGELOG. */
 export function changelogMoiNhat(soMuc: number): string {
   const md = docTep('CHANGELOG.md');
   const dau = md.search(/^## \d/m);
@@ -113,7 +112,7 @@ export interface GoiTai { nenTang: string; ten: string; url: string; sha256: str
 export interface BanPhatHanh { tag: string; phienBan: string; ngay: string; url: string; goi: GoiTai[]; tepSums: { ten: string; url: string }[] }
 
 /**
- * Nền tảng theo hậu tố tên tệp phát hành (cùng quy tắc đặt tên của workflow build_*.yml kế thừa từ LocalSend:
+ * Nền tảng theo hậu tố tên tệp phát hành (quy tắc đặt tên của release-lotus.yml:
  * <tên>-<phiên bản>-<nền tảng>-<kiến trúc>.<đuôi>). Thứ tự = thứ tự hiển thị.
  */
 export const NEN_TANG: { ma: string; ten: string; mau: RegExp }[] = [

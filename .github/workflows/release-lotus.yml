@@ -100,7 +100,7 @@ jobs:
           Copy-Item app\assets\packaging\logo.ico $payload
           # Chưa có chứng thư Authenticode: bộ cài không ký Authenticode, được bảo chứng bằng SHA256SUMS ký Sigstore
           # và chứng thực nguồn gốc (xem đầu tệp). Có chứng thư thì bỏ /DSkipSignTool và truyền /SMySignTool=...
-          iscc /DSkipSignTool /DSkipMsixHelper "/DPayloadDir=$payload" "/DResultDir=$result" support\scripts\compile_windows_exe-inno.iss
+          iscc /DSkipSignTool "/DPayloadDir=$payload" "/DResultDir=$result" support\scripts\compile_windows_exe-inno.iss
           Move-Item "$result\lotus-share-setup.exe" "dist\lotus-share-$env:V-windows-x86-64-setup.exe"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
@@ -168,7 +168,7 @@ jobs:
           New-Item -ItemType Directory -Force $payload, $result | Out-Null
           Copy-Item "$rel\*" $payload -Recurse
           Copy-Item app\assets\packaging\logo.ico $payload
-          iscc /DArm64 /DSkipSignTool /DSkipMsixHelper "/DPayloadDir=$payload" "/DResultDir=$result" support\scripts\compile_windows_exe-inno.iss
+          iscc /DArm64 /DSkipSignTool "/DPayloadDir=$payload" "/DResultDir=$result" support\scripts\compile_windows_exe-inno.iss
           Move-Item "$result\lotus-share-setup.exe" "dist\lotus-share-$env:V-windows-arm-64-setup.exe"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:

@@ -97,7 +97,6 @@ include(flutter/generated_plugins.cmake)
 # to fail because deprecation warnings are treated as errors.
 # TODO: Remove after upgrading to tray_manager >= 0.7.0 (requires Flutter >= 3.47),
 # which drops Ayatana.
-# https://github.com/localsend/localsend/pull/3358
 if(TARGET tray_manager_plugin)
   target_compile_options(tray_manager_plugin PRIVATE -Wno-error=deprecated-declarations)
 endif()

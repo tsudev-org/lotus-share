@@ -41,7 +41,7 @@ export function kiemVietQr(q: VietQr): void {
     throw new Error(`VietQR chuyển tới ${nhan.get('00')}/${nhan.get('01')}, khác ${bin}/${soTaiKhoan} đã khai`);
 }
 
-// Tên/miền của dự án gốc và các kênh tài trợ cũ: không bao giờ được xuất hiện ở trang ủng hộ của tsudev.
+// Kênh tài trợ ngoài hệ tsudev: không bao giờ được xuất hiện ở trang ủng hộ.
 const CAM = /tienisto|ko-fi\.com|localsend\.org|github\.com\/sponsors\/(?!tsudev)/i;
 const THU_MUC_QR = join(process.cwd(), 'public');
 

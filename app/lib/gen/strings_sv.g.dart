@@ -1496,7 +1496,7 @@ class _Translations$dialogs$quickActions$sv extends Translations$dialogs$quickAc
   @override
   String get padZero => 'Fyll ut med nollor';
   @override
-  String get sortBeforeCount => 'Sortera alfabetiskt i förväg (A–Ö)';
+  String get sortBeforeCount => 'Sortera alfabetiskt i förväg (A-Ö)';
   @override
   String get random => 'Slumpmässig';
 }

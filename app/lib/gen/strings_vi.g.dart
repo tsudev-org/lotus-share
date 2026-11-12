@@ -864,17 +864,11 @@ class _Translations$tsudev$vi extends Translations$tsudev$en {
   @override
   String copyright({required Object year}) => '© ${year} tsudev';
   @override
-  String get basedOn => 'Dựa trên LocalSend © Tien Do Nam (Giấy phép Apache 2.0)';
-  @override
   String get homepage => 'Trang chủ';
   @override
   String get sourceCode => 'Mã nguồn (GitHub)';
   @override
-  String get upstreamSourceCode => 'Dự án gốc: LocalSend (GitHub)';
-  @override
-  String get upstreamCodeberg => 'Dự án gốc: LocalSend (Codeberg)';
-  @override
-  String get licenseNotices => 'Giấy phép thư viện bên thứ ba';
+  String get licenseNotices => 'Giấy phép và bản quyền';
   @override
   String get debugging => 'Gỡ lỗi';
   @override
