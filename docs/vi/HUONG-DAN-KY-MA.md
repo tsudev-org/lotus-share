@@ -35,7 +35,7 @@ Nên làm A1-A4 và B1-B2 **ngay** vì phần chờ duyệt nằm ở phía Sign
 | Đang bảo trì, đã phát hành đúng dạng cần ký | `v1.18.2-lotus.3` (exe, zip, CLI) | Đạt |
 | Chức năng mô tả trên trang tải | `lotus.tsudev.com/tai-ve/` | Đạt |
 | Build từ mã nguồn kiểm chứng được, mỗi lần ký được duyệt tay | GitHub Actions + nhãn bất biến; SignPath bắt duyệt | Đạt |
-| **MFA cho mọi thành viên** (GitHub và SignPath) | Org `tsudev-org` **chưa bắt buộc 2FA** (đo 12/11/2026) | **A1, A2** |
+| **MFA cho mọi thành viên** (GitHub và SignPath) | Org `tsudev-org` đã bắt buộc 2FA (đo 12/11/2026) | Đạt (A1, A2 xong) |
 | Trang "Code signing policy": câu ghi công có 2 liên kết, vai trò "Committers and reviewers" / "Approvers", tuyên bố quyền riêng tư; liên kết từ trang chủ và trang tải | `lotus.tsudev.com/chinh-sach-ky-ma/` - đủ (bổ sung phần tiếng Anh 12/11/2026) | Đạt |
 | Metadata: tên sản phẩm = tên dự án, phiên bản như nhau | `Runner.rc`: ProductName "Lotus Share"; Inno AppName "Lotus Share" | Đạt (đặt tên dự án SignPath là "Lotus Share") |
 | **Bản fork phải "dùng fork hiển nhiên, ví dụ tính năng fork của GitHub"** | `tsudev-org/lotus-share` **không** phải GitHub fork (`fork=false`) | Rủi ro - trả lời theo A5 |
@@ -100,6 +100,9 @@ xem quy tắc tên repo trong CLAUDE.md toàn cục):
 
 Nếu SignPath vẫn yêu cầu nhãn fork: mở yêu cầu tại <https://support.github.com> xin gắn repo vào mạng fork của
 `localsend/localsend` (GitHub thường chỉ hỗ trợ tách, không chắc nhận gắn) - không tự xử lý bằng cách tạo repo mới.
+
+> **Tình trạng:** đã nộp đơn 12/11/2026, chờ SignPath duyệt. Có email trả lời thì báo agent (dán nội dung, KHÔNG dán
+> token/mật khẩu).
 
 ### A6. Khi được duyệt (email từ SignPath)
 
@@ -166,7 +169,17 @@ Lotus Share tìm thiết bị qua multicast (224.0.0.167, cổng 53317). Trên i
    - Push Notifications: KHÔNG bật - agent bỏ khóa `aps-environment` thừa trong entitlements (ứng dụng không dùng push).
 3. macOS phát hành bằng DMG ngoài App Store với Developer ID: **không cần** App ID/provisioning profile.
 
-### B5. Chứng thư - làm được ngay trên máy Linux/WSL, không cần máy Mac
+### B5. Chứng thư
+
+> **Kế hoạch (12/11/2026):** làm phần B vào tháng 12/2026 trên MacBook của chủ dự án.
+>
+> **Trên MacBook:** Keychain Access > Certificate Assistant > *Request a Certificate From a Certificate Authority*
+> (nhập email Apple ID, chọn *Saved to disk*) -> tạo 2 chứng thư bên dưới trên developer.apple.com bằng tệp CSR đó ->
+> tải `.cer` về, mở đúp để nhập vào Keychain -> trong Keychain chọn chứng thư (kèm khóa riêng) > *Export* thành
+> `developer-id.p12` và `distribution.p12` (cùng một mật khẩu) -> chép vào `~/.config/lotus-share/keys/apple/`, `chmod 600`.
+> Cách dùng openssl dưới đây là phương án khi không có Mac.
+
+Cách không cần máy Mac (Linux/WSL):
 
 Cần 2 chứng thư: **Developer ID Application** (ký app macOS ngoài App Store; chỉ Account Holder tạo được) và
 **Apple Distribution** (ký bản iOS gửi TestFlight/App Store).

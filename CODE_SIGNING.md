@@ -1,7 +1,7 @@
 # Chính sách ký mã (Code signing policy) - Lotus Share
 
-> Trạng thái (12/11/2026): bản Windows/macOS **chưa** có chứng thư ký mã thương mại; đang chuẩn bị đăng ký
-> SignPath Foundation (Windows) và Apple Developer ID (macOS/iOS). Hướng dẫn: `docs/vi/HUONG-DAN-KY-MA.md`.
+> Trạng thái (12/11/2026): bản Windows/macOS **chưa** có chứng thư ký mã thương mại. Đã nộp đơn SignPath Foundation
+> (Windows), đang chờ duyệt; Apple Developer ID (macOS/iOS) dự kiến tháng 12/2026. Hướng dẫn: `docs/vi/HUONG-DAN-KY-MA.md`.
 > Trang này sẽ cập nhật ngay khi việc ký được bật.
 
 Khi được SignPath Foundation duyệt, bản Windows sẽ ký theo câu ghi công sau:
