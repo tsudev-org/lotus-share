@@ -8,8 +8,9 @@
 - Deploy website: `cd website && XDG_CONFIG_HOME=$HOME/.config/wrangler-tsudev npm run deploy` (cấu hình wrangler RIÊNG của
   tsudev - đăng nhập chung là tài khoản UBND; kiểm `wrangler whoami` = dev.nguyentrangtinhsu@...). Sau mỗi bản phát hành
   phải deploy lại (trang Tải về đọc danh sách tệp lúc build).
-- [ ] Phiếu `~/projects/logs/handover/20261112-02` (kho gói đổi tên `lotus-share`) - sau khi kho gói đổi, sửa lệnh cài ở
-      `website/src/pages/tai-ve.astro` và bỏ tiền tố cũ `tsudev-lotus` trong `website/src/lib/noi-dung.ts`.
+- [ ] **winget `tsudev.LotusShare`** (chủ dự án): manifest đã đẩy lên nhánh `tsudev-tsudev/winget-pkgs:tsudev.LotusShare-1.18.2`
+      (SHA-256 bộ cài khớp). Việc còn lại - phiên agent bị chặn quyền mở PR ở kho công khai Microsoft: mở PR từ nhánh đó
+      vào `microsoft/winget-pkgs` và đóng PR #477225 (`tsudev.Lotus`, chưa từng được duyệt), xóa nhánh `tsudev.Lotus-1.18.2`.
 - [ ] **Chủ dự án nộp đơn SignPath Foundation** theo phiếu `logs/handover/20261111-03_noi-dung-don-signpath.md`
       (nội dung điền sẵn; trang `lotus.tsudev.com/chinh-sach-ky-ma/` đã có). Ghi ngày nộp vào mục Quyết định.
 - [ ] **Đầu tháng 12/2026 - ký mã Apple (macOS công chứng, iOS TestFlight)** khi chủ dự án có Apple Developer; tích hợp
@@ -25,6 +26,13 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 12/11/2026 (lotus-share-fc) - **Kho gói đổi tên `lotus-share`** (phiếu `~/projects/logs/handover/20261112-02`):
+  linux-packages #6 (tên riêng `tenRieng`, gói `.deb` chuyển tiếp `tsudev-lotus`, RPM Provides+Obsoletes; CI cài tên cũ thật
+  từ pkg.tsudev.com rồi `apt upgrade`/`dnf upgrade` ra `lotus-share` - đạt 5 bản phân phối; sửa luôn lỗi xuat-ban định kỳ
+  từ khi đổi tên) - đã xuất bản, đo `pkg.tsudev.com`: `lotus-share 1.18.2-3` + `tsudev-lotus 1.18.2-3` Depends lotus-share;
+  scoop-bucket #2; homebrew-tap #1 (`cask_renames.json` KHÔNG chuyển máy đã cài - CI chứng minh, thay bằng cask tên cũ
+  `deprecate!`). lotus-share #27 (`.desktop` "Lotus Share", `linux.formerNames`). Trang Tải về: lệnh cài `lotus-share`,
+  bỏ tiền tố cũ khi nhận tệp phát hành, hướng dẫn chuyển cho máy đã cài bằng lệnh.
 - 12/11/2026 - **Phát hành công khai `v1.18.2-lotus.3`** - bản Lotus Share đầu tiên (15 tệp `lotus-share-*`, có DMG macOS).
   Lần chạy đầu job macOS bị GitHub hủy (máy chạy, chưa chạy bước nào) -> xóa bản nháp, chạy lại job lỗi -> xanh toàn bộ.
   Đã kiểm trên tệp thật: SHA256SUMS khớp (DMG nằm trong tệp ký), `gh attestation verify` đạt + từ chối tệp sửa 1 byte,

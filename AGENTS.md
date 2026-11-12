@@ -77,6 +77,7 @@ enum). Chạy `python3 -I tools/fix_slang_format.py` để trả về đúng đ�
 | Em-dash trong mã + bản dịch kế thừa upstream (71 dòng) | Sửa sẽ gây xung đột mỗi lần gộp upstream | Ngoại lệ 3 của quy ước v3.3.0 (`.standards-upstream`); CI chặn thật, xác minh trực tuyến. Gộp upstream xong MUST nâng `ref` |
 | `namespace`/package Kotlin `org.localsend.localsend_app`, tên kênh nền tảng, gói Dart `localsend_app`, crate `localsend` | Nội bộ, người dùng không thấy; đổi thì mỗi lần gộp upstream xung đột hàng trăm tệp | Giữ. Định danh cài đặt đã đổi: xem `docs/vi/PHAT-HANH.md` mục 1 |
 | Workflow của upstream (`build_*.yml`, `release.yml`) | Cần secret ký mã của LocalSend | Không dùng; phát hành bằng `release-lotus.yml` |
+| Tên gói `lotus-share` (Scoop, Homebrew, APT, RPM; winget `tsudev.LotusShare`) thay khuôn `tsudev-<ten>` (PACKAGING.md mục 2) | Đổi tên sản phẩm 12/11/2026 (chủ dự án). Tên cũ `tsudev-lotus` vẫn nhận bản mới: APT gói chuyển tiếp, RPM Provides+Obsoletes, cask/manifest tên cũ deprecate (CI kiểm nâng cấp thật) | Đề xuất ở `tsudev-standards` phiếu `logs/handover/20261112-02_de-xuat-ten-goi-thuong-hieu-rieng.md`; ngoại lệ ghi đích danh `tenRieng` ở `linux-packages/products.json` |
 | Logo riêng Lotus Share làm icon/favicon thay dấu hiệu chung tsudev (BRAND_ASSETS mục 12.3) | Quyết định chủ dự án 11/11/2026: mỗi sản phẩm có điểm nhấn riêng | Đề xuất ở `tsudev-standards` phiếu `logs/handover/20261112-01_de-xuat-logo-rieng-tung-san-pham.md` (đã bổ sung Lotus Share); chân trang website vẫn ghi `© tsudev` |
 
 ### B.5. Việc riêng của repo cần biết trước khi sửa

@@ -40,21 +40,20 @@ const vd = ban?.goi.find((g) => g.ten.endsWith('-windows-x86-64.exe'))?.ten ?? '
       )}
 
       <h2 id="cai-bang-lenh">Cài bằng lệnh</h2>
-      <p>Kho gói vẫn dùng tên gói cũ <code>tsudev-lotus</code> cho tới khi chuyển sang <code>lotus-share</code>; trang này sẽ cập nhật lệnh khi kho gói đổi xong.</p>
       <p>Cách nhanh nhất, tự cập nhật về sau. Gói do chính dự án duy trì, ghim mã SHA-256 của bản phát hành; trình quản lý gói từ chối cài nếu tệp không khớp.</p>
       <h3>Windows - Scoop</h3>
       <pre tabindex="0"><code>scoop bucket add tsudev https://github.com/tsudev-org/scoop-bucket
-scoop install tsudev/tsudev-lotus</code></pre>
+scoop install tsudev/lotus-share</code></pre>
       <h3>macOS - Homebrew</h3>
-      <pre tabindex="0"><code>brew install --cask tsudev-org/tap/tsudev-lotus</code></pre>
+      <pre tabindex="0"><code>brew install --cask tsudev-org/tap/lotus-share</code></pre>
       <h3>Debian, Ubuntu, Mint - APT</h3>
       <pre tabindex="0"><code>curl -fsSL https://pkg.tsudev.com/tsudev-archive-keyring.gpg | sudo tee /usr/share/keyrings/tsudev.gpg &gt;/dev/null
 echo "deb [signed-by=/usr/share/keyrings/tsudev.gpg] https://pkg.tsudev.com/apt stable main" | sudo tee /etc/apt/sources.list.d/tsudev.list
-sudo apt update &amp;&amp; sudo apt install tsudev-lotus</code></pre>
+sudo apt update &amp;&amp; sudo apt install lotus-share</code></pre>
       <h3>Fedora - DNF</h3>
       <pre tabindex="0"><code>sudo curl -fsSLo /etc/yum.repos.d/tsudev.repo https://pkg.tsudev.com/rpm/tsudev.repo
-sudo dnf install tsudev-lotus</code></pre>
-      <p>Kho APT/RPM ký GPG, vân tay khóa <code>3883 10F4 7FA8 224D 76C0  A9C7 9745 B6AF 3EA3 3C74</code> (đối chiếu tại <a href="https://tsudev.com/apps" target="_blank" rel="noopener noreferrer">tsudev.com/apps</a>); apt và dnf tự từ chối gói không khớp chữ ký. Gói cài vào <code>/opt/tsudev-lotus</code>, lệnh <code>tsudev-lotus</code>, gỡ sạch bằng <code>sudo apt remove tsudev-lotus</code> / <code>sudo dnf remove tsudev-lotus</code>.</p>
+sudo dnf install lotus-share</code></pre>
+      <p>Kho APT/RPM ký GPG, vân tay khóa <code>3883 10F4 7FA8 224D 76C0  A9C7 9745 B6AF 3EA3 3C74</code> (đối chiếu tại <a href="https://tsudev.com/apps" target="_blank" rel="noopener noreferrer">tsudev.com/apps</a>); apt và dnf tự từ chối gói không khớp chữ ký. Gói cài vào <code>/opt/lotus-share</code>, lệnh <code>lotus-share</code>, gỡ sạch bằng <code>sudo apt remove lotus-share</code> / <code>sudo dnf remove lotus-share</code>.</p>
       <p>Mã nguồn gói: <a href="https://github.com/tsudev-org/scoop-bucket" target="_blank" rel="noopener noreferrer">tsudev-org/scoop-bucket</a>, <a href="https://github.com/tsudev-org/homebrew-tap" target="_blank" rel="noopener noreferrer">tsudev-org/homebrew-tap</a>, <a href="https://github.com/tsudev-org/linux-packages" target="_blank" rel="noopener noreferrer">tsudev-org/linux-packages</a>. Gói winget đang chờ Microsoft duyệt.</p>
 
       <h2 id="chon-goi">Chọn gói</h2>
@@ -138,6 +137,7 @@ sudo dnf install tsudev-lotus</code></pre>
       <ol>
         <li>Cài Lotus Share theo hướng dẫn ở trên.</li>
         <li>Gỡ bản cũ tên <em>tsudev-lotus</em> (Windows: Cài đặt &gt; Ứng dụng; Android: giữ biểu tượng &gt; Gỡ cài đặt; macOS: kéo vào Thùng rác; Linux: xóa tệp AppImage cũ).</li>
+        <li>Đã cài bằng lệnh: APT, DNF và Homebrew tự chuyển sang Lotus Share khi cập nhật (<code>sudo apt upgrade</code>, <code>sudo dnf upgrade</code>, <code>brew upgrade</code>); sau đó gỡ gói chuyển tiếp nếu muốn (<code>sudo apt remove tsudev-lotus</code>). Scoop: <code>scoop uninstall tsudev-lotus</code> rồi <code>scoop install tsudev/lotus-share</code>.</li>
         <li>Thiết bị yêu thích và cài đặt không chuyển sang được: thêm lại thiết bị yêu thích và so dấu vân tay trên hai máy.</li>
       </ol>
 

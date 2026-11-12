@@ -115,16 +115,15 @@ export interface BanPhatHanh { tag: string; phienBan: string; ngay: string; url:
 /**
  * Nền tảng theo hậu tố tên tệp phát hành (cùng quy tắc đặt tên của workflow build_*.yml kế thừa từ LocalSend:
  * <tên>-<phiên bản>-<nền tảng>-<kiến trúc>.<đuôi>). Thứ tự = thứ tự hiển thị.
- * Nhận cả tiền tố cũ `tsudev-lotus-` (bản phát hành trước 11/11/2026) để trang không trống trước bản Lotus Share đầu tiên.
  */
 export const NEN_TANG: { ma: string; ten: string; mau: RegExp }[] = [
-  { ma: 'windows-x64', ten: 'Windows 10/11 (x64)', mau: /^(?:lotus-share|tsudev-lotus)-\d[^-]*-windows-x86-64\.(exe|zip|msix)$/ },
-  { ma: 'windows-arm64', ten: 'Windows 11 trên ARM (ARM64)', mau: /^(?:lotus-share|tsudev-lotus)-\d[^-]*-windows-arm-64\.(exe|zip|msix)$/ },
+  { ma: 'windows-x64', ten: 'Windows 10/11 (x64)', mau: /^lotus-share-\d[^-]*-windows-x86-64\.(exe|zip|msix)$/ },
+  { ma: 'windows-arm64', ten: 'Windows 11 trên ARM (ARM64)', mau: /^lotus-share-\d[^-]*-windows-arm-64\.(exe|zip|msix)$/ },
   { ma: 'macos', ten: 'macOS 12+ (chip Apple và Intel)', mau: /\.dmg$/ },
   { ma: 'linux-x64', ten: 'Linux x64', mau: /-linux-x86-64\.(AppImage|deb|rpm|tar\.gz)$/ },
   { ma: 'linux-arm64', ten: 'Linux ARM64', mau: /-linux-arm-64\.(AppImage|deb|rpm|tar\.gz)$/ },
   { ma: 'android', ten: 'Android 5.0+', mau: /\.apk$/ },
-  { ma: 'cli', ten: 'Dòng lệnh (CLI)', mau: /^(?:lotus-share|tsudev-lotus)-cli-/ },
+  { ma: 'cli', ten: 'Dòng lệnh (CLI)', mau: /^lotus-share-cli-/ },
 ];
 
 function loaiGoi(ten: string): string {
