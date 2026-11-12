@@ -39,6 +39,7 @@ import 'package:localsend_app/util/notification_strings.dart';
 import 'package:localsend_app/util/ui/dynamic_colors.dart';
 import 'package:localsend_app/util/ui/snackbar.dart';
 import 'package:localsend_app/widget/dialogs/local_network_dialog.dart';
+import 'package:localsend_app/widget/dialogs/update_dialog.dart';
 import 'package:localsend_isolates/isolate.dart';
 import 'package:localsend_isolates/model/dto/file_dto.dart';
 import 'package:localsend_isolates/model/dto/multicast_dto.dart';
@@ -272,6 +273,11 @@ Future<void> postInit(BuildContext context, Ref ref, bool appStart) async {
         ),
       );
     }
+  }
+
+  if (appStart && context.mounted) {
+    // lotus-share: bắt buộc cập nhật (chạy nền, không chặn khởi động khi không có Internet).
+    runUpdateCheck(context, ref); // ignore: unawaited_futures, use_build_context_synchronously
   }
 
   bool hasInitialShare = false;

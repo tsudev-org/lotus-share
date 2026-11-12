@@ -592,6 +592,19 @@
     "addApps(param=n)": {
       "one": "Add {n} app",
       "other": "Add {n} apps"
+    },
+    "updateRequired": {
+      "title": "Lotus Share needs an update",
+      "body": "Version {current} is no longer supported and cannot connect to other devices. Install Lotus Share {latest} to continue.",
+      "bodyLatest": "Version {current} is no longer supported and cannot connect to other devices. Install the latest Lotus Share to continue.",
+      "download": "Download",
+      "exit": "Quit"
+    },
+    "updateAvailable": {
+      "title": "Lotus Share {latest} is available",
+      "body": "You are using version {current}. The new version includes fixes and improvements.",
+      "download": "Download",
+      "later": "Later"
     }
   }
 }

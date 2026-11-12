@@ -599,6 +599,19 @@
     "donationVoluntary": "Ủng hộ tự nguyện, 100% tới nhà phát triển, không mở khóa tính năng nào.",
     "addApps(param=n)": {
       "other": "Thêm {n} ứng dụng"
+    },
+    "updateRequired": {
+      "title": "Cần cập nhật Lotus Share",
+      "body": "Phiên bản {current} đã ngừng hỗ trợ và không còn kết nối được với các thiết bị khác. Hãy cài Lotus Share {latest} để tiếp tục sử dụng.",
+      "bodyLatest": "Phiên bản {current} đã ngừng hỗ trợ và không còn kết nối được với các thiết bị khác. Hãy cài bản Lotus Share mới nhất để tiếp tục sử dụng.",
+      "download": "Tải bản mới",
+      "exit": "Thoát"
+    },
+    "updateAvailable": {
+      "title": "Đã có Lotus Share {latest}",
+      "body": "Bạn đang dùng phiên bản {current}. Bản mới có sửa lỗi và cải tiến.",
+      "download": "Tải bản mới",
+      "later": "Để sau"
     }
   }
 }

@@ -13,7 +13,7 @@
 #endif
 
 #define MyAppName "Lotus Share"
-#define MyAppVersion "1.18.2"
+#define MyAppVersion "2.0.0"
 #define MyAppPublisher "tsudev"
 #define MyAppURL "https://lotus.tsudev.com"
 #define MyAppExeName "lotus_share.exe"

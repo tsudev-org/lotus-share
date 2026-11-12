@@ -61,6 +61,21 @@ for (const [ten, duong] of lienKet) {
   const dich = join(dist, decodeURI(duong));
   if (!existsSync(dich) && !existsSync(join(dich, 'index.html'))) loi.push(`${ten}: liên kết nội bộ gãy: ${duong}`);
 }
+// Tệp phiên bản cho cơ chế bắt buộc cập nhật (docs/vi/CAP-NHAT-BAT-BUOC.md): đúng khuôn mà ứng dụng chấp nhận,
+// toiThieu <= moiNhat <= số build trong app/pubspec.yaml (không công bố bản chưa có, không chặn bản mới nhất).
+{
+  let pb;
+  try { pb = JSON.parse(readFileSync(join(dist, 'phien-ban.json'), 'utf8')); } catch (e) { loi.push(`phien-ban.json: ${e.message}`); }
+  if (pb) {
+    const pubspec = readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../../app/pubspec.yaml'), 'utf8');
+    const [, ver, build] = pubspec.match(/^version: (\d+\.\d+\.\d+)\+(\d+)$/m) ?? [];
+    if (pb.schema !== 1 || !/^\d+\.\d+\.\d+$/.test(pb.phienBan ?? '')) loi.push('phien-ban.json: sai schema/phienBan');
+    if (!Number.isInteger(pb.moiNhat) || !Number.isInteger(pb.toiThieu) || pb.toiThieu < 1 || pb.toiThieu > pb.moiNhat)
+      loi.push('phien-ban.json: cần số nguyên 1 <= toiThieu <= moiNhat');
+    if (!build || pb.moiNhat > Number(build)) loi.push(`phien-ban.json: moiNhat ${pb.moiNhat} lớn hơn số build pubspec ${build}`);
+    if (pb.moiNhat === Number(build) && pb.phienBan !== ver) loi.push(`phien-ban.json: phienBan ${pb.phienBan} khác pubspec ${ver}`);
+  }
+}
 for (const l of loi) console.error('[check-dist] LỖI', l);
 console.log(`[check-dist] ${loi.length} lỗi`);
 process.exit(loi.length ? 1 : 0);
