@@ -4,6 +4,9 @@
 > Hai việc làm cùng đợt vì cùng đụng `.github/workflows/release-lotus.yml`, `docs/vi/PHAT-HANH.md`, trang Tải về, và
 > cùng kết thúc bằng một bản phát hành mới (`v<phiên bản>-lotus.<n+1>`).
 >
+> **Cập nhật 13/11/2026**: SignPath Foundation từ chối đơn đầu (12/11/2026) vì dự án chưa đủ mức độ được biết đến công
+> khai; mời nộp lại sau. Phần 1 tạm dừng tới khi nộp lại được duyệt - xem `logs/STATE.md`.
+>
 > **Việc của chủ dự án** (đơn SignPath, tài khoản/chứng thư Apple): làm theo [`HUONG-DAN-KY-MA.md`](HUONG-DAN-KY-MA.md).
 > Tài liệu này là phần việc của AGENT. Đối chiếu điều khoản SignPath + tài liệu action lần gần nhất: 12/11/2026.
 >
