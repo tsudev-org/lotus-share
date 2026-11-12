@@ -22,7 +22,9 @@
       CHƯA làm gì trước thời điểm đó. Chủ dự án làm `docs/vi/HUONG-DAN-KY-MA.md` phần B trên MacBook (B1-B4, xin quyền
       multicast B3 ngay sau khi đăng ký vì Apple duyệt tay; chứng thư theo B5 "Trên MacBook"), chạy
       `tools/day-khoa-apple.sh`; agent làm `KE-HOACH-KY-MA-12-2026.md` mục 2.2 và chạy thử app trên MacBook thật.
-- [ ] **Thử thật khám phá thiết bị (nhánh `fix/kham-pha-thiet-bi`)** sau khi có bản build: laptop Windows cài mới bằng
+- [ ] **Phát hành `v1.18.2-lotus.5`** (chờ chủ dự án đồng ý): mang bản sửa khám phá thiết bị (PR #35) tới người dùng.
+      Trang Tải về đã mô tả bộ cài mới (tường lửa, `-setup.exe`) nhưng tệp hiện tại vẫn là lotus.4 - phát hành sớm.
+- [ ] **Thử thật khám phá thiết bị (PR #35)** sau khi có bản build: laptop Windows cài mới bằng
       `-setup.exe` (mạng đặt Công cộng) + điện thoại Android cùng Wi-Fi - hai chiều thấy nhau; kiểm quy tắc tường lửa
       tạo/xóa khi cài/gỡ, bộ cài gỡ được `tsudev-lotus` cũ (máy phát triển đang có bản cũ ở `C:\Program Files\tsudev-lotus`).
       Chi tiết + công cụ: `docs/vi/KHAM-PHA-THIET-BI.md`. Bản phát hành kế tiếp: deploy lại website để `/tai/*` trỏ tệp
@@ -40,7 +42,9 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
-- 12/11/2026 - **Sửa "không thấy nhau" + chuẩn hóa bộ cài/tải về** (nhánh `fix/kham-pha-thiet-bi`): lõi Rust gửi thêm
+- 12/11/2026 (lotus-share-d7) - **Sửa "không thấy nhau" + chuẩn hóa bộ cài/tải về** (PR #35, đã gộp; website đã deploy,
+  đo `/tai/windows` = 302). Build thử run 43191034629 xanh mọi nền tảng; bộ cài x64 cài/gỡ thật (chế độ người dùng)
+  trên máy phát triển đạt, lối tắt tiếng Việt đúng: lõi Rust gửi thêm
   broadcast có hướng song song multicast + chống trả lời trùng; Android giữ MulticastLock; card mạng ảo/VPN xếp cuối
   khi quét; bộ cài Inno tạo/xóa quy tắc tường lửa theo chương trình (xóa cả quy tắc Chặn), tự gỡ `tsudev-lotus` cũ, xóa
   khóa tự khởi động khi gỡ; công cụ `chan-doan-mang.ps1` (menu Start + ZIP; đã chạy thật trên máy phát triển); bộ cài
