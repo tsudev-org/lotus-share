@@ -16,7 +16,8 @@
 - [ ] **Đầu tháng 12/2026 - ký mã Apple (macOS công chứng, iOS TestFlight)** khi chủ dự án có Apple Developer; tích hợp
       SignPath khi đơn được duyệt. Kế hoạch: `docs/vi/KE-HOACH-KY-MA-12-2026.md` mục 1.5, 2.
 - [ ] Dựng máy chủ tín hiệu `signal.lotus.tsudev.com` từ `server/` trước khi bật WebRTC (mặc định đã trỏ về đó).
-- [ ] Gói .deb/.rpm cho Linux (cấu hình `app/linux/packaging/` đã đổi tên, workflow chưa dựng), Linux ARM64, Windows ARM64.
+- [ ] AppImage Linux ARM64 (công thức `support/build/appimage/` chỉ x86_64). Kiểm cài gói `.deb`/`.rpm` arm64 trong
+      CI `linux-packages` (hiện chỉ cài thử amd64).
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
 
 ## Đang thực hiện
@@ -26,6 +27,12 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 12/11/2026 (lotus-share-fc) - **ARM64**: `release-lotus.yml` thêm Windows ARM64 (bộ cài Inno `/DArm64` + ZIP, MSVC
+  Redist ARM64 từ Visual Studio của máy chạy), Linux ARM64 (tar.gz), CLI Linux/Windows ARM64; job ARM `continue-on-error`.
+  Build thử run 43139703302 xanh toàn bộ; đã tải artifact kiểm: ELF aarch64, PE 0xAA64 (exe, lõi Rust, vcruntime).
+  `packaging/package.json` khai `windows-arm64`, `linux-arm64` (kho pkg.tsudev.com tự dựng .deb/.rpm arm64 từ bản sau).
+  Gói .deb/.rpm x64: do `tsudev-org/linux-packages` dựng (không cần workflow trong repo này).
+- 12/11/2026 (lotus-share-fc) - Gộp upstream `2e7ef197` (icon khay Snap), nâng `.standards-upstream` (PR #29).
 - 12/11/2026 (lotus-share-fc) - **Kho gói đổi tên `lotus-share`** (phiếu `~/projects/logs/handover/20261112-02`):
   linux-packages #6 (tên riêng `tenRieng`, gói `.deb` chuyển tiếp `tsudev-lotus`, RPM Provides+Obsoletes; CI cài tên cũ thật
   từ pkg.tsudev.com rồi `apt upgrade`/`dnf upgrade` ra `lotus-share` - đạt 5 bản phân phối; sửa luôn lỗi xuat-ban định kỳ
