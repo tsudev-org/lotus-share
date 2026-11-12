@@ -214,7 +214,7 @@ pub struct DiscoveryHandle {
 }
 
 impl DiscoveryHandle {
-    /// Announces this device to the network, which makes every other LocalSend
+    /// Announces this device to the network, which makes every other Lotus Share
     /// device on it register with this device over HTTP.
     ///
     /// Devices registering in response arrive at the application as server

@@ -39,8 +39,8 @@ Từ 2.0 Lotus Share có định danh, thư mục cấu hình (Windows `%APPDATA
 3. Mọi cổng kiểm xanh trên `main`, rồi gắn nhãn có chú thích và đẩy:
 
    ```bash
-   git tag -a v2.0.0-lotus.6 -m "Lotus Share 2.0.0-lotus.6"
-   git push origin v2.0.0-lotus.6
+   git tag -a v2.0.0-lotus.7 -m "Lotus Share 2.0.0-lotus.7"
+   git push origin v2.0.0-lotus.7
    ```
 
 4. Workflow build Windows (x64 + ARM64), Linux (x64 + ARM64), Android, macOS, CLI (x64 + ARM64); sinh SBOM, `SHA256SUMS.txt`, ký Sigstore, chứng thực SLSA, rồi

@@ -536,7 +536,7 @@ jobs:
         run: |
           set -euo pipefail
           cat > notes.md <<EOF
-          Bản phát hành Lotus Share $V (dựa trên LocalSend $V). Kiểm chứng tệp tải về: docs/vi/PHAT-HANH.md.
+          Bản phát hành Lotus Share $V. Kiểm chứng tệp tải về: docs/vi/PHAT-HANH.md.
 
           - Dấu vân tay chứng thư ký APK (SHA-256): \`$ANDROID_CERT_SHA256\`
           - SHA256SUMS.txt ký bằng Sigstore (SHA256SUMS.txt.sigstore.json); mọi tệp có chứng thực nguồn gốc SLSA.

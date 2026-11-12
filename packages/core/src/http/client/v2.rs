@@ -10,7 +10,7 @@ use reqwest::{Response, StatusCode};
 use tokio::io::AsyncWriteExt;
 use tokio_util::sync::CancellationToken;
 
-/// HTTP client for LocalSend Protocol v2.2.
+/// HTTP client for the Lotus Share protocol (v2.2 message format under `/api/lotus/v2`).
 pub struct LsHttpClientV2 {
     client: reqwest::Client,
 }

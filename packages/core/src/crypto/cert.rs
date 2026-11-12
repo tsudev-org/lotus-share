@@ -23,7 +23,7 @@ pub struct SelfSignedCert {
 ///
 /// - RSA-2048, matching the certificates the Flutter app has historically
 ///   generated in Dart.
-/// - `CN=LocalSend User` and no SANs: peers identify each other purely by the
+/// - `CN=Lotus Share` and no SANs: peers identify each other purely by the
 ///   certificate fingerprint, so the name carries no information.
 /// - The serial number is derived from the hash of the public key
 ///   (rcgen's default when no serial number is set).
@@ -97,7 +97,7 @@ fn verify_cert_from_cert(cert: X509Certificate, public_key: Option<&str>) -> any
 }
 
 /// Computes the SHA-256 fingerprint of a certificate in DER format.
-/// Encoded as uppercase hex, the format used for LocalSend fingerprints.
+/// Encoded as uppercase hex, the format used for Lotus Share fingerprints.
 pub fn fingerprint_from_cert_der(cert: &[u8]) -> String {
     crate::crypto::hash::sha256(cert)
         .iter()

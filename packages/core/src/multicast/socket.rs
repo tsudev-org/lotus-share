@@ -16,7 +16,7 @@ pub(crate) struct MulticastSocket {
 
     /// lotus-share: the directed broadcast address the same announcement is also sent to
     /// (IPv4 only), for networks that drop multicast. Receivers bind the wildcard address on
-    /// the same port, so LocalSend v2 devices receive it unchanged.
+    /// the same port, so Lotus Share 2.x devices receive it unchanged.
     pub(crate) broadcast_target: Option<SocketAddr>,
 
     pub(crate) socket: Arc<UdpSocket>,

@@ -20,11 +20,11 @@ use tokio::sync::{mpsc, oneshot};
 static NEXT_PORT: AtomicU16 = AtomicU16::new(54317);
 
 /// Like the group the protocol uses, but distinct from it so that real
-/// LocalSend instances on the machine stay out.
-const TEST_GROUP: Ipv4Addr = Ipv4Addr::new(224, 0, 0, 168);
+/// Lotus Share instances on the machine stay out.
+const TEST_GROUP: Ipv4Addr = Ipv4Addr::new(224, 0, 0, 169);
 
 /// See [TEST_GROUP].
-const TEST_GROUP_V6: Ipv6Addr = Ipv6Addr::new(0xff12, 0, 0, 0, 0, 0, 0xfd3a, 0xe421);
+const TEST_GROUP_V6: Ipv6Addr = Ipv6Addr::new(0xff12, 0, 0, 0, 0, 0, 0x1075, 0x5ea1);
 
 const RECEIVE_TIMEOUT: Duration = Duration::from_secs(5);
 
