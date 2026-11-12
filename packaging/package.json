@@ -41,9 +41,12 @@
   },
   "linux": {
     "command": "lotus-share",
+    "formerNames": [
+      "tsudev-lotus"
+    ],
     "icon": "data/flutter_assets/assets/img/logo-512.png",
     "desktop": {
-      "name": "tsudev Lotus",
+      "name": "Lotus Share",
       "genericName": {
         "vi": "Chia sẻ tệp trong mạng nội bộ",
         "en": "Local network file sharing"
