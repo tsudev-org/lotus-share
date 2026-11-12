@@ -16,8 +16,9 @@
       phần B (xin quyền multicast B3 sớm), chạy `tools/day-khoa-apple.sh`; agent làm `KE-HOACH-KY-MA-12-2026.md` mục 2.2.
       Tích hợp SignPath (mục 1.5) khi đơn được duyệt và chủ dự án đã chạy `tools/dat-bien-signpath.sh`.
 - [ ] Dựng máy chủ tín hiệu `signal.lotus.tsudev.com` từ `server/` trước khi bật WebRTC (mặc định đã trỏ về đó).
-- [ ] AppImage Linux ARM64 (công thức `support/build/appimage/` chỉ x86_64). Kiểm cài gói `.deb`/`.rpm` arm64 trong
-      CI `linux-packages` (hiện chỉ cài thử amd64).
+- [ ] **Chủ dự án duyệt** lần xuất bản kho `pkg.tsudev.com` (linux-packages run 43165111593, Environment `packages`:
+      Actions > run > Review deployments > Approve) để gói `.deb`/`.rpm` arm64 + bản lotus.4 lên kho. Lần chạy định kỳ
+      6 giờ/lần cũng chờ duyệt như vậy.
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
 
 ## Đang thực hiện
@@ -26,6 +27,15 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 12/11/2026 (lotus-share-fc) - **Phát hành `v1.18.2-lotus.4`** (22 tệp, thêm Windows ARM64 exe/zip, Linux ARM64
+  AppImage/zsync/tar.gz, CLI Linux/Windows ARM64). AppImage ARM64 (PR #32): appimage-builder chạy thẳng trên máy ARM
+  (ảnh Docker chỉ amd64), phụ thuộc ghim hash `requirements-arm64.txt`, nguồn apt `ports.ubuntu.com`, `arch: aarch64`.
+  Đã kiểm trên tệp thật: SHA256SUMS khớp, `gh attestation verify` trỏ `release-lotus.yml@refs/tags/v1.18.2-lotus.4`,
+  từ chối tệp sửa 1 byte; AppImage ARM64 = runtime + `lotus_share` + lõi Rust đều aarch64, có thông tin cập nhật zsync.
+  Website deploy lại (Tải về hiện lotus.4 + gói ARM64). Scoop + Homebrew (cả tên cũ) tự lên lotus.4, CI xanh.
+  linux-packages PR #7: job `cai-thu-arm64` cài THẬT gói arm64 trên máy ARM (ubuntu 24.04, debian 12, fedora) gồm đường
+  đổi tên `tsudev-lotus` -> `lotus-share` - đạt. winget #478033 qua 10 bước kiểm tự động, chờ người duyệt Microsoft.
 
 - 12/11/2026 (lotus-share-fc) - winget: PR microsoft/winget-pkgs#478033 `tsudev.LotusShare` 1.18.2 (SHA-256 bộ cài khớp
   tệp tải về), đóng #477225, xóa nhánh `tsudev.Lotus-1.18.2`. Hướng dẫn chủ dự án `docs/vi/HUONG-DAN-KY-MA.md` (SignPath
