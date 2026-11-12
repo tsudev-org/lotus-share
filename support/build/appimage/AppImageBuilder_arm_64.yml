@@ -66,6 +66,6 @@ AppDir:
 #      image: appimagecrafters/tests-env:ubuntu-xenial
 #      command: ./AppRun
 AppImage:
-  arch: arm_64
+  arch: aarch64  # lotus-share: tên runtime AppImageKit là runtime-aarch64 (runtime-arm_64 không tồn tại)
   file_name: !ENV 'lotus-share-${APP_VERSION}-linux-arm-64.AppImage'
   update-information: gh-releases-zsync|tsudev-org|lotus-share|latest|lotus-share-*-linux-arm-64.AppImage.zsync
