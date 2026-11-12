@@ -10,12 +10,10 @@
   phải deploy lại (trang Tải về đọc danh sách tệp lúc build).
 - [ ] winget `tsudev.LotusShare`: chờ Microsoft duyệt PR microsoft/winget-pkgs#478033 (đã đóng #477225 `tsudev.Lotus`). Khi
       merge: chuyển `winget` từ `planned` sang `channels` trong `packaging/package.json`, thêm lệnh winget vào trang Tải về.
-- [ ] **Ký mã Windows - SignPath Foundation TỪ CHỐI đơn đầu (email 12/11/2026 21:49)**: chưa đủ tín hiệu được biết đến
-      công khai (sao/fork/người đóng góp GitHub, bài viết, thảo luận bên ngoài), không phải đánh giá chất lượng; mời nộp
-      lại khi dự án được biết đến rộng hơn, hoặc dùng gói SignPath trả phí. CHỜ CHỦ DỰ ÁN chọn: (a) nộp lại sau (đề xuất:
-      sau vài tháng có người dùng, sao GitHub, bài giới thiệu) - giữ nguyên `CODE_SIGNING.md`, `tools/dat-bien-signpath.sh`,
-      KE-HOACH mục 1.5; (b) chứng thư trả phí (tốn tiền - lệch hạ tầng 0 đồng, chủ dự án quyết). Trong lúc chờ: bản Windows
-      chưa ký, trang Tải về hướng dẫn SmartScreen + kiểm SHA256SUMS/chứng thực.
+- [ ] **Ký mã Windows TRẢ PHÍ cho cả hệ tsudev - chủ dự án chọn hướng 2 (13/11/2026)**: SignPath Foundation từ chối
+      đơn đầu (12/11/2026). Đề xuất: **Certum Open Source Code Signing (SimplySign, trên mây)** từ €49/năm, một chứng thư
+      cá nhân ký được mọi dự án mã nguồn mở của chủ dự án. CHỜ chủ dự án xác nhận chọn Certum. Chi tiết, so sánh, nguồn,
+      các bước: `logs/handover/20261113-02_ban-giao-ky-ma-tra-phi-certum.md` (ĐỌC TRƯỚC).
 - [ ] **Tháng 12/2026, khi chủ dự án có MacBook - ký mã Apple (macOS Developer ID + công chứng, iOS TestFlight)**.
       CHƯA làm gì trước thời điểm đó. Chủ dự án làm `docs/vi/HUONG-DAN-KY-MA.md` phần B trên MacBook (B1-B4, xin quyền
       multicast B3 ngay sau khi đăng ký vì Apple duyệt tay; chứng thư theo B5 "Trên MacBook"), chạy
@@ -178,6 +176,8 @@
   bản quyền gốc trong LICENSE/NOTICE/thông tin tệp chạy (Apache-2.0 mục 4c bắt buộc); trong app chỉ hiện ở Giấy phép.
 - 12/11/2026 - Chủ dự án: bản cũ phải hiện hộp thoại bắt buộc cập nhật; áp dụng cả hệ (phiếu 20261112-04). Phiên bản
   2.0.0+65; so sánh bằng số build.
+- 13/11/2026 - Chủ dự án chọn ký mã Windows TRẢ PHÍ (hướng 2) và hỏi chi phí cho cả hệ; agent đề xuất Certum Open
+  Source (~€49/năm cả hệ) + Apple $99/năm. Chưa chốt nhà cung cấp, chưa mua (phiếu 20261113-02).
 - 12/11/2026 - SignPath Foundation từ chối đơn đầu (lý do: dự án chưa đủ mức độ được biết đến công khai; mời nộp
   lại). Bản Windows tiếp tục chưa ký Authenticode; `CODE_SIGNING.md` ghi trạng thái thật.
 - 13/11/2026 - Agent: `v2.0.0-lotus.6` bỏ (CLI sai nhóm multicast, chưa từng công khai), phát hành `v2.0.0-lotus.7` giữ
