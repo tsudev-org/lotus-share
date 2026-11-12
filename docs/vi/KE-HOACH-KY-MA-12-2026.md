@@ -107,6 +107,9 @@
 
 ### 2.1. Chủ dự án chuẩn bị (agent không làm thay được)
 
+> Lịch (12/11/2026): chủ dự án làm vào tháng 12/2026 khi có MacBook. Có MacBook thì agent build + chạy thử bản macOS
+> đã ký/công chứng trên máy thật (Gatekeeper: `spctl -a -vv`, `stapler validate`) trước khi phát hành.
+
 1. Đăng ký Apple Developer Program (99 USD/năm). Cá nhân: dùng Apple ID có xác thực 2 yếu tố. Tổ chức: cần số
    D-U-N-S - lâu hơn, nên chọn cá nhân nếu muốn kịp đầu tháng 12.
 2. Ghi lại **Team ID** (10 ký tự) - agent sẽ ghim vào workflow.

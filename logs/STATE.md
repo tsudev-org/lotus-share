@@ -10,15 +10,22 @@
   phải deploy lại (trang Tải về đọc danh sách tệp lúc build).
 - [ ] winget `tsudev.LotusShare`: chờ Microsoft duyệt PR microsoft/winget-pkgs#478033 (đã đóng #477225 `tsudev.Lotus`). Khi
       merge: chuyển `winget` từ `planned` sang `channels` trong `packaging/package.json`, thêm lệnh winget vào trang Tải về.
-- [ ] **Chủ dự án nộp đơn SignPath Foundation** theo `docs/vi/HUONG-DAN-KY-MA.md` phần A (bật bắt buộc 2FA ở org
-      `tsudev-org` TRƯỚC - đo 12/11/2026 chưa bật). Ghi ngày nộp vào mục Quyết định.
-- [ ] **Đầu tháng 12/2026 - ký mã Apple (macOS công chứng, iOS TestFlight)**: chủ dự án làm `docs/vi/HUONG-DAN-KY-MA.md`
-      phần B (xin quyền multicast B3 sớm), chạy `tools/day-khoa-apple.sh`; agent làm `KE-HOACH-KY-MA-12-2026.md` mục 2.2.
-      Tích hợp SignPath (mục 1.5) khi đơn được duyệt và chủ dự án đã chạy `tools/dat-bien-signpath.sh`.
+- [ ] **SignPath Foundation: ĐÃ NỘP ĐƠN 12/11/2026, chờ duyệt** (org `tsudev-org` đã bắt buộc 2FA - đo 12/11/2026).
+      Đầu mỗi phiên: hỏi chủ dự án có email từ SignPath chưa (agent không đọc được hộp thư).
+      - SignPath hỏi thêm (thường về quan hệ fork): trả lời theo `docs/vi/HUONG-DAN-KY-MA.md` mục A5.
+      - Được duyệt: chủ dự án làm A6 (MFA SignPath, Trusted Build System GitHub.com, CI user + token) rồi chạy
+        `tools/dat-bien-signpath.sh`. Agent kiểm `gh variable list` / `gh secret list` có đủ `SIGNPATH_*` rồi làm
+        `docs/vi/KE-HOACH-KY-MA-12-2026.md` mục 1.5 (artifact configuration XML, bước ký trong `release-lotus.yml`,
+        build thử) -> 1.6 (trang chính sách ký mã: "đã bật", phát hành bản đã ký, trả lời SmartScreen trên Tải về).
+      - Bị từ chối: ghi lý do vào mục Quyết định, báo chủ dự án; phương án dự phòng ở KE-HOACH mục 1.2.
+- [ ] **Tháng 12/2026, khi chủ dự án có MacBook - ký mã Apple (macOS Developer ID + công chứng, iOS TestFlight)**.
+      CHƯA làm gì trước thời điểm đó. Chủ dự án làm `docs/vi/HUONG-DAN-KY-MA.md` phần B trên MacBook (B1-B4, xin quyền
+      multicast B3 ngay sau khi đăng ký vì Apple duyệt tay; chứng thư theo B5 "Trên MacBook"), chạy
+      `tools/day-khoa-apple.sh`; agent làm `KE-HOACH-KY-MA-12-2026.md` mục 2.2 và chạy thử app trên MacBook thật.
 - [ ] Dựng máy chủ tín hiệu `signal.lotus.tsudev.com` từ `server/` trước khi bật WebRTC (mặc định đã trỏ về đó).
-- [ ] **Chủ dự án duyệt** lần xuất bản kho `pkg.tsudev.com` (linux-packages run 43165111593, Environment `packages`:
-      Actions > run > Review deployments > Approve) để gói `.deb`/`.rpm` arm64 + bản lotus.4 lên kho. Lần chạy định kỳ
-      6 giờ/lần cũng chờ duyệt như vậy.
+- Xuất bản kho `pkg.tsudev.com` (linux-packages, Environment `packages`) cần duyệt mỗi lần. Chủ dự án đã cho agent tự
+  duyệt (12/11/2026; quyền ghi ở `.claude/settings.local.json` của máy này):
+  `gh api -X POST repos/tsudev-org/linux-packages/actions/runs/<id>/pending_deployments -F 'environment_ids[]=26928270657' -f state=approved -f comment=...`
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
 
 ## Đang thực hiện
@@ -27,6 +34,9 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 12/11/2026 - Chủ dự án bật bắt buộc 2FA ở org `tsudev-org` (đã đo) và nộp đơn SignPath Foundation. Kho
+  `pkg.tsudev.com` đã xuất bản lotus.4 (đo: `lotus-share`/`tsudev-lotus` 1.18.2-4 cho amd64 + arm64, RPM aarch64).
 
 - 12/11/2026 (lotus-share-fc) - **Phát hành `v1.18.2-lotus.4`** (22 tệp, thêm Windows ARM64 exe/zip, Linux ARM64
   AppImage/zsync/tar.gz, CLI Linux/Windows ARM64). AppImage ARM64 (PR #32): appimage-builder chạy thẳng trên máy ARM
@@ -123,6 +133,9 @@
   của Microsoft, không có trình tự cập nhật hay telemetry.
 
 ## Quyết định quan trọng
+
+- 12/11/2026 - Chủ dự án nộp đơn SignPath Foundation (Windows). Ký mã Apple (macOS + iOS) dời sang tháng 12/2026, làm
+  khi có MacBook - không đăng ký Apple Developer trước đó.
 
 - 11-12/11/2026 - Chủ dự án: tên **Lotus Share**, slug `lotus-share`; dùng logo riêng (lệch BRAND_ASSETS, đề xuất ở
   tsudev-standards phiếu 20261112-01); ĐỔI cả định danh cài đặt (bản tsudev-lotus cũ không tự cập nhật - trang Tải về có
