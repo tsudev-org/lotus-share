@@ -26,11 +26,9 @@ Hệ quả: chỉ cần **một** trong ba đường (multicast tới máy kia, 
 | 4 | Laptop có card mạng ảo (WSL, Hyper-V, VirtualBox, VMware, Docker) hoặc VPN (Tailscale, ZeroTier, Radmin, Hamachi): 3 mạng con được quét HTTP có thể toàn là mạng ảo | Bước quét dự phòng không bao giờ chạm tới mạng Wi-Fi thật | `local_ip_provider.dart`: card ảo/VPN (theo tên card và dải 100.64/10, 25/8, 26/8, 169.254/16) xếp cuối danh sách |
 | 5 | Bản cũ `tsudev-lotus` (AppId khác) chạy nền ở khay hệ thống, giữ cổng (trước 2.0 cổng chung với ứng dụng khác) | Lotus Share mở sau không bật được máy chủ nhận tệp | Bộ cài tự gỡ im lặng bản `tsudev-lotus` cũ (AppId `{E6A866CD-...}`), tắt tiến trình cũ, xóa khóa tự khởi động cũ. Không đụng LocalSend gốc; công cụ chẩn đoán báo tiến trình nào giữ cổng |
 | 6 | Wi-Fi cơ quan/quán cà phê bật cách ly thiết bị (client isolation), Wi-Fi khách, tách mạng 2,4/5 GHz | Không ứng dụng chia sẻ nội bộ nào hoạt động | Không sửa được từ ứng dụng. Công cụ chẩn đoán đếm thiết bị thấy được qua bảng ARP để nhận ra; hướng dẫn dùng điểm phát Wi-Fi |
-<<<<<<< HEAD
 | 7 | Bước quét HTTP dự phòng chỉ chạy khi trong 1 giây chưa thấy thiết bị nào. Một thiết bị trả lời multicast (vd điện thoại) là đủ để bỏ quét | Máy tính thấy điện thoại nhưng không thấy laptop Linux (multicast tới laptop bị tường lửa chặn) | Lõi Rust `discover_staged` luôn quét mạng con sau 1 giây (`packages/core/src/discovery/mod.rs`) |
 | 8 | Tường lửa Linux (ufw bật sẵn trên Linux Mint, firewalld trên Fedora/openSUSE) chặn UDP/TCP đến | Thiết bị khác không thấy máy Linux, máy Linux vẫn thấy thiết bị khác | Cài đặt > Khắc phục sự cố > **Sửa lỗi tự động** chạy `pkexec` mở cổng trên ufw/firewalld đang bật; công cụ `chan-doan-mang.sh` (trong gói tar.gz/AppImage) kiểm và sửa (`--sua`) |
-| 9 | Windows: Lotus Share dùng chung tệp cấu hình `%APPDATA%\LocalSend\settings.json` với LocalSend | Nhận lại tên thiết bị tiếng Anh (vd "Strategic Tomato"), khóa TLS và cổng của LocalSend đã cài | Tệp riêng `%APPDATA%\Lotus Share\settings.json`; tên ngẫu nhiên tiếng Anh tự đổi sang tiếng Việt khi khởi động |
-=======
+| 9 | Windows: Lotus Share dùng chung tệp cấu hình `%APPDATA%\LocalSend\settings.json` với ứng dụng LocalSend cài trên cùng máy | Nhận lại tên thiết bị tiếng Anh (vd "Strategic Tomato"), khóa TLS và cổng của LocalSend đã cài | Tệp riêng `%APPDATA%\Lotus Share\settings.json`; tên ngẫu nhiên tiếng Anh tự đổi sang tiếng Việt khi khởi động |
 
 ## 3. Công cụ chẩn đoán Windows `support/scripts/chan-doan-mang.ps1`
 
@@ -59,13 +57,24 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File 'C:\Users\Public\chan-do
 đặt Công cộng, card WSL là card ảo, quy tắc cổng cũ của bản tsudev-lotus, mạng không cách ly (11 thiết bị
 ARP), không có thiết bị Lotus Share nào khác đang mở lúc đo.
 
+## 3b. Công cụ chẩn đoán Linux `support/scripts/chan-doan-mang.sh`
+
+Có trong gói `.tar.gz` và AppImage (cạnh `lotus_share`). Kiểm: tiến trình giữ cổng, ufw/firewalld có cho phép cổng
+chưa, card mạng thật/ảo/VPN, quét `/24` mạng chính tìm thiết bị đang mở Lotus Share, đếm hàng xóm ARP. `--sua` mở
+cổng trên tường lửa đang bật (cần sudo).
+
+```bash
+bash chan-doan-mang.sh          # chỉ kiểm
+bash chan-doan-mang.sh --sua    # kiểm + mở cổng trên tường lửa đang bật
+```
+
 ## 4. Kiểm thử
 
 - Rust: `cd packages/core && cargo test --features full` (`util::interface` - địa chỉ broadcast; `discovery` -
   `RecentAnswers`).
-- Dart: `flutter test test/unit/provider/network_info_provider_test.dart` (xếp hạng card ảo, nhận diện tên card).
+- Dart: `flutter test test/unit/provider/network_info_provider_test.dart` (xếp hạng card ảo, nhận diện tên card),
+  `test/unit/util/alias_generator_test.dart` (đổi tên ngẫu nhiên tiếng Anh).
 - Bộ cài + Android: build thử `release-lotus.yml` (workflow_dispatch) - ISCC biên dịch `[Code]`/`[CustomMessages]`,
   Gradle biên dịch `MainActivity.kt`.
 - Thử thật cần 2 thiết bị: Windows mới cài (tường lửa mặc định) + điện thoại Android cùng Wi-Fi; kiểm cả mạng đặt
   Công cộng. Ghi kết quả vào `logs/STATE.md`.
->>>>>>> e0acacbd (feat!: Lotus Share doc lap - giao thuc rieng, bo cau hinh va tai nguyen LocalSend)

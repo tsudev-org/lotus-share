@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Lotus Share - chẩn đoán "không thấy thiết bị" trên Linux. Không gửi gì ra Internet.
-# Dùng: bash chan-doan-mang.sh [--sua] [--cong 53317]
+# Dùng: bash chan-doan-mang.sh [--sua] [--cong 53420]
 #   --sua   mở cổng trên tường lửa đang bật (ufw / firewalld), cần sudo
 set -u
 
-CONG=53317
+CONG=53420
 SUA=0
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -89,7 +89,7 @@ if command -v curl >/dev/null 2>&1 && [ -n "$MAC_DINH" ]; then
     [ "$TIEN_TO.$i" = "$CUA_MINH" ] && continue
     (
       for giao_thuc in https http; do
-        TRA=$(curl -sk --max-time 2 "$giao_thuc://$TIEN_TO.$i:$CONG/api/localsend/v2/info" 2>/dev/null)
+        TRA=$(curl -sk --max-time 2 "$giao_thuc://$TIEN_TO.$i:$CONG/api/lotus/v2/info" 2>/dev/null)
         if [ -n "$TRA" ]; then
           TEN=$(printf '%s' "$TRA" | sed -n 's/.*"alias":"\([^"]*\)".*/\1/p')
           printf '    %-16s %s\n' "$TIEN_TO.$i" "${TEN:-(không rõ tên)}"
