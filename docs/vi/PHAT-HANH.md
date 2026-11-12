@@ -31,11 +31,16 @@ dùng chung cổng 53317 nên không nên **chạy** cùng lúc trên một máy
    git push origin v1.18.2-lotus.1
    ```
 
-4. Workflow build Windows, Linux, Android, macOS, CLI; sinh SBOM, `SHA256SUMS.txt`, ký Sigstore, chứng thực SLSA, rồi
+4. Workflow build Windows (x64 + ARM64), Linux (x64 + ARM64), Android, macOS, CLI (x64 + ARM64); sinh SBOM, `SHA256SUMS.txt`, ký Sigstore, chứng thực SLSA, rồi
    tạo **bản nháp** phát hành. Chủ dự án kiểm (mục 4) rồi bấm Publish. Sau đó chạy lại `npm run deploy` ở `website/`
    để trang Tải về cập nhật phiên bản và SHA-256.
 
 Chạy tay (Actions > Phát hành > Run workflow) = build thử, có ký và chứng thực nhưng không tạo bản phát hành.
+
+Job ARM64 (`windows-arm64` trên `windows-11-arm`, `linux-arm64` trên `ubuntu-22.04-arm`, CLI ARM64) và macOS chạy
+`continue-on-error`: lỗi ở đó không chặn bản x64, nhưng bản phát hành sẽ THIẾU gói đó - kiểm danh sách tệp trước khi
+Publish. Linux ARM64 chưa có AppImage (công thức `AppImageBuilder` chỉ x86_64); gói `.deb`/`.rpm` arm64 do kho
+`pkg.tsudev.com` dựng từ tar.gz.
 
 ## 3. Khóa và chứng thư
 

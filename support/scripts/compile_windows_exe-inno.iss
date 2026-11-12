@@ -51,8 +51,14 @@ ShowLanguageDialog=yes
 #ifndef SkipSignTool
 SignTool=MySignTool
 #endif
+; lotus-share: bộ cài Windows ARM64 riêng (iscc /DArm64); AppId giữ chung, nên đổi kiến trúc = cài đè đúng chỗ.
+#ifdef Arm64
+ArchitecturesInstallIn64BitMode=arm64
+ArchitecturesAllowed=arm64
+#else
 ArchitecturesInstallIn64BitMode=x64compatible
 ArchitecturesAllowed=x64compatible
+#endif
 
 [Languages]
 ; lotus-share: tiếng Việt đứng đầu = mặc định (vendored như Icelandic, xem ..\build\windows\inno\NGUON-VIETNAMESE.md)
