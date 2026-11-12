@@ -22,15 +22,6 @@
       CHƯA làm gì trước thời điểm đó. Chủ dự án làm `docs/vi/HUONG-DAN-KY-MA.md` phần B trên MacBook (B1-B4, xin quyền
       multicast B3 ngay sau khi đăng ký vì Apple duyệt tay; chứng thư theo B5 "Trên MacBook"), chạy
       `tools/day-khoa-apple.sh`; agent làm `KE-HOACH-KY-MA-12-2026.md` mục 2.2 và chạy thử app trên MacBook thật.
-- [ ] **CHỦ DỰ ÁN duyệt xuất bản kho pkg.tsudev.com cho lotus.5**: run linux-packages 43206677590 đang chờ Environment
-      `packages` (lệnh duyệt của agent bị bộ phân loại auto mode chặn ở phiên lotus-share-d7). Duyệt ở
-      https://github.com/tsudev-org/linux-packages/actions/runs/43206677590 (Review deployments) hoặc thêm quyền cho lệnh
-      `gh api -X POST .../pending_deployments`. Sau đó đo: `lotus-share 1.18.2-5` trong Packages của apt amd64/arm64.
-- [ ] **Thử thật khám phá thiết bị (PR #35, có trong lotus.5)**: laptop Windows cài mới bằng
-      `-setup.exe` (mạng đặt Công cộng) + điện thoại Android cùng Wi-Fi - hai chiều thấy nhau; kiểm quy tắc tường lửa
-      tạo/xóa khi cài/gỡ, bộ cài gỡ được `tsudev-lotus` cũ (máy phát triển đang có bản cũ ở `C:\Program Files\tsudev-lotus`).
-      Chi tiết + công cụ: `docs/vi/KHAM-PHA-THIET-BI.md`. Bản phát hành kế tiếp: deploy lại website để `/tai/*` trỏ tệp
-      `-setup.exe` mới; kiểm `curl -sI https://lotus.tsudev.com/tai/windows` = 302.
 - [ ] Dựng máy chủ tín hiệu `signal.lotus.tsudev.com` từ `server/` trước khi bật WebRTC (mặc định đã trỏ về đó).
 - Xuất bản kho `pkg.tsudev.com` (linux-packages, Environment `packages`) cần duyệt mỗi lần. Chủ dự án đã cho agent tự
   duyệt (12/11/2026; quyền ghi ở `.claude/settings.local.json` của máy này):
@@ -40,8 +31,11 @@
       `org.localsend.localsend_app-tray`, workspace `_localsend_workspace`. Cần sinh lại mã flutter_rust_bridge và build thử
       `release-lotus.yml` mọi nền tảng. Người dùng không thấy; làm PR riêng.
 - [ ] CLI `lotus-share-cli`: kiểm `phien-ban.json` như ứng dụng (`docs/vi/CAP-NHAT-BAT-BUOC.md` mục 4).
-- [ ] Thử thật lotus.6: laptop Linux (máy bạn báo không thấy) chạy `bash chan-doan-mang.sh` trong gói tar.gz; Windows
-      mở bản 2.0 thấy tên tiếng Việt mới, thấy cả Android + Linux.
+- [ ] **Thử thật 2.0.0-lotus.7** (đã phát hành 13/11/2026): mọi thiết bị cùng cài 2.0 (1.x không thấy 2.x). Windows cài
+      `lotus.tsudev.com/tai/windows` (cài cho mọi người dùng, giữ dấu chọn tường lửa; bộ cài gỡ `tsudev-lotus` cũ) - lần
+      đầu mở có tên thiết bị tiếng Việt mới, thấy cả Android lẫn laptop Linux; laptop Linux chạy
+      `bash chan-doan-mang.sh` (trong tar.gz; `--sua` mở cổng 53420 ufw/firewalld). Hộp thoại cập nhật chỉ thử thật được
+      khi phát hành build 66 (URL tệp phiên bản cố định trong ứng dụng). Chi tiết `docs/vi/KHAM-PHA-THIET-BI.md`.
 - [ ] Phiếu cả hệ `~/projects/logs/handover/20261112-04_yeu-cau-bat-buoc-cap-nhat-he-sinh-thai.md`: theo dõi mục Kết quả.
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
 
@@ -51,6 +45,20 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 12-13/11/2026 (lotus-share-9e) - **Phát hành `v2.0.0-lotus.7` - Lotus Share độc lập** (chủ dự án đồng ý phát hành):
+  PR #38 (máy Linux không hiện: bỏ quét mạng con khi đã có thiết bị trả lời; Windows dùng chung `settings.json` với
+  LocalSend -> tên "Strategic Tomato"; tên tiếng Anh tự đổi sang tiếng Việt; nút sửa tường lửa Linux;
+  `chan-doan-mang.sh`), PR #39 (giao thức riêng 53420 / `224.0.0.168` / `ff12::1075:5ea0` / `/api/lotus/v2`, di trú
+  cấu hình v5, gỡ workflow/tài nguyên/liên kết LocalSend, vendor `device_apps` + `permission_handler_windows`, trang
+  Giới thiệu + Giấy phép mới, bắt buộc cập nhật qua `phien-ban.json`, 2.0.0+65), PR #42 (hằng multicast Rust vẫn
+  224.0.0.167 -> CLI nghe sai nhóm; test `protocol_constants.rs` đối chiếu Dart/Rust). Nhãn `v2.0.0-lotus.6` KHÔNG
+  phát hành (bản nháp đã xóa vì lỗi CLI; nhãn bất biến nên còn lại). Kiểm trên tệp thật lotus.7: 22 tệp, SHA256SUMS
+  khớp, `gh attestation verify` đạt + từ chối tệp sửa 1 byte, CLI nghe UDP/TCP 53420 và tham gia `224.0.0.168` (đo
+  `/proc/net/igmp`), `/api/localsend/v2/info` 404. Website deploy: `/tai/{windows,windows-arm,android,linux,macos}` =
+  302 tới tệp lotus.7, `phien-ban.json` 200 `max-age=300`. Scoop + Homebrew `2.0.0-lotus.7`; pkg.tsudev.com APT
+  `lotus-share 2.0.0-7` amd64/arm64 (agent duyệt run 43267747308). Phiếu cả hệ bắt buộc cập nhật: `~/projects/logs/handover/20261112-04_yeu-cau-bat-buoc-cap-nhat-he-sinh-thai.md`
+  (tsudev: không áp dụng; tsudev-files: làm ở 2.4.1).
 
 - 12/11/2026 (lotus-share-d7) - **Phát hành `v1.18.2-lotus.5`** (chủ dự án đồng ý): sửa khám phá thiết bị + bộ cài tường
   lửa (PR #35). 22 tệp, bộ cài mang tên `-setup.exe`. Đã kiểm trên tệp thật: SHA256SUMS khớp, `gh attestation verify` đạt
@@ -172,6 +180,8 @@
   bản quyền gốc trong LICENSE/NOTICE/thông tin tệp chạy (Apache-2.0 mục 4c bắt buộc); trong app chỉ hiện ở Giấy phép.
 - 12/11/2026 - Chủ dự án: bản cũ phải hiện hộp thoại bắt buộc cập nhật; áp dụng cả hệ (phiếu 20261112-04). Phiên bản
   2.0.0+65; so sánh bằng số build.
+- 13/11/2026 - Agent: `v2.0.0-lotus.6` bỏ (CLI sai nhóm multicast, chưa từng công khai), phát hành `v2.0.0-lotus.7` giữ
+  build 65. Nhãn chỉ dùng một lần; bản kế tiếp là build 66.
 
 - 12/11/2026 - Chủ dự án nộp đơn SignPath Foundation (Windows). Ký mã Apple (macOS + iOS) dời sang tháng 12/2026, làm
   khi có MacBook - không đăng ký Apple Developer trước đó.
