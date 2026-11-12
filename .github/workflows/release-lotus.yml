@@ -206,6 +206,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p dist AppDir
+          install -m755 support/scripts/chan-doan-mang.sh app/build/linux/x64/release/bundle/chan-doan-mang.sh
           tar -C app/build/linux/x64/release/bundle -czf "dist/lotus-share-$V-linux-x86-64.tar.gz" .
           cp -r app/build/linux/x64/release/bundle/* AppDir/
           for s in 32 128 256; do
@@ -282,6 +283,7 @@ jobs:
           set -euo pipefail
           mkdir -p dist
           file app/build/linux/arm64/release/bundle/lotus_share | grep -q aarch64
+          install -m755 support/scripts/chan-doan-mang.sh app/build/linux/arm64/release/bundle/chan-doan-mang.sh
           tar -C app/build/linux/arm64/release/bundle -czf "dist/lotus-share-$V-linux-arm-64.tar.gz" .
       # Ảnh Docker của action build-appimage chỉ có amd64 => chạy appimage-builder thẳng trên máy ARM64,
       # mọi phụ thuộc Python ghim phiên bản + SHA-256 (support/build/appimage/requirements-arm64.txt).

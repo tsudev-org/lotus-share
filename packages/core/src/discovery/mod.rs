@@ -14,7 +14,7 @@ use crate::util::interface::InterfaceFilter;
 use futures_util::StreamExt;
 use std::collections::HashSet;
 use std::net::{IpAddr, Ipv4Addr, Ipv6Addr};
-use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
+use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
 use std::time::{Duration, SystemTime};
 use store::DeviceStore;
@@ -119,10 +119,6 @@ struct DiscoveryState {
 
     /// The interface addresses a subnet scan is currently running for.
     scanning: std::sync::Mutex<HashSet<Ipv4Addr>>,
-
-    /// Number of confirmations in this run, on which
-    /// [`DiscoveryHandle::discover_staged`] decides whether to escalate.
-    confirmations: AtomicU64,
 }
 
 impl DiscoveryState {
@@ -187,7 +183,6 @@ impl DiscoveryState {
     /// emits the resulting event. Returns whether the device is new, and
     /// its stored state after the merge.
     async fn found(&self, device: DiscoveredDevice) -> (bool, StatefulDevice) {
-        self.confirmations.fetch_add(1, Ordering::Relaxed);
         let (event, merged) = self.store.upsert(device, SystemTime::now());
         let is_new = matches!(event, DiscoveryEvent::Discovered { .. });
         if let Some(event_tx) = &self.event_tx {
@@ -298,9 +293,9 @@ impl DiscoveryHandle {
     /// falls back to scanning the `/24` subnets of the local interface
     /// addresses `interface_ips`, for networks that do not carry multicast.
     ///
-    /// The fallback only runs when nothing was confirmed until `grace` after
-    /// the known channels have been probed: any confirmation — a new device
-    /// or a known one — proves that the cheap stages work on this network.
+    /// lotus-share: the scan runs `grace` after the known channels have been
+    /// probed, whether or not anything was confirmed by then: one device
+    /// answering does not prove that multicast reaches every other device.
     ///
     /// The found devices are put into the store (and emitted) as they answer;
     /// returns once every stage has finished, including the whole
@@ -313,19 +308,19 @@ impl DiscoveryHandle {
         protocol: ProtocolType,
         grace: Duration,
     ) -> Result<(), ClientError> {
-        let confirmations = self.state.confirmations.load(Ordering::Relaxed);
         let escalate = async {
             self.discover_known_http_channels(known_channels).await?;
             tokio::time::sleep(grace).await;
 
-            if self.state.confirmations.load(Ordering::Relaxed) == confirmations {
-                futures_util::future::try_join_all(
-                    interface_ips
-                        .into_iter()
-                        .map(|ip| self.scan_subnet(ip, port, protocol)),
-                )
-                .await?;
-            }
+            // lotus-share: always scan. Skipping the scan once anything answered hid every device
+            // that multicast does not reach (e.g. a Linux laptop behind a firewall dropping UDP)
+            // as soon as one other device (e.g. a phone) was found.
+            futures_util::future::try_join_all(
+                interface_ips
+                    .into_iter()
+                    .map(|ip| self.scan_subnet(ip, port, protocol)),
+            )
+            .await?;
             Ok(())
         };
 
@@ -464,7 +459,6 @@ pub async fn start(config: DiscoveryConfig, stop_rx: oneshot::Receiver<()>) -> D
         event_tx: config.event_tx,
         answering: AtomicBool::new(true),
         scanning: std::sync::Mutex::new(HashSet::new()),
-        confirmations: AtomicU64::new(0),
     });
 
     // Ends once discovery is stopped: the multicast side then drops its

@@ -33,14 +33,11 @@ part 'persistence_provider_migrations.dart';
 
 final _logger = Logger('PersistenceService');
 
+/// lotus-share: thư mục cấu hình riêng. Trước đây dùng chung `%APPDATA%\\LocalSend\\settings.json` với LocalSend,
+/// nên Lotus Share nhận lại tên thiết bị, khóa TLS, cổng... của LocalSend đã cài trên máy. Không chép gì từ tệp đó.
 String get _windowsFile {
   final appData = Platform.environment['APPDATA'];
-  return '$appData\\LocalSend\\settings.json';
-}
-
-String get _windowsLegacyFile {
-  final appData = Platform.environment['APPDATA'];
-  return '$appData\\org.localsend\\localsend_app\\shared_preferences.json';
+  return '$appData\\Lotus Share\\settings.json';
 }
 
 // Version of the storage
@@ -116,32 +113,24 @@ class PersistenceService {
     SharedPreferences prefs;
 
     final portableStore = SharedPreferencesPortable();
-    bool usingLegacyStore = false;
     if (checkPlatform(const [TargetPlatform.windows, TargetPlatform.linux, TargetPlatform.macOS]) && portableStore.exists()) {
       _logger.info('Using portable settings.');
       SharedPreferencesStorePlatform.instance = portableStore;
     } else if (defaultTargetPlatform == TargetPlatform.windows) {
-      final legacyStore = SharedPreferencesFile(filePath: _windowsLegacyFile);
-      if (legacyStore.exists()) {
-        _logger.info('Using legacy settings. Will migrate in the next step.');
-        SharedPreferencesStorePlatform.instance = legacyStore;
-        usingLegacyStore = true;
-      } else {
-        SharedPreferencesStorePlatform.instance = SharedPreferencesFile(filePath: _windowsFile);
-      }
+      SharedPreferencesStorePlatform.instance = SharedPreferencesFile(filePath: _windowsFile);
     }
 
     final bool isFirstAppStart;
     final existingPrefs = await SharedPreferencesStorePlatform.instance.getAll();
     final existingVersion = existingPrefs['flutter.$_version'] as int?;
     _logger.info('Existing version: $existingVersion');
-    isFirstAppStart = existingVersion == null && !usingLegacyStore && !existingPrefs.keys.any((key) => key.startsWith('flutter.ls_'));
+    isFirstAppStart = existingVersion == null && !existingPrefs.keys.any((key) => key.startsWith('flutter.ls_'));
     if (isFirstAppStart) {
       await SharedPreferencesStorePlatform.instance.setValue('Int', 'flutter.$_version', _latestVersion);
     } else {
       // Unversioned profiles in the current store may already contain string modes.
       // Only apply the repair migration; older migrations would replace those modes.
-      final fromVersion = existingVersion ?? (usingLegacyStore ? 1 : 3);
+      final fromVersion = existingVersion ?? 3;
       if (fromVersion < _latestVersion) {
         await _runMigrations(fromVersion);
       }
@@ -174,7 +163,9 @@ class PersistenceService {
       await prefs.setString(_showToken, const Uuid().v4());
     }
 
-    if (prefs.getString(_aliasKey) == null) {
+    // lotus-share: tên ngẫu nhiên sinh bằng tiếng Anh (vd "Strategic Tomato") đổi sang ngôn ngữ đang dùng.
+    final alias = prefs.getString(_aliasKey);
+    if (alias == null || isGeneratedAliasOfOtherLocale(alias)) {
       await prefs.setString(_aliasKey, generateRandomAlias());
     }
 
