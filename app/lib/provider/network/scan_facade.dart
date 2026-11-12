@@ -7,8 +7,8 @@ import 'package:localsend_app/provider/settings_provider.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 
 /// Discovers devices in stages, cheapest first: multicast announcement and
-/// favorite probes right away, http-based discovery on the subnets only when
-/// nothing was confirmed within 1 second.
+/// favorite probes right away, http-based discovery on the subnets after 1 second
+/// (lotus-share: always, so devices that multicast misses are still found).
 class StartSmartScan extends AsyncGlobalAction {
   /// Maximum number of interfaces to scan.
   /// If there are more interfaces, the first ones will be used or the user needs to select one.

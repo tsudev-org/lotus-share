@@ -87,8 +87,7 @@ abstract class RsDiscovery implements RustOpaqueInterface {
   /// the network and probes [channels] (e.g. the favorites), then falls
   /// back to scanning the `/24` subnets of the local interface addresses
   /// [interface_ips], for networks that do not carry multicast. The
-  /// fallback only runs when nothing was confirmed until [grace_ms] after
-  /// the channels have been probed.
+  /// scan runs [grace_ms] after the channels have been probed.
   ///
   /// The found devices are emitted on [RsDiscovery::listen] as they answer;
   /// returns once every stage has finished, including the whole

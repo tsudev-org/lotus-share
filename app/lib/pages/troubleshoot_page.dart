@@ -42,6 +42,11 @@ class TroubleshootPage extends StatelessWidget {
                       'netsh advfirewall firewall add rule name="$forkProductName" dir=in action=allow protocol=UDP localport=${settings.port}',
                     ],
                   ),
+                  // lotus-share: Linux - mở cổng trên ufw (Ubuntu, Mint) và firewalld (Fedora, openSUSE) nếu đang bật.
+                  TargetPlatform.linux: _CommandFixAction(
+                    adminPrivileges: true,
+                    commands: linuxFirewallFixCommands(settings.port),
+                  ),
                 },
               ),
               secondaryButton: _FixButton(
@@ -204,6 +209,9 @@ class _CommandFixAction extends _FixAction {
     if (adminPrivileges) {
       if (checkPlatform([TargetPlatform.windows])) {
         await runWindowsCommandAsAdmin(commands);
+      } else if (checkPlatform([TargetPlatform.linux])) {
+        // lotus-share: pkexec hiện hộp thoại mật khẩu của hệ thống (polkit).
+        await Process.run('pkexec', ['sh', '-c', commands.join('\n')]);
       } else {
         throw 'Admin privileges are only implemented on Windows.';
       }
@@ -227,4 +235,13 @@ class _NativeFixAction extends _FixAction {
   void runFix() async {
     await action();
   }
+}
+
+/// lotus-share: lệnh mở cổng [port] (TCP + UDP) trên tường lửa Linux đang bật. Bỏ qua tường lửa không cài/không bật.
+@visibleForTesting
+List<String> linuxFirewallFixCommands(int port) {
+  return [
+    'if command -v ufw >/dev/null 2>&1 && ufw status | grep -q "Status: active"; then ufw allow $port/tcp comment "$forkProductName"; ufw allow $port/udp comment "$forkProductName"; fi',
+    'if command -v firewall-cmd >/dev/null 2>&1 && firewall-cmd --state >/dev/null 2>&1; then firewall-cmd --permanent --add-port=$port/tcp --add-port=$port/udp && firewall-cmd --reload; fi',
+  ];
 }
