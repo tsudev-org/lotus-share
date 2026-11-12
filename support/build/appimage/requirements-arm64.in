@@ -1,0 +1,6 @@
+appimage-builder==1.1.0
+# packaging 22+ bỏ LegacyVersion: appimage-builder 1.1.0 parse "continuous" và phiên bản gói apt
+packaging==21.3
+# lief 0.12 không có wheel aarch64; API dùng (parse/interpreter/get_section) giữ nguyên ở 0.14
+lief==0.14.1
+urllib3<2
