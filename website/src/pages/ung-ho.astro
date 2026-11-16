@@ -1,9 +1,11 @@
 ---
 // Trang Ủng hộ: nơi DUY NHẤT liệt kê cách ủng hộ Lotus Share (ứng dụng, README, nút Sponsor GitHub đều trỏ về đây).
-// Dữ liệu: src/data/ung-ho.json, kiểm lúc build ở src/lib/ung-ho.ts (VietQR, SHA-256 ảnh QR). Chép mô hình từ tsudev-files.
+// Dữ liệu: src/data/ung-ho.json, kiểm lúc build ở src/lib/ung-ho.ts (VietQR, SHA-256 ảnh QR). Chép mô hình từ tsudev-files;
+// trình bày cùng khuôn với tsudev.com/ung-ho qua components/KhoiUngHo.astro (16/11/2026).
 import TaiLieu from '../components/TaiLieu.astro';
 import { REPO_URL } from '../lib/noi-dung';
 import { KENH } from '../lib/ung-ho';
+import KhoiUngHo from '../components/KhoiUngHo.astro';
 ---
 <TaiLieu tieuDe="Ủng hộ" moTa="Cách ủng hộ Lotus Share, ứng dụng gửi tệp trong mạng nội bộ miễn phí của hệ sinh thái tsudev: kênh ủng hộ chính thức và những cách đóng góp không tốn tiền." duongDan="/ung-ho/">
   <h1>Ủng hộ Lotus Share</h1>
@@ -11,17 +13,7 @@ import { KENH } from '../lib/ung-ho';
 
   <h2 id="kenh-ung-ho">Kênh ủng hộ</h2>
   {KENH.length > 0 ? (
-    <ul class="kenh-ung-ho">
-      {KENH.map((k) => (
-        <li>
-          {k.url ? <a href={k.url} target="_blank" rel="noopener noreferrer"><strong>{k.ten}</strong></a> : <strong>{k.ten}</strong>}
-          <span>{k.moTa}</span>
-          {k.chiTiet.length > 0 && <span class="kenh-ung-ho__chi-tiet">{k.chiTiet.map((d) => <span>{d}</span>)}</span>}
-          {k.anhQr && <img src={k.anhQr} alt={k.vietqr ? `Mã QR chuyển khoản tới tài khoản ${k.vietqr.soTaiKhoan}` : `Mã QR ${k.ten}`} width="200" height="200" loading="lazy">}
-        </li>
-      ))}
-    </ul>
-    <p>Đây là kênh ủng hộ duy nhất của Lotus Share. Trước khi chuyển, hãy kiểm tra tên chủ tài khoản ứng dụng ngân hàng hiển thị khớp với thông tin trên; đừng chuyển tiền theo số tài khoản hay mã QR ở bất kỳ nơi nào khác tự nhận là tsudev.</p>
+    <KhoiUngHo kenh={KENH} ten="Lotus Share" />
   ) : (
     <p>Kênh ủng hộ tài chính chính thức đang được chuẩn bị và sẽ được công bố tại trang này. Trang này là nơi duy nhất công bố kênh ủng hộ.</p>
   )}
