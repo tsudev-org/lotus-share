@@ -1,0 +1,60 @@
+{
+  "nguon": {
+    "pkg": "https://pkg.tsudev.com/catalog.json",
+    "scoop": "https://raw.githubusercontent.com/tsudev-org/scoop-bucket/main/catalog.json",
+    "brew": "https://raw.githubusercontent.com/tsudev-org/homebrew-tap/main/catalog.json"
+  },
+  "nhom": [
+    {
+      "heDieuHanh": "Windows",
+      "kenh": [
+        {
+          "kenh": "Scoop",
+          "ghiChu": "không cần quyền quản trị để cài",
+          "lenh": [
+            "scoop bucket add tsudev https://github.com/tsudev-org/scoop-bucket",
+            "scoop install tsudev/lotus-share"
+          ],
+          "lenhTao": [],
+          "nguon": "https://github.com/tsudev-org/scoop-bucket"
+        }
+      ]
+    },
+    {
+      "heDieuHanh": "macOS",
+      "kenh": [
+        {
+          "kenh": "Homebrew",
+          "ghiChu": "macOS",
+          "lenh": [
+            "brew install --cask tsudev-org/tap/lotus-share"
+          ],
+          "nguon": "https://github.com/tsudev-org/homebrew-tap"
+        }
+      ]
+    },
+    {
+      "heDieuHanh": "Linux",
+      "kenh": [
+        {
+          "kenh": "APT (Debian, Ubuntu)",
+          "lenh": [
+            "curl -fsSL https://pkg.tsudev.com/tsudev-archive-keyring.gpg | sudo tee /usr/share/keyrings/tsudev.gpg >/dev/null",
+            "echo \"deb [signed-by=/usr/share/keyrings/tsudev.gpg] https://pkg.tsudev.com/apt stable main\" | sudo tee /etc/apt/sources.list.d/tsudev.list",
+            "sudo apt update",
+            "sudo apt install lotus-share"
+          ],
+          "nguon": "https://pkg.tsudev.com"
+        },
+        {
+          "kenh": "DNF (Fedora, RHEL)",
+          "lenh": [
+            "sudo curl -fsSLo /etc/yum.repos.d/tsudev.repo https://pkg.tsudev.com/rpm/tsudev.repo",
+            "sudo dnf install lotus-share"
+          ],
+          "nguon": "https://pkg.tsudev.com"
+        }
+      ]
+    }
+  ]
+}
