@@ -146,7 +146,7 @@ kbd { border: 1px solid var(--border-strong); border-bottom-width: 2px; border-r
 .chu-y p { margin: 0.3rem 0; }
 
 /* Trang tài liệu */
-.tai-lieu { display: grid; grid-template-columns: 15rem 1fr; gap: 2.5rem; padding: 2.5rem 0 4rem; }
+.tai-lieu { display: grid; grid-template-columns: 15rem 1fr; gap: 2.5rem; padding-block: 2.5rem 4rem;   /* chỉ dọc: giữ lề ngang của .khung (điện thoại) */ }
 .tai-lieu__menu { position: sticky; top: 5rem; align-self: start; }
 .tai-lieu__menu ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.1rem; }
 .tai-lieu__menu a { display: block; padding: 0.35rem 0.7rem; border-radius: 6px; text-decoration: none; color: var(--text-secondary); font-weight: 500; font-size: 0.94rem; }
