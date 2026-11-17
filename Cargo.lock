@@ -2191,6 +2191,7 @@ dependencies = [
  "hyper-util",
  "if-addrs",
  "libc",
+ "localsend",
  "lru",
  "pem 4.0.0",
  "percent-encoding",
