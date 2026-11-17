@@ -36,6 +36,10 @@ ACCEPTED: dict[str, tuple[str, str]] = {
     ),
     "RUSTSEC-2025-0141": ("bincode 1.x ngừng bảo trì (cảnh báo thông tin, không phải lỗ hổng); đến qua webrtc.", "31/03/2027"),
     "RUSTSEC-2026-0441": ("pin-utils ngừng bảo trì (cảnh báo thông tin, không phải lỗ hổng).", "31/03/2027"),
+    "RUSTSEC-2026-0543": (
+        "chrono ngừng bảo trì (cảnh báo thông tin, không có bản vá); chỉ đến qua server -> tokio-cron-scheduler -> croner.",
+        "31/03/2027",
+    ),
 }
 
 
