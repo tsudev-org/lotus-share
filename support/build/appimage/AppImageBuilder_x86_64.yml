@@ -17,18 +17,29 @@ AppDir:
   apt:
     arch:
       - amd64
-    allow_unauthenticated: true
+    # lotus-share: kho Ubuntu kiểm chữ ký bằng khóa ghim trong repo (Ubuntu Archive Automatic Signing Key 2018,
+    # F6EC B376 2474 EDA9 D21B  7022 8719 20D1 991B C93C). @THU_MUC_REPO@ do release-lotus.yml thay lúc dựng.
     sources:
       - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy main restricted
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.public.key
       - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy-updates main restricted
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.public.key
       - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy universe
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.public.key
       - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy-updates universe
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.public.key
       - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy multiverse
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.public.key
       - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy-updates multiverse
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.public.key
       - sourceline: deb http://archive.ubuntu.com/ubuntu/ jammy-backports main restricted universe multiverse
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.public.key
       - sourceline: deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.public.key
       - sourceline: deb http://security.ubuntu.com/ubuntu/ jammy-security universe
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.public.key
       - sourceline: deb http://security.ubuntu.com/ubuntu/ jammy-security multiverse
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.public.key
     include:
       - libayatana-appindicator3-1:amd64
       - librsvg2-common:amd64

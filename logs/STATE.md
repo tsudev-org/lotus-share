@@ -1,7 +1,7 @@
 # STATE.md - Trạng thái project Lotus Share (repo tsudev-org/lotus-share, trước đây tsudev-lotus)
 
 > **Phiên kế tiếp (phiếu toàn hệ 20261117-P2):** đọc `~/projects/logs/handover/20261117-P2_ke-hoach-phan-phoi-tin-cay-da-nen-tang.md` hàng 3 (`lotus-share`) ở mục 3
-> + `.standards/docs/DISTRIBUTION_TRUST.md` (chuẩn v3.7.0) + `.standards/docs/VERSIONING.md` mục 2. Khuôn thẻ/tên tệp mới chỉ áp
+> và `.standards/docs/DISTRIBUTION_TRUST.md` (chuẩn v3.7.0) + `.standards/docs/VERSIONING.md` mục 2. Khuôn thẻ/tên tệp mới chỉ áp
 > cho bản phát hành KẾ TIẾP, đọc mục 2.4 (updater đã cài) trước khi đổi.
 
 > Agent đọc file này ở đầu mỗi phiên và cập nhật ở cuối mỗi phiên.
@@ -12,25 +12,18 @@
 - Deploy website: `cd website && XDG_CONFIG_HOME=$HOME/.config/wrangler-tsudev npm run deploy` (cấu hình wrangler RIÊNG của
   tsudev - đăng nhập chung là tài khoản UBND; kiểm `wrangler whoami` = dev.nguyentrangtinhsu@...). Sau mỗi bản phát hành
   phải deploy lại (trang Tải về đọc danh sách tệp lúc build).
-- [ ] winget `tsudev.LotusShare`: chờ Microsoft duyệt PR microsoft/winget-pkgs#478033 (đã đóng #477225 `tsudev.Lotus`). Khi
-      merge: chuyển `winget` từ `planned` sang `channels` trong `packaging/package.json`, thêm lệnh winget vào trang Tải về.
-- [ ] **Ký mã Windows TRẢ PHÍ cho cả hệ tsudev - chủ dự án chọn hướng 2 (13/11/2026)**: SignPath Foundation từ chối
-      đơn đầu (12/11/2026). Đề xuất: **Certum Open Source Code Signing (SimplySign, trên mây)** từ €49/năm, một chứng thư
-      cá nhân ký được mọi dự án mã nguồn mở của chủ dự án. CHỜ chủ dự án xác nhận chọn Certum. Chi tiết, so sánh, nguồn,
-      các bước: `logs/handover/20261113-02_ban-giao-ky-ma-tra-phi-certum.md` (ĐỌC TRƯỚC).
-- [ ] **Tháng 12/2026, khi chủ dự án có MacBook - ký mã Apple (macOS Developer ID + công chứng, iOS TestFlight)**.
-      CHƯA làm gì trước thời điểm đó. Chủ dự án làm `docs/vi/HUONG-DAN-KY-MA.md` phần B trên MacBook (B1-B4, xin quyền
-      multicast B3 ngay sau khi đăng ký vì Apple duyệt tay; chứng thư theo B5 "Trên MacBook"), chạy
-      `tools/day-khoa-apple.sh`; agent làm `KE-HOACH-KY-MA-12-2026.md` mục 2.2 và chạy thử app trên MacBook thật.
-- [ ] Dựng máy chủ tín hiệu `signal.lotus.tsudev.com` từ `server/` trước khi bật WebRTC (mặc định đã trỏ về đó).
-- Xuất bản kho `pkg.tsudev.com` (linux-packages, Environment `packages`) cần duyệt mỗi lần. Chủ dự án đã cho agent tự
-  duyệt (12/11/2026; quyền ghi ở `.claude/settings.local.json` của máy này):
-  `gh api -X POST repos/tsudev-org/linux-packages/actions/runs/<id>/pending_deployments -F 'environment_ids[]=26928270657' -f state=approved -f comment=...`
-- [ ] **Đổi tên nội bộ** `localsend_app` -> gói Dart mới, `packages/localsend_isolates`, crate `localsend`/`localsend-cli`/
-      `rust_lib_localsend_app`, package Kotlin + tên kênh `org.localsend.localsend_app/*`, icon khay
-      `org.localsend.localsend_app-tray`, workspace `_localsend_workspace`. Cần sinh lại mã flutter_rust_bridge và build thử
-      `release-lotus.yml` mọi nền tảng. Người dùng không thấy; làm PR riêng.
-- [ ] CLI `lotus-share-cli`: kiểm `phien-ban.json` như ứng dụng (`docs/vi/CAP-NHAT-BAT-BUOC.md` mục 4).
+- [ ] winget `tsudev.LotusShare`: chờ người kiểm duyệt cộng đồng duyệt PR microsoft/winget-pkgs#478033 (18/11 đã nâng
+      manifest lên **2.0.0** + bộ cài arm64; SHA-256 đo trên tệp tải về). Khi merge: chuyển `winget` từ `planned` sang
+      `channels` trong `packaging/package.json`; khối "Cài bằng lệnh" tự hiện lệnh winget ở lần build/deploy kế tiếp.
+- [ ] **Phát hành kế tiếp theo khuôn V1** (`v26.M.DDNN`, phiếu `logs/handover/20261117-V1_*` mục 6 - khảo sát đã xong):
+      số build = `YYMDDNN`; AppImage + `.zsync` GIỮ tên cũ (AppImage đã cài dò `lotus-share-*-linux-x86-64.AppImage.zsync`);
+      đổi cùng PR `packaging/package.json` tagRegex/assets, scoop-bucket checkver/autoupdate, homebrew-tap livecheck,
+      bước `prepare` của `release-lotus.yml`, `phien-ban.json`. Kèm P1 phiếu P2: VirusTotal (workflow dùng chung
+      `tsudev-org/.github`, chờ Sound Db phát hành thật kiểm mẫu).
+- [ ] Bảng bằng chứng 6 ngưỡng SignPath (phiếu 20261115-01 mục 2.4): soạn khi Scorecard có điểm (chạy hằng tuần + mỗi
+      lần gộp `main`, xem `https://scorecard.dev/viewer/?uri=github.com/tsudev-org/lotus-share`). Best Practices ĐÃ passing.
+- [ ] CLI `lotus-share-cli`: kiểm `phien-ban.json` như ứng dụng (`docs/vi/CAP-NHAT-BAT-BUOC.md` mục 4) - đã mở issue #58
+      (good first issue); chưa ai nhận thì agent làm.
 - [ ] **Thử thật 2.0.0-lotus.7** (đã phát hành 13/11/2026): mọi thiết bị cùng cài 2.0 (1.x không thấy 2.x). Windows cài
       `lotus.tsudev.com/tai/windows` (cài cho mọi người dùng, giữ dấu chọn tường lửa; bộ cài gỡ `tsudev-lotus` cũ) - lần
       đầu mở có tên thiết bị tiếng Việt mới, thấy cả Android lẫn laptop Linux; laptop Linux chạy
@@ -45,6 +38,21 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 18/11/2026 (lotus-share-5e) - **Bảo mật + uy tín + giao diện** (nhận #49/#51 từ phiên điều phối projects-e4):
+  #49 quy ước v3.7.0 + astro/marked về devDependencies (chủ dự án chọn phương án (a), phiếu 20261118-01 mục 3.3) +
+  chấp nhận RUSTSEC-2026-0543; #51 ci.yml ghim SHA + `permissions: contents: read` (7 cảnh báo CodeQL Actions);
+  #55 AppImage ARM64 urllib3 2.8.0 + lief 0.17.6 (9 cảnh báo Dependabot; build thử THẬT run 44165028549
+  xanh cả 12 job, gồm Linux ARM64); #54 client `danger_accept_invalid_certs` chỉ còn sau tính năng `test-util` (CodeQL
+  rust/disabled-certificate-check); #56 (Dependabot actions); phát hiện + sửa lỗ hổng thừa kế: công thức
+  appimage-builder để `allow_unauthenticated: true` (thư viện đóng vào AppImage tải qua HTTP KHÔNG kiểm chữ ký, log
+  `NO_PUBKEY 871920D1991BC93C`) - ghim khóa Ubuntu Archive 2018, bỏ
+  `allow_unauthenticated` (#61; build thử run 44169959283 x64 + ARM64 xanh, `NO_PUBKEY` 0). Uy tín: #53 README
+  tiếng Anh (README.vi.md) + OpenSSF Scorecard; #57 hồ sơ Best Practices `docs/best-practices.json`, CHANGELOG ghi
+  RUSTSEC đã vá, CONTRIBUTING/SECURITY tiếng Anh; issue good first #58 #59 #60. Giao diện (phiếu 20261113-07): quét
+  production 10 trang x 390/1280 x Tối/Sáng = OK; soi ảnh thấy chân trang di động một cột dài -> #52 lưới 2 cột.
+  winget-pkgs#478033 nâng 2.0.0. Phiếu V1: khảo sát updater (mục 6 bản sao). **OpenSSF Best Practices passing 100%**
+  (dự án 16860, nộp bằng `bp.cjs`, huy hiệu README). Website deploy (Version 30616e5e): quét production 7 trang OK.
 
 - 12-13/11/2026 (lotus-share-9e) - **Phát hành `v2.0.0-lotus.7` - Lotus Share độc lập** (chủ dự án đồng ý phát hành):
   PR #38 (máy Linux không hiện: bỏ quét mạng con khi đã có thiết bị trả lời; Windows dùng chung `settings.json` với

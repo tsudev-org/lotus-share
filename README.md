@@ -2,6 +2,7 @@
 
 **English** · [Tiếng Việt](README.vi.md)
 
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/16860/badge)](https://www.bestpractices.dev/projects/16860)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/tsudev-org/lotus-share/badge)](https://scorecard.dev/viewer/?uri=github.com/tsudev-org/lotus-share)
 [![Latest release](https://img.shields.io/github/v/release/tsudev-org/lotus-share?include_prereleases)](https://github.com/tsudev-org/lotus-share/releases/latest)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)

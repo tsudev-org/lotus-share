@@ -224,7 +224,9 @@ jobs:
           for s in 32 128 256; do
             install -Dm644 "app/assets/img/logo-$s.png" "AppDir/usr/share/icons/hicolor/${s}x${s}/apps/lotus-share.png"
           done
-          sed "s/^    version: .*/    version: $V/" support/build/appimage/AppImageBuilder_x86_64.yml > AppImageBuilder.yml
+          # Action Docker gắn thư mục làm việc ở /github/workspace: khóa kho Ubuntu đọc từ đó (kiểm chữ ký apt).
+          sed -e "s/^    version: .*/    version: $V/" -e "s|@THU_MUC_REPO@|/github/workspace|" \
+            support/build/appimage/AppImageBuilder_x86_64.yml > AppImageBuilder.yml
       # appimage-builder chạy apt-get bên trong; máy chủ gói Ubuntu đôi khi đang đồng bộ ("Mirror sync in progress")
       # nên thử lại một lần sau 2 phút thay vì đánh trượt cả bản phát hành vì lỗi tạm thời phía Ubuntu.
       - name: Dựng AppImage
@@ -307,7 +309,8 @@ jobs:
           for s in 32 128 256; do
             install -Dm644 "app/assets/img/logo-$s.png" "AppDir/usr/share/icons/hicolor/${s}x${s}/apps/lotus-share.png"
           done
-          sed "s/^    version: .*/    version: $V/" support/build/appimage/AppImageBuilder_arm_64.yml > AppImageBuilder.yml
+          sed -e "s/^    version: .*/    version: $V/" -e "s|@THU_MUC_REPO@|$GITHUB_WORKSPACE|" \
+            support/build/appimage/AppImageBuilder_arm_64.yml > AppImageBuilder.yml
           python3 -m venv "$RUNNER_TEMP/aib"
           "$RUNNER_TEMP/aib/bin/pip" install --require-hashes --only-binary=lief -r support/build/appimage/requirements-arm64.txt
           # appimage-builder gọi apt-get/dpkg cần root; giữ PATH để thấy venv.
