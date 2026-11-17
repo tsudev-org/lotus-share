@@ -5,7 +5,7 @@
 - **Gửi**: mọi repo có website / trang `*.tsudev.com` - tsudev-cwico, tsudev-swico, tsudev-contact,
   tsudev-trafficmonitor, tsufiles (`tsudev-files`), lotus-share, linux-packages (trang kho, nếu có),
   6 repo game TsuGameLabs + tsudev-game-kit
-- **Trạng thái**: MỞ - mỗi repo ghi "Đã đọc" + kết quả vào cuối phiếu BẢN SAO trong repo mình
+- **Trạng thái**: ĐÓNG ở lotus-share (18/11/2026, PR #52)
 
 ## 1. Yêu cầu của chủ dự án
 
@@ -59,3 +59,13 @@ mâu thuẫn nội dung hoặc thiếu chuyên nghiệp; sửa để giao diện
 - Công cụ ở mục 2.1 in `OK` cho mọi trang × khổ × chế độ trên PRODUCTION (mã thoát 0), hoặc ghi rõ ngoại lệ có lý do.
 - Ảnh 390px + 1280px trước/sau của trang chủ và một trang con, đính kèm PR.
 - Ghi vào cuối bản sao phiếu này: "Đã đọc" + danh sách lỗi tìm thấy + PR + trạng thái production.
+
+## Kết quả (lotus-share)
+
+- Đã đọc - phiên lotus-share-5e, 18/11/2026. Quét PRODUCTION `https://lotus.tsudev.com` bằng `quet-giao-dien.cjs`: 10 trang
+  (`/`, `/tai-ve/`, `/huong-dan/`, `/nhat-ky/`, `/ung-ho/`, `/ban-quyen/`, `/bao-mat/`, `/bao-mat/kien-truc/`,
+  `/chinh-sach-ky-ma/`, `/khong-ton-tai`) x 390/1280 x Tối/Sáng = OK (trang 404 trả HTTP 404 đúng, có đúng 1 h1).
+- Soi ảnh bằng mắt: lỗi duy nhất - chân trang khổ 390 xếp hai nhóm liên kết thành MỘT cột dài (lệch mục 3.3). Sửa ở PR
+  #52 (dưới 860px: phần giới thiệu chiếm cả hàng, hai nhóm liên kết lưới 2 cột; hàng "© tsudev" + bộ chọn giao diện
+  giữ một hàng). Kiểm trên máy: quét 3 trang x 2 khổ x 2 chế độ OK.
+- Mục 3.1/3.2 (header/footer tài khoản) không áp dụng: site không có đăng nhập. Không chạm logo, `©`, kênh ủng hộ.
