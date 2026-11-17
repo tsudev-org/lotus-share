@@ -2,7 +2,7 @@
 
 - **Mã phiếu**: 20261115-01 (phiếu con)
 - **Từ**: phiên agent-files (repo `tsufiles`), chủ dự án yêu cầu 15/11/2026 - **Đến**: phiên kế tiếp của repo `lotus-share`
-- **Trạng thái**: MỞ - đã gỡ hai chặn bắt buộc (PR #51 #54 #55), hồ sơ soạn xong (#57); còn nộp bằng bp.cjs
+- **Trạng thái**: MỞ - Best Practices PASSING 100% (dự án 16860, 18/11); còn bảng 6 ngưỡng SignPath (mục 2.4)
 - **Phiếu mẹ (ĐỌC TRƯỚC, mục 0 nguyên tắc + mục 3 quy trình)**: `~/projects/logs/handover/20261115-01_yeu-cau-ho-so-xac-minh-toan-he.md`
 - **Công cụ + mẫu đã đạt passing 100%**: `~/projects/logs/tools/bestpractices/` (`README.md`, `bp.cjs`, `mau-tsufiles.json`);
   mẫu hồ sơ dạng đọc: `~/projects/tsufiles/docs/best-practices.md`.
@@ -48,3 +48,5 @@ Tự chứng nhận sai bị phát hiện sẽ làm hỏng hồ sơ SignPath c�
   3. Hồ sơ `docs/best-practices.json` (67 tiêu chí, `Unmet` trung thực cho `dynamic_analysis_unsafe`) + CHANGELOG ghi
      RUSTSEC đã vá (`release_notes_vulns`) + chính sách kiểm thử tiếng Anh (`test_policy`) - PR #57.
   Còn: đo lại 0 cảnh báo trên `main` -> `bp.cjs new/fill --submit` (phía Windows) -> huy hiệu; bảng 6 ngưỡng SignPath.
+  - 18/11 (sau): đo lại trên `main` Dependabot 0 / code scanning 0 / secret scanning 0 -> `bp.cjs new` (id 16860) ->
+    `fill` chạy thử 69/69 ô, 100% -> `fill --submit`: **passing 100%**, silver 13%. Huy hiệu ở README.md.
