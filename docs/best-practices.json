@@ -1,0 +1,276 @@
+{
+  "fields": {
+    "name": "Lotus Share",
+    "homepage_url": "https://lotus.tsudev.com"
+  },
+  "criteria": {
+    "description_good": [
+      "Met",
+      "README.md describes what Lotus Share does: share files and messages between devices on the same local network, no Internet or account: https://github.com/tsudev-org/lotus-share/blob/main/README.md"
+    ],
+    "interact": [
+      "Met",
+      "README.md and CONTRIBUTING.md explain how to get the source and binaries, report bugs (issue forms), request features and contribute: https://github.com/tsudev-org/lotus-share/blob/main/CONTRIBUTING.md"
+    ],
+    "contribution": [
+      "Met",
+      "CONTRIBUTING.md explains the pull request process (section 'Contributing in English'): https://github.com/tsudev-org/lotus-share/blob/main/CONTRIBUTING.md"
+    ],
+    "contribution_requirements": [
+      "Met",
+      "CONTRIBUTING.md lists the requirements: required CI checks, tests for every change, Conventional Commits, Apache-2.0-compatible dependencies: https://github.com/tsudev-org/lotus-share/blob/main/CONTRIBUTING.md"
+    ],
+    "floss_license": [
+      "Met",
+      "Apache-2.0: https://github.com/tsudev-org/lotus-share/blob/main/LICENSE"
+    ],
+    "floss_license_osi": [
+      "Met",
+      "Apache-2.0 is OSI approved."
+    ],
+    "license_location": [
+      "Met",
+      "https://github.com/tsudev-org/lotus-share/blob/main/LICENSE"
+    ],
+    "documentation_basics": [
+      "Met",
+      "README.md covers installation (Scoop, Homebrew, APT/RPM, installers), verification and development; docs/KIEN-TRUC-KY-THUAT.md covers the architecture: https://github.com/tsudev-org/lotus-share/blob/main/README.md"
+    ],
+    "documentation_interface": [
+      "Met",
+      "The app is a GUI; the network protocol it exposes (port 53420, multicast group, /api/lotus/v2/ endpoints) is documented in docs/vi/KHAM-PHA-THIET-BI.md, and the CLI documents its options with --help: https://github.com/tsudev-org/lotus-share/blob/main/docs/vi/KHAM-PHA-THIET-BI.md"
+    ],
+    "sites_https": [
+      "Met",
+      "Project site https://lotus.tsudev.com (HSTS) and the GitHub repository/releases are HTTPS only."
+    ],
+    "discussion": [
+      "Met",
+      "GitHub Issues and Discussions are public and searchable: https://github.com/tsudev-org/lotus-share/issues"
+    ],
+    "english": [
+      "Met",
+      "English documentation and bug reports are accepted: https://github.com/tsudev-org/lotus-share/blob/main/README.md"
+    ],
+    "maintained": [
+      "Met",
+      "Actively maintained: releases on 10-13/11/2026 and regular commits: https://github.com/tsudev-org/lotus-share/commits/main"
+    ],
+    "repo_public": [
+      "Met",
+      "https://github.com/tsudev-org/lotus-share"
+    ],
+    "repo_track": [
+      "Met",
+      "Git tracks every change with author and date."
+    ],
+    "repo_interim": [
+      "Met",
+      "Work in progress is pushed to branches and pull requests between releases."
+    ],
+    "repo_distributed": [
+      "Met",
+      "Git."
+    ],
+    "version_unique": [
+      "Met",
+      "Each release has a unique version and git tag: https://github.com/tsudev-org/lotus-share/tags"
+    ],
+    "version_semver": [
+      "Met",
+      "SemVer of the product plus a release counter (2.0.0-lotus.7); the ecosystem moves to calendar versions YY.M.DDNN from the next release."
+    ],
+    "version_tags": [
+      "Met",
+      "Every release is tagged (v1.18.2-lotus.2 ... v2.0.0-lotus.7): https://github.com/tsudev-org/lotus-share/tags"
+    ],
+    "release_notes": [
+      "Met",
+      "CHANGELOG.md summarises every release in human-readable form (also shown in the app and on the website): https://github.com/tsudev-org/lotus-share/blob/main/CHANGELOG.md"
+    ],
+    "release_notes_vulns": [
+      "Met",
+      "CHANGELOG.md lists the RUSTSEC identifiers fixed in each release (1.18.2-lotus.2, 1.18.2-lotus.3): https://github.com/tsudev-org/lotus-share/blob/main/CHANGELOG.md"
+    ],
+    "report_process": [
+      "Met",
+      "Bug reports use GitHub Issues with issue forms: https://github.com/tsudev-org/lotus-share/issues/new/choose"
+    ],
+    "report_tracker": [
+      "Met",
+      "GitHub Issues: https://github.com/tsudev-org/lotus-share/issues"
+    ],
+    "report_responses": [
+      "Met",
+      "No external bug report has been filed so far; the maintainer reads every issue and acknowledges reports within days."
+    ],
+    "enhancement_responses": [
+      "Met",
+      "No external enhancement request has been filed so far; the feature request form routes them to the maintainer, who answers each one."
+    ],
+    "report_archive": [
+      "Met",
+      "GitHub Issues are public and searchable: https://github.com/tsudev-org/lotus-share/issues?q=is%3Aissue"
+    ],
+    "vulnerability_report_process": [
+      "Met",
+      "SECURITY.md (Vietnamese + English summary) explains how to report vulnerabilities: https://github.com/tsudev-org/lotus-share/blob/main/SECURITY.md"
+    ],
+    "vulnerability_report_private": [
+      "Met",
+      "GitHub private vulnerability reporting is enabled: https://github.com/tsudev-org/lotus-share/security/advisories/new"
+    ],
+    "vulnerability_report_response": [
+      "Met",
+      "No vulnerability report was received in the last 6 months. SECURITY.md commits to a reply within 72 hours."
+    ],
+    "build": [
+      "Met",
+      "The release workflow builds every platform from source on GitHub Actions (flutter build + cargo): https://github.com/tsudev-org/lotus-share/blob/main/.github/workflows/release-lotus.yml"
+    ],
+    "build_common_tools": [
+      "Met",
+      "Flutter/Dart (pub), Rust (cargo), Gradle, Inno Setup, appimage-builder."
+    ],
+    "build_floss_tools": [
+      "Met",
+      "Flutter, Dart, Rust, cargo, Gradle, Inno Setup and appimage-builder are FLOSS (Xcode is only needed for the optional macOS build)."
+    ],
+    "test": [
+      "Met",
+      "Automated tests: Dart tests in app/test and Rust unit + integration tests in packages/core (TLS pinning, PIN brute-force limits, protocol constants, discovery): https://github.com/tsudev-org/lotus-share/tree/main/packages/core/tests"
+    ],
+    "test_invocation": [
+      "Met",
+      "flutter test and cargo test --features full (documented in AGENTS.md section B.2 and CONTRIBUTING.md)."
+    ],
+    "test_most": [
+      "Met",
+      "Tests cover the security-critical core (TLS certificate pinning, PIN checks, request limits, upload/download sessions, discovery) and the app's settings, persistence migration, i18n and legal assets."
+    ],
+    "test_continuous_integration": [
+      "Met",
+      "GitHub Actions runs format, analyze, clippy and all tests on every push and pull request; they are required checks for main: https://github.com/tsudev-org/lotus-share/blob/main/.github/workflows/ci.yml"
+    ],
+    "test_policy": [
+      "Met",
+      "CONTRIBUTING.md requires automated tests for every new feature or bug fix: https://github.com/tsudev-org/lotus-share/blob/main/CONTRIBUTING.md"
+    ],
+    "tests_are_added": [
+      "Met",
+      "Recent changes added tests with the code, e.g. packages/core/tests/protocol_constants.rs with the multicast fix (PR #42) and the PIN hardening tests: https://github.com/tsudev-org/lotus-share/pull/42"
+    ],
+    "tests_documented_added": [
+      "Met",
+      "The test policy is written in CONTRIBUTING.md: https://github.com/tsudev-org/lotus-share/blob/main/CONTRIBUTING.md"
+    ],
+    "warnings": [
+      "Met",
+      "flutter analyze (Dart analyzer with lints) and cargo clippy run in CI: https://github.com/tsudev-org/lotus-share/blob/main/.github/workflows/ci.yml"
+    ],
+    "warnings_fixed": [
+      "Met",
+      "CI fails on any flutter analyze issue (zero issues on main); clippy findings in the Rust core are reviewed and fixed in pull requests."
+    ],
+    "warnings_strict": [
+      "Met",
+      "The Dart analyzer runs with the flutter_lints rule set and fails the build on any issue; clippy runs on all targets with every feature enabled."
+    ],
+    "know_secure_design": [
+      "Met",
+      "docs/vi/KIEN-TRUC-BAO-MAT.md documents the threat model and defences (per-device TLS certificates identified by SHA-256 fingerprint, mutual TLS, PIN brute-force limits, no proxy/redirects): https://github.com/tsudev-org/lotus-share/blob/main/docs/vi/KIEN-TRUC-BAO-MAT.md"
+    ],
+    "know_common_errors": [
+      "Met",
+      "The security architecture lists the common errors for a LAN transfer tool (device impersonation via spoofed discovery packets, PIN guessing including IPv6 address rotation, connection floods, proxy/redirect abuse, quick-save from strangers) and the mitigation for each: https://github.com/tsudev-org/lotus-share/blob/main/docs/vi/KIEN-TRUC-BAO-MAT.md"
+    ],
+    "crypto_published": [
+      "Met",
+      "Uses only published, reviewed algorithms: TLS 1.2/1.3 via rustls, RSA-2048 keys, RSA-PSS with SHA-256, SHA-256 fingerprints, Ed25519."
+    ],
+    "crypto_call": [
+      "Met",
+      "All cryptography is delegated to established libraries (rustls, ring, RustCrypto rsa/sha2/ed25519-dalek, rcgen); the project implements no primitive itself."
+    ],
+    "crypto_floss": [
+      "Met",
+      "All cryptographic libraries are FLOSS (Apache-2.0/MIT/ISC)."
+    ],
+    "crypto_keylength": [
+      "Met",
+      "Device keys are RSA 2048-bit (NIST minimum through 2030); TLS uses rustls' default cipher suites."
+    ],
+    "crypto_working": [
+      "Met",
+      "No broken algorithms: rustls does not offer RC4, 3DES, MD5 or SHA-1 cipher suites; fingerprints use SHA-256."
+    ],
+    "crypto_weaknesses": [
+      "Met",
+      "No SHA-1/MD5 or other algorithms with known serious weaknesses are used for security."
+    ],
+    "crypto_pfs": [
+      "Met",
+      "rustls only negotiates ECDHE key exchange (TLS 1.2) or TLS 1.3, both providing perfect forward secrecy."
+    ],
+    "crypto_password_storage": [
+      "N/A",
+      "The software has no user accounts and stores no passwords for authenticating external users. The optional receive PIN is a local setting compared in constant time with attempt limits."
+    ],
+    "crypto_random": [
+      "Met",
+      "Keys, PINs, session IDs and tokens come from the OS CSPRNG (OsRng/getrandom, Random.secure); PIN generation fails closed if no CSPRNG is available."
+    ],
+    "delivery_mitm": [
+      "Met",
+      "Releases are downloaded over HTTPS from GitHub; SHA256SUMS.txt is signed with Sigstore and each file has a GitHub artifact attestation (gh attestation verify); APKs are signed with a pinned certificate."
+    ],
+    "delivery_unsigned": [
+      "Met",
+      "Hashes are published in a Sigstore-signed SHA256SUMS.txt over HTTPS, never over plain HTTP."
+    ],
+    "vulnerabilities_fixed_60_days": [
+      "Met",
+      "No unpatched vulnerability of medium or higher severity affects the software: 0 open Dependabot alerts; the OSV scan runs on every change and only accepts documented, time-limited exceptions. RUSTSEC-2023-0071 (rsa, Marvin timing attack, no fixed release) does not apply: rsa is only used to generate keys and verify RSA-PSS signatures with public keys; TLS private-key operations use ring. RUSTSEC-2026-0387 (crypto-bigint) is only reachable through the WebRTC transport, which is disabled in the app: https://github.com/tsudev-org/lotus-share/blob/main/tools/osv_scan.py"
+    ],
+    "vulnerabilities_critical_fixed": [
+      "Met",
+      "No critical vulnerability has been reported; Dependabot and the OSV scan keep dependencies patched (e.g. RUSTSEC-2026-0486 fixed the day it was published)."
+    ],
+    "no_leaked_credentials": [
+      "Met",
+      "gitleaks scans the full history on every push and pull request; signing keys live outside the repository: https://github.com/tsudev-org/lotus-share/blob/main/.github/workflows/security.yml"
+    ],
+    "static_analysis": [
+      "Met",
+      "CodeQL (Rust, Actions), cargo clippy and the Dart analyzer analyse every change: https://github.com/tsudev-org/lotus-share/blob/main/.github/workflows/security.yml"
+    ],
+    "static_analysis_common_vulnerabilities": [
+      "Met",
+      "CodeQL security queries look for common vulnerabilities (certificate validation, hard-coded credentials, injection, workflow permissions)."
+    ],
+    "static_analysis_fixed": [
+      "Met",
+      "All medium and higher CodeQL findings were fixed or triaged with a written reason; there are no open code scanning alerts."
+    ],
+    "static_analysis_often": [
+      "Met",
+      "Static analysis runs on every push and pull request."
+    ],
+    "dynamic_analysis": [
+      "Met",
+      "Integration tests run real HTTPS servers and clients against each other (TLS pinning, malformed and oversized requests, connection floods in accept_resilience.rs) on every change."
+    ],
+    "dynamic_analysis_unsafe": [
+      "Unmet",
+      "The core is Rust and the app is Dart (memory-safe). The only unsafe blocks wrap OS file descriptors (File::from_raw_fd on Android); no sanitizer run is configured yet."
+    ],
+    "dynamic_analysis_enable_assertions": [
+      "Met",
+      "Tests run debug builds with assertions enabled (cargo test, flutter test)."
+    ],
+    "dynamic_analysis_fixed": [
+      "Met",
+      "No medium or higher severity issue found by dynamic analysis remains unfixed."
+    ]
+  }
+}

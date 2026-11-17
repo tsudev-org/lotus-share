@@ -48,6 +48,10 @@ x509-parser = { version = "0.18.1", features = ["verify"], optional = true }
 # `accept_resilience` test to lower this process' descriptor limit.
 libc = "0.2"
 
+# lotus-share: bật tính năng `test-util` cho test tích hợp + ví dụ (client bỏ qua kiểm chứng chỉ chỉ có ở đó).
+[dev-dependencies]
+localsend = { path = ".", features = ["test-util"] }
+
 [[example]]
 name = "stress_send"
 required-features = ["http"]
@@ -60,4 +64,6 @@ http = ["crypto", "form_urlencoded", "http-body-util", "hyper", "hyper-util", "i
 multicast = ["if-addrs", "socket2", "tokio-util"]
 webrtc-signaling = ["tokio-tungstenite"]
 webrtc = ["crypto", "flate2", "dep:webrtc", "webrtc-signaling", "x509-parser"]
+# lotus-share: chỉ dùng trong test/ví dụ - KHÔNG bật ở ứng dụng hay CLI (client bỏ qua kiểm chứng chỉ TLS).
+test-util = []
 full = ["crypto", "discovery", "http", "multicast", "webrtc"]

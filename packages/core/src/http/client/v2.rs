@@ -43,6 +43,11 @@ impl LsHttpClientV2 {
     /// Creates a new HTTP client without TLS client certificate.
     ///
     /// Use this for HTTP-only connections or when client authentication is not needed.
+    ///
+    /// lotus-share: accepts ANY server certificate, so it exists only behind the
+    /// `test-util` feature (integration tests, `examples/stress_send.rs`). The app
+    /// and CLI use [`Self::try_new`], which pins the peer fingerprint.
+    #[cfg(feature = "test-util")]
     pub fn try_new_without_cert() -> Result<Self, ClientError> {
         let _ = rustls::crypto::ring::default_provider().install_default();
 
