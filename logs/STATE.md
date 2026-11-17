@@ -53,6 +53,9 @@
   production 10 trang x 390/1280 x Tối/Sáng = OK; soi ảnh thấy chân trang di động một cột dài -> #52 lưới 2 cột.
   winget-pkgs#478033 nâng 2.0.0. Phiếu V1: khảo sát updater (mục 6 bản sao). **OpenSSF Best Practices passing 100%**
   (dự án 16860, nộp bằng `bp.cjs`, huy hiệu README). Website deploy (Version 30616e5e): quét production 7 trang OK.
+  Scorecard 6.5 (đo 18/11 sau huy hiệu; trừ điểm không sửa được: Maintained - repo < 90 ngày, Code-Review - một người
+  bảo trì, Fuzzing). Sửa được (#63): ghim digest ảnh Docker `server/Dockerfile` + Dependabot docker; bỏ 3 DLL MSVC x64
+  khỏi repo (lấy từ Redist Visual Studio của máy chạy, kiểm chữ ký Authenticode Microsoft).
 
 - 12-13/11/2026 (lotus-share-9e) - **Phát hành `v2.0.0-lotus.7` - Lotus Share độc lập** (chủ dự án đồng ý phát hành):
   PR #38 (máy Linux không hiện: bỏ quét mạng con khi đã có thiết bị trả lời; Windows dùng chung `settings.json` với
