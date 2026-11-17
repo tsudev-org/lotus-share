@@ -1,7 +1,7 @@
 # Build from the repository root (workspace root):
 #   docker build -f server/Dockerfile .
 # lotus-share: ảnh gốc ghim digest (đo 18/11/2026; Dependabot docker cập nhật). Đổi thẻ thì đổi cả digest.
-FROM rust:1.97@sha256:b1b3c9c0d921d7fa0a6d1f9ec7e4eab87f8c8ec97644c3d791450f131dec813f AS builder
+FROM rust:1.99@sha256:8a4e90c7946b74626488b1446f712c0fe0ed1a596cbd3d871684bc9c5433ae07 AS builder
 
 WORKDIR /app
 
