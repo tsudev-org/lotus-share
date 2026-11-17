@@ -18,18 +18,29 @@ AppDir:
   apt:
     arch:
       - arm64
-    allow_unauthenticated: true
+    # lotus-share: kho Ubuntu kiểm chữ ký bằng khóa ghim trong repo (Ubuntu Archive Automatic Signing Key 2018,
+    # F6EC B376 2474 EDA9 D21B  7022 8719 20D1 991B C93C). @THU_MUC_REPO@ do release-lotus.yml thay lúc dựng.
     sources:
       - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy main restricted
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.asc
       - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-updates main restricted
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.asc
       - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy universe
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.asc
       - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-updates universe
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.asc
       - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy multiverse
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.asc
       - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-updates multiverse
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.asc
       - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-backports main restricted universe multiverse
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.asc
       - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-security main restricted
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.asc
       - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-security universe
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.asc
       - sourceline: deb http://ports.ubuntu.com/ubuntu-ports/ jammy-security multiverse
+        key_url: file://@THU_MUC_REPO@/support/build/appimage/ubuntu-archive-keyring-2018.asc
     include:
       - libayatana-appindicator3-1:arm64
       - librsvg2-common:arm64
