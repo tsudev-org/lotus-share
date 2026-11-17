@@ -1,47 +1,71 @@
 # Lotus Share
 
-Chia sẻ tệp và tin nhắn giữa các thiết bị trong cùng mạng nội bộ (Wi-Fi, LAN) - không cần Internet, không cần
-tài khoản, không qua máy chủ trung gian. Giao diện tiếng Việt mặc định, cấu hình bảo mật chặt.
+**English** · [Tiếng Việt](README.vi.md)
 
-Một sản phẩm của [tsudev](https://tsudev.com).
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/tsudev-org/lotus-share/badge)](https://scorecard.dev/viewer/?uri=github.com/tsudev-org/lotus-share)
+[![Latest release](https://img.shields.io/github/v/release/tsudev-org/lotus-share?include_prereleases)](https://github.com/tsudev-org/lotus-share/releases/latest)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
-- Trang sản phẩm: <https://lotus.tsudev.com>
-- Tải bản phát hành: <https://github.com/tsudev-org/lotus-share/releases/latest>
+Share files and messages between phones and computers on the same local network (Wi-Fi, LAN) - no Internet, no
+account, no relay server. Vietnamese is the default interface language; 60+ other languages are included.
 
-## Đặc điểm
+A product of [tsudev](https://tsudev.com). Lotus Share started as a fork of LocalSend 1.18.2 and became an independent
+product in 2.0 (own protocol, configuration and identifiers).
 
-| Hạng mục | Lotus Share |
+- Website: <https://lotus.tsudev.com>
+- Downloads: <https://lotus.tsudev.com/tai-ve/> or [GitHub Releases](https://github.com/tsudev-org/lotus-share/releases/latest)
+- Platforms: Windows (x64, ARM64), Linux (x64, ARM64: AppImage, tar.gz, APT/RPM at `pkg.tsudev.com`), Android, macOS,
+  plus the command-line tool `lotus-share-cli`
+
+## Install
+
+| Channel | Command |
 | --- | --- |
-| Ngôn ngữ | Tiếng Việt mặc định cho người dùng mới (vẫn chọn được "Theo hệ thống" hoặc 60+ ngôn ngữ khác); bản dịch tiếng Việt đủ 100% khóa, kể cả tên thiết bị ngẫu nhiên kiểu "Xoài Thông Minh" |
-| Giao thức | Giao thức riêng của Lotus Share (cổng 53420, nhóm multicast 224.0.0.168); mọi thiết bị cần cùng chạy Lotus Share 2.0 trở lên. Bản quá cũ bị yêu cầu cập nhật khi mở |
-| Phụ thuộc | Đã vá 7 thư viện Rust có lỗ hổng công bố (rustls, rustls-webpki, webpki-roots, tokio, h2, lru...) |
-| Cổng kiểm CI | CodeQL (Rust, Actions), gitleaks toàn lịch sử, soát lỗ hổng OSV cho Rust + Dart, kiểm bản dịch, đối chiếu mã sinh |
-| Liên kết | Trang chủ, chính sách quyền riêng tư, mã nguồn thuộc hệ sinh thái tsudev |
+| Scoop (Windows) | `scoop bucket add tsudev https://github.com/tsudev-org/scoop-bucket` then `scoop install tsudev/lotus-share` |
+| Homebrew (macOS) | `brew install --cask tsudev-org/tap/lotus-share` |
+| APT / RPM (Linux) | see <https://lotus.tsudev.com/tai-ve/> (signed repository `pkg.tsudev.com`) |
 
-Chi tiết mô hình bảo mật: [docs/vi/KIEN-TRUC-BAO-MAT.md](docs/vi/KIEN-TRUC-BAO-MAT.md).
+## Features
 
-## Cách hoạt động (tóm tắt)
+| Area | Lotus Share |
+| --- | --- |
+| Privacy | Files and messages go directly between the two devices; nothing is uploaded. The only Internet request is a public version file checked at start-up ([details](docs/vi/CAP-NHAT-BAT-BUOC.md)) |
+| Security | Every device has its own TLS certificate; its SHA-256 fingerprint is its identity. Transfers use mutual TLS; favourite devices are trusted by fingerprint only; PINs are generated with a CSPRNG |
+| Protocol | Lotus Share protocol 2 (port 53420, multicast group 224.0.0.168 / ff12::1075:5ea0, `/api/lotus/v2/`). All devices need Lotus Share 2.0 or later; outdated versions are asked to update |
+| Supply chain | Every release ships `SHA256SUMS.txt` signed with Sigstore, SLSA build provenance for each file (`gh attestation verify`) and an SPDX SBOM |
+| CI gates | CodeQL (Rust, Actions), gitleaks over the full history, OSV vulnerability scan for Rust + Dart, translation and generated-code checks |
 
-1. Mỗi thiết bị tự sinh một chứng thư TLS riêng; **dấu vân tay** (SHA-256 của chứng thư) là danh tính của máy.
-2. Các máy tìm nhau bằng gói multicast UDP trong mạng nội bộ (cổng 53420), trả lời bằng HTTPS.
-3. Tệp truyền trực tiếp giữa hai máy qua HTTPS, cả hai phía xác thực chứng thư của nhau (mTLS). Tệp và tin nhắn
-   không đi ra Internet; Internet chỉ dùng để tải tệp số phiên bản công khai khi mở ứng dụng (`docs/vi/CAP-NHAT-BAT-BUOC.md`).
+Security model: [docs/vi/KIEN-TRUC-BAO-MAT.md](docs/vi/KIEN-TRUC-BAO-MAT.md) (Vietnamese).
 
-## Phát triển
-
-Xem [AGENTS.md](AGENTS.md) mục B.2 (lệnh chạy, kiểm tra) và [docs/KIEN-TRUC-KY-THUAT.md](docs/KIEN-TRUC-KY-THUAT.md)
-(kiến trúc kỹ thuật). Trạng thái công việc: [logs/STATE.md](logs/STATE.md).
+## Verify a download
 
 ```bash
-cd app && flutter pub get && flutter run          # Flutter 3.47.9 (ghim trong .fvmrc)
-python3 -I tools/check_i18n_vi.py                 # kiểm bản dịch tiếng Việt
-python3 -I tools/osv_scan.py                      # soát lỗ hổng phụ thuộc
+gh attestation verify lotus-share-<version>-windows-x86-64-setup.exe --repo tsudev-org/lotus-share
+sha256sum -c SHA256SUMS.txt --ignore-missing
 ```
 
-## Báo lỗi bảo mật
+Windows builds are not Authenticode-signed yet; see [CODE_SIGNING.md](CODE_SIGNING.md) for the current status.
 
-Không mở Issue công khai. Xem [SECURITY.md](SECURITY.md).
+## Development
 
-## Giấy phép
+Flutter is pinned in `.fvmrc` (3.47.9); the core (protocol, HTTPS, crypto) is Rust in `packages/core`.
 
-Apache License 2.0 - xem [LICENSE](LICENSE) và [NOTICE](NOTICE). (c) 2026 tsudev.
+```bash
+cd app && flutter pub get && flutter run
+flutter analyze && flutter test
+(cd packages/core && cargo test --features full)
+python3 -I tools/check_i18n_vi.py      # Vietnamese translation completeness
+python3 -I tools/osv_scan.py           # dependency vulnerability scan
+```
+
+Architecture: [docs/KIEN-TRUC-KY-THUAT.md](docs/KIEN-TRUC-KY-THUAT.md). Contributing: [CONTRIBUTING.md](CONTRIBUTING.md).
+Issues labelled [good first issue](https://github.com/tsudev-org/lotus-share/labels/good%20first%20issue) are a good
+place to start.
+
+## Reporting security issues
+
+Do not open a public issue. Use private vulnerability reporting as described in [SECURITY.md](SECURITY.md).
+
+## License
+
+Apache License 2.0 - see [LICENSE](LICENSE) and [NOTICE](NOTICE). (c) 2026 tsudev.

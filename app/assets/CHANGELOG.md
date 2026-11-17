@@ -31,6 +31,8 @@ Lotus Share trở thành sản phẩm độc lập của tsudev, có giao thức
 
 ## 1.18.2 (lotus.3) - 12/11/2026
 
+- Bảo mật (security fix): nâng `rustix` 1.1.4 -> 1.1.6, vá **RUSTSEC-2026-0486**.
+
 - Đổi tên sản phẩm thành **Lotus Share**: định danh `com.tsudev.lotusshare`, logo riêng, tên gói `lotus-share`.
 - Trang Ủng hộ chỉ mở `lotus.tsudev.com/ung-ho/`.
 
@@ -38,3 +40,7 @@ Lotus Share trở thành sản phẩm độc lập của tsudev, có giao thức
 
 - Bản phát hành công khai đầu tiên: tiếng Việt mặc định, giao diện tối tím, gia cố mã PIN, vá phụ thuộc có lỗ hổng,
   SHA256SUMS ký Sigstore và chứng thực SLSA cho mọi tệp phát hành.
+- Bảo mật (security fixes) - lỗ hổng công bố đã vá trong bản này: `rustls` 0.23.46 (**RUSTSEC-2026-0285, 0346, 0348,
+  0349**), `rustls-webpki` 0.103.16 (**RUSTSEC-2026-0382**), `webpki-roots`/`webpki-root-certs` 1.0.11
+  (**RUSTSEC-2026-0381, 0383**), `tokio` 1.54.1 (**RUSTSEC-2026-0386**), `h2` 0.4.20 (**RUSTSEC-2026-0258**), `lru`
+  0.18.5 (**RUSTSEC-2026-0253**). Gia cố PIN: so sánh thời gian hằng, đếm lần sai theo khối /64 IPv6.
