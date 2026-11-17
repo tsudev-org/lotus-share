@@ -89,7 +89,19 @@ jobs:
         shell: pwsh
         run: |
           $rel = "app\build\windows\x64\runner\Release"
-          Copy-Item support\build\windows\x64\*.dll $rel
+          # Thư viện MSVC x64 lấy từ bộ Redist của Visual Studio trên máy chạy (như ARM64), không chép tệp nhị phân
+          # trong repo; kiểm chữ ký Authenticode của Microsoft trước khi đóng gói.
+          $vs = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -property installationPath
+          $crt = Get-ChildItem "$vs\VC\Redist\MSVC\*\x64\Microsoft.VC*.CRT" -Directory | Sort-Object FullName | Select-Object -Last 1
+          if (-not $crt) { throw "Không thấy MSVC Redist x64" }
+          foreach ($d in 'msvcp140.dll', 'vcruntime140.dll', 'vcruntime140_1.dll') {
+            $f = "$($crt.FullName)\$d"
+            if (-not (Test-Path $f)) { throw "Thiếu $d trong $($crt.FullName)" }
+            $sig = Get-AuthenticodeSignature $f
+            if ($sig.Status -ne 'Valid' -or $sig.SignerCertificate.Subject -notmatch 'O=Microsoft Corporation') { throw "$d: chữ ký không hợp lệ ($($sig.Status))" }
+            Copy-Item $f $rel
+          }
+          Get-ChildItem $rel -Filter *.dll | ForEach-Object { $_.Name }
           New-Item -ItemType Directory -Force dist | Out-Null
           # lotus-share: công cụ chẩn đoán mạng đi kèm bản di động + bộ cài (bộ cài lấy từ support\scripts).
           Copy-Item support\scripts\chan-doan-mang.ps1 $rel
