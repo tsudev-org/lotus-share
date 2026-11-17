@@ -96,9 +96,9 @@ jobs:
           if (-not $crt) { throw "Không thấy MSVC Redist x64" }
           foreach ($d in 'msvcp140.dll', 'vcruntime140.dll', 'vcruntime140_1.dll') {
             $f = "$($crt.FullName)\$d"
-            if (-not (Test-Path $f)) { throw "Thiếu $d trong $($crt.FullName)" }
+            if (-not (Test-Path $f)) { throw "Thiếu ${d} trong $($crt.FullName)" }
             $sig = Get-AuthenticodeSignature $f
-            if ($sig.Status -ne 'Valid' -or $sig.SignerCertificate.Subject -notmatch 'O=Microsoft Corporation') { throw "$d: chữ ký không hợp lệ ($($sig.Status))" }
+            if ($sig.Status -ne 'Valid' -or $sig.SignerCertificate.Subject -notmatch 'O=Microsoft Corporation') { throw "${d} - chữ ký không hợp lệ ($($sig.Status))" }
             Copy-Item $f $rel
           }
           Get-ChildItem $rel -Filter *.dll | ForEach-Object { $_.Name }
