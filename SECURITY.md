@@ -18,3 +18,10 @@ Chỉ bản phát hành mới nhất tại <https://github.com/tsudev-org/lotus-
 
 - Mô hình bảo mật: [docs/vi/KIEN-TRUC-BAO-MAT.md](docs/vi/KIEN-TRUC-BAO-MAT.md)
 - Chuẩn bảo mật chung của hệ tsudev: [.standards/docs/SECURITY_BASELINE.md](.standards/docs/SECURITY_BASELINE.md)
+
+## English summary
+
+Do **not** open a public issue for a vulnerability. Report it privately via GitHub **Security > Report a
+vulnerability** (<https://github.com/tsudev-org/lotus-share/security/advisories/new>). Include the version, operating
+system, steps to reproduce and impact. We reply within 72 hours, fix critical issues as a priority and credit the
+reporter in the release notes if they wish. Only the latest release is supported.
