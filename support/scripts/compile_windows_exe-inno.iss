@@ -13,7 +13,7 @@
 #endif
 
 #define MyAppName "Lotus Share"
-#define MyAppVersion "2.0.0"
+#define MyAppVersion "26.11.1801"
 #define MyAppPublisher "tsudev"
 #define MyAppURL "https://lotus.tsudev.com"
 #define MyAppExeName "lotus_share.exe"
@@ -28,6 +28,8 @@
 AppId={{21D09887-EE8E-478B-B43F-BD492DE6EFE3}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
+; lotus-share: FileVersion 4 phần theo VERSIONING (`YY.M.DDNN.0`).
+VersionInfoVersion={#MyAppVersion}.0
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}

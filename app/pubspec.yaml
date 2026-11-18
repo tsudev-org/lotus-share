@@ -4,7 +4,7 @@ homepage: https://lotus.tsudev.com/
 publish_to: "none"
 resolution: workspace
 
-version: 2.0.0+65
+version: 26.11.1801+26111801
 
 environment:
   flutter: ^3.47.0
