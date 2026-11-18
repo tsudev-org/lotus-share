@@ -17,8 +17,8 @@ pub enum ApiVersion {
     V3,
 }
 
-impl<'a> TargetUrl<'a> {
-    pub fn to_string(&self) -> String {
+impl std::fmt::Display for TargetUrl<'_> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let base = format!(
             "{}://{}:{}/api/lotus/{}{}",
             self.protocol,
@@ -39,12 +39,12 @@ impl<'a> TargetUrl<'a> {
             self.path
         );
         if self.params.is_empty() {
-            base
+            f.write_str(&base)
         } else {
             let query = form_urlencoded::Serializer::new(String::new())
                 .extend_pairs(self.params.iter().copied())
                 .finish();
-            format!("{}?{}", base, query)
+            write!(f, "{base}?{query}")
         }
     }
 }

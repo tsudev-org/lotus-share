@@ -558,8 +558,8 @@ fn create_tls_config(
     mandatory_client_auth: bool,
 ) -> anyhow::Result<tokio_rustls::TlsAcceptor> {
     let config = {
-        let certs = vec![CertificateDer::from_pem_slice(&tls_config.cert.as_bytes())?];
-        let key = PrivateKeyDer::from_pem_slice(&tls_config.private_key.as_bytes())?;
+        let certs = vec![CertificateDer::from_pem_slice(tls_config.cert.as_bytes())?];
+        let key = PrivateKeyDer::from_pem_slice(tls_config.private_key.as_bytes())?;
 
         rustls::ServerConfig::builder()
             .with_client_cert_verifier(Arc::new(CustomClientCertVerifier::try_new(
@@ -610,7 +610,7 @@ impl RequestClientInfo {
 async fn handle_request(req: Request<Incoming>) -> Result<Response<BoxedBody>, hyper::Error> {
     Ok(handle_request_inner(req).await.unwrap_or_else(|err| {
         tracing::error!("Error handling request: {err:?}");
-        err.to_response()
+        err.into_response()
     }))
 }
 

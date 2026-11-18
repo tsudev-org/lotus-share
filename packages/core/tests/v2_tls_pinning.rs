@@ -20,6 +20,9 @@ use tokio::sync::{mpsc, oneshot, Mutex};
 use tokio_stream::wrappers::ReceiverStream;
 use tokio_util::sync::CancellationToken;
 
+/// Tệp đã nhận: (tên tệp, nội dung).
+type Received = Arc<Mutex<Vec<(String, Vec<u8>)>>>;
+
 /// A generated self-signed certificate, as LocalSend peers use them.
 struct Identity {
     cert: String,
@@ -43,7 +46,7 @@ struct TestServer {
     /// Requests that reached the application layer.
     prepare_uploads: Arc<Mutex<Vec<String>>>,
     /// Uploaded file contents, mapped by file ID.
-    received: Arc<Mutex<Vec<(String, Vec<u8>)>>>,
+    received: Received,
     _stop_tx: oneshot::Sender<()>,
 }
 
@@ -57,7 +60,7 @@ async fn start_tls_server(identity: &Identity) -> TestServer {
 async fn start_tls_server_with_web(identity: &Identity, web: WebConfig) -> TestServer {
     let _ = tracing_subscriber::fmt().with_test_writer().try_init();
     let prepare_uploads: Arc<Mutex<Vec<String>>> = Arc::new(Mutex::new(Vec::new()));
-    let received: Arc<Mutex<Vec<(String, Vec<u8>)>>> = Arc::new(Mutex::new(Vec::new()));
+    let received: Received = Arc::new(Mutex::new(Vec::new()));
 
     let (event_tx, mut event_rx) = mpsc::channel::<ServerEventV2>(16);
 

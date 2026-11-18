@@ -1,5 +1,12 @@
 # Nhật ký thay đổi - Lotus Share
 
+## Chưa phát hành
+
+- CLI `lotus-share-cli` kiểm bản mới lúc khởi động như ứng dụng: bản quá cũ dừng kèm hướng dẫn cập nhật, có bản mới
+  thì nhắc một dòng; bỏ kiểm bằng `--khong-kiem-cap-nhat` hoặc `LOTUS_SHARE_KHONG_KIEM_CAP_NHAT=1`. `--version` và
+  thông tin tệp `.exe` Windows hiện đúng phiên bản sản phẩm.
+- Nâng các phụ thuộc Rust/Dart trong phạm vi tương thích; CI chặn mọi cảnh báo clippy của lõi Rust.
+
 ## 2.0.0 (lotus.7)
 
 Lotus Share trở thành sản phẩm độc lập của tsudev, có giao thức mạng, cấu hình và định danh riêng.

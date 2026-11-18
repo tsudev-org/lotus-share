@@ -278,7 +278,7 @@ pub async fn send_offer(
                     if let Some(expecting_public_key) = expecting_public_key {
                         if !crypto::token::verify_token_nonce(
                             &*expecting_public_key,
-                            &token,
+                            token,
                             &nonce,
                         ) {
                             return Err(anyhow::anyhow!("Invalid token signature or nonce"));
@@ -334,7 +334,7 @@ pub async fn send_offer(
                     &mut receive_rx,
                     true,
                     |data_channel, result| {
-                        let data_channel = Arc::clone(&data_channel);
+                        let data_channel = Arc::clone(data_channel);
                         async move {
                             send_string_in_chunks(
                                 &data_channel,
@@ -382,14 +382,14 @@ pub async fn send_offer(
                     let _ = status_tx.try_send(RTCStatus::Error(format!(
                         "Failed to send file list message: {e}"
                     )));
-                    return Err(e.into());
+                    return Err(e);
                 }
 
                 if let Err(e) = send_delimiter(&data_channel).await {
                     let _ = status_tx.try_send(RTCStatus::Error(format!(
                         "Failed to send file list message: {e}"
                     )));
-                    return Err(e.into());
+                    return Err(e);
                 }
             }
 
@@ -398,7 +398,7 @@ pub async fn send_offer(
             // Receive file tokens
             let file_list_res = {
                 let bytes = receive_string_from_chunks(&mut receive_rx).await;
-                let parsed: RTCFileListResponse = serde_json::from_slice(&*bytes).map_err(|e| {
+                let parsed: RTCFileListResponse = serde_json::from_slice(&bytes).map_err(|e| {
                     anyhow::anyhow!("Failed to deserialize file list response: {e}")
                 })?;
                 parsed
@@ -440,7 +440,7 @@ pub async fn send_offer(
                     let file_list_res = {
                         let bytes = receive_string_from_chunks(&mut receive_rx).await;
                         let parsed: RTCFileListResponse =
-                            serde_json::from_slice(&*bytes).map_err(|e| {
+                            serde_json::from_slice(&bytes).map_err(|e| {
                                 anyhow::anyhow!("Failed to deserialize file list response: {e}")
                             })?;
                         parsed
@@ -742,7 +742,7 @@ pub async fn accept_offer(
                     &mut receive_rx,
                     false,
                     |data_channel, result| {
-                        let data_channel = Arc::clone(&data_channel);
+                        let data_channel = Arc::clone(data_channel);
                         async move {
                             data_channel
                                 .send_text(&serde_json::to_string(&match result {
@@ -775,7 +775,7 @@ pub async fn accept_offer(
             let pin_response = {
                 let bytes = receive_string_from_chunks(&mut receive_rx).await;
                 let parsed: RTCPinSendingResponse =
-                    serde_json::from_slice(&*bytes).map_err(|e| {
+                    serde_json::from_slice(&bytes).map_err(|e| {
                         anyhow::anyhow!("Failed to deserialize file list response: {e}")
                     })?;
                 parsed
@@ -980,7 +980,7 @@ pub async fn accept_offer(
                     // publish binary data
                     match &mut file_state {
                         Some(state) => {
-                            state.received = state.received + msg.data.len() as u64;
+                            state.received += msg.data.len() as u64;
                             if state.received > state.size {
                                 // Sender transmitted more bytes than declared. Interrupt early
                                 // to avoid writing a corrupt/oversized file.
@@ -1217,9 +1217,9 @@ where
 
         if pin_try >= pin_config.max_tries {
             let _ = tokio::time::timeout(Duration::from_secs(5), async {
-                let _ = send_result(&data_channel, VerifyPinResult::TooManyAttempts).await;
+                let _ = send_result(data_channel, VerifyPinResult::TooManyAttempts).await;
 
-                wait_buffer_empty(&data_channel).await;
+                wait_buffer_empty(data_channel).await;
             })
             .await;
 
@@ -1230,7 +1230,7 @@ where
 
         if send_initial_notice || pin_try > 0 {
             send_initial_notice = false;
-            send_result(&data_channel, VerifyPinResult::PinRequired).await?;
+            send_result(data_channel, VerifyPinResult::PinRequired).await?;
         }
 
         remote_pin = match receive_rx.recv().await {
@@ -1400,9 +1400,9 @@ mod tests {
         assert_eq!(chunks[1].len(), CHUNK_SIZE);
         assert_eq!(chunks[2].len(), 5);
 
-        assert_eq!(chunks[0].iter().all(|x| *x == 0), true);
-        assert_eq!(chunks[1].iter().all(|x| *x == 1), true);
-        assert_eq!(chunks[2].iter().all(|x| *x == 2), true);
+        assert!(chunks[0].iter().all(|x| *x == 0));
+        assert!(chunks[1].iter().all(|x| *x == 1));
+        assert!(chunks[2].iter().all(|x| *x == 2));
     }
 
     #[test]

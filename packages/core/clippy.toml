@@ -1,0 +1,4 @@
+# lotus-share: các hàm client HTTP/WebRTC nhận tham số rời vì là API công khai mà flutter_rust_bridge ánh xạ sang Dart
+# (packages/localsend_isolates/rust); gom thành struct buộc sinh lại cầu nối mọi nền tảng. Ngưỡng = số tham số lớn
+# nhất hiện có; hàm mới vượt ngưỡng vẫn bị chặn.
+too-many-arguments-threshold = 13

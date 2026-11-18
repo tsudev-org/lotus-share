@@ -85,14 +85,17 @@ jobs:
       # pulls all of them in.
       - name: Clippy (core)
         working-directory: packages/core
-        run: cargo clippy --features full --all-targets
+        # -D warnings: cảnh báo mới chặn PR (#60); ngoại lệ có lý do ghi ở packages/core/clippy.toml.
+        run: cargo clippy --features full --all-targets -- -D warnings
       - name: Test (core)
         working-directory: packages/core
         run: cargo test --features full
       - name: Test (signaling server)
         run: cargo test --package server
-      - name: Check (plugin crate, CLI)
-        run: cargo check --package rust_lib_localsend_app --package localsend-cli
+      - name: Test (CLI)
+        run: cargo test --package localsend-cli
+      - name: Check (plugin crate)
+        run: cargo check --package rust_lib_localsend_app
 
   packaging:
     runs-on: ubuntu-latest
