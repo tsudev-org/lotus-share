@@ -9,6 +9,7 @@
 # will likely look very different (and much more reasonable).
 # See Cargo.toml.orig for the original contents.
 
+# lotus-share: bỏ thư mục test/ của bản gốc (chứa khóa thử AF_ALG) và các mục [[test]]; không cần để biên dịch.
 [package]
 edition = "2018"
 rust-version = "1.56"
@@ -46,27 +47,6 @@ targets = [
     "x86_64-unknown-redox",
     "x86_64-unknown-illumos",
 ]
-
-[[test]]
-name = "test"
-path = "test/test.rs"
-
-[[test]]
-name = "test-aio-drop"
-path = "test/sys/test_aio_drop.rs"
-
-[[test]]
-name = "test-clearenv"
-path = "test/test_clearenv.rs"
-
-[[test]]
-name = "test-mount"
-path = "test/test_mount.rs"
-harness = false
-
-[[test]]
-name = "test-ptymaster-drop"
-path = "test/test_ptymaster_drop.rs"
 
 [dependencies.bitflags]
 version = "1.1"
