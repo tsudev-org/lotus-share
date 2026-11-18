@@ -87,6 +87,10 @@ Sau `dart run slang`, chạy `python3 -I tools/fix_slang_format.py` (dấu `;` c
   giao thức/cấu hình/thương hiệu LocalSend. Lỗ hổng trong mã bắt nguồn từ đó: tự vá.
 - **Giao thức riêng** từ 2.0: cổng 53420, nhóm multicast `224.0.0.168` / `ff12::1075:5ea0`, API `/api/lotus/v2/`
   (`docs/vi/KHAM-PHA-THIET-BI.md`). Bản 1.x không nói chuyện được với 2.x.
+- **Hợp đồng giao thức cho client khác trong hệ** (TsuFiles): `docs/GIAO-THUC-LOTUS-V2.md` + mẫu `docs/giao-thuc-mau/`
+  (test `packages/core/tests/protocol_samples.rs`). Đổi DTO/đường dẫn/cổng/vân tay => sửa đặc tả + mẫu CÙNG PR; đổi phá
+  vỡ => `/api/lotus/v3/` và phiếu cho tsufiles TRƯỚC khi phát hành. UDP 53420 dùng chung được (`SO_REUSEADDR`), TCP 53420
+  là của riêng Lotus Share.
 - **Bắt buộc cập nhật**: ứng dụng đọc `https://lotus.tsudev.com/phien-ban.json` (nguồn `website/public/phien-ban.json`),
   so số build; xem `docs/vi/CAP-NHAT-BAT-BUOC.md`.
 - Mã sinh tự động `app/lib/gen/` ĐƯỢC commit. Sửa JSON dịch xong phải `dart run slang`; CI

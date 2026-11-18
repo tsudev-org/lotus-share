@@ -1,0 +1,30 @@
+{
+  "info": {
+    "alias": "TsuFiles trên iPhone",
+    "version": "2.2",
+    "deviceModel": "TsuFiles",
+    "deviceType": "mobile",
+    "fingerprint": "3F1C9A0B7E5D2C4A6B8D0E1F2A3B4C5D6E7F8091A2B3C4D5E6F708192A3B4C5D",
+    "port": 53501,
+    "protocol": "https",
+    "download": false
+  },
+  "files": {
+    "a1b2c3": {
+      "id": "a1b2c3",
+      "fileName": "ảnh-sinh-nhật.jpg",
+      "size": 2483011,
+      "fileType": "image/jpeg",
+      "sha256": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+      "metadata": {
+        "modified": "2026-11-18T09:15:00Z"
+      }
+    },
+    "d4e5f6": {
+      "id": "d4e5f6",
+      "fileName": "ghi-chu.txt",
+      "size": 12,
+      "fileType": "text/plain"
+    }
+  }
+}

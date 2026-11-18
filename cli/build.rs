@@ -28,7 +28,7 @@ fn main() {
         res.set("InternalName", "lotus-share-cli");
         res.set(
             "LegalCopyright",
-            "Copyright (C) 2026 tsudev. LocalSend (C) 2022-2026 Tien Do Nam. Apache-2.0",
+            "Copyright (C) 2026 tsudev. Portions (C) 2022-2026 Tien Do Nam. Apache-2.0",
         );
         // lotus-share: FileVersion 4 phần = phiên bản sản phẩm + ".0" (VERSIONING: `YY.M.DDNN.0`).
         let parts: Vec<u64> = version.split('.').filter_map(|p| p.parse().ok()).collect();

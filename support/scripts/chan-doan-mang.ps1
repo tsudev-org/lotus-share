@@ -119,9 +119,16 @@ $udp = Get-NetUDPEndpoint -LocalPort $Port -ErrorAction SilentlyContinue
 $owners = @(@($tcp) + @($udp) | Where-Object { $_ } | ForEach-Object { $_.OwningProcess } | Sort-Object -Unique)
 if ($tcp) { Write-Ok "Có chương trình nghe TCP $Port." } else { Write-Bad "Không có chương trình nào nghe TCP $Port (máy chủ nhận tệp chưa bật hoặc đổi cổng)." }
 if ($udp) { Write-Ok "Có chương trình nghe UDP $Port (khám phá thiết bị)." } else { Write-Bad "Không có chương trình nào nghe UDP $Port." }
+# Ứng dụng cùng hệ tsudev (TsuFiles, CLI) được phép nghe CHUNG UDP $Port để tìm máy (SO_REUSEADDR) -
+# docs/GIAO-THUC-LOTUS-V2.md mục 6. Chỉ TCP $Port là của riêng Lotus Share.
+$cungHe = '^(lotus_share|lotus-share-cli|tsufiles)$'
+$tcpOwners = @(@($tcp) | Where-Object { $_ } | ForEach-Object { $_.OwningProcess } | Sort-Object -Unique)
 foreach ($o in $owners) {
   $p = Get-Process -Id $o -ErrorAction SilentlyContinue
-  if ($p -and $p.ProcessName -ne 'lotus_share') {
+  if (-not $p -or $p.ProcessName -eq 'lotus_share') { continue }
+  if ($p.ProcessName -match $cungHe -and $tcpOwners -notcontains $o) {
+    Write-Info "'$($p.ProcessName)' (PID $o) dùng chung UDP $Port để tìm máy - ứng dụng cùng hệ, hợp lệ."
+  } else {
     Write-Warn "Cổng $Port đang bị '$($p.ProcessName)' (PID $o) dùng - tắt ứng dụng đó rồi mở lại Lotus Share."
   }
 }
