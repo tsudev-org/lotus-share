@@ -628,9 +628,9 @@ class Translations$donationPage$en {
   /// en: 'Donate'
   String get title => 'Donate';
 
-  /// en: 'Lotus Share is free, open-source and without any ads. If you like the app, follow and support the project on the tsudev pages below.'
+  /// en: 'Lotus Share is free, open-source and without any ads. If you like the app, follow and support the project on the TsuDEV pages below.'
   String get info =>
-      'Lotus Share is free, open-source and without any ads. If you like the app, follow and support the project on the tsudev pages below.';
+      'Lotus Share is free, open-source and without any ads. If you like the app, follow and support the project on the TsuDEV pages below.';
 
   /// en: 'Donate {amount}'
   String donate({required Object amount}) => 'Donate ${amount}';
@@ -960,8 +960,8 @@ class Translations$tsudev$en {
   /// en: 'Version: {version}'
   String version({required Object version}) => 'Version: ${version}';
 
-  /// en: '© {year} tsudev'
-  String copyright({required Object year}) => '© ${year} tsudev';
+  /// en: '© {year} TsuDEV'
+  String copyright({required Object year}) => '© ${year} TsuDEV';
 
   /// en: 'Homepage'
   String get homepage => 'Homepage';

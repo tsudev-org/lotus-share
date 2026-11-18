@@ -5,7 +5,7 @@
 const forkProductName = 'Lotus Share';
 
 /// Chủ sở hữu sản phẩm, dùng ở dòng bản quyền.
-const forkOwner = 'tsudev';
+const forkOwner = 'TsuDEV';
 
 /// Trang sản phẩm (tên miền con 1 cấp của tsudev.com, cùng kiểu trafficmonitor.tsudev.com).
 const forkHomepageUrl = 'https://lotus.tsudev.com';
@@ -22,9 +22,9 @@ const forkReleasesUrl = 'https://github.com/tsudev-org/lotus-share/releases/late
 /// Trang chủ hệ sinh thái.
 const forkEcosystemUrl = 'https://tsudev.com';
 
-/// Ngôn ngữ mặc định khi người dùng chưa chọn ngôn ngữ (thay cho "theo ngôn ngữ hệ thống").
-/// Người dùng vẫn đổi được trong Cài đặt > Ngôn ngữ.
-const forkDefaultLocaleTag = 'vi';
+/// Ngôn ngữ mặc định CŨ (trước 26.11): chỉ dùng để giữ nguyên tiếng Việt cho máy đã cài mà chưa từng chọn ngôn ngữ.
+/// Người dùng mới nhận ngôn ngữ hệ thống (PRODUCT_POLICY mục 1, yêu cầu chủ dự án 19/11/2026).
+const legacyDefaultLocaleTag = 'vi';
 
 /// Máy chủ tín hiệu WebRTC mặc định - hạ tầng của tsudev.
 /// Tính năng WebRTC hiện TẮT ở thời điểm biên dịch (`webRTCEnabled = false`), nên ứng dụng

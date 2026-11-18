@@ -23,12 +23,12 @@ fn main() {
         let mut res = winresource::WindowsResource::new();
         res.set("ProductName", "Lotus Share"); // lotus-share
         res.set("FileDescription", "Lotus Share CLI");
-        res.set("CompanyName", "tsudev");
+        res.set("CompanyName", "TsuDEV");
         res.set("OriginalFilename", "lotus-share-cli.exe");
         res.set("InternalName", "lotus-share-cli");
         res.set(
             "LegalCopyright",
-            "Copyright (C) 2026 tsudev. Portions (C) 2022-2026 Tien Do Nam. Apache-2.0",
+            "Copyright (C) 2026 TsuDEV. Portions (C) 2022-2026 Tien Do Nam. Apache-2.0",
         );
         // lotus-share: FileVersion 4 phần = phiên bản sản phẩm + ".0" (VERSIONING: `YY.M.DDNN.0`).
         let parts: Vec<u64> = version.split('.').filter_map(|p| p.parse().ok()).collect();

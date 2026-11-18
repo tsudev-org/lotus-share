@@ -1,6 +1,6 @@
 part of 'persistence_provider.dart';
 
-const _latestVersion = 5;
+const _latestVersion = 6;
 
 Future<void> _runMigrations(int from) async {
   if (from < 2) {
@@ -18,6 +18,10 @@ Future<void> _runMigrations(int from) async {
   if (from < 5) {
     await _migrate5();
     await SharedPreferencesStorePlatform.instance.setValue('Int', 'flutter.$_version', 5);
+  }
+  if (from < 6) {
+    await _migrate6();
+    await SharedPreferencesStorePlatform.instance.setValue('Int', 'flutter.$_version', 6);
   }
 }
 
@@ -82,5 +86,19 @@ Future<void> _migrate5() async {
         }(),
     ];
     await SharedPreferencesStorePlatform.instance.setValue('StringList', 'flutter.$_favorites', migrated);
+  }
+}
+
+/// lotus-share: từ 26.11 người dùng MỚI nhận ngôn ngữ + giao diện theo hệ thống (PRODUCT_POLICY mục 1). Máy đã cài
+/// trước đó chưa từng chọn thì đang thấy mặc định cũ (tiếng Việt, Tối) - ghi rõ giá trị đó để bản cập nhật không đổi
+/// giao diện của họ; lựa chọn người dùng đã lưu thì giữ nguyên.
+Future<void> _migrate6() async {
+  _logger.info('Migrating to version 6');
+  final prefs = await SharedPreferencesStorePlatform.instance.getAll();
+  if (prefs['flutter.$_localeKey'] == null) {
+    await SharedPreferencesStorePlatform.instance.setValue('String', 'flutter.$_localeKey', legacyDefaultLocaleTag);
+  }
+  if (prefs['flutter.$_themeKey'] == null) {
+    await SharedPreferencesStorePlatform.instance.setValue('String', 'flutter.$_themeKey', ThemeMode.dark.name);
   }
 }

@@ -14,11 +14,11 @@ Một sản phẩm của [tsudev](https://tsudev.com).
 
 | Hạng mục | Lotus Share |
 | --- | --- |
-| Ngôn ngữ | Tiếng Việt mặc định cho người dùng mới (vẫn chọn được "Theo hệ thống" hoặc 60+ ngôn ngữ khác); bản dịch tiếng Việt đủ 100% khóa, kể cả tên thiết bị ngẫu nhiên kiểu "Xoài Thông Minh" |
+| Ngôn ngữ, giao diện | Lần đầu mở theo ngôn ngữ và chế độ sáng/tối của hệ thống (ngôn ngữ chưa có bản dịch => tiếng Anh); đổi được sang 60+ ngôn ngữ, Sáng/Tối; bản dịch tiếng Việt đủ 100% khóa, kể cả tên thiết bị ngẫu nhiên kiểu "Xoài Thông Minh" |
 | Giao thức | Giao thức riêng của Lotus Share (cổng 53420, nhóm multicast 224.0.0.168); mọi thiết bị cần cùng chạy Lotus Share 2.0 trở lên. Bản quá cũ bị yêu cầu cập nhật khi mở |
 | Phụ thuộc | Đã vá 7 thư viện Rust có lỗ hổng công bố (rustls, rustls-webpki, webpki-roots, tokio, h2, lru...) |
 | Cổng kiểm CI | CodeQL (Rust, Actions), gitleaks toàn lịch sử, soát lỗ hổng OSV cho Rust + Dart, kiểm bản dịch, đối chiếu mã sinh |
-| Liên kết | Trang chủ, chính sách quyền riêng tư, mã nguồn thuộc hệ sinh thái tsudev |
+| Liên kết | Trang chủ, chính sách quyền riêng tư, mã nguồn thuộc hệ sinh thái TsuDEV |
 
 Chi tiết mô hình bảo mật: [docs/vi/KIEN-TRUC-BAO-MAT.md](docs/vi/KIEN-TRUC-BAO-MAT.md).
 
@@ -46,4 +46,4 @@ Không mở Issue công khai. Xem [SECURITY.md](SECURITY.md).
 
 ## Giấy phép
 
-Apache License 2.0 - xem [LICENSE](LICENSE) và [NOTICE](NOTICE). (c) 2026 tsudev.
+Apache License 2.0 - xem [LICENSE](LICENSE) và [NOTICE](NOTICE). (c) 2026 TsuDEV.

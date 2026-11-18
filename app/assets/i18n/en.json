@@ -314,7 +314,7 @@
   },
   "donationPage": {
     "title": "Donate",
-    "info": "Lotus Share is free, open-source and without any ads. If you like the app, follow and support the project on the tsudev pages below.",
+    "info": "Lotus Share is free, open-source and without any ads. If you like the app, follow and support the project on the TsuDEV pages below.",
     "donate": "Donate {amount}",
     "thanks": "Thank you very much!",
     "restore": "Restore purchase"
@@ -580,7 +580,7 @@
   "tsudev": {
     "@info": "lotus-share: strings specific to Lotus Share.",
     "version": "Version: {version}",
-    "copyright": "© {year} tsudev",
+    "copyright": "© {year} TsuDEV",
     "homepage": "Homepage",
     "sourceCode": "Source code (GitHub)",
     "licenseNotices": "Licenses and notices",

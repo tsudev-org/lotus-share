@@ -1,5 +1,13 @@
 # Nhật ký thay đổi - Lotus Share
 
+## Chưa phát hành
+
+- Người dùng mới: lần đầu mở theo **ngôn ngữ và chế độ sáng/tối của hệ thống** (ngôn ngữ chưa có bản dịch => tiếng
+  Anh). Máy đã cài mà chưa từng đổi thì giữ nguyên tiếng Việt + giao diện Tối như trước.
+- Website lotus.tsudev.com: lần đầu vào theo chế độ sáng/tối của máy.
+- Tên thương hiệu hiển thị `TsuDEV` (dòng bản quyền, nhà phát hành trong bộ cài và thông tin tệp `.exe`).
+- Siêu dữ liệu ứng dụng (iOS, bản web, dòng bản quyền tệp cài) chỉ ghi tên Lotus Share.
+
 ## 26.11.1801 - 18/11/2026
 
 - **Số phiên bản mới** theo quy ước chung của tsudev: `26.11.1801` (năm.tháng.ngày + thứ tự trong ngày) thay cho

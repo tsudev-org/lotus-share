@@ -8,9 +8,10 @@
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
 Share files and messages between phones and computers on the same local network (Wi-Fi, LAN) - no Internet, no
-account, no relay server. Vietnamese is the default interface language; 60+ other languages are included.
+account, no relay server. On first launch it follows the system language and light/dark mode; full Vietnamese and 60+ other
+languages are included.
 
-A product of [tsudev](https://tsudev.com), independent since 2.0 (own protocol, configuration and identifiers). It is
+A product of [TsuDEV](https://tsudev.com), independent since 2.0 (own protocol, configuration and identifiers). It is
 built on Apache-2.0 open-source code; the original copyright notices are kept in [LICENSE](LICENSE) and [NOTICE](NOTICE).
 
 - Website: <https://lotus.tsudev.com>
@@ -69,4 +70,4 @@ Do not open a public issue. Use private vulnerability reporting as described in 
 
 ## License
 
-Apache License 2.0 - see [LICENSE](LICENSE) and [NOTICE](NOTICE). (c) 2026 tsudev.
+Apache License 2.0 - see [LICENSE](LICENSE) and [NOTICE](NOTICE). (c) 2026 TsuDEV.

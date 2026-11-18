@@ -1,4 +1,4 @@
-// Kiểm tra bản build (ECOSYSTEM_IDENTITY mục 2.2 và 4): mọi trang có title đúng khuôn, og:site_name = tsudev, canonical
+// Kiểm tra bản build (ECOSYSTEM_IDENTITY mục 2.2 và 4): mọi trang có title đúng khuôn, og:site_name = TsuDEV, canonical
 // không www, description 120-160 ký tự, không CSS nội tuyến (CSP), script duy nhất là /theme.js nạp chặn trong <head>
 // trước stylesheet và được CSP cho phép, liên kết mở tab mới có rel đủ,
 // chỉ dùng gạch ngang ngắn trong chữ hiển thị (AGENTS.md mục 7), liên kết nội bộ không gãy.
@@ -19,8 +19,8 @@ function duyet(thuMuc) {
 function kiemTra(tep, html) {
   const ten = tep.slice(dist.length);
   const title = html.match(/<title>([^<]*)<\/title>/)?.[1] ?? '';
-  if (!/^(.+ - )?Lotus Share \| tsudev$/.test(title)) loi.push(`${ten}: title sai khuôn: ${title}`);
-  if (!html.includes('<meta property="og:site_name" content="tsudev">')) loi.push(`${ten}: thiếu og:site_name tsudev`);
+  if (!/^(.+ - )?Lotus Share \| TsuDEV$/.test(title)) loi.push(`${ten}: title sai khuôn: ${title}`);
+  if (!html.includes('<meta property="og:site_name" content="TsuDEV">')) loi.push(`${ten}: thiếu og:site_name TsuDEV`);
   if (!/<link rel="canonical" href="https:\/\/lotus\.tsudev\.com\//.test(html)) loi.push(`${ten}: thiếu canonical`);
   const mota = html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '';
   const dai = [...mota.replace(/&[a-z#0-9]+;/g, 'x')].length;
