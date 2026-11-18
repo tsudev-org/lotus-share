@@ -9,17 +9,14 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
-- [ ] **`v26.11.1801` GIỮ NHÁP - báo nhầm antivirus** (phiếu `logs/handover/20261118-02_*`): 4 tệp Windows bị 1-3 engine
-      học máy (APEX, DeepInstinct, Cylance) gắn cờ; 👤 nộp báo nhầm + quyết Publish. Bản nháp đã kiểm: 22 tệp, SHA256SUMS
-      khớp, `gh attestation verify` đạt + từ chối tệp sửa 1 byte. Sau Publish: (1) gộp PR nhánh
-      `chore/kenh-sau-phat-hanh-26111801` (package.json + phien-ban.json; dòng "ĐANG DỞ" trong STATE của nhánh đó thay
-      bằng dòng này) -> deploy website -> đo `/tai/*`, `phien-ban.json`; (2) Scoop `lotus-share.json` + `tsudev-lotus.json`:
-      checkver `v([\\d.]+)`, autoupdate `lotus-share_$version_windows-x64.zip`, hash thật; (3) Homebrew 2 cask: url
-      `lotus-share_#{version}_macos-universal.dmg`, livecheck `v?(\d+(?:\.\d+)+)`, sửa `tools/cap-nhat.py`; (4) kiểm kho APT
-      pkg.tsudev.com; (5) ghi mục 6 phiếu V1. Ruleset nhãn đã mở rộng `refs/tags/v*`.
-- Deploy website: `cd website && XDG_CONFIG_HOME=$HOME/.config/wrangler-tsudev npm run deploy` (cấu hình wrangler RIÊNG của
-  tsudev - đăng nhập chung là tài khoản UBND; kiểm `wrangler whoami` = dev.nguyentrangtinhsu@...). Sau mỗi bản phát hành
-  phải deploy lại (trang Tải về đọc danh sách tệp lúc build).
+- [ ] 👤 **Duyệt xuất bản kho APT/RPM** (Environment `packages`, chỉ `nguyentrangtinhsu` duyệt được): run cũ
+      `https://github.com/tsudev-org/linux-packages/actions/runs/44113082063` (17/11) đang chờ, chặn hàng đợi; duyệt (hoặc
+      Reject) nó, rồi duyệt lượt kế tiếp (tự tính kế hoạch mới gồm `lotus-share 26.11.1801-1`). Agent sau đó đo
+      pkg.tsudev.com.
+- [ ] 👤 Nộp báo nhầm antivirus cho bản 26.11.1801 (phiếu `logs/handover/20261118-02_*` mục 4 - nội dung soạn sẵn);
+      agent quét lại VirusTotal sau 24-72 giờ (workflow tạm dùng `VT_API_KEY`, mục 3.2) và ghi kết quả.
+- [ ] winget: khi PR microsoft/winget-pkgs#478033 (2.0.0) được gộp, gửi PR cập nhật `tsudev.LotusShare` 26.11.1801
+      (bộ cài `lotus-share_26.11.1801_windows-{x64,arm64}-setup.exe`, SHA-256 từ SHA256SUMS.txt).
 - [ ] winget `tsudev.LotusShare`: chờ người kiểm duyệt cộng đồng duyệt PR microsoft/winget-pkgs#478033 (18/11 đã nâng
       manifest lên **2.0.0** + bộ cài arm64; SHA-256 đo trên tệp tải về). Khi merge: chuyển `winget` từ `planned` sang
       `channels` trong `packaging/package.json`; khối "Cài bằng lệnh" tự hiện lệnh winget ở lần build/deploy kế tiếp.
@@ -44,6 +41,12 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 18/11/2026 (lotus-share-9c) - **Phát hành `v26.11.1801`** (chủ dự án ủy quyền): Publish 15:53 UTC (ngoại lệ VirusTotal
+  có ghi, phiếu 20261118-02); PR #72 (package.json + phien-ban.json `moiNhat` 26111801); website deploy - đo production:
+  `/tai/*` 7 đường dẫn 302 tới tệp 26.11.1801, `phien-ban.json` mới, trang Tải về hiện 26.11.1801. Scoop
+  scoop-bucket#23 (`lotus-share` + `tsudev-lotus`, hash đo trên tệp), Homebrew homebrew-tap#12 (2 cask + `cap-nhat.py`,
+  CI nâng cấp thật tên cũ đạt). Mô tả kênh bỏ "tương thích/bản Việt hóa LocalSend". Phiếu V1 mục 6 đã ghi.
 
 - 18/11/2026 (lotus-share-9c) - **Khuôn phiên bản V1** (PR #69): `26.11.1801+26111801`, nhãn `vYY.M.DDNN`, tệp
   `lotus-share_{ver}_{os}-{arch}` (AppImage giữ tên cũ - ngoại lệ AGENTS B.4), Runner.rc FileVersion `YY.M.DDNN.0` (số
