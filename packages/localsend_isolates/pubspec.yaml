@@ -15,7 +15,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_foreground_task: ^9.2.2
-  flutter_rust_bridge: ^2.12.0
+  flutter_rust_bridge: 2.12.0 # lotus-share: GHIM đúng bản codegen + crate Rust (=2.12.0); lệch là app không khởi động (test frb_version_test)
   freezed_annotation: ^3.1.0
   gal: ^2.3.3
   logging: ^1.3.0
