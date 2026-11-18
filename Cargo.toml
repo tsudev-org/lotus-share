@@ -20,3 +20,9 @@ opt-level = 2
 
 [profile.dev.package.num-bigint-dig]
 opt-level = 2
+
+# lotus-share: nix 0.26.4 (kéo vào qua webrtc-util) dùng libc::sockaddr_ctl trên iOS, nhưng libc >= 0.2.191 chỉ còn kiểu
+# này trên macOS => lõi Rust không biên dịch được cho iOS. Bản chép ở packages/vendor/ thu hẹp SysControlAddr về macOS
+# (ghi chú `lotus-share:` tại chỗ). Bỏ khi nâng webrtc lên bản dùng nix mới.
+[patch.crates-io]
+nix = { path = "packages/vendor/nix-0.26.4" }
