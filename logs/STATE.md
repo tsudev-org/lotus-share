@@ -9,10 +9,6 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
-- [ ] 👤 **Duyệt xuất bản kho APT/RPM** (Environment `packages`, chỉ `nguyentrangtinhsu` duyệt được): run cũ
-      `https://github.com/tsudev-org/linux-packages/actions/runs/44113082063` (17/11) đang chờ, chặn hàng đợi; duyệt (hoặc
-      Reject) nó, rồi duyệt lượt kế tiếp (tự tính kế hoạch mới gồm `lotus-share 26.11.1801-1`). Agent sau đó đo
-      pkg.tsudev.com.
 - [ ] Báo nhầm antivirus 26.11.1801: ĐÃ NỘP cả 3 hãng 19/11 (phiếu `logs/handover/20261118-02_*`). Từ 20/11: quét lại
       VirusTotal (workflow tạm dùng `VT_API_KEY`, mục 3.2), ghi số engine; theo dõi thư trả lời ở dev.nguyentrangtinhsu@gmail.com.
 - [ ] winget: khi PR microsoft/winget-pkgs#478033 (2.0.0) được gộp, gửi PR cập nhật `tsudev.LotusShare` 26.11.1801
@@ -41,6 +37,15 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 19/11/2026 (lotus-share-fc) - **T3 + T2 (phần Lotus Share)** PR #79: app người dùng mới theo ngôn ngữ + giao diện hệ
+  thống (chưa có bản dịch => tiếng Anh), `_migrate6` giữ tiếng Việt + Tối cho máy đã cài chưa từng chọn; test bắt buộc
+  PRODUCT_POLICY 1.4 (`system_defaults_test.dart`). Website `tsudev-theme` mặc định `system` (check-theme kiểm khách mới
+  theo máy). Chữ hiển thị `TsuDEV` (website, bản dịch vi/en, CompanyName/LegalCopyright, AppPublisher Inno, CLI,
+  README); định danh máy đọc giữ nguyên. Tím hoa sen giữ (chủ dự án chốt 19/11). Áp vào bản phát hành kế tiếp.
+- 19/11/2026 (lotus-share-fc) - Kho APT/RPM: chủ dự án đã duyệt run 44113082063; đo `pkg.tsudev.com`: `lotus-share` +
+  `tsudev-lotus` 26.11.1801-1 (amd64, arm64), RPM x86_64/aarch64 trong `catalog.json`, tệp trả 200. Còn 2 run
+  `xuat-ban` chờ duyệt (44332608025, 44376379671) - không chặn Lotus Share.
 
 - 18/11/2026 (lotus-share-9c) - **Phát hành `v26.11.1801`** (chủ dự án ủy quyền): Publish 15:53 UTC (ngoại lệ VirusTotal
   có ghi, phiếu 20261118-02); PR #72 (package.json + phien-ban.json `moiNhat` 26111801); website deploy - đo production:
