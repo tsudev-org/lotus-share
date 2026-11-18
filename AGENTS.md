@@ -28,6 +28,8 @@ Bản quy ước repo này đang dùng: xem [`.standards-version`](.standards-ve
 | Tìm kiếm và lọc tiếng Việt | `.standards/docs/SEARCH_AND_FILTER.md` |
 | Kiểm thử và chất lượng mã | `.standards/docs/TESTING_QUALITY.md` |
 | Khả năng truy cập | `.standards/docs/ACCESSIBILITY.md` |
+| Chính sách sản phẩm (không quảng cáo, Pro/Ủng hộ, ngôn ngữ + giao diện theo hệ thống) | `.standards/docs/PRODUCT_POLICY.md` |
+| Nộp kho ứng dụng (Microsoft Store, Google Play, App Store) | `.standards/docs/STORE_SUBMISSION.md` |
 
 `MUST NOT` sửa bất kỳ file nào trong `.standards/`. Cần đổi quy ước thì mở đề
 xuất tại repo `tsudev-standards` theo `.standards/docs/SYNC.md` mục 1.
