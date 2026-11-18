@@ -1,0 +1,11 @@
+{
+  "alias": "Máy tính phòng khách",
+  "version": "2.2",
+  "deviceModel": "Windows",
+  "deviceType": "desktop",
+  "fingerprint": "3F1C9A0B7E5D2C4A6B8D0E1F2A3B4C5D6E7F8091A2B3C4D5E6F708192A3B4C5D",
+  "port": 53420,
+  "protocol": "https",
+  "download": false,
+  "announce": true
+}

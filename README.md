@@ -10,8 +10,8 @@
 Share files and messages between phones and computers on the same local network (Wi-Fi, LAN) - no Internet, no
 account, no relay server. Vietnamese is the default interface language; 60+ other languages are included.
 
-A product of [tsudev](https://tsudev.com). Lotus Share started as a fork of LocalSend 1.18.2 and became an independent
-product in 2.0 (own protocol, configuration and identifiers).
+A product of [tsudev](https://tsudev.com), independent since 2.0 (own protocol, configuration and identifiers). It is
+built on Apache-2.0 open-source code; the original copyright notices are kept in [LICENSE](LICENSE) and [NOTICE](NOTICE).
 
 - Website: <https://lotus.tsudev.com>
 - Downloads: <https://lotus.tsudev.com/tai-ve/> or [GitHub Releases](https://github.com/tsudev-org/lotus-share/releases/latest)
