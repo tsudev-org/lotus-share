@@ -9,6 +9,14 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
+- [ ] **ĐANG DỞ (18/11 21:05, phiên lotus-share-9c) - phát hành `v26.11.1801`**: nhãn đã đẩy, run release
+      44320817020 (kèm job VirusTotal). Tiếp: (1) chờ run xanh + VirusTotal 0 cờ -> kiểm tệp nháp (SHA256SUMS, `gh attestation
+      verify`) -> Publish; (2) gộp PR nhánh `chore/kenh-sau-phat-hanh-26111801` (package.json + phien-ban.json) -> deploy
+      website (lệnh dưới) -> đo `/tai/*`, `phien-ban.json`; (3) Scoop `lotus-share.json` + `tsudev-lotus.json`: checkver
+      `v([\\d.]+)`, autoupdate `lotus-share_$version_windows-x64.zip`, hash thật; (4) Homebrew 2 cask: url
+      `lotus-share_#{version}_macos-universal.dmg`, livecheck `v?(\d+(?:\.\d+)+)`, sửa `tools/cap-nhat.py`; (5) kho APT tự
+      dựng sau khi package.json lên main (kiểm pkg.tsudev.com); (6) ghi mục 6 phiếu V1. Build thử 44312597517 đã kiểm:
+      APK versionCode 26111801, FileVersion 26.11.1801.0, AppImage giữ thông tin zsync cũ. Ruleset nhãn đã mở rộng `refs/tags/v*`.
 - Deploy website: `cd website && XDG_CONFIG_HOME=$HOME/.config/wrangler-tsudev npm run deploy` (cấu hình wrangler RIÊNG của
   tsudev - đăng nhập chung là tài khoản UBND; kiểm `wrangler whoami` = dev.nguyentrangtinhsu@...). Sau mỗi bản phát hành
   phải deploy lại (trang Tải về đọc danh sách tệp lúc build).
