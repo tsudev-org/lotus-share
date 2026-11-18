@@ -1,6 +1,6 @@
 # lotus-share: quy trình phát hành và ký mã.
 #
-# Kích hoạt: đẩy nhãn `v<phiên bản pubspec>-lotus.<n>` (vd v1.18.2-lotus.1), hoặc chạy tay (build thử, không phát hành).
+# Kích hoạt: đẩy nhãn `v<phiên bản pubspec>` theo VERSIONING (`vYY.M.DDNN`, vd v26.11.1801; nhãn cũ `v*-lotus.*` giữ nguyên), hoặc chạy tay (build thử, không phát hành).
 # Sản phẩm: Windows x64 + ARM64 (bộ cài + ZIP), Linux (x64 + ARM64: AppImage + tar.gz), Android (APK ký bằng khóa tsudev), macOS (DMG ký ad-hoc),
 # CLI (Linux, Windows; x64 + ARM64). Chuỗi tin cậy:
 #   1. SHA256SUMS.txt cho mọi tệp, ký không khóa (keyless) bằng Sigstore cosign - danh tính = workflow này ở repo này.
@@ -12,7 +12,7 @@ name: Phát hành
 
 on:
   push:
-    tags: ['v*-lotus.*']
+    tags: ['v[0-9]*.[0-9]*.[0-9]*']
   workflow_dispatch:
 
 permissions:
@@ -54,8 +54,8 @@ jobs:
           tag=""
           if [[ "$REF_TYPE" == tag ]]; then
             tag="$REF_NAME"
-            [[ "$tag" =~ ^v${version//./\\.}-lotus\.[0-9]+$ ]] \
-              || { echo "::error::Nhãn $tag không khớp phiên bản pubspec $version (cần v$version-lotus.<n>)"; exit 1; }
+            [[ "$tag" =~ ^v${version//./\\.}(-(beta|rc)\.[0-9]+)?$ ]] \
+              || { echo "::error::Nhãn $tag không khớp phiên bản pubspec $version (cần v$version)"; exit 1; }
           fi
           echo "version=$version" >> "$GITHUB_OUTPUT"
           echo "tag=$tag" >> "$GITHUB_OUTPUT"
@@ -105,7 +105,7 @@ jobs:
           New-Item -ItemType Directory -Force dist | Out-Null
           # lotus-share: công cụ chẩn đoán mạng đi kèm bản di động + bộ cài (bộ cài lấy từ support\scripts).
           Copy-Item support\scripts\chan-doan-mang.ps1 $rel
-          Compress-Archive -Path "$rel\*" -DestinationPath "dist\lotus-share-$env:V-windows-x86-64.zip"
+          Compress-Archive -Path "$rel\*" -DestinationPath "dist\lotus-share_$($env:V)_windows-x64.zip"
           $payload = "$env:RUNNER_TEMP\inno"; $result = "$env:RUNNER_TEMP\inno-result"
           New-Item -ItemType Directory -Force $payload, $result | Out-Null
           Copy-Item "$rel\*" $payload -Recurse
@@ -113,7 +113,7 @@ jobs:
           # Chưa có chứng thư Authenticode: bộ cài không ký Authenticode, được bảo chứng bằng SHA256SUMS ký Sigstore
           # và chứng thực nguồn gốc (xem đầu tệp). Có chứng thư thì bỏ /DSkipSignTool và truyền /SMySignTool=...
           iscc /DSkipSignTool "/DPayloadDir=$payload" "/DResultDir=$result" support\scripts\compile_windows_exe-inno.iss
-          Move-Item "$result\lotus-share-setup.exe" "dist\lotus-share-$env:V-windows-x86-64-setup.exe"
+          Move-Item "$result\lotus-share-setup.exe" "dist\lotus-share_$($env:V)_windows-x64-setup.exe"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: windows
@@ -171,7 +171,7 @@ jobs:
           New-Item -ItemType Directory -Force dist | Out-Null
           # lotus-share: công cụ chẩn đoán mạng đi kèm bản di động + bộ cài (bộ cài lấy từ support\scripts).
           Copy-Item support\scripts\chan-doan-mang.ps1 $rel
-          Compress-Archive -Path "$rel\*" -DestinationPath "dist\lotus-share-$env:V-windows-arm-64.zip"
+          Compress-Archive -Path "$rel\*" -DestinationPath "dist\lotus-share_$($env:V)_windows-arm64.zip"
           if (-not (Get-Command iscc -ErrorAction SilentlyContinue)) {
             $inno = "${env:ProgramFiles(x86)}\Inno Setup 6"
             if (Test-Path "$inno\ISCC.exe") { $env:PATH = "$inno;$env:PATH" } else { choco install innosetup -y --no-progress; $env:PATH = "$inno;$env:PATH" }
@@ -181,7 +181,7 @@ jobs:
           Copy-Item "$rel\*" $payload -Recurse
           Copy-Item app\assets\packaging\logo.ico $payload
           iscc /DArm64 /DSkipSignTool "/DPayloadDir=$payload" "/DResultDir=$result" support\scripts\compile_windows_exe-inno.iss
-          Move-Item "$result\lotus-share-setup.exe" "dist\lotus-share-$env:V-windows-arm-64-setup.exe"
+          Move-Item "$result\lotus-share-setup.exe" "dist\lotus-share_$($env:V)_windows-arm64-setup.exe"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: windows-arm64
@@ -219,7 +219,7 @@ jobs:
           set -euo pipefail
           mkdir -p dist AppDir
           install -m755 support/scripts/chan-doan-mang.sh app/build/linux/x64/release/bundle/chan-doan-mang.sh
-          tar -C app/build/linux/x64/release/bundle -czf "dist/lotus-share-$V-linux-x86-64.tar.gz" .
+          tar -C app/build/linux/x64/release/bundle -czf "dist/lotus-share_${V}_linux-x64.tar.gz" .
           cp -r app/build/linux/x64/release/bundle/* AppDir/
           for s in 32 128 256; do
             install -Dm644 "app/assets/img/logo-$s.png" "AppDir/usr/share/icons/hicolor/${s}x${s}/apps/lotus-share.png"
@@ -298,7 +298,7 @@ jobs:
           mkdir -p dist
           file app/build/linux/arm64/release/bundle/lotus_share | grep -q aarch64
           install -m755 support/scripts/chan-doan-mang.sh app/build/linux/arm64/release/bundle/chan-doan-mang.sh
-          tar -C app/build/linux/arm64/release/bundle -czf "dist/lotus-share-$V-linux-arm-64.tar.gz" .
+          tar -C app/build/linux/arm64/release/bundle -czf "dist/lotus-share_${V}_linux-arm64.tar.gz" .
       # Ảnh Docker của action build-appimage chỉ có amd64 => chạy appimage-builder thẳng trên máy ARM64,
       # mọi phụ thuộc Python ghim phiên bản + SHA-256 (support/build/appimage/requirements-arm64.txt).
       - name: AppImage
@@ -378,8 +378,8 @@ jobs:
           want="$(printf '%s' "$ANDROID_CERT_SHA256" | tr -d ' :' | tr 'A-F' 'a-f')"
           mkdir -p dist
           apkdir=app/build/app/outputs/flutter-apk
-          for pair in "app-release:universal" "app-arm64-v8a-release:arm64-v8a" "app-armeabi-v7a-release:armeabi-v7a" "app-x86_64-release:x86_64"; do
-            src="$apkdir/${pair%%:*}.apk"; dst="dist/lotus-share-$V-android-${pair##*:}.apk"
+          for pair in "app-release:universal" "app-arm64-v8a-release:arm64" "app-armeabi-v7a-release:armv7" "app-x86_64-release:x64"; do
+            src="$apkdir/${pair%%:*}.apk"; dst="dist/lotus-share_${V}_android-${pair##*:}.apk"
             out="$("$apksigner" verify --verbose --print-certs "$src")"
             grep -q 'Verified using v2 scheme (APK Signature Scheme v2): true' <<< "$out" \
               || { echo "$out"; echo "::error::$src chưa ký lược đồ v2"; exit 1; }
@@ -439,7 +439,7 @@ jobs:
           codesign --force --deep --sign - "$app"
           codesign --verify --deep --strict "$app"
           mkdir -p dist staging && cp -R "$app" staging/ && ln -s /Applications staging/Applications
-          hdiutil create -volname "Lotus Share" -srcfolder staging -ov -format UDZO "dist/lotus-share-$V-macos.dmg"
+          hdiutil create -volname "Lotus Share" -srcfolder staging -ov -format UDZO "dist/lotus-share_${V}_macos-universal.dmg"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: macos
@@ -454,17 +454,17 @@ jobs:
         include:
           - os: ubuntu-22.04
             exe: lotus-share-cli
-            out: linux-x86-64
+            out: linux-x64
           - os: windows-2025
             exe: lotus-share-cli.exe
-            out: windows-x86-64.exe
+            out: windows-x64.exe
           - os: ubuntu-22.04-arm
             exe: lotus-share-cli
-            out: linux-arm-64
+            out: linux-arm64
             optional: true
           - os: windows-11-arm
             exe: lotus-share-cli.exe
-            out: windows-arm-64.exe
+            out: windows-arm64.exe
             optional: true
     runs-on: ${{ matrix.os }}
     timeout-minutes: 40
@@ -493,7 +493,7 @@ jobs:
         run: |
           cargo build --release --locked -p localsend-cli  # gói giữ tên upstream, tệp chạy: lotus-share-cli
           mkdir -p dist
-          cp "target/release/${{ matrix.exe }}" "dist/lotus-share-cli-${{ needs.prepare.outputs.version }}-${{ matrix.out }}"
+          cp "target/release/${{ matrix.exe }}" "dist/lotus-share-cli_${{ needs.prepare.outputs.version }}_${{ matrix.out }}"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: cli-${{ matrix.os }}
@@ -526,7 +526,7 @@ jobs:
         with:
           path: .
           format: spdx-json
-          output-file: dist/lotus-share-${{ needs.prepare.outputs.version }}-sbom.spdx.json
+          output-file: dist/lotus-share_${{ needs.prepare.outputs.version }}_sbom.spdx.json
           upload-artifact: false
           upload-release-assets: false
       - name: SHA256SUMS
@@ -552,6 +552,11 @@ jobs:
           set -euo pipefail
           cat > notes.md <<EOF
           Bản phát hành Lotus Share $V. Kiểm chứng tệp tải về: docs/vi/PHAT-HANH.md.
+          Thay đổi: CHANGELOG.md. Giấy phép Apache-2.0, thông báo bản quyền: LICENSE + NOTICE.
+
+          English summary: Lotus Share $V - Vietnamese-first, security-hardened local network file sharing
+          (Apache-2.0; copyright notices in LICENSE and NOTICE). Verify downloads with SHA256SUMS.txt (Sigstore-signed) and
+          \`gh attestation verify <file> -R tsudev-org/lotus-share\`. See CHANGELOG.md for changes.
 
           - Dấu vân tay chứng thư ký APK (SHA-256): \`$ANDROID_CERT_SHA256\`
           - SHA256SUMS.txt ký bằng Sigstore (SHA256SUMS.txt.sigstore.json); mọi tệp có chứng thực nguồn gốc SLSA.
@@ -559,4 +564,4 @@ jobs:
           EOF
           sed -i 's/^          //' notes.md
           gh release create "$TAG" dist/* --repo "$GITHUB_REPOSITORY" --draft --verify-tag \
-            --title "Lotus Share $V (${TAG#v$V-})" --notes-file notes.md
+            --title "Lotus Share ${TAG#v}" --notes-file notes.md

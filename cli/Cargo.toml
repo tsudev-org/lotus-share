@@ -1,6 +1,6 @@
 [package]
 name = "localsend-cli"
-version = "2.0.0"
+version = "26.11.1801"
 edition = "2024"
 
 [[bin]]

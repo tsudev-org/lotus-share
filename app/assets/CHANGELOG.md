@@ -1,7 +1,10 @@
 # Nhật ký thay đổi - Lotus Share
 
-## Chưa phát hành
+## 26.11.1801 - 18/11/2026
 
+- **Số phiên bản mới** theo quy ước chung của tsudev: `26.11.1801` (năm.tháng.ngày + thứ tự trong ngày) thay cho
+  `2.0.0-lotus.7`. Bản đã cài vẫn nhận ra đây là bản mới hơn; giao thức không đổi, nói chuyện được với 2.0.0.
+  Tên tệp tải về đổi theo khuôn `lotus-share_26.11.1801_windows-x64-setup.exe` (AppImage giữ tên cũ để tự cập nhật).
 - CLI `lotus-share-cli` kiểm bản mới lúc khởi động như ứng dụng: bản quá cũ dừng kèm hướng dẫn cập nhật, có bản mới
   thì nhắc một dòng; bỏ kiểm bằng `--khong-kiem-cap-nhat` hoặc `LOTUS_SHARE_KHONG_KIEM_CAP_NHAT=1`. `--version` và
   thông tin tệp `.exe` Windows hiện đúng phiên bản sản phẩm.

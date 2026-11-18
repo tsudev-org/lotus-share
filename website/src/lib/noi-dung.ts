@@ -112,18 +112,19 @@ export interface GoiTai { nenTang: string; ten: string; url: string; sha256: str
 export interface BanPhatHanh { tag: string; phienBan: string; ngay: string; url: string; goi: GoiTai[]; tepSums: { ten: string; url: string }[] }
 
 /**
- * Nền tảng theo hậu tố tên tệp phát hành (quy tắc đặt tên của release-lotus.yml:
- * <tên>-<phiên bản>-<nền tảng>-<kiến trúc>.<đuôi>). Thứ tự = thứ tự hiển thị.
+ * Nền tảng theo tên tệp phát hành (release-lotus.yml). Từ 26.11.1801: <tên>_<phiên bản>_<os>-<arch>.<đuôi>
+ * (VERSIONING v3), riêng AppImage giữ <tên>-<phiên bản>-linux-<x86-64|arm-64>.AppImage; bản đến 2.0.0-lotus.7:
+ * <tên>-<phiên bản>-<os>-<x86-64|arm-64>.<đuôi>. Nhận cả hai khuôn. Thứ tự = thứ tự hiển thị.
  */
 export const NEN_TANG: { ma: string; ten: string; mau: RegExp }[] = [
   // Bộ cài `-setup.exe` từ bản sau 1.18.2-lotus.4; bản cũ đặt tên bộ cài `-windows-x86-64.exe`, vẫn nhận.
-  { ma: 'windows-x64', ten: 'Windows 10/11 (x64)', mau: /^lotus-share-\d[^-]*-windows-x86-64(-setup)?\.(exe|zip|msix)$/ },
-  { ma: 'windows-arm64', ten: 'Windows 11 trên ARM (ARM64)', mau: /^lotus-share-\d[^-]*-windows-arm-64(-setup)?\.(exe|zip|msix)$/ },
+  { ma: 'windows-x64', ten: 'Windows 10/11 (x64)', mau: /^lotus-share(-\d[^-]*-windows-x86-64|_\d[^_]*_windows-x64)(-setup)?\.(exe|zip|msix)$/ },
+  { ma: 'windows-arm64', ten: 'Windows 11 trên ARM (ARM64)', mau: /^lotus-share(-\d[^-]*-windows-arm-64|_\d[^_]*_windows-arm64)(-setup)?\.(exe|zip|msix)$/ },
   { ma: 'macos', ten: 'macOS 12+ (chip Apple và Intel)', mau: /\.dmg$/ },
-  { ma: 'linux-x64', ten: 'Linux x64', mau: /-linux-x86-64\.(AppImage|deb|rpm|tar\.gz)$/ },
-  { ma: 'linux-arm64', ten: 'Linux ARM64', mau: /-linux-arm-64\.(AppImage|deb|rpm|tar\.gz)$/ },
+  { ma: 'linux-x64', ten: 'Linux x64', mau: /(-linux-x86-64|_linux-x64)\.(AppImage|deb|rpm|tar\.gz)$/ },
+  { ma: 'linux-arm64', ten: 'Linux ARM64', mau: /(-linux-arm-64|_linux-arm64)\.(AppImage|deb|rpm|tar\.gz)$/ },
   { ma: 'android', ten: 'Android 5.0+', mau: /\.apk$/ },
-  { ma: 'cli', ten: 'Dòng lệnh (CLI)', mau: /^lotus-share-cli-/ },
+  { ma: 'cli', ten: 'Dòng lệnh (CLI)', mau: /^lotus-share-cli[-_]/ },
 ];
 
 function loaiGoi(ten: string): string {
@@ -135,7 +136,7 @@ function loaiGoi(ten: string): string {
   if (ten.endsWith('.deb')) return 'Gói .deb (Debian, Ubuntu)';
   if (ten.endsWith('.rpm')) return 'Gói .rpm (Fedora, openSUSE)';
   if (ten.endsWith('.apk')) return ten.includes('universal') ? 'APK (mọi kiến trúc)' : `APK ${ten.match(/android-([^.]+)\.apk$/)?.[1] ?? ''}`;
-  if (ten.includes('-cli-')) return ten.endsWith('.exe') ? 'CLI Windows' : 'CLI Linux';
+  if (/^lotus-share-cli[-_]/.test(ten)) return ten.endsWith('.exe') ? 'CLI Windows' : 'CLI Linux';
   return 'Gói nén (tar.gz)';
 }
 
@@ -189,12 +190,12 @@ export function banMoiNhat(): Promise<BanPhatHanh | null> {
 export interface GoiNhanh { ma: string; nhan: string; moTa: string; goi: GoiTai }
 
 const NHANH: { ma: string; nhan: string; moTa: string; mau: RegExp }[] = [
-  { ma: 'windows', nhan: 'Windows 10/11', moTa: 'Bộ cài .exe (x64), tự mở tường lửa', mau: /-windows-x86-64(-setup)?\.exe$/ },
-  { ma: 'android', nhan: 'Android', moTa: 'APK (arm64, hầu hết điện thoại)', mau: /-android-arm64-v8a\.apk$/ },
-  { ma: 'macos', nhan: 'macOS 12+', moTa: 'Ảnh đĩa .dmg (Apple và Intel)', mau: /-macos\.dmg$/ },
+  { ma: 'windows', nhan: 'Windows 10/11', moTa: 'Bộ cài .exe (x64), tự mở tường lửa', mau: /^lotus-share(-\d[^-]*-windows-x86-64|_\d[^_]*_windows-x64)(-setup)?\.exe$/ },
+  { ma: 'android', nhan: 'Android', moTa: 'APK (arm64, hầu hết điện thoại)', mau: /[-_]android-arm64(-v8a)?\.apk$/ },
+  { ma: 'macos', nhan: 'macOS 12+', moTa: 'Ảnh đĩa .dmg (Apple và Intel)', mau: /[-_]macos(-universal)?\.dmg$/ },
   { ma: 'linux', nhan: 'Linux', moTa: 'AppImage x64, chạy ngay', mau: /-linux-x86-64\.AppImage$/ },
-  { ma: 'windows-arm', nhan: 'Windows ARM64', moTa: 'Bộ cài .exe (ARM64)', mau: /^lotus-share-\d[^-]*-windows-arm-64(-setup)?\.exe$/ },
-  { ma: 'android-universal', nhan: 'Android (máy cũ)', moTa: 'APK mọi kiến trúc', mau: /-android-universal\.apk$/ },
+  { ma: 'windows-arm', nhan: 'Windows ARM64', moTa: 'Bộ cài .exe (ARM64)', mau: /^lotus-share(-\d[^-]*-windows-arm-64|_\d[^_]*_windows-arm64)(-setup)?\.exe$/ },
+  { ma: 'android-universal', nhan: 'Android (máy cũ)', moTa: 'APK mọi kiến trúc', mau: /[-_]android-universal\.apk$/ },
   { ma: 'linux-arm', nhan: 'Linux ARM64', moTa: 'AppImage ARM64', mau: /-linux-arm-64\.AppImage$/ },
 ];
 
@@ -203,7 +204,7 @@ export function goiNhanh(ban: BanPhatHanh | null): GoiNhanh[] {
   if (!ban) return [];
   const out: GoiNhanh[] = [];
   for (const n of NHANH) {
-    const goi = ban.goi.find((g) => n.mau.test(g.ten) && !g.ten.includes('-cli-'));
+    const goi = ban.goi.find((g) => n.mau.test(g.ten) && !/^lotus-share-cli[-_]/.test(g.ten));
     if (goi) out.push({ ma: n.ma, nhan: n.nhan, moTa: n.moTa, goi });
   }
   return out;

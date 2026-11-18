@@ -12,7 +12,7 @@ Free code signing provided by [SignPath.io](https://about.signpath.io), certific
 ## Bản phát hành được tạo thế nào
 
 - Mọi tệp phát hành được build tự động từ mã nguồn ở repo này bằng GitHub Actions
-  ([`release-lotus.yml`](.github/workflows/release-lotus.yml)), chỉ từ nhãn `v*-lotus.*` (bất biến, chỉ quản trị
+  ([`release-lotus.yml`](.github/workflows/release-lotus.yml)), chỉ từ nhãn `vYY.M.DDNN` (trước đây `v*-lotus.*`; bất biến, chỉ quản trị
   viên tạo được).
 - Mọi thay đổi vào `main` phải qua Pull Request và toàn bộ kiểm tra bắt buộc (ruleset của repo).
 - APK Android ký bằng khóa riêng của tsudev; dấu vân tay chứng thư được ghim trong workflow.
@@ -45,7 +45,7 @@ an update is available or required.
 
 Lotus Share is an independent, Vietnamese-first local file-sharing app by tsudev (Apache-2.0; derived from Apache-2.0
 code, see [NOTICE](NOTICE)). Release binaries are built only by GitHub-hosted runners from immutable, admin-only tags
-`v*-lotus.*` via [`release-lotus.yml`](.github/workflows/release-lotus.yml); every change to `main` goes through a pull
+`vYY.M.DDNN` (formerly `v*-lotus.*`) via [`release-lotus.yml`](.github/workflows/release-lotus.yml); every change to `main` goes through a pull
 request with all required checks.
 
 - Committers and reviewers: [@tsudev-tsudev](https://github.com/tsudev-tsudev)

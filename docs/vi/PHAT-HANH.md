@@ -19,9 +19,14 @@ dẫn ở trang Tải về, mục "Đã cài bản tsudev-lotus?").
 Từ bản sau `1.18.2-lotus.4`, bộ cài Windows tự gỡ im lặng bản `tsudev-lotus` cũ (cùng máy, theo AppId cũ), tắt tiến
 trình `tsudev_lotus.exe` và xóa khóa tự khởi động cũ, vì hai bản chạy song song tranh cổng 53420.
 
-**Tên tệp phát hành** (từ bản sau `1.18.2-lotus.4`): bộ cài Windows `lotus-share-<ver>-windows-<x86-64|arm-64>-setup.exe`
-(trước đó không có hậu tố `-setup`, dễ nhầm với CLI `.exe`), bản di động `...-windows-<arch>.zip` (giữ nguyên - Scoop
-dùng), kèm `chan-doan-mang.ps1`. Đường dẫn ngắn luôn trỏ bản mới nhất: `lotus.tsudev.com/tai/<windows|android|macos|linux|
+**Phiên bản + tên tệp** (từ `26.11.1801`, VERSIONING v3 / phiếu `logs/handover/20261117-V1_*`): phiên bản `YY.M.DDNN`,
+số build `YYMDDNN` (Android `versionCode`, so sánh cập nhật), nhãn `vYY.M.DDNN`, tiêu đề Release `Lotus Share YY.M.DDNN`.
+Tệp `lotus-share_<ver>_<os>-<arch>[-setup].<đuôi>`: `windows-<x64|arm64>-setup.exe` (bộ cài, kèm `chan-doan-mang.ps1`),
+`windows-<x64|arm64>.zip`, `linux-<x64|arm64>.tar.gz`, `macos-universal.dmg`, `android-<universal|arm64|armv7|x64>.apk`,
+CLI `lotus-share-cli_<ver>_<os>-<arch>`, `SHA256SUMS.txt`. **Ngoại lệ**: AppImage + `.zsync` GIỮ tên cũ
+`lotus-share-<ver>-linux-<x86-64|arm-64>.AppImage` vì AppImage đã cài dò bản mới theo mẫu tên đó (thông tin cập nhật
+zsync nhúng trong tệp, đổi là AppImageUpdate im lặng không thấy bản mới). Bản đến `2.0.0-lotus.7` theo khuôn cũ
+`lotus-share-<ver>-<os>-<x86-64|arm-64>`, nhãn `v<x.y.z>-lotus.<n>` (bất biến, giữ nguyên). Đường dẫn ngắn luôn trỏ bản mới nhất: `lotus.tsudev.com/tai/<windows|android|macos|linux|
 windows-arm|android-universal|linux-arm>` (sinh lúc build website vào `_redirects`, xem `docs/vi/KHAM-PHA-THIET-BI.md`
 cho phần tường lửa của bộ cài).
 
@@ -31,16 +36,17 @@ Từ 2.0 Lotus Share có định danh, thư mục cấu hình (Windows `%APPDATA
 ## 2. Phát hành một bản mới
 
 1. Phiên bản: `app/pubspec.yaml` (`x.y.z+<số build>`), `support/scripts/compile_windows_exe-inno.iss` (`MyAppVersion`),
-   `cli/Cargo.toml`, `support/build/appimage/*.yml` phải trùng nhau (CI `packaging` kiểm). Nhãn phát hành
-   `v<x.y.z>-lotus.<n>`. **Số build tăng sau mỗi bản phát hành** - kiểm tra cập nhật so sánh bằng số build.
+   `cli/Cargo.toml`, `support/build/appimage/*.yml` phải trùng nhau (CI `packaging` kiểm). Phiên bản `YY.M.DDNN` theo
+   NGÀY gắn nhãn, số build `YYMDDNN` (vd `26.11.1801+26111801`); nhãn `vYY.M.DDNN`. **Số build tăng sau mỗi bản phát
+   hành** - kiểm tra cập nhật so sánh bằng số build.
 2. Cập nhật `website/public/phien-ban.json` (xem `docs/vi/CAP-NHAT-BAT-BUOC.md`): `moiNhat` = số build mới; nâng
    `toiThieu` khi bản cũ không còn dùng được (đổi giao thức, lỗ hổng bảo mật). Deploy website SAU khi bản phát hành
    đã Publish, để người dùng bị yêu cầu cập nhật luôn tải được bản mới.
 3. Mọi cổng kiểm xanh trên `main`, rồi gắn nhãn có chú thích và đẩy:
 
    ```bash
-   git tag -a v2.0.0-lotus.7 -m "Lotus Share 2.0.0-lotus.7"
-   git push origin v2.0.0-lotus.7
+   git tag -a v26.11.1801 -m "Lotus Share 26.11.1801"
+   git push origin v26.11.1801
    ```
 
 4. Workflow build Windows (x64 + ARM64), Linux (x64 + ARM64), Android, macOS, CLI (x64 + ARM64); sinh SBOM, `SHA256SUMS.txt`, ký Sigstore, chứng thực SLSA, rồi
@@ -77,13 +83,13 @@ sha256sum -c --ignore-missing SHA256SUMS.txt
 # 2) Danh sách băm do đúng workflow phát hành của repo này ký (Sigstore)
 cosign verify-blob SHA256SUMS.txt --bundle SHA256SUMS.txt.sigstore.json \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-  --certificate-identity-regexp '^https://github.com/tsudev-org/lotus-share/\.github/workflows/release-lotus\.yml@refs/tags/v.*-lotus\.[0-9]+$'
+  --certificate-identity-regexp '^https://github.com/tsudev-org/lotus-share/\.github/workflows/release-lotus\.yml@refs/tags/v[0-9.]+(-lotus\.[0-9]+)?$'
 
 # 3) Tệp được build trên GitHub Actions từ mã nguồn của repo này (chứng thực SLSA)
-gh attestation verify lotus-share-<phiên bản>-windows-x86-64-setup.exe -R tsudev-org/lotus-share
+gh attestation verify lotus-share_<phiên bản>_windows-x64-setup.exe -R tsudev-org/lotus-share
 
 # 4) APK ký bằng khóa tsudev (Android SDK build-tools)
-apksigner verify --print-certs lotus-share-<phiên bản>-android-universal.apk   # SHA-256 phải khớp mục 3
+apksigner verify --print-certs lotus-share_<phiên bản>_android-universal.apk   # SHA-256 phải khớp mục 3
 ```
 
 ## 5. Giới hạn hiện tại (nói thẳng với người dùng)
