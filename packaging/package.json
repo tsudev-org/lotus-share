@@ -10,47 +10,47 @@
   },
   "release": {
     "repo": "tsudev-org/lotus-share",
-    "tagRegex": "^v(?<version>\\d+\\.\\d+\\.\\d+)(?:-lotus\\.(?<revision>\\d+))?$",
+    "tagRegex": "^v(?<version>\\d{2}\\.\\d{1,2}\\.\\d{4}|\\d+\\.\\d+\\.\\d+)(?:-lotus\\.(?<revision>\\d+))?$",
     "sums": "SHA256SUMS.txt"
   },
   "assets": {
     "windows-x64": {
-      "file": "lotus-share-{version}-windows-x86-64.zip",
+      "file": "lotus-share_{version}_windows-x64.zip",
       "kind": "portable",
       "bin": "lotus_share.exe"
     },
     "windows-x64-installer": {
-      "file": "lotus-share-{version}-windows-x86-64-setup.exe",
+      "file": "lotus-share_{version}_windows-x64-setup.exe",
       "kind": "installer",
       "installer": "inno"
     },
     "windows-arm64": {
-      "file": "lotus-share-{version}-windows-arm-64.zip",
+      "file": "lotus-share_{version}_windows-arm64.zip",
       "kind": "portable",
       "bin": "lotus_share.exe"
     },
     "windows-arm64-installer": {
-      "file": "lotus-share-{version}-windows-arm-64-setup.exe",
+      "file": "lotus-share_{version}_windows-arm64-setup.exe",
       "kind": "installer",
       "installer": "inno"
     },
     "linux-x64": {
-      "file": "lotus-share-{version}-linux-x86-64.tar.gz",
+      "file": "lotus-share_{version}_linux-x64.tar.gz",
       "kind": "tar",
       "bin": "lotus_share"
     },
     "linux-arm64": {
-      "file": "lotus-share-{version}-linux-arm-64.tar.gz",
+      "file": "lotus-share_{version}_linux-arm64.tar.gz",
       "kind": "tar",
       "bin": "lotus_share"
     },
     "macos-universal": {
-      "file": "lotus-share-{version}-macos.dmg",
+      "file": "lotus-share_{version}_macos-universal.dmg",
       "kind": "dmg",
       "app": "Lotus Share.app"
     },
     "android-universal": {
-      "file": "lotus-share-{version}-android-universal.apk",
+      "file": "lotus-share_{version}_android-universal.apk",
       "kind": "apk"
     }
   },
