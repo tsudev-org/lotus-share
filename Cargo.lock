@@ -2219,7 +2219,7 @@ dependencies = [
 
 [[package]]
 name = "localsend-cli"
-version = "26.11.1801"
+version = "26.11.1901"
 dependencies = [
  "anyhow",
  "bytes",
