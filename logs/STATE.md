@@ -13,8 +13,8 @@
       `https://github.com/tsudev-org/linux-packages/actions/runs/44113082063` (17/11) đang chờ, chặn hàng đợi; duyệt (hoặc
       Reject) nó, rồi duyệt lượt kế tiếp (tự tính kế hoạch mới gồm `lotus-share 26.11.1801-1`). Agent sau đó đo
       pkg.tsudev.com.
-- [ ] 👤 Nộp báo nhầm antivirus cho bản 26.11.1801 (phiếu `logs/handover/20261118-02_*` mục 4 - nội dung soạn sẵn);
-      agent quét lại VirusTotal sau 24-72 giờ (workflow tạm dùng `VT_API_KEY`, mục 3.2) và ghi kết quả.
+- [ ] Báo nhầm antivirus 26.11.1801: ĐÃ NỘP cả 3 hãng 19/11 (phiếu `logs/handover/20261118-02_*`). Từ 20/11: quét lại
+      VirusTotal (workflow tạm dùng `VT_API_KEY`, mục 3.2), ghi số engine; theo dõi thư trả lời ở dev.nguyentrangtinhsu@gmail.com.
 - [ ] winget: khi PR microsoft/winget-pkgs#478033 (2.0.0) được gộp, gửi PR cập nhật `tsudev.LotusShare` 26.11.1801
       (bộ cài `lotus-share_26.11.1801_windows-{x64,arm64}-setup.exe`, SHA-256 từ SHA256SUMS.txt).
 - [ ] winget `tsudev.LotusShare`: chờ người kiểm duyệt cộng đồng duyệt PR microsoft/winget-pkgs#478033 (18/11 đã nâng
