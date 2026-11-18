@@ -9,6 +9,14 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
+- [ ] **`v26.11.1801` GIỮ NHÁP - báo nhầm antivirus** (phiếu `logs/handover/20261118-02_*`): 4 tệp Windows bị 1-3 engine
+      học máy (APEX, DeepInstinct, Cylance) gắn cờ; 👤 nộp báo nhầm + quyết Publish. Bản nháp đã kiểm: 22 tệp, SHA256SUMS
+      khớp, `gh attestation verify` đạt + từ chối tệp sửa 1 byte. Sau Publish: (1) gộp PR nhánh
+      `chore/kenh-sau-phat-hanh-26111801` (package.json + phien-ban.json; dòng "ĐANG DỞ" trong STATE của nhánh đó thay
+      bằng dòng này) -> deploy website -> đo `/tai/*`, `phien-ban.json`; (2) Scoop `lotus-share.json` + `tsudev-lotus.json`:
+      checkver `v([\\d.]+)`, autoupdate `lotus-share_$version_windows-x64.zip`, hash thật; (3) Homebrew 2 cask: url
+      `lotus-share_#{version}_macos-universal.dmg`, livecheck `v?(\d+(?:\.\d+)+)`, sửa `tools/cap-nhat.py`; (4) kiểm kho APT
+      pkg.tsudev.com; (5) ghi mục 6 phiếu V1. Ruleset nhãn đã mở rộng `refs/tags/v*`.
 - Deploy website: `cd website && XDG_CONFIG_HOME=$HOME/.config/wrangler-tsudev npm run deploy` (cấu hình wrangler RIÊNG của
   tsudev - đăng nhập chung là tài khoản UBND; kiểm `wrangler whoami` = dev.nguyentrangtinhsu@...). Sau mỗi bản phát hành
   phải deploy lại (trang Tải về đọc danh sách tệp lúc build).
@@ -36,6 +44,12 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 18/11/2026 (lotus-share-9c) - **Khuôn phiên bản V1** (PR #69): `26.11.1801+26111801`, nhãn `vYY.M.DDNN`, tệp
+  `lotus-share_{ver}_{os}-{arch}` (AppImage giữ tên cũ - ngoại lệ AGENTS B.4), Runner.rc FileVersion `YY.M.DDNN.0` (số
+  build cũ tràn 16 bit), job VirusTotal dùng chung. Build thử 44312597517 kiểm trên tệp: APK versionCode 26111801,
+  FileVersion 26.11.1801.0, CLI `--version`, AppImage giữ thông tin zsync. Ruleset nhãn mở rộng `refs/tags/v*`. Nhãn
+  `v26.11.1801` đã đẩy; run 44320817020 dựng đủ 22 tệp, VirusTotal gắn cờ 4 tệp Windows -> nháp (phiếu 20261118-02).
 
 - 18/11/2026 - Chủ dự án xóa bản nháp Release `v2.0.0-lotus.6` (đo: `release not found`, nhãn còn trên origin).
 
