@@ -1,6 +1,11 @@
 # Nhật ký thay đổi - Lotus Share
 
-## Chưa phát hành
+## 26.11.1901 - 19/11/2026
+
+- **Sửa lỗi nghiêm trọng của 26.11.1801: ứng dụng không mở được** (Windows, Linux, macOS, Android - hiện màn hình lỗi
+  "codegen version (2.12.0) should be the same as runtime version (2.13.0)"). Nguyên nhân: lần nâng phụ thuộc trước bản
+  26.11.1801 nâng một thư viện cầu nối Dart-Rust lệch với mã sinh. Đã ghim lại, thêm kiểm tra tự động chặn lệch. CLI
+  `lotus-share-cli` không bị ảnh hưởng. Giao thức không đổi.
 
 - Người dùng mới: lần đầu mở theo **ngôn ngữ và chế độ sáng/tối của hệ thống** (ngôn ngữ chưa có bản dịch => tiếng
   Anh). Máy đã cài mà chưa từng đổi thì giữ nguyên tiếng Việt + giao diện Tối như trước.
