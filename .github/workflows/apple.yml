@@ -70,16 +70,18 @@ jobs:
           set -euo pipefail
           ent=app/ios/Runner/Runner.entitlements
           plutil -lint "$ent" app/ios/Runner/Info.plist app/ios/Runner/PrivacyInfo.xcprivacy
-          [[ "$(plutil -extract com.apple.developer.networking.multicast raw "$ent")" == true ]] \
+          # PlistBuddy: plutil -extract hiểu dấu chấm trong tên khóa là đường dẫn lồng nhau.
+          pb() { /usr/libexec/PlistBuddy -c "Print :$1" "$2" 2>/dev/null; }
+          [[ "$(pb com.apple.developer.networking.multicast "$ent")" == true ]] \
             || { echo "::error::Thiếu quyền multicast trong $ent (tìm thiết bị cần quyền này)"; exit 1; }
-          if plutil -extract aps-environment raw "$ent" >/dev/null 2>&1; then
+          if pb aps-environment "$ent" >/dev/null; then
             echo "::error::$ent còn aps-environment: ứng dụng không dùng push, khóa này buộc bật Push Notifications"; exit 1
           fi
           for k in NSLocalNetworkUsageDescription NSPhotoLibraryUsageDescription NSPhotoLibraryAddUsageDescription; do
-            v="$(plutil -extract "$k" raw app/ios/Runner/Info.plist)"
+            v="$(pb "$k" app/ios/Runner/Info.plist)"
             [[ -n "$v" ]] || { echo "::error::Info.plist: $k rỗng"; exit 1; }
           done
-          [[ "$(plutil -extract ITSAppUsesNonExemptEncryption raw app/ios/Runner/Info.plist)" == false ]]
+          [[ "$(pb ITSAppUsesNonExemptEncryption app/ios/Runner/Info.plist)" == false ]]
           grep -q "PRODUCT_BUNDLE_IDENTIFIER = $BUNDLE_ID;" app/ios/Runner.xcodeproj/project.pbxproj
       - name: Dựng iOS release không ký
         working-directory: app
@@ -185,8 +187,9 @@ jobs:
           lipo -info "$app/Contents/MacOS/Lotus Share" | tee /dev/stderr | grep -q arm64
           # Entitlements Release (sandbox + mạng) phải có trong chữ ký Xcode tạo ra - bản Developer ID sau này giữ chúng.
           codesign -d --entitlements - --xml "$app" > ent.plist
-          [[ "$(plutil -extract com.apple.security.app-sandbox raw ent.plist)" == true ]]
-          [[ "$(plutil -extract com.apple.security.network.server raw ent.plist)" == true ]]
+          pb() { /usr/libexec/PlistBuddy -c "Print :$1" "$2" 2>/dev/null; }
+          [[ "$(pb com.apple.security.app-sandbox ent.plist)" == true ]] || { echo "::error::Chữ ký thiếu app-sandbox"; exit 1; }
+          [[ "$(pb com.apple.security.network.server ent.plist)" == true ]] || { echo "::error::Chữ ký thiếu network.server"; exit 1; }
           # Ký lại GIỐNG HỆT job macOS của release-lotus.yml để chạy thử đúng bản người dùng tải về.
           codesign --force --deep --sign - "$app"
           codesign --verify --deep --strict "$app"
