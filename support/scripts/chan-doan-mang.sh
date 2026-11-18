@@ -31,15 +31,15 @@ if command -v ss >/dev/null 2>&1; then
     canh "Không tiến trình nào nghe cổng $CONG"
   else
     printf '%s\n' "$GIU" | sed 's/^/    /'
-    # TsuFiles / CLI cùng hệ được nghe CHUNG UDP $CONG (SO_REUSEADDR + SO_REUSEPORT) - docs/GIAO-THUC-LOTUS-V2.md mục 6.
+    # TsuFiles (tiến trình TsuFiles, tsufiles-cli) / CLI cùng hệ được nghe CHUNG UDP $CONG (SO_REUSEADDR + SO_REUSEPORT) - docs/GIAO-THUC-LOTUS-V2.md mục 6.
     # Chỉ TCP $CONG là của riêng Lotus Share.
     LA=$(printf '%s\n' "$GIU" | grep -i 'users:' | grep -viE '"(lotus_share|lotus-share-cli)"' || true)
     if printf '%s\n' "$LA" | grep -q '^tcp'; then
       loi "Cổng TCP $CONG đang bị tiến trình khác giữ - tắt tiến trình đó rồi mở lại Lotus Share"
-    elif printf '%s\n' "$LA" | grep -qvi '"tsufiles"' && [ -n "$LA" ]; then
+    elif printf '%s\n' "$LA" | grep -qviE '"(tsufiles|tsufiles-cli)"' && [ -n "$LA" ]; then
       loi "Cổng UDP $CONG đang bị tiến trình lạ giữ - tắt tiến trình đó rồi mở lại Lotus Share"
     elif [ -n "$LA" ]; then
-      ok "TsuFiles dùng chung UDP $CONG để tìm máy - ứng dụng cùng hệ, hợp lệ"
+      ok "TsuFiles (app/CLI) dùng chung UDP $CONG để tìm máy - ứng dụng cùng hệ, hợp lệ"
     fi
   fi
 fi

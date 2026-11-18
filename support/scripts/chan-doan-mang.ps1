@@ -121,7 +121,8 @@ if ($tcp) { Write-Ok "Có chương trình nghe TCP $Port." } else { Write-Bad "K
 if ($udp) { Write-Ok "Có chương trình nghe UDP $Port (khám phá thiết bị)." } else { Write-Bad "Không có chương trình nào nghe UDP $Port." }
 # Ứng dụng cùng hệ tsudev (TsuFiles, CLI) được phép nghe CHUNG UDP $Port để tìm máy (SO_REUSEADDR) -
 # docs/GIAO-THUC-LOTUS-V2.md mục 6. Chỉ TCP $Port là của riêng Lotus Share.
-$cungHe = '^(lotus_share|lotus-share-cli|tsufiles)$'
+# -match không phân biệt hoa thường: TsuFiles (app), tsufiles-cli (lệnh `tsufiles send`).
+$cungHe = '^(lotus_share|lotus-share-cli|tsufiles|tsufiles-cli)$'
 $tcpOwners = @(@($tcp) | Where-Object { $_ } | ForEach-Object { $_.OwningProcess } | Sort-Object -Unique)
 foreach ($o in $owners) {
   $p = Get-Process -Id $o -ErrorAction SilentlyContinue
