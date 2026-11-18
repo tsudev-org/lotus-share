@@ -18,6 +18,8 @@ futures-util = "0.3"
 gethostname = "1.0"
 mime_guess = "2.0"
 pem = "4.0"
+reqwest = { version = "0.13.4", default-features = false, features = ["rustls-no-provider"] }
+rustls = { version = "0.23.43", default-features = false, features = ["ring", "std"] }
 qrcode = { version = "0.14", default-features = false }
 ratatui = "0.30"
 ratatui-explorer = "0.3"

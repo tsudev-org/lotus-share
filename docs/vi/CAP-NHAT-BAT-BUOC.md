@@ -41,4 +41,7 @@
 - Bản phát hành trước 2.0.0 (`1.18.2-lotus.2` đến `.5`) **không có** cơ chế này nên không thể hiện hộp thoại. Từ 2.0
   các bản đó cũng không thấy thiết bị chạy 2.x (giao thức riêng); trang Tải về và mục "Không thấy thiết bị?" hướng
   dẫn cập nhật.
-- CLI `lotus-share-cli` chưa kiểm phiên bản (task trong `logs/STATE.md`).
+- CLI `lotus-share-cli` kiểm cùng tệp lúc khởi động (`cli/src/update_check.rs`, thời hạn 3 giây, không theo chuyển
+  hướng, đọc tối đa 16 KiB): dưới `toiThieu` thì báo lỗi và thoát mã khác 0; dưới `moiNhat` thì in một dòng nhắc rồi
+  chạy tiếp; mất mạng hay tệp sai định dạng thì chạy bình thường. Số build lấy từ `app/pubspec.yaml` lúc build. Bỏ
+  kiểm (máy không có Internet, kịch bản tự động): `--khong-kiem-cap-nhat` hoặc `LOTUS_SHARE_KHONG_KIEM_CAP_NHAT=1`.

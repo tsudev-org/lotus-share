@@ -7,6 +7,7 @@ mod send_task;
 mod slots;
 mod storage;
 mod ui;
+mod update_check;
 mod util;
 
 use clap::{ArgAction, Parser, Subcommand};
@@ -38,7 +39,7 @@ pub enum Command {
 #[derive(Parser)]
 #[command(
     name = "lotus-share-cli",
-    version,
+    version = env!("LOTUS_SHARE_VERSION"),
     about,
     after_help = HELP_SECTIONS,
     help_template = HELP_TEMPLATE,
@@ -69,6 +70,10 @@ pub struct Args {
     #[arg(long, env = "LOTUS_SHARE_DESTINATION")]
     pub destination: Option<PathBuf>,
 
+    /// Không kiểm bản mới ở lotus.tsudev.com khi khởi động
+    #[arg(long, env = "LOTUS_SHARE_KHONG_KIEM_CAP_NHAT", value_parser = clap::builder::BoolishValueParser::new())]
+    pub khong_kiem_cap_nhat: bool,
+
     #[command(subcommand)]
     pub command: Option<Command>,
 }
@@ -86,11 +91,17 @@ const HELP_SECTIONS: &str = "Sự kiện:\n  \
                              Y/N/P  Chấp nhận / Từ chối / Chấp nhận và ghép đôi yêu cầu đến\n  \
                              Ctrl+C Hủy lượt truyền hoặc yêu cầu hiện tại, hoặc thoát khi rảnh\n \
                              \nBiến môi trường:\n  \
-                             XDG_CONFIG_HOME, LOTUS_SHARE_ALIAS, LOTUS_SHARE_PORT, LOTUS_SHARE_DESTINATION";
+                             XDG_CONFIG_HOME, LOTUS_SHARE_ALIAS, LOTUS_SHARE_PORT, LOTUS_SHARE_DESTINATION,\n  \
+                             LOTUS_SHARE_KHONG_KIEM_CAP_NHAT";
 
 fn main() -> anyhow::Result<()> {
     let args = Args::parse();
-    tokio::runtime::Runtime::new()?.block_on(app::run(args))
+    tokio::runtime::Runtime::new()?.block_on(async {
+        if !args.khong_kiem_cap_nhat {
+            update_check::check().await?;
+        }
+        app::run(args).await
+    })
 }
 
 #[cfg(test)]
@@ -98,6 +109,13 @@ mod tests {
     use super::{Args, Command};
     use clap::Parser;
     use std::path::PathBuf;
+
+    #[test]
+    fn update_check_can_be_skipped() {
+        assert!(!Args::try_parse_from(["lotus-share-cli"]).unwrap().khong_kiem_cap_nhat);
+        let args = Args::try_parse_from(["lotus-share-cli", "--khong-kiem-cap-nhat"]).unwrap();
+        assert!(args.khong_kiem_cap_nhat);
+    }
 
     #[test]
     fn accepts_mixed_send_paths() {
