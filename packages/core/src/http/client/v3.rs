@@ -226,9 +226,9 @@ impl LsHttpClientV3 {
                     port,
                     path: "/upload",
                     params: &[
-                        ("sessionId", &session_id),
-                        ("fileId", &file_id),
-                        ("token", &token),
+                        ("sessionId", session_id),
+                        ("fileId", file_id),
+                        ("token", token),
                     ],
                 }
                 .to_string(),

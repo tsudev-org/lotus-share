@@ -927,7 +927,7 @@ async fn test_second_session_blocked_and_cancel() {
             "127.0.0.1",
             server.port,
             None,
-            prepare_upload_request(&[file.clone()]),
+            prepare_upload_request(std::slice::from_ref(&file)),
             None,
             CancellationToken::new(),
         )
@@ -943,7 +943,7 @@ async fn test_second_session_blocked_and_cancel() {
             "127.0.0.1",
             server.port,
             None,
-            prepare_upload_request(&[file.clone()]),
+            prepare_upload_request(std::slice::from_ref(&file)),
             None,
             CancellationToken::new(),
         )
@@ -1347,7 +1347,7 @@ async fn test_prepare_upload_declined() {
             "127.0.0.1",
             server.port,
             None,
-            prepare_upload_request(&[file.clone()]),
+            prepare_upload_request(std::slice::from_ref(&file)),
             None,
             CancellationToken::new(),
         )
@@ -1441,7 +1441,7 @@ async fn test_pin() {
             "127.0.0.1",
             server.port,
             None,
-            prepare_upload_request(&[file.clone()]),
+            prepare_upload_request(std::slice::from_ref(&file)),
             None,
             CancellationToken::new(),
         )
@@ -1455,7 +1455,7 @@ async fn test_pin() {
             "127.0.0.1",
             server.port,
             None,
-            prepare_upload_request(&[file.clone()]),
+            prepare_upload_request(std::slice::from_ref(&file)),
             Some("000000"),
             CancellationToken::new(),
         )
@@ -1491,7 +1491,7 @@ async fn test_pin_too_many_attempts() {
                 "127.0.0.1",
                 server.port,
                 None,
-                prepare_upload_request(&[file.clone()]),
+                prepare_upload_request(std::slice::from_ref(&file)),
                 Some("000000"),
                 CancellationToken::new(),
             )
