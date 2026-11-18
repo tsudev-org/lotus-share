@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  lotus-share: tệp kê khai quyền riêng tư cấp ứng dụng (Apple bắt buộc từ 05/2024; PRODUCT_POLICY mục 2.1).
+  - Không theo dõi, không thu thập dữ liệu: tệp đi thẳng giữa hai thiết bị trong mạng nội bộ.
+  - API "required reason" mà mã của chính ứng dụng (Dart, lõi Rust) gọi; plugin tự kê khai trong gói của mình.
+    UserDefaults CA92.1: cài đặt của ứng dụng (shared_preferences).
+    FileTimestamp C617.1 + 3B52.1: đọc thời điểm sửa của tệp trong vùng chứa ứng dụng và tệp người dùng chọn để gửi.
+    SystemBootTime 35F9.1: đồng hồ đơn điệu (Instant của Rust, Stopwatch của Dart) để đo thời gian/tốc độ truyền.
+  Đổi mã dùng thêm API trong danh sách của Apple => sửa tệp này cùng PR (CI apple.yml kiểm tệp có trong gói .app).
+-->
+<plist version="1.0">
+<dict>
+	<key>NSPrivacyTracking</key>
+	<false/>
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>CA92.1</string>
+			</array>
+		</dict>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryFileTimestamp</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>C617.1</string>
+				<string>3B52.1</string>
+			</array>
+		</dict>
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategorySystemBootTime</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>35F9.1</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

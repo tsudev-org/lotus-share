@@ -127,6 +127,13 @@
 
 ### 2.2. Agent làm (sau khi có các thứ ở 2.1)
 
+> **Cập nhật 19/11/2026:** phần lớn mục này ĐÃ VIẾT SẴN (chưa chạy thật): bỏ `aps-environment`, `PrivacyInfo.xcprivacy`,
+> `scripts/apple/*`, bước ký Developer ID + công chứng trong job `macos`, job `ios` (TestFlight) trong `release-lotus.yml`
+> - tự bật khi có `vars.APPLE_TEAM_ID`; CI không ký `apple.yml`. Thứ tự làm khi có tài khoản:
+> [`APPLE-IOS-MACOS.md`](APPLE-IOS-MACOS.md) mục 4 (thay các bước dưới đây nếu khác). Nhóm ứng dụng macOS hiện là
+> `$(AppIdentifierPrefix)lotusshare.shared_group`; iOS tải lên bằng `xcodebuild -exportArchive` (`destination=upload`),
+> không dùng altool.
+
 1. Script `tools/day-khoa-apple.sh` (đã có) - Secrets `APPLE_DEVID_P12_BASE64`, `APPLE_DIST_P12_BASE64` (.p12 3DES),
    `APPLE_P12_PASSWORD`, `APPLE_ASC_KEY_P8_BASE64`; Variables (không bí mật) `APPLE_TEAM_ID`, `APPLE_ASC_KEY_ID`,
    `APPLE_ASC_ISSUER_ID`. Ghim Team ID trong workflow và so với `vars.APPLE_TEAM_ID`.

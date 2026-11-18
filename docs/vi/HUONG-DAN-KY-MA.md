@@ -1,5 +1,7 @@
 # Hướng dẫn từng bước cho chủ dự án: nộp đơn SignPath (Windows) và ký mã Apple (macOS, iOS)
 
+> Phần Apple: quy trình đầy đủ + trạng thái CI/script đã chuẩn bị ở [`APPLE-IOS-MACOS.md`](APPLE-IOS-MACOS.md).
+
 > **Ghi chú 12/11/2026**: từ Lotus Share 2.0 sản phẩm độc lập (giao thức, cấu hình, định danh riêng; không còn gộp mã
 > LocalSend). Nội dung đơn SignPath dưới đây là bản ĐÃ NỘP, giữ nguyên để đối chiếu. Nếu SignPath hỏi lại: trả lời trung
 > thực rằng mã nguồn bắt nguồn từ LocalSend (Apache-2.0, giữ thông báo bản quyền trong LICENSE/NOTICE) và từ 2.0 phát
@@ -154,10 +156,10 @@ Lotus Share tìm thiết bị qua multicast (224.0.0.168, cổng 53420). Trên i
 1. Mở <https://developer.apple.com/contact/request/networking-multicast> (đăng nhập tài khoản developer).
 2. Bundle ID: `com.tsudev.lotusshare`. Phần giải thích (dán):
 
-> Lotus Share sends files between nearby devices on the same local network without Internet or accounts. It is
-> protocol-compatible with LocalSend (which uses the same entitlement): devices announce themselves by sending a small
-> JSON packet to the multicast group 224.0.0.168 on UDP port 53420 and listen on that group to discover peers, then
-> transfer files directly over HTTPS. Discovery only runs while the user has the app open, and the user is asked for
+> Lotus Share sends files between nearby devices on the same local network without Internet or accounts. Devices
+> announce themselves by sending a small JSON packet to the multicast group 224.0.0.168 (IPv6 ff12::1075:5ea0) on UDP
+> port 53420 and listen on that group to discover peers, then transfer files directly over HTTPS (mutual TLS). The
+> same app runs on Windows, macOS, Linux and Android, so an iPhone must use multicast to find those devices. Discovery only runs while the user has the app open, and the user is asked for
 > Local Network permission (NSLocalNetworkUsageDescription) before any traffic.
 
 3. Chờ email duyệt (vài ngày). Sau đó ở App ID (B4) mục **Additional Capabilities** bật **Multicast Networking**.
@@ -171,7 +173,8 @@ Lotus Share tìm thiết bị qua multicast (224.0.0.168, cổng 53420). Trên i
    - `com.tsudev.lotusshare` (mô tả "Lotus Share"), nền tảng iOS. Capabilities: **App Groups** (gán nhóm ở bước 1).
      **Multicast Networking**: bật sau khi B3 được duyệt.
    - `com.tsudev.lotusshare.ShareExtension` ("Lotus Share Share Extension"), iOS, **App Groups** cùng nhóm.
-   - Push Notifications: KHÔNG bật - agent bỏ khóa `aps-environment` thừa trong entitlements (ứng dụng không dùng push).
+   - Push Notifications: KHÔNG bật - khóa `aps-environment` thừa đã bỏ khỏi entitlements 19/11/2026 (CI `apple.yml` chặn
+     nếu thêm lại).
 3. macOS phát hành bằng DMG ngoài App Store với Developer ID: **không cần** App ID/provisioning profile.
 
 ### B5. Chứng thư
@@ -235,9 +238,10 @@ unset P; chmod 600 ./*
 2. App Privacy > **Data Not Collected** (ứng dụng không thu dữ liệu; trao đổi trực tiếp giữa thiết bị). Privacy Policy
    URL: `https://tsudev.com/privacy`.
 3. Mô tả cửa hàng: KHÔNG ghi số tài khoản, QR hay lời kêu gọi ủng hộ (quyết định ủng hộ theo nền tảng - iOS ẩn hoàn
-   toàn); được ghi website `https://lotus.tsudev.com`. Ghi công LocalSend trong mô tả.
-4. Mã hóa xuất khẩu: `Info.plist` đặt `ITSAppUsesNonExemptEncryption = false` như LocalSend gốc (chỉ dùng mã hóa chuẩn
-   TLS để bảo vệ kết nối). Nếu App Review hỏi, trả lời đúng như vậy.
+   toàn); được ghi website `https://lotus.tsudev.com`. Nội dung soạn sẵn: `docs/store/app-store.md` (không nhắc tên
+   sản phẩm khác - AGENTS.md B.5; ghi công gốc chỉ ở Giới thiệu > Giấy phép).
+4. Mã hóa xuất khẩu: `Info.plist` đang đặt `ITSAppUsesNonExemptEncryption = false`; phải xác minh lại trước lần nộp
+   đầu (lõi dùng TLS của `rustls`, không phải của hệ điều hành) - `docs/store/app-store.md` mục 4.
 
 ### B8. Kiểm tra trước khi giao cho agent
 
