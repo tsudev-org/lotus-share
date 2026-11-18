@@ -22,4 +22,4 @@
 
 - 19/11/2026 - phiên lotus-share-9c: `sync-standards.sh --ref v3.8.1` (MANIFEST.sha256 xác minh) + `check-standards.sh`
   ĐẠT 0 lưu ý (gồm 5b thẻ `v26.11.1801` đúng khuôn). AGENTS.md bảng tra cứu thêm PRODUCT_POLICY + STORE_SUBMISSION.
-  PR: xem dòng dưới.
+  PR #77 (đã gộp, CI xanh 13/13 - lần đầu job `format` đỏ do tải Flutter SDK đứt mạng, chạy lại xanh).
