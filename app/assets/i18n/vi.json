@@ -314,7 +314,7 @@
   },
   "donationPage": {
     "title": "Ủng hộ",
-    "info": "Lotus Share miễn phí, mã nguồn mở, không quảng cáo. Nếu thấy hữu ích, hãy theo dõi và ủng hộ dự án qua các trang của tsudev dưới đây.",
+    "info": "Lotus Share miễn phí, mã nguồn mở, không quảng cáo. Nếu thấy hữu ích, hãy theo dõi và ủng hộ dự án qua các trang của TsuDEV dưới đây.",
     "donate": "Ủng hộ {amount}",
     "thanks": "Xin chân thành cảm ơn!",
     "restore": "Khôi phục giao dịch"
@@ -588,7 +588,7 @@
   },
   "tsudev": {
     "version": "Phiên bản: {version}",
-    "copyright": "© {year} tsudev",
+    "copyright": "© {year} TsuDEV",
     "homepage": "Trang chủ",
     "sourceCode": "Mã nguồn (GitHub)",
     "licenseNotices": "Giấy phép và bản quyền",

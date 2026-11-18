@@ -1,5 +1,5 @@
 // Kiểm tra bộ chọn giao diện trong Chromium thật, với CSP của production (phiếu logs/handover/20261110-05 mục 3, 5):
-// mặc định Tối; 3 lựa chọn Sáng/Tối/Hệ thống giữ sau khi tải lại; "warm" cũ đọc thành Sáng; "Hệ thống" đổi theo máy
+// mặc định Hệ thống (PRODUCT_POLICY mục 1.2); 3 lựa chọn Sáng/Tối/Hệ thống giữ sau khi tải lại; "warm" cũ đọc thành Sáng; "Hệ thống" đổi theo máy
 // không cần tải lại; data-theme có ngay từ khung hình đầu (không nháy màu); theme-color theo chế độ; localStorage bị
 // chặn không làm hỏng trang; radiogroup (ARIA, phím mũi tên) ở chân trang; không lỗi CSP/console.
 // Chạy sau `npm run build`: `npm run check:theme`.
@@ -31,15 +31,15 @@ const trangThai = (page) => page.evaluate(() => ({
   checked: [...document.querySelectorAll('[data-chon-giao-dien]')].filter((b) => b.getAttribute('aria-checked') === 'true').map((b) => b.dataset.chonGiaoDien),
 }));
 
-// 1. Khách mới: Tối, kể cả khi máy đang ở chế độ sáng
+// 1. Khách mới: theo hệ thống - máy sáng thấy Sáng, máy tối thấy Tối
 for (const scheme of ['light', 'dark']) {
   const ctx = await browser.newContext({ colorScheme: scheme });
   const page = await trang(ctx);
   await page.goto(base + '/');
   const s = await trangThai(page);
-  ky(s.theme === 'dark' && s.chon === 'dark' && s.nen === NEN_RGB.dark, `khách mới (máy ${scheme}): ${JSON.stringify(s)}`);
-  ky(s.mau.length === 1 && s.mau[0] === NEN.dark, `theme-color khách mới: ${s.mau}`);
-  ky(s.checked.join() === 'dark', `aria-checked khách mới: ${s.checked}`);
+  ky(s.theme === scheme && s.chon === 'system' && s.nen === NEN_RGB[scheme], `khách mới (máy ${scheme}): ${JSON.stringify(s)}`);
+  ky(s.mau.length === 1 && s.mau[0] === NEN[scheme], `theme-color khách mới: ${s.mau}`);
+  ky(s.checked.join() === 'system', `aria-checked khách mới: ${s.checked}`);
   ky(await page.locator('footer #giao-dien[role="radiogroup"]').isVisible(), 'bộ chọn không hiện ở chân trang');
   ky(await page.locator('header [data-chon-giao-dien], header #giao-dien').count() === 0, 'header vẫn còn nút giao diện');
   ky(!(await page.locator('body').innerText()).includes('Ấm'), 'còn chữ "Ấm" trong trang');
@@ -88,8 +88,8 @@ for (const scheme of ['light', 'dark']) {
   await ctx.close();
 }
 
-// 4. Giá trị cũ "warm" -> Sáng; giá trị lạ -> Tối
-for (const [cu, mongDoi, chon] of [['warm', 'light', 'light'], ['"><img src=x>', 'dark', 'dark']]) {
+// 4. Giá trị cũ "warm" -> Sáng; giá trị lạ -> Hệ thống (máy tối => Tối)
+for (const [cu, mongDoi, chon] of [['warm', 'light', 'light'], ['"><img src=x>', 'dark', 'system']]) {
   const ctx = await browser.newContext({ colorScheme: 'dark' });
   await ctx.addInitScript((v) => localStorage.setItem('tsudev-theme', v), cu);
   const page = await trang(ctx);
@@ -104,7 +104,7 @@ for (const [cu, mongDoi, chon] of [['warm', 'light', 'light'], ['"><img src=x>',
   const ctx = await browser.newContext();
   const page = await trang(ctx);
   await page.goto(base + '/');
-  ky(await page.evaluate(() => [...document.querySelectorAll('[data-chon-giao-dien]')].map((b) => b.tabIndex).join()) === '-1,0,-1', 'tabIndex của radiogroup sai');
+  ky(await page.evaluate(() => [...document.querySelectorAll('[data-chon-giao-dien]')].map((b) => b.tabIndex).join()) === '-1,-1,0', 'tabIndex của radiogroup sai (khách mới: chỉ nút Hệ thống trong thứ tự Tab)');
   await page.focus(NUT('dark'));
   await page.keyboard.press('ArrowRight');
   let s = await trangThai(page);
@@ -117,7 +117,7 @@ for (const [cu, mongDoi, chon] of [['warm', 'light', 'light'], ['"><img src=x>',
   await ctx.close();
 }
 
-// 6. localStorage bị chặn (ném lỗi): trang vẫn hiện (Tối), bộ chọn vẫn đổi được cho lần xem này
+// 6. localStorage bị chặn (ném lỗi): trang vẫn hiện (theo hệ thống), bộ chọn vẫn đổi được cho lần xem này
 {
   const ctx = await browser.newContext({ colorScheme: 'light' });
   await ctx.addInitScript(() => {
@@ -125,10 +125,10 @@ for (const [cu, mongDoi, chon] of [['warm', 'light', 'light'], ['"><img src=x>',
   });
   const page = await trang(ctx);
   await page.goto(base + '/');
-  ky((await trangThai(page)).theme === 'dark', 'localStorage bị chặn: không về Tối');
-  await page.click(NUT('light'));
+  ky((await trangThai(page)).theme === 'light', 'localStorage bị chặn: không theo hệ thống (máy sáng)');
+  await page.click(NUT('dark'));
   const s = await trangThai(page);
-  ky(s.theme === 'light' && s.checked.join() === 'light', `localStorage bị chặn: không đổi được giao diện ${JSON.stringify(s)}`);
+  ky(s.theme === 'dark' && s.checked.join() === 'dark', `localStorage bị chặn: không đổi được giao diện ${JSON.stringify(s)}`);
   await ctx.close();
 }
 

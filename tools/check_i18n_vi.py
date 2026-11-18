@@ -105,8 +105,9 @@ def main() -> int:
             errors.append(f"{path.name}: appName = {name!r}, phải là {PRODUCT_NAME!r}")
 
     config = FORK_CONFIG.read_text(encoding="utf-8")
-    if not re.search(r"const forkDefaultLocaleTag = 'vi';", config):
-        errors.append("fork_config.dart: forkDefaultLocaleTag phải là 'vi'")
+    # Người dùng mới theo ngôn ngữ hệ thống (PRODUCT_POLICY mục 1); máy đã cài trước 26.11 giữ tiếng Việt qua _migrate6.
+    if not re.search(r"const legacyDefaultLocaleTag = 'vi';", config):
+        errors.append("fork_config.dart: legacyDefaultLocaleTag phải là 'vi' (giữ ngôn ngữ cho máy đã cài)")
 
     url = re.compile(r"""['"]https?://(?:[\w-]+\.)*localsend\.org""")
     for path in sorted(APP_LIB.rglob("*.dart")):

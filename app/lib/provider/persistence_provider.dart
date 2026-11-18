@@ -112,6 +112,14 @@ class PersistenceService {
 
   PersistenceService._(this._prefs, this.isFirstAppStart);
 
+  /// Chỉ dùng trong test: dựng dịch vụ trên SharedPreferences giả, bỏ qua các bước cần nền tảng thật.
+  @visibleForTesting
+  PersistenceService.forTest(this._prefs, {this.isFirstAppStart = false});
+
+  /// Chỉ dùng trong test: chạy chuỗi nâng cấp cấu hình từ phiên bản [from].
+  @visibleForTesting
+  static Future<void> runMigrationsForTest(int from) => _runMigrations(from);
+
   static Future<PersistenceService> initialize({
     required bool supportsDynamicColors,
   }) async {
@@ -154,11 +162,10 @@ class PersistenceService {
     }
 
     // Locale configuration upon persistence initialisation to prevent unlocalised Alias generation
-    // lotus-share: chưa chọn ngôn ngữ => tiếng Việt; chọn "theo hệ thống" => lưu giá trị đặc biệt.
+    // lotus-share: chưa chọn hoặc chọn "theo hệ thống" => ngôn ngữ hệ thống (PRODUCT_POLICY mục 1); ngôn ngữ hệ
+    // thống chưa có bản dịch => tiếng Anh (base_locale của slang).
     final persistedLocale = prefs.getString(_localeKey);
-    if (persistedLocale == null) {
-      await LocaleSettings.setLocaleRaw(forkDefaultLocaleTag);
-    } else if (persistedLocale == _localeSystemValue) {
+    if (persistedLocale == null || persistedLocale == _localeSystemValue) {
       await LocaleSettings.useDeviceLocale();
     } else {
       await LocaleSettings.setLocaleRaw(persistedLocale);
@@ -305,10 +312,8 @@ class PersistenceService {
 
   ThemeMode getTheme() {
     final value = _prefs.getString(_themeKey);
-    if (value == null) {
-      return ThemeMode.dark; // tsudev: mặc định Tối cho người dùng mới (phiếu 20261110-05)
-    }
-    return ThemeMode.values.firstWhereOrNull((theme) => theme.name == value) ?? ThemeMode.dark;
+    // lotus-share: mặc định Hệ thống (PRODUCT_POLICY mục 2, thay mặc định Tối cũ - máy đã cài giữ Tối nhờ _migrate6).
+    return ThemeMode.values.firstWhereOrNull((theme) => theme.name == value) ?? ThemeMode.system;
   }
 
   Future<void> setTheme(ThemeMode theme) async {
@@ -342,11 +347,8 @@ class PersistenceService {
 
   AppLocale? getLocale() {
     final value = _prefs.getString(_localeKey);
-    if (value == null) {
-      // lotus-share: mặc định tiếng Việt khi người dùng chưa chọn.
-      return AppLocale.values.firstWhereOrNull((locale) => locale.languageTag == forkDefaultLocaleTag);
-    }
-    if (value == _localeSystemValue) {
+    if (value == null || value == _localeSystemValue) {
+      // lotus-share: chưa chọn = theo hệ thống.
       return null;
     }
     return AppLocale.values.firstWhereOrNull((locale) => locale.languageTag == value);
@@ -354,7 +356,7 @@ class PersistenceService {
 
   Future<void> setLocale(AppLocale? locale) async {
     if (locale == null) {
-      // lotus-share: ghi nhớ lựa chọn "theo hệ thống" thay vì xóa khóa (xóa khóa = tiếng Việt).
+      // lotus-share: ghi nhớ lựa chọn "theo hệ thống" (khóa trống cũng là theo hệ thống, ghi rõ để dễ đọc tệp cấu hình).
       await _prefs.setString(_localeKey, _localeSystemValue);
     } else {
       await _prefs.setString(_localeKey, locale.languageTag);

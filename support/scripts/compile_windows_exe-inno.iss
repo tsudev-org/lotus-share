@@ -14,7 +14,7 @@
 
 #define MyAppName "Lotus Share"
 #define MyAppVersion "26.11.1801"
-#define MyAppPublisher "tsudev"
+#define MyAppPublisher "TsuDEV"
 #define MyAppURL "https://lotus.tsudev.com"
 #define MyAppExeName "lotus_share.exe"
 ; lotus-share: tên quy tắc Tường lửa Windows (bộ cài tạo, gỡ cài đặt xóa) và công cụ chẩn đoán mạng đi kèm.

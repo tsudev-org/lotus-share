@@ -13,7 +13,7 @@ interface Props {
   duongDan: string;    // ví dụ "/tai-ve/"
 }
 const { tieuDe, moTa, duongDan } = Astro.props;
-const title = tieuDe ? `${tieuDe} - ${SAN_PHAM} | tsudev` : `${SAN_PHAM} | tsudev`;
+const title = tieuDe ? `${tieuDe} - ${SAN_PHAM} | TsuDEV` : `${SAN_PHAM} | TsuDEV`;
 const ogTitle = tieuDe ? `${tieuDe} - ${SAN_PHAM}` : SAN_PHAM;
 const url = `${SITE}${duongDan}`;
 const nam = new Date().getFullYear();
@@ -42,7 +42,7 @@ const dangO = (href: string) => duongDan.startsWith(href);
     <!-- Giao diện: chạy chặn, SAU meta theme-color và TRƯỚC stylesheet, để không nháy màu (public/theme.js; CSP script-src 'self') -->
     <script is:inline src="/theme.js"></script>
     <link rel="canonical" href={url}>
-    <meta property="og:site_name" content="tsudev">
+    <meta property="og:site_name" content="TsuDEV">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="vi_VN">
     <meta property="og:title" content={ogTitle}>
@@ -88,12 +88,12 @@ const dangO = (href: string) => duongDan.startsWith(href);
             <a class="thuong-hieu thuong-hieu--nho" href="https://tsudev.com" target="_blank" rel="noopener noreferrer">
               <!-- Logo CHUNG của hệ tsudev (bản chính thức từ tsudev/apps/frontend-main/public/brand), không phải logo Lotus -->
               <picture><source srcset="/brand/logo-tsudev-48.avif 1x, /brand/logo-tsudev-96.avif 2x" type="image/avif"><source srcset="/brand/logo-tsudev-48.webp 1x, /brand/logo-tsudev-96.webp 2x" type="image/webp"><img src="/brand/logo-tsudev-256.png" alt="" width="28" height="28" loading="lazy" decoding="async"></picture>
-              <span>tsudev</span>
+              <span>TsuDEV</span>
             </a>
-            <p>Lotus Share là ứng dụng chia sẻ tệp trong mạng nội bộ của tsudev, mã nguồn mở theo
+            <p>Lotus Share là ứng dụng chia sẻ tệp trong mạng nội bộ của TsuDEV, mã nguồn mở theo
               <a href="/ban-quyen/">giấy phép Apache 2.0</a>.</p>
           </div>
-          <nav aria-label="Hệ sinh thái tsudev">
+          <nav aria-label="Hệ sinh thái TsuDEV">
             <ul class="chan-trang__lien-ket">
               <li><a href="https://tsudev.com/terms" target="_blank" rel="noopener noreferrer">Điều khoản sử dụng</a></li>
               <li><a href="https://tsudev.com/privacy" target="_blank" rel="noopener noreferrer">Chính sách riêng tư</a></li>
@@ -112,7 +112,7 @@ const dangO = (href: string) => duongDan.startsWith(href);
           </nav>
         </div>
         <div class="chan-trang__cuoi">
-          <p>© {nam} tsudev</p>
+          <p>© {nam} TsuDEV</p>
           <div class="giao-dien" id="giao-dien" role="radiogroup" aria-label="Giao diện" hidden>
             {cheDo.map((c) => (
               <button type="button" role="radio" aria-checked={c.ma === 'dark' ? 'true' : 'false'} tabindex={c.ma === 'dark' ? '0' : '-1'}

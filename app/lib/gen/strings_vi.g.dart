@@ -548,7 +548,7 @@ class _Translations$donationPage$vi extends Translations$donationPage$en {
   String get title => 'Ủng hộ';
   @override
   String get info =>
-      'Lotus Share miễn phí, mã nguồn mở, không quảng cáo. Nếu thấy hữu ích, hãy theo dõi và ủng hộ dự án qua các trang của tsudev dưới đây.';
+      'Lotus Share miễn phí, mã nguồn mở, không quảng cáo. Nếu thấy hữu ích, hãy theo dõi và ủng hộ dự án qua các trang của TsuDEV dưới đây.';
   @override
   String donate({required Object amount}) => 'Ủng hộ ${amount}';
   @override
@@ -862,7 +862,7 @@ class _Translations$tsudev$vi extends Translations$tsudev$en {
   @override
   String version({required Object version}) => 'Phiên bản: ${version}';
   @override
-  String copyright({required Object year}) => '© ${year} tsudev';
+  String copyright({required Object year}) => '© ${year} TsuDEV';
   @override
   String get homepage => 'Trang chủ';
   @override
