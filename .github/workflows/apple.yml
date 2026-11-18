@@ -146,8 +146,8 @@ jobs:
           # Tiến trình còn sống chưa đủ: màn hình lỗi khởi động cũng giữ tiến trình (sự cố 26.11.1801).
           { cat ios-app.log 2>/dev/null; xcrun simctl spawn "$udid" log show --last 5m --style compact \
               --predicate 'eventMessage CONTAINS "LOTUS_SHARE_INIT_ERROR"'; } > ios-check.log || true
-          if grep -q LOTUS_SHARE_INIT_ERROR ios-check.log; then
-            echo "::error::Ứng dụng iOS hiện màn hình lỗi khởi động:"; grep LOTUS_SHARE_INIT_ERROR ios-check.log | tail -3; exit 1
+          if grep -qF "LOTUS_SHARE_INIT_ERROR: " ios-check.log; then
+            echo "::error::Ứng dụng iOS hiện màn hình lỗi khởi động:"; grep -F "LOTUS_SHARE_INIT_ERROR: " ios-check.log | tail -3; exit 1
           fi
           xcrun simctl shutdown "$udid"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -208,8 +208,8 @@ jobs:
           mkdir -p shots && screencapture -x shots/macos.png || echo "::warning::Không chụp được màn hình (máy chạy không có phiên đồ họa)"
           { cat macos-app.log; log show --last 5m --style compact \
               --predicate 'eventMessage CONTAINS "LOTUS_SHARE_INIT_ERROR"'; } > macos-check.log || true
-          if grep -q LOTUS_SHARE_INIT_ERROR macos-check.log; then
-            echo "::error::Ứng dụng macOS hiện màn hình lỗi khởi động:"; grep LOTUS_SHARE_INIT_ERROR macos-check.log | tail -3; exit 1
+          if grep -qF "LOTUS_SHARE_INIT_ERROR: " macos-check.log; then
+            echo "::error::Ứng dụng macOS hiện màn hình lỗi khởi động:"; grep -F "LOTUS_SHARE_INIT_ERROR: " macos-check.log | tail -3; exit 1
           fi
           pkill -x "Lotus Share" || true
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
