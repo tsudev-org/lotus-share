@@ -22,8 +22,6 @@
       `tsudev-org/.github`, chờ Sound Db phát hành thật kiểm mẫu).
 - [ ] SignPath: bảng 6 ngưỡng ĐÃ soạn (phiếu 20261115-01, Kết quả 18/11): 0/6 đạt trọn, chưa nộp lại. Đo lại hằng
       tuần (lệnh ghi trong phiếu), chép dòng tổng vào mục 7 `~/projects/logs/handover/20261113-02_*`.
-- [ ] Bản nháp Release `v2.0.0-lotus.6` (21 tệp, KHÔNG công khai) vẫn còn trên GitHub dù nhật ký 13/11 ghi đã xóa -
-      chủ dự án quyết xóa (`gh release delete v2.0.0-lotus.6`, giữ nhãn).
 - [ ] **Thử thật 2.0.0-lotus.7** (đã phát hành 13/11/2026): mọi thiết bị cùng cài 2.0 (1.x không thấy 2.x). Windows cài
       `lotus.tsudev.com/tai/windows` (cài cho mọi người dùng, giữ dấu chọn tường lửa; bộ cài gỡ `tsudev-lotus` cũ) - lần
       đầu mở có tên thiết bị tiếng Việt mới, thấy cả Android lẫn laptop Linux; laptop Linux chạy
@@ -38,6 +36,8 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 18/11/2026 - Chủ dự án xóa bản nháp Release `v2.0.0-lotus.6` (đo: `release not found`, nhãn còn trên origin).
 
 - 18/11/2026 (lotus-share-a1) - **PR #66** (gộp, CI xanh 13 kiểm): nâng phụ thuộc Rust/Dart trong phạm vi tương thích
   thay Dependabot #8 (kéo `chrono-tz 0.10.4` dính RUSTSEC-2026-0555 + `webrtc` phá API) và #65 (`test ^1.32` không giải
