@@ -99,4 +99,11 @@ Tám kiểu đặt thẻ cùng tồn tại, khó so sánh/đối chiếu phiên 
      So sánh phiên bản ở kênh: dpkg/rpm/Scoop/winget đều coi `26.11.DDNN` > `2.0.0` (số đầu 26 > 2).
   4. Ghi "Dựa trên LocalSend 1.18.2" ở Release notes + Giới thiệu (đã có ở Giấy phép).
   Việc đưa vào `logs/STATE.md` hàng đợi: "Phát hành kế tiếp theo khuôn V1".
-
+- 18/11/2026 - lotus-share (phiên lotus-share-9c): **ĐÃ ĐỔI KHUÔN** - PR #69 (khuôn), #72 (package.json + phien-ban.json),
+  scoop-bucket#23, homebrew-tap#12. Thẻ đầu tiên theo khuôn mới: **`v26.11.1801`** (Publish 18/11 15:53 UTC, tiêu đề
+  `Lotus Share 26.11.1801`, tệp `lotus-share_26.11.1801_<os>-<arch>`). Chứng minh updater: app đã cài so số build
+  26111801 > 65 (test `update_check_test.dart`); APK versionCode 26111801 (tách ABI 261118013); Windows FileVersion
+  26.11.1801.0 (Runner.rc sửa tràn 16 bit); Scoop/Homebrew coi 26.11.1801 > 2.0.0-lotus.7 (CI homebrew-tap cài thật tên
+  cũ `tsudev-lotus` rồi `brew upgrade` ra Lotus Share - đạt). Ngoại lệ: AppImage + `.zsync` giữ tên cũ (AGENTS B.4);
+  không ghi "Dựa trên LocalSend" (quyết định chủ dự án B.5, ghi ở B.4). winget: PR 2.0.0 đang chờ duyệt, bản mới gửi PR
+  cập nhật sau khi gói được nhận. Ruleset nhãn mở rộng `refs/tags/v*`.
