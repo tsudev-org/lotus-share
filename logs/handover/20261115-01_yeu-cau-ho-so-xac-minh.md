@@ -50,3 +50,22 @@ Tự chứng nhận sai bị phát hiện sẽ làm hỏng hồ sơ SignPath c�
   Còn: đo lại 0 cảnh báo trên `main` -> `bp.cjs new/fill --submit` (phía Windows) -> huy hiệu; bảng 6 ngưỡng SignPath.
   - 18/11 (sau): đo lại trên `main` Dependabot 0 / code scanning 0 / secret scanning 0 -> `bp.cjs new` (id 16860) ->
     `fill` chạy thử 69/69 ô, 100% -> `fill --submit`: **passing 100%**, silver 13%. Huy hiệu ở README.md.
+
+- 18/11/2026 (phiên lotus-share-a1) - **Bảng 6 ngưỡng SignPath** (mốc tự đặt ở kế hoạch `20261113-02` mục 5; KHÔNG nộp - 👤).
+  Đo bằng GitHub API + API Scorecard/Best Practices lúc 18/11/2026, repo tạo 10/11/2026:
+
+  | # | Ngưỡng | Số đo thật | Bằng chứng | Đạt |
+  | --- | --- | --- | --- | --- |
+  | 1 | >= 100 sao + fork người ngoài | 0 sao, 0 fork | `https://github.com/tsudev-org/lotus-share` | Chưa |
+  | 2 | >= 3 người đóng góp ngoài (PR đã gộp) | 0 (mọi PR gộp là của chủ dự án hoặc bot); issue mời đóng góp #59 còn mở | `https://github.com/tsudev-org/lotus-share/pulls?q=is%3Amerged` | Chưa |
+  | 3 | >= 2 bài viết/video độc lập hoặc thảo luận >= 20 bình luận | Chưa tìm thấy | - | Chưa |
+  | 4 | >= 6 tháng phát hành đều, ghi chú tiếng Anh | 5 bản công khai trong 10-12/11/2026 (`v1.18.2-lotus.2` đến `v2.0.0-lotus.7`); mới 8 ngày tuổi | `https://github.com/tsudev-org/lotus-share/releases` | Chưa (sớm nhất 05/2027) |
+  | 5 | Scorecard >= 7 + Best Practices passing | Scorecard **6.8** (18/11 12:51 UTC); Best Practices **passing** (16860) | `https://scorecard.dev/viewer/?uri=github.com/tsudev-org/lotus-share`, `https://www.bestpractices.dev/projects/16860` | Nửa |
+  | 6 | Người dùng thật: lượt tải tăng đều | 894 lượt tải tệp Release (lotus.7: 321, lotus.5: 172, lotus.4: 180, lotus.3: 74, lotus.2: 147); Scoop/Homebrew/APT chưa có số | `gh api repos/tsudev-org/lotus-share/releases` | Mốc đầu, cần đo lại hằng tuần |
+
+  Kết luận: 0/6 đạt trọn (cần >= 4/6) - **chưa nộp lại**. Scorecard dưới 10: Code-Review 0 và Maintained 0 (một người
+  bảo trì, repo < 90 ngày - tự hết dần), Fuzzing 0, Vulnerabilities 4 (Scorecard đếm cả các RUSTSEC đã chấp nhận có
+  lý do ở `tools/osv_scan.py`: bincode, chrono, crypto-bigint, pin-utils, rsa - hết khi lõi upstream nâng), Branch-Protection 4
+  (cần quyền quản trị: chủ dự án quyết), CII-Best-Practices 5 (passing; silver mới lên 10), Signed-Releases 8.
+  Đo lại: cùng các lệnh trên, chép dòng mới vào bảng.
+
