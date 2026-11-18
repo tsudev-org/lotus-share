@@ -226,7 +226,8 @@ unset P; chmod 600 ./*
 
 1. <https://appstoreconnect.apple.com/access/integrations/api> > **Team Keys** (lần đầu: **Request Access**, Account
    Holder đồng ý điều khoản).
-2. **Generate API Key**: tên "lotus-share-ci", vai trò **App Manager**.
+2. **Generate API Key**: tên "lotus-share-ci", vai trò **Admin** (CI dùng khóa này để tự tạo hồ sơ cấp phép iOS; App
+   Manager chỉ đủ nếu được tick thêm "Access to Certificates, Identifiers & Profiles").
 3. **Download API Key** - tệp `AuthKey_<KEYID>.p8` **chỉ tải được một lần** - lưu vào `~/.config/lotus-share/keys/apple/`
    và `chmod 600`. Ghi **Issuer ID** (UUID hiện phía trên danh sách khóa).
 
