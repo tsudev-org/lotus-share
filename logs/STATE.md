@@ -20,10 +20,10 @@
       đổi cùng PR `packaging/package.json` tagRegex/assets, scoop-bucket checkver/autoupdate, homebrew-tap livecheck,
       bước `prepare` của `release-lotus.yml`, `phien-ban.json`. Kèm P1 phiếu P2: VirusTotal (workflow dùng chung
       `tsudev-org/.github`, chờ Sound Db phát hành thật kiểm mẫu).
-- [ ] Bảng bằng chứng 6 ngưỡng SignPath (phiếu 20261115-01 mục 2.4): soạn khi Scorecard có điểm (chạy hằng tuần + mỗi
-      lần gộp `main`, xem `https://scorecard.dev/viewer/?uri=github.com/tsudev-org/lotus-share`). Best Practices ĐÃ passing.
-- [ ] CLI `lotus-share-cli`: kiểm `phien-ban.json` như ứng dụng (`docs/vi/CAP-NHAT-BAT-BUOC.md` mục 4) - đã mở issue #58
-      (good first issue); chưa ai nhận thì agent làm.
+- [ ] SignPath: bảng 6 ngưỡng ĐÃ soạn (phiếu 20261115-01, Kết quả 18/11): 0/6 đạt trọn, chưa nộp lại. Đo lại hằng
+      tuần (lệnh ghi trong phiếu), chép dòng tổng vào mục 7 `~/projects/logs/handover/20261113-02_*`.
+- [ ] Bản nháp Release `v2.0.0-lotus.6` (21 tệp, KHÔNG công khai) vẫn còn trên GitHub dù nhật ký 13/11 ghi đã xóa -
+      chủ dự án quyết xóa (`gh release delete v2.0.0-lotus.6`, giữ nhãn).
 - [ ] **Thử thật 2.0.0-lotus.7** (đã phát hành 13/11/2026): mọi thiết bị cùng cài 2.0 (1.x không thấy 2.x). Windows cài
       `lotus.tsudev.com/tai/windows` (cài cho mọi người dùng, giữ dấu chọn tường lửa; bộ cài gỡ `tsudev-lotus` cũ) - lần
       đầu mở có tên thiết bị tiếng Việt mới, thấy cả Android lẫn laptop Linux; laptop Linux chạy
@@ -38,6 +38,13 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 18/11/2026 (lotus-share-a1) - **PR #66** (gộp, CI xanh 13 kiểm): nâng phụ thuộc Rust/Dart trong phạm vi tương thích
+  thay Dependabot #8 (kéo `chrono-tz 0.10.4` dính RUSTSEC-2026-0555 + `webrtc` phá API) và #65 (`test ^1.32` không giải
+  được) - đã đóng cả hai kèm ghi chú; **#60** clippy lõi `-D warnings` (sửa hết cảnh báo, ngoại lệ có lý do ở
+  `packages/core/clippy.toml`) + CI chạy test CLI; **#58** CLI kiểm `phien-ban.json` lúc khởi động (`cli/src/update_check.rs`,
+  bỏ kiểm `--khong-kiem-cap-nhat`), chạy thật với production: build 65 chạy tiếp, tạm hạ build 60 -> thoát 1. Bảng 6
+  ngưỡng SignPath (0/6, Scorecard 6.8).
 
 - 18/11/2026 (lotus-share-5e) - **Bảo mật + uy tín + giao diện** (nhận #49/#51 từ phiên điều phối projects-e4):
   #49 quy ước v3.7.0 + astro/marked về devDependencies (chủ dự án chọn phương án (a), phiếu 20261118-01 mục 3.3) +
