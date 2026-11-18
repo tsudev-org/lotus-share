@@ -23,8 +23,8 @@ sớm lỗi do Xcode của máy chạy đổi); chạy tay `gh workflow run appl
 
 | Job | Làm gì | Sản phẩm (artifact 14 ngày) |
 | --- | --- | --- |
-| `ios` | Kiểm tĩnh (entitlements có multicast, không còn `aps-environment`, chuỗi xin quyền, mã hóa xuất khẩu, bundle id) -> `flutter build ios --release --no-codesign` -> kiểm gói (bundle id, tên, `PrivacyInfo.xcprivacy` nằm trong `.app`, arm64) -> đóng `.ipa` không ký -> dựng bản Simulator, đặt ngôn ngữ máy `vi`, cài, mở, kiểm còn chạy sau 45 giây, chụp màn hình | `ios-unsigned-ipa` (`Lotus-Share-<ver>-unsigned.ipa` + SHA256SUMS), `ios-simulator-screenshot` |
-| `macos` | `flutter build macos --release` -> kiểm entitlements Release trong chữ ký Xcode (sandbox, mạng) -> ký ad-hoc GIỐNG bản phát hành -> mở thử, kiểm còn chạy sau 30 giây, chụp màn hình | `macos-screenshot` |
+| `ios` | Kiểm tĩnh (entitlements có multicast, không còn `aps-environment`, chuỗi xin quyền, mã hóa xuất khẩu, bundle id) -> `flutter build ios --release --no-codesign` -> kiểm gói (bundle id, tên, `PrivacyInfo.xcprivacy` nằm trong `.app`, arm64) -> đóng `.ipa` không ký -> dựng bản Simulator, đặt ngôn ngữ máy `vi`, cài, mở, kiểm còn chạy sau 45 giây và KHÔNG có dấu hiệu `LOTUS_SHARE_INIT_ERROR` (màn hình lỗi khởi động - sự cố 26.11.1801 tiến trình vẫn sống), chụp màn hình | `ios-unsigned-ipa` (`Lotus-Share-<ver>-unsigned.ipa` + SHA256SUMS), `ios-simulator-screenshot` |
+| `macos` | `flutter build macos --release` -> kiểm entitlements Release trong chữ ký Xcode (sandbox, mạng) -> ký ad-hoc GIỐNG bản phát hành -> chạy thẳng tệp thực thi, kiểm còn chạy sau 30 giây và không có `LOTUS_SHARE_INIT_ERROR`, chụp màn hình | `macos-screenshot` |
 
 Lỗi thường gặp: máy chạy chưa có Xcode 26 (connectivity_plus cần SDK 26) => đọc nhật ký bước "Chọn Xcode 26";
 ứng dụng sập trên Simulator => bước in 80 dòng log cuối của tiến trình `Runner`.
