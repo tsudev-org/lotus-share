@@ -18,11 +18,16 @@
       `pkg.tsudev.com/catalog.json` sau khi duyệt.
 - [ ] 👤 GitGuardian sự cố 40268788 ("Generic Password", `scripts/apple/nhap-khoa.sh` dòng 7 ở commit 02ad20e): báo nhầm
       (chỉ kiểm biến môi trường, không có giá trị) - đánh dấu false positive trên dashboard. Mã đã viết lại.
-- [ ] Báo nhầm antivirus **26.11.1901** (4 tệp Windows, 1-2/74 engine - bảng trong Release notes): quét lại + nộp như
-      26.11.1801 (phiếu `20261118-02` mục 6).
-- [ ] Dependabot #82 (cargo, 5 gói) + #83 (pub, 30 gói): CHƯA gộp - xem kỹ từng gói (sự cố 26.11.1801 đến từ lượt nâng
-      hàng loạt); cổng `frb_version_test` + `apple.yml` (Simulator/macOS chạy thử) phải xanh. `libc` >= 0.2.191 cần bản
-      chép `nix` (packages/vendor) - giữ khi nâng.
+- [ ] Báo nhầm antivirus **26.11.1901** (4 tệp Windows, 1-2/74 engine - bảng trong Release notes): CHƯA đọc được tên
+      engine - đọc API nội bộ trang VirusTotal bằng trình duyệt tự động bị chặn (19/11). Cách đúng: workflow tạm dùng
+      `VT_API_KEY` (mục 3.2 phiếu `20261118-02`) hoặc 👤 mở 4 link báo cáo; sau đó nộp như 26.11.1801.
+- [ ] 👤 Thử iPhone thật: `.ipa` không ký (run apple.yml 44472500679, gồm #89) ở
+      `C:\Users\devng\Downloads\lotus-share-ios\Lotus-Share-26.11.1901-unsigned.ipa` (SHA-256 `672df4df...f288c`, khớp
+      SHA256SUMS.txt cùng thư mục); làm theo `docs/vi/APPLE-IOS-MACOS.md` mục 2 (Sideloadly, 👤 đăng nhập Apple ID), ghi
+      kết quả `logs/thu-thiet-bi/`.
+- [ ] Bản major còn lại (Dependabot sẽ mở PR riêng từng gói nhờ `dependabot.yml` mới): freezed 4, device_info_plus 13,
+      package_info_plus 10, network_info_plus 8, file_picker 13, dynamic_color 2, win32_registry 3, pasteboard; webrtc
+      0.21 (viết lại API, task riêng); tokio-cron-scheduler 0.15 (chờ chrono-tz vá RUSTSEC-2026-0555).
 - [ ] Báo nhầm antivirus 26.11.1801: ĐÃ NỘP cả 3 hãng 19/11 (phiếu `logs/handover/20261118-02_*`). Từ 20/11: quét lại
       VirusTotal (workflow tạm dùng `VT_API_KEY`, mục 3.2), ghi số engine; theo dõi thư trả lời ở dev.nguyentrangtinhsu@gmail.com.
 - [ ] winget: khi PR microsoft/winget-pkgs#478033 (2.0.0) được gộp, gửi PR cập nhật `tsudev.LotusShare` **26.11.1901**
@@ -43,6 +48,9 @@
       `bash chan-doan-mang.sh` (trong tar.gz; `--sua` mở cổng 53420 ufw/firewalld). Hộp thoại cập nhật chỉ thử thật được
       khi phát hành build 66 (URL tệp phiên bản cố định trong ứng dụng). Chi tiết `docs/vi/KHAM-PHA-THIET-BI.md`.
 - [ ] Phiếu cả hệ `~/projects/logs/handover/20261112-04_yeu-cau-bat-buoc-cap-nhat-he-sinh-thai.md`: theo dõi mục Kết quả.
+- [ ] 👤 Quyết khóa `ITSAppUsesNonExemptEncryption` trước lần nộp App Store đầu: `false` hiện tại không có căn cứ (lõi tự
+      mang `rustls`/`ring`); khuyến nghị bỏ khóa để App Store Connect hỏi - `docs/store/app-store.md` mục 4 (#89). Làm
+      cùng: chuỗi xin quyền tiếng Anh cho macOS `Info.plist`. Còn việc agent: ảnh iPad 13" trong `apple.yml`.
 - [ ] **Apple (iOS + macOS)** - PR #80 ĐÃ GỘP (`apple.yml` xanh: Simulator mở app tiếng Việt, macOS mở app; script ký
       viết sẵn, `docs/vi/APPLE-IOS-MACOS.md`, `docs/store/app-store.md`). Còn: 👤 thử iPhone thật bằng `.ipa` không ký (mục 2 tài liệu, ghi kết quả
       `logs/thu-thiet-bi/`); khi có Mac + Apple Developer (đầu 2027): làm mục 4 tài liệu - xin quyền multicast NGAY,
@@ -55,6 +63,17 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 19/11/2026 (phiên lotus-share kế tiếp, tối) - Tiếp phiên trước bị tắt giữa chừng. **#88** nâng phụ thuộc có chọn lọc
+  thay Dependabot #82/#83 (đã đóng): dirs 7, lru 0.19, base64 0.23 + 11 gói pub minor/patch, mã sinh slang 4.19.2;
+  `dependabot.yml` chỉ gom minor/patch, bỏ qua webrtc >=0.15 + tokio-cron-scheduler >=0.14. Cục bộ: cargo test/clippy,
+  CLI, server, OSV, flutter analyze + test (135 + 21), kiểm bản dịch đạt; CI xanh cả iOS Simulator + macOS chạy thử.
+  Build thử `release-lotus.yml` trên main (run 44464294694) xanh 12 job; AppImage x64 mở thật trên WSLg 60 giây: không
+  `INIT_ERROR`, server HTTPS cổng 53420 chạy.
+  Bài học: `dart format` sau `fix_slang_format.py` gộp lại dấu `;` => cổng mã sinh đỏ; đừng format `lib/gen`.
+  **#89** (ủy quyền C): chuỗi xin quyền iOS tiếng Anh mặc định + `vi.lproj/InfoPlist.strings`, `apple.yml` kiểm; kết
+  luận mã hóa xuất khẩu. Rà Release mọi repo `tsudev-org`: chỉ lotus-share có bảng VirusTotal; repo khác chưa có dữ
+  liệu quét => chưa lập phiếu (cần workflow VirusTotal dùng chung, P1 phiếu P2). `tsudev-tsudev/app-la-ban` chưa có Release.
 
 - 19/11/2026 (lotus-share-fc) - **SỰ CỐ 26.11.1801 + bản sửa `v26.11.1901`**: 26.11.1801 không mở được trên Windows,
   Linux, macOS, Android (màn hình lỗi "codegen version (2.12.0) should be the same as runtime version (2.13.0)"); CLI
