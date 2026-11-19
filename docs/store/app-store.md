@@ -73,15 +73,32 @@ Không nhắc tên sản phẩm/dự án khác (AGENTS.md B.5); thông báo bả
 - Quyền xin (đều có chuỗi tiếng Việt trong `Info.plist`): Mạng cục bộ (tìm + kết nối thiết bị), Thư viện ảnh (chọn để
   gửi / lưu tệp nhận), Vị trí khi dùng (iOS chỉ cho đọc tên Wi-Fi khi có quyền vị trí - ứng dụng không lấy tọa độ).
   ⚠ Người duyệt hay hỏi quyền vị trí: trả lời đúng mục đích trên; nếu không cần hiện tên Wi-Fi thì cân nhắc bỏ quyền.
-  ⚠ Chuỗi xin quyền chỉ có tiếng Việt: thêm `en.lproj/InfoPlist.strings` trước khi nộp bản địa hóa English.
+- Chuỗi xin quyền (20/11/2026): `Info.plist` giữ bản **tiếng Anh** (ngôn ngữ chưa có bản dịch, PRODUCT_POLICY 1.4),
+  bản tiếng Việt ở `Runner/vi.lproj/InfoPlist.strings`; `apple.yml` kiểm cả hai có trong `Runner.app`. Thêm ngôn ngữ
+  khác: tạo `<mã>.lproj/InfoPlist.strings` + thêm vào nhóm `InfoPlist.strings` của `project.pbxproj`.
 
 ## 4. Tuân thủ xuất khẩu mã hóa (Export Compliance)
 
-`Info.plist` hiện ghi `ITSAppUsesNonExemptEncryption = false`. ⚠ Phải xác minh lại trước lần nộp đầu: lõi Rust dùng
-TLS chuẩn qua thư viện `rustls` (không phải TLS của hệ điều hành) - câu hỏi của Apple "dùng thuật toán mã hóa chuẩn thay
-cho/bổ sung mã hóa của hệ điều hành" khi đó là **Có**. Đọc hướng dẫn Export Compliance hiện hành của Apple + quy định
-EAR (mass market 5D992 / báo cáo tự phân loại hằng năm) ngày nộp, ghi kết luận và lý do vào đây; đổi khóa `Info.plist`
-nếu kết luận khác. 👤 quyết nếu phải nộp báo cáo cho cơ quan Mỹ.
+`Info.plist` hiện ghi `ITSAppUsesNonExemptEncryption = false` (`apple.yml` kiểm giá trị này).
+
+**Kết luận nghiên cứu 19/11/2026** (nguồn: Apple "Complying with Encryption Export Regulations" + "Determine and upload
+app encryption documentation"):
+
+- Quy tắc của Apple (nguyên văn): đặt `NO` khi ứng dụng "including any third-party libraries it links against - doesn't
+  use encryption, or if it only uses forms of encryption that are exempt"; còn lại `YES`. Apple chỉ nêu ví dụ miễn trừ
+  là mã hóa **của hệ điều hành** (HTTPS qua `URLSession`); mã hóa độc quyền thì không miễn.
+- Lotus Share tự mang mã hóa chuẩn trong lõi Rust: `rustls` + `ring` (TLS 1.2/1.3 giữa các thiết bị), `rcgen`
+  (chứng thư tự ký), `rsa`/`ed25519-dalek`/`sha2`. Đây là **thuật toán chuẩn nhưng không do hệ điều hành cung cấp** -
+  không thuộc ví dụ miễn trừ Apple nêu. Giá trị `false` hiện tại **không có căn cứ** trong tài liệu Apple.
+- Apple ghi: dùng mã hóa thuộc diện miễn thì có thể phải nộp báo cáo tự phân loại cuối năm cho chính phủ Mỹ (BIS);
+  nộp tài liệu cho Apple (khi `YES`) thì không cần báo cáo đó. `ITSEncryptionExportComplianceCode` chỉ thêm SAU khi Apple
+  duyệt tài liệu và cấp mã.
+- Chưa kiểm được: câu hỏi chi tiết trong hộp thoại App Store Connect và yêu cầu riêng của Pháp (trang Apple không nêu).
+
+**Khuyến nghị (👤 quyết trước lần nộp đầu, không ảnh hưởng gì trước đó):** bỏ khóa `ITSAppUsesNonExemptEncryption`
+khỏi `Info.plist` (iOS + macOS) và sửa kiểm ở `apple.yml`, để App Store Connect hỏi ở bản dựng đầu; trả lời đúng thực tế
+("dùng thuật toán mã hóa chuẩn thay cho/bổ sung mã hóa của hệ điều hành"), làm theo hộp thoại (tải tài liệu nếu được yêu
+cầu), rồi đặt khóa + `ITSEncryptionExportComplianceCode` theo kết quả. Nếu phải nộp báo cáo cho cơ quan Mỹ: 👤 quyết.
 
 ## 5. Xếp hạng tuổi (Age Rating)
 

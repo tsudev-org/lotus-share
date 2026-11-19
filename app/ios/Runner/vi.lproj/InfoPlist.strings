@@ -1,0 +1,6 @@
+/* Chuỗi xin quyền tiếng Việt. Info.plist giữ bản tiếng Anh cho ngôn ngữ chưa có bản dịch (PRODUCT_POLICY 1.4). */
+"NSPhotoLibraryUsageDescription" = "Ứng dụng cần quyền truy cập thư viện ảnh để bạn chọn ảnh, video muốn chia sẻ.";
+"NSPhotoLibraryAddUsageDescription" = "Ứng dụng lưu ảnh, video nhận được vào thư viện ảnh.";
+"NSLocationAlwaysAndWhenInUseUsageDescription" = "Ứng dụng cần địa chỉ IP trong mạng nội bộ để kết nối với thiết bị khác.";
+"NSLocationWhenInUseUsageDescription" = "Ứng dụng cần địa chỉ IP trong mạng nội bộ để kết nối với thiết bị khác.";
+"NSLocalNetworkUsageDescription" = "Ứng dụng dùng mạng nội bộ để tìm và kết nối với các thiết bị ở gần.";

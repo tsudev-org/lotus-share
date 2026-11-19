@@ -241,8 +241,8 @@ unset P; chmod 600 ./*
 3. Mô tả cửa hàng: KHÔNG ghi số tài khoản, QR hay lời kêu gọi ủng hộ (quyết định ủng hộ theo nền tảng - iOS ẩn hoàn
    toàn); được ghi website `https://lotus.tsudev.com`. Nội dung soạn sẵn: `docs/store/app-store.md` (không nhắc tên
    sản phẩm khác - AGENTS.md B.5; ghi công gốc chỉ ở Giới thiệu > Giấy phép).
-4. Mã hóa xuất khẩu: `Info.plist` đang đặt `ITSAppUsesNonExemptEncryption = false`; phải xác minh lại trước lần nộp
-   đầu (lõi dùng TLS của `rustls`, không phải của hệ điều hành) - `docs/store/app-store.md` mục 4.
+4. Mã hóa xuất khẩu: `Info.plist` đang đặt `ITSAppUsesNonExemptEncryption = false` - không có căn cứ (lõi tự mang
+   TLS `rustls`/`ring`, không phải của hệ điều hành). Kết luận + khuyến nghị: `docs/store/app-store.md` mục 4 (👤 quyết).
 
 ### B8. Kiểm tra trước khi giao cho agent
 

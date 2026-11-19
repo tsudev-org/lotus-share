@@ -98,6 +98,10 @@ jobs:
           [[ "$(plutil -extract CFBundleIdentifier raw "$app/Info.plist")" == "$BUNDLE_ID" ]]
           [[ "$(plutil -extract CFBundleDisplayName raw "$app/Info.plist")" == "Lotus Share" ]]
           test -f "$app/PrivacyInfo.xcprivacy" || { echo "::error::PrivacyInfo.xcprivacy không có trong Runner.app"; exit 1; }
+          # Chuỗi xin quyền: Info.plist tiếng Anh (ngôn ngữ chưa dịch), vi.lproj tiếng Việt - cả hai phải vào gói.
+          plutil -lint "$app/vi.lproj/InfoPlist.strings"
+          [[ "$(plutil -extract NSLocalNetworkUsageDescription raw "$app/vi.lproj/InfoPlist.strings")" == *"mạng nội bộ"* ]]
+          [[ "$(plutil -extract NSLocalNetworkUsageDescription raw "$app/Info.plist")" == *"local network"* ]]
           lipo -info "$app/Runner" | tee /dev/stderr | grep -q arm64
           ver="$(plutil -extract CFBundleShortVersionString raw "$app/Info.plist")"
           build="$(plutil -extract CFBundleVersion raw "$app/Info.plist")"
