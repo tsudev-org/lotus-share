@@ -61,6 +61,9 @@
       viết sẵn, `docs/vi/APPLE-IOS-MACOS.md`, `docs/store/app-store.md`). Còn: 👤 thử iPhone thật bằng `.ipa` không ký (mục 2 tài liệu, ghi kết quả
       `logs/thu-thiet-bi/`); khi có Mac + Apple Developer (đầu 2027): làm mục 4 tài liệu - xin quyền multicast NGAY,
       ghim `APPLE_TEAM_ID_GHIM`, thử sandbox macOS trên Mac thật. Phiếu toàn hệ `~/projects/logs/handover/20261119-AP1_*`.
+- [ ] **PRO1** (phiếu `logs/handover/20261119-PRO1_*`, từ qulythuchi-b2 19/11): lưu cục bộ mặc định, Pro chỉ đồng bộ
+      danh sách thiết bị/cài đặt qua PRO-D; truyền LAN vẫn miễn phí, không relay internet. KHÔNG làm trước khi
+      tsudev-standards v3.9.0 (PRO-A) + PRO-B/PRO-D sẵn sàng.
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
 
 ## Đang thực hiện
