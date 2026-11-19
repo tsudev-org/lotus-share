@@ -4,7 +4,9 @@
 # In ra đường dẫn keychain; job phải gọi `xoa-khoa.sh` ở bước `if: always()`.
 # CHƯA CHẠY THẬT (chờ Apple Developer Program, docs/vi/APPLE-IOS-MACOS.md mục 4) - build thử trước khi phát hành.
 set -euo pipefail
-: "${RUNNER_TEMP:?chỉ chạy trên CI}" "${APPLE_P12_PASSWORD:?thiếu APPLE_P12_PASSWORD}"
+: "${RUNNER_TEMP:?chỉ chạy trên CI}"
+# Mật khẩu .p12 đến từ secret của workflow (biến môi trường), không bao giờ viết trong tệp này.
+[[ -n "${APPLE_P12_PASSWORD-}" ]] || { echo "::error::Thiếu biến môi trường mật khẩu .p12 (secret của workflow)"; exit 1; }
 kc="$RUNNER_TEMP/lotus-ky.keychain-db"
 kc_pw="$(openssl rand -hex 24)"
 security create-keychain -p "$kc_pw" "$kc"
