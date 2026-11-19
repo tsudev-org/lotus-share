@@ -109,8 +109,8 @@ giới hạn, không nội dung do người dùng tạo công khai - tệp chỉ
 
 - iPhone 6,9" (1320 x 2868) bắt buộc; 6,5" tùy hệ thống yêu cầu ngày nộp. Ứng dụng hỗ trợ cả iPad
   (`TARGETED_DEVICE_FAMILY = "1,2"`) => BẮT BUỘC thêm ảnh iPad 13" (2064 x 2752); chụp trên Simulator iPad Pro 13".
-- Nguồn ảnh: phase T8 (ảnh không dữ liệu thật) + ảnh chụp Simulator iPhone Pro Max của `apple.yml`
-  (`ios-simulator-screenshot`). Lưu bộ chọn lọc ở `assets/store/ios/`.
+- Nguồn ảnh: phase T8 (ảnh không dữ liệu thật) + ảnh chụp Simulator iPhone Pro Max và iPad Pro 13" của `apple.yml`
+  (`ios-simulator-screenshot`: `ios-simulator.png`, `ipad-13.png` - job đỏ nếu ảnh iPad không đúng cỡ 13"). Lưu bộ chọn lọc ở `assets/store/ios/`.
 - Nội dung 5 ảnh: (1) danh sách thiết bị ở gần, (2) chọn tệp gửi, (3) nhận tệp + PIN, (4) lịch sử, (5) cài đặt ngôn ngữ/
   giao diện. Chữ chú thích vi + en.
 
