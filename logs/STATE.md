@@ -26,6 +26,8 @@
       `C:\Users\devng\Downloads\lotus-share-ios\Lotus-Share-26.11.1901-unsigned.ipa` (SHA-256 `672df4df...f288c`, khớp
       SHA256SUMS.txt cùng thư mục); làm theo `docs/vi/APPLE-IOS-MACOS.md` mục 2 (Sideloadly, 👤 đăng nhập Apple ID), ghi
       kết quả `logs/thu-thiet-bi/`.
+- [ ] Dependabot mở 19/11 sau #93 (CHƯA xem, đều đỏ): #95 nhóm pub (build_runner 2.16 + freezed 4.0.3 an toàn; còn kéo
+      test 1.32 + tray_manager 0.9 => tách), #96 dynamic_color 2 (major, test + Apple đỏ).
 - [ ] Bản major còn lại (Dependabot sẽ mở PR riêng từng gói nhờ `dependabot.yml` mới): tray_manager 0.9 (thử khay hệ
       thống 3 desktop), flutter_foreground_task 11 (KGP/SPM/UIScene, thử Android thật), device_info_plus 13,
       package_info_plus 10, network_info_plus 8, file_picker 13, dynamic_color 2, win32_registry 3; pasteboard (bỏ bản
