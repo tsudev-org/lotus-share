@@ -59,4 +59,8 @@ Mỗi việc xong: cập nhật `logs/STATE.md` (Đã hoàn thành) + mục Kế
 
 ## 4. Kết quả
 
-(phiên kế tiếp ghi)
+- 19/11/2026 tối - Việc 4: XONG (#88 gộp, #82/#83 đóng); build thử run 44464294694 xanh 12 job, AppImage mở thật OK.
+- Việc 5: #89 (en/vi chuỗi xin quyền, kết luận `ITSAppUsesNonExemptEncryption` -> 👤 quyết). `.ipa` đã để ở `C:\Users\devng\Downloads\lotus-share-ios\` (SHA-256 khớp). Chưa: ảnh iPad.
+- Việc 1 (GitGuardian): CHƯA - cần đăng nhập dashboard của 👤.
+- Việc 2: CHƯA - đọc báo cáo VirusTotal bằng trình duyệt tự động bị chặn; dùng workflow `VT_API_KEY` (từ 20/11).
+- Việc 3: chỉ lotus-share có bảng VirusTotal trong Release notes; repo khác không có dữ liệu => chưa có phiếu nào.
