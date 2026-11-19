@@ -64,3 +64,8 @@ Mỗi việc xong: cập nhật `logs/STATE.md` (Đã hoàn thành) + mục Kế
 - Việc 1 (GitGuardian): CHƯA - cần đăng nhập dashboard của 👤.
 - Việc 2: CHƯA - đọc báo cáo VirusTotal bằng trình duyệt tự động bị chặn; dùng workflow `VT_API_KEY` (từ 20/11).
 - Việc 3: chỉ lotus-share có bảng VirusTotal trong Release notes; repo khác không có dữ liệu => chưa có phiếu nào.
+- 19/11/2026 khuya - Việc 2: engine đã đọc + quét lại (phiếu `20261118-02` mục 7; Cylance gỡ cờ). Nộp 1901 soạn sẵn,
+  chờ 👤 gửi (Gmail DeepInstinct + form SecureAge - sandbox chặn `uav.secureage.com`). Quét lại tiếp từ 22/11.
+- Dependabot #90/#91: XONG qua #93 (phần an toàn); major tách ra STATE.
+- Việc 5 ảnh iPad 13": XONG (#94, 2064x2752).
+- Còn 👤: GitGuardian 40268788, duyệt `xuat-ban`, quyết `ITSAppUsesNonExemptEncryption`, thử iPhone, gửi báo nhầm 1901.

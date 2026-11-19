@@ -18,18 +18,22 @@
       `pkg.tsudev.com/catalog.json` sau khi duyệt.
 - [ ] 👤 GitGuardian sự cố 40268788 ("Generic Password", `scripts/apple/nhap-khoa.sh` dòng 7 ở commit 02ad20e): báo nhầm
       (chỉ kiểm biến môi trường, không có giá trị) - đánh dấu false positive trên dashboard. Mã đã viết lại.
-- [ ] Báo nhầm antivirus **26.11.1901** (4 tệp Windows, 1-2/74 engine - bảng trong Release notes): CHƯA đọc được tên
-      engine - đọc API nội bộ trang VirusTotal bằng trình duyệt tự động bị chặn (19/11). Cách đúng: workflow tạm dùng
-      `VT_API_KEY` (mục 3.2 phiếu `20261118-02`) hoặc 👤 mở 4 link báo cáo; sau đó nộp như 26.11.1801.
+- [ ] 👤 Gửi báo nhầm **26.11.1901** (đã đọc engine 19/11, phiếu `20261118-02` mục 7): mở
+      `C:\Users\devng\Downloads\lotus-share-bao-nham-26111901\huong-dan.html` - (1) link Gmail soạn sẵn cho DeepInstinct
+      (zip + CLI ARM64), bấm Gửi; (2) form SecureAge cho APEX (2 bộ cài trong cùng thư mục) - sandbox agent không vào được
+      `uav.secureage.com`.
 - [ ] 👤 Thử iPhone thật: `.ipa` không ký (run apple.yml 44472500679, gồm #89) ở
       `C:\Users\devng\Downloads\lotus-share-ios\Lotus-Share-26.11.1901-unsigned.ipa` (SHA-256 `672df4df...f288c`, khớp
       SHA256SUMS.txt cùng thư mục); làm theo `docs/vi/APPLE-IOS-MACOS.md` mục 2 (Sideloadly, 👤 đăng nhập Apple ID), ghi
       kết quả `logs/thu-thiet-bi/`.
-- [ ] Bản major còn lại (Dependabot sẽ mở PR riêng từng gói nhờ `dependabot.yml` mới): freezed 4, device_info_plus 13,
-      package_info_plus 10, network_info_plus 8, file_picker 13, dynamic_color 2, win32_registry 3, pasteboard; webrtc
+- [ ] Bản major còn lại (Dependabot sẽ mở PR riêng từng gói nhờ `dependabot.yml` mới): tray_manager 0.9 (thử khay hệ
+      thống 3 desktop), flutter_foreground_task 11 (KGP/SPM/UIScene, thử Android thật), device_info_plus 13,
+      package_info_plus 10, network_info_plus 8, file_picker 13, dynamic_color 2, win32_registry 3; pasteboard (bỏ bản
+      git vá, dependabot đang bỏ qua); test >= 1.32 (chờ nâng Flutter - test_api ghim); webrtc
       0.21 (viết lại API, task riêng); tokio-cron-scheduler 0.15 (chờ chrono-tz vá RUSTSEC-2026-0555).
-- [ ] Báo nhầm antivirus 26.11.1801: ĐÃ NỘP cả 3 hãng 19/11 (phiếu `logs/handover/20261118-02_*`). Từ 20/11: quét lại
-      VirusTotal (workflow tạm dùng `VT_API_KEY`, mục 3.2), ghi số engine; theo dõi thư trả lời ở dev.nguyentrangtinhsu@gmail.com.
+- [ ] Báo nhầm antivirus 26.11.1801 + 26.11.1901: quét lại 19/11 12:25 UTC - Cylance đã gỡ; còn APEX + DeepInstinct
+      (phiếu `20261118-02` mục 7). Quét lại lần nữa từ **22/11** (workflow tạm, cách ở mục 7); theo dõi thư trả lời ở
+      dev.nguyentrangtinhsu@gmail.com.
 - [ ] winget: khi PR microsoft/winget-pkgs#478033 (2.0.0) được gộp, gửi PR cập nhật `tsudev.LotusShare` **26.11.1901**
       (KHÔNG dùng 26.11.1801 - bản lỗi; bộ cài `lotus-share_26.11.1901_windows-{x64,arm64}-setup.exe`, SHA-256 từ SHA256SUMS.txt).
 - [ ] winget `tsudev.LotusShare`: chờ người kiểm duyệt cộng đồng duyệt PR microsoft/winget-pkgs#478033 (18/11 đã nâng
@@ -50,7 +54,7 @@
 - [ ] Phiếu cả hệ `~/projects/logs/handover/20261112-04_yeu-cau-bat-buoc-cap-nhat-he-sinh-thai.md`: theo dõi mục Kết quả.
 - [ ] 👤 Quyết khóa `ITSAppUsesNonExemptEncryption` trước lần nộp App Store đầu: `false` hiện tại không có căn cứ (lõi tự
       mang `rustls`/`ring`); khuyến nghị bỏ khóa để App Store Connect hỏi - `docs/store/app-store.md` mục 4 (#89). Làm
-      cùng: chuỗi xin quyền tiếng Anh cho macOS `Info.plist`. Còn việc agent: ảnh iPad 13" trong `apple.yml`.
+      cùng: chuỗi xin quyền tiếng Anh cho macOS `Info.plist`. Ảnh iPad 13" đã có (#94).
 - [ ] **Apple (iOS + macOS)** - PR #80 ĐÃ GỘP (`apple.yml` xanh: Simulator mở app tiếng Việt, macOS mở app; script ký
       viết sẵn, `docs/vi/APPLE-IOS-MACOS.md`, `docs/store/app-store.md`). Còn: 👤 thử iPhone thật bằng `.ipa` không ký (mục 2 tài liệu, ghi kết quả
       `logs/thu-thiet-bi/`); khi có Mac + Apple Developer (đầu 2027): làm mục 4 tài liệu - xin quyền multicast NGAY,
@@ -63,6 +67,15 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 19/11/2026 (phiên lotus-share, khuya) - **VirusTotal**: workflow tạm `VT_API_KEY` (run 44523059222, nhánh đã xóa)
+  đọc engine 26.11.1901 + quét lại 8 tệp: Cylance đã gỡ cờ mọi tệp; còn APEX (2 bộ cài 1901 + 1801) và DeepInstinct
+  (zip/CLI ARM64, bộ cài 1801) - phiếu `20261118-02` mục 7. Nộp 1901: soạn sẵn ở `C:\Users\devng\Downloads\lotus-share-bao-nham-26111901\`
+  (sandbox chặn `uav.secureage.com` => 👤 gửi). **#93** thay Dependabot #90/#91 (xem từng gói): freezed 4.0.1 +
+  dart_mappable 4.10 + mockito 5.8.1 (đi cùng vì analyzer), sinh lại mã; không nâng test 1.32 (test_api ghim theo
+  Flutter), pasteboard (git vá), tray_manager 0.9 / flutter_foreground_task 11 (major, PR riêng); dependabot.yml bỏ qua
+  test >=1.32 + pasteboard. CI xanh 15/15 (macOS bị hủy vì không có máy chạy, chạy lại xanh). **#94** `apple.yml` chạy thử +
+  chụp iPad Pro 13-inch (M5) giả lập, ảnh 2064x2752 đúng cỡ App Store, kiểm không sập/không `INIT_ERROR`.
 
 - 19/11/2026 (phiên lotus-share kế tiếp, tối) - Tiếp phiên trước bị tắt giữa chừng. **#88** nâng phụ thuộc có chọn lọc
   thay Dependabot #82/#83 (đã đóng): dirs 7, lru 0.19, base64 0.23 + 11 gói pub minor/patch, mã sinh slang 4.19.2;
