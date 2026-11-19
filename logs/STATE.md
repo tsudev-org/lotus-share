@@ -29,6 +29,10 @@
       `bash chan-doan-mang.sh` (trong tar.gz; `--sua` mở cổng 53420 ufw/firewalld). Hộp thoại cập nhật chỉ thử thật được
       khi phát hành build 66 (URL tệp phiên bản cố định trong ứng dụng). Chi tiết `docs/vi/KHAM-PHA-THIET-BI.md`.
 - [ ] Phiếu cả hệ `~/projects/logs/handover/20261112-04_yeu-cau-bat-buoc-cap-nhat-he-sinh-thai.md`: theo dõi mục Kết quả.
+- [ ] **Apple (iOS + macOS)** - PR #80 (`apple.yml`, script ký viết sẵn, `docs/vi/APPLE-IOS-MACOS.md`,
+      `docs/store/app-store.md`). Còn: 👤 thử iPhone thật bằng `.ipa` không ký (mục 2 tài liệu, ghi kết quả
+      `logs/thu-thiet-bi/`); khi có Mac + Apple Developer (đầu 2027): làm mục 4 tài liệu - xin quyền multicast NGAY,
+      ghim `APPLE_TEAM_ID_GHIM`, thử sandbox macOS trên Mac thật. Phiếu toàn hệ `~/projects/logs/handover/20261119-AP1_*`.
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
 
 ## Đang thực hiện

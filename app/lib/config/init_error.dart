@@ -15,6 +15,10 @@ void showInitErrorApp({
   required StackTrace stackTrace,
 }) async {
   _logger.severe('Error during init', error, stackTrace);
+  // lotus-share: dấu hiệu cố định trong nhật ký hệ thống (cả bản release) để CI chạy thử biết ứng dụng rơi vào màn
+  // hình lỗi khởi động dù tiến trình vẫn sống (sự cố 26.11.1801) - .github/workflows/apple.yml tìm chuỗi này.
+  // ignore: avoid_print
+  print('LOTUS_SHARE_INIT_ERROR: $error');
 
   if (checkPlatformIsDesktop()) {
     await WindowManager.instance.ensureInitialized();

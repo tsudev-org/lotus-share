@@ -1,0 +1,221 @@
+# lotus-share: dựng và chạy thử iOS + macOS KHÔNG KÝ trên máy chạy macOS của GitHub (PRODUCT_POLICY mục 2.1).
+#
+# Chưa có Mac + Apple Developer Program (dự kiến đầu 2027): workflow này giữ cho mã iOS/macOS luôn dựng được và chạy
+# được, để ngày có tài khoản chỉ còn bước ký (docs/vi/APPLE-IOS-MACOS.md). Repo CÔNG KHAI nên phút macOS miễn phí.
+#   - iOS: `flutter build ios --release --no-codesign` -> Lotus-Share-unsigned.ipa (artifact 14 ngày, KHÔNG đăng
+#     Release) cho chủ dự án ký lại bằng Apple ID cá nhân (Sideloadly) và cài lên iPhone của chính mình.
+#   - iOS Simulator: dựng bản debug, cài + mở trên iPhone giả lập, kiểm ứng dụng còn chạy sau 45 giây VÀ không ghi
+#     LOTUS_SHARE_INIT_ERROR (màn hình lỗi khởi động - app/lib/config/init_error.dart), chụp màn hình.
+#   - macOS: dựng release, ký ad-hoc, mở thử, kiểm còn chạy, chụp màn hình.
+#   - Kiểm tĩnh trên gói: bundle id, PrivacyInfo.xcprivacy có trong .app, entitlements multicast + app group, không
+#     còn aps-environment, chuỗi xin quyền tiếng Việt không rỗng.
+name: Apple (iOS, macOS)
+
+on:
+  pull_request:
+    paths:
+      - 'app/**'
+      - 'packages/**'
+      - 'Cargo.lock'
+      - 'rust-toolchain.toml'
+      - 'pubspec.lock'
+      - '.github/workflows/apple.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'app/ios/**'
+      - 'app/macos/**'
+      - 'app/pubspec.yaml'
+      - '.github/workflows/apple.yml'
+  schedule:
+    - cron: '17 3 * * 1'   # thứ Hai hằng tuần: bắt sớm lỗi do Xcode/máy chạy macOS đổi
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: apple-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: '3.47.9'
+  FLUTTER_COMMIT: 'c197ca5199e9ee5661e865596c9c07294dfab51c'
+  BUNDLE_ID: 'com.tsudev.lotusshare'
+
+jobs:
+  ios:
+    name: iOS (không ký + Simulator)
+    runs-on: macos-15
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Cài Flutter (ghim tag + commit)
+        run: |
+          set -euo pipefail
+          git clone --depth 1 -b "$FLUTTER_VERSION" https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          test "$(git -C "$RUNNER_TEMP/flutter" rev-parse HEAD)" = "$FLUTTER_COMMIT"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+      # connectivity_plus dùng API của SDK 26: cần Xcode 26 trở lên (như job macOS của release-lotus.yml).
+      - name: Chọn Xcode 26
+        run: |
+          set -euo pipefail
+          xc="$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1 || true)"
+          [[ -n "$xc" ]] || { echo "::error::Máy chạy không có Xcode 26"; ls -d /Applications/Xcode*.app; exit 1; }
+          sudo xcode-select -s "$xc/Contents/Developer"
+          xcodebuild -version
+      - name: Kiểm tĩnh mã nguồn iOS
+        run: |
+          set -euo pipefail
+          ent=app/ios/Runner/Runner.entitlements
+          plutil -lint "$ent" app/ios/Runner/Info.plist app/ios/Runner/PrivacyInfo.xcprivacy
+          # PlistBuddy: plutil -extract hiểu dấu chấm trong tên khóa là đường dẫn lồng nhau.
+          pb() { /usr/libexec/PlistBuddy -c "Print :$1" "$2" 2>/dev/null; }
+          [[ "$(pb com.apple.developer.networking.multicast "$ent")" == true ]] \
+            || { echo "::error::Thiếu quyền multicast trong $ent (tìm thiết bị cần quyền này)"; exit 1; }
+          if pb aps-environment "$ent" >/dev/null; then
+            echo "::error::$ent còn aps-environment: ứng dụng không dùng push, khóa này buộc bật Push Notifications"; exit 1
+          fi
+          for k in NSLocalNetworkUsageDescription NSPhotoLibraryUsageDescription NSPhotoLibraryAddUsageDescription; do
+            v="$(pb "$k" app/ios/Runner/Info.plist)"
+            [[ -n "$v" ]] || { echo "::error::Info.plist: $k rỗng"; exit 1; }
+          done
+          [[ "$(pb ITSAppUsesNonExemptEncryption app/ios/Runner/Info.plist)" == false ]]
+          grep -q "PRODUCT_BUNDLE_IDENTIFIER = $BUNDLE_ID;" app/ios/Runner.xcodeproj/project.pbxproj
+      - name: Dựng iOS release không ký
+        working-directory: app
+        run: |
+          set -euo pipefail
+          flutter config --no-analytics
+          flutter pub get
+          flutter build ios --release --no-codesign
+      - name: Kiểm gói .app + đóng .ipa không ký
+        run: |
+          set -euo pipefail
+          app=app/build/ios/iphoneos/Runner.app
+          [[ "$(plutil -extract CFBundleIdentifier raw "$app/Info.plist")" == "$BUNDLE_ID" ]]
+          [[ "$(plutil -extract CFBundleDisplayName raw "$app/Info.plist")" == "Lotus Share" ]]
+          test -f "$app/PrivacyInfo.xcprivacy" || { echo "::error::PrivacyInfo.xcprivacy không có trong Runner.app"; exit 1; }
+          lipo -info "$app/Runner" | tee /dev/stderr | grep -q arm64
+          ver="$(plutil -extract CFBundleShortVersionString raw "$app/Info.plist")"
+          build="$(plutil -extract CFBundleVersion raw "$app/Info.plist")"
+          echo "Phiên bản $ver ($build)"
+          mkdir -p dist/Payload && cp -R "$app" dist/Payload/
+          (cd dist && zip -qry "Lotus-Share-${ver}-unsigned.ipa" Payload && rm -rf Payload)
+          (cd dist && shasum -a 256 ./*.ipa | tee SHA256SUMS.txt)
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ios-unsigned-ipa
+          path: dist/*
+          retention-days: 14
+          if-no-files-found: error
+      - name: Dựng bản Simulator
+        working-directory: app
+        run: flutter build ios --simulator --debug
+      - name: Chạy thử trên iPhone giả lập
+        run: |
+          set -euo pipefail
+          udid="$(xcrun simctl list devices available -j | python3 -I -c '
+          import json, sys
+          d = json.load(sys.stdin)["devices"]
+          ios = sorted((k for k in d if "iOS" in k), key=lambda k: [int(x) for x in k.rsplit("iOS-", 1)[1].split("-")])
+          for k in reversed(ios):
+              for dev in d[k]:
+                  if dev["name"].startswith("iPhone") and "Pro Max" in dev["name"]:
+                      print(dev["udid"]); sys.exit()
+          for k in reversed(ios):
+              for dev in d[k]:
+                  if dev["name"].startswith("iPhone"):
+                      print(dev["udid"]); sys.exit()
+          ')"
+          [[ -n "$udid" ]] || { echo "::error::Không có iPhone giả lập"; xcrun simctl list devices available; exit 1; }
+          xcrun simctl boot "$udid"
+          xcrun simctl bootstatus "$udid" -b
+          # Ngôn ngữ hệ thống tiếng Việt: lần đầu mở phải ra giao diện tiếng Việt (PRODUCT_POLICY mục 1).
+          xcrun simctl spawn "$udid" defaults write -g AppleLanguages -array vi
+          xcrun simctl spawn "$udid" defaults write -g AppleLocale vi_VN
+          xcrun simctl install "$udid" app/build/ios/iphonesimulator/Runner.app
+          xcrun simctl launch --stdout="$PWD/ios-app.log" --stderr="$PWD/ios-app.log" "$udid" "$BUNDLE_ID"
+          sleep 45
+          xcrun simctl spawn "$udid" launchctl list | grep -q "UIKitApplication:$BUNDLE_ID" \
+            || { echo "::error::Ứng dụng thoát/sập trên Simulator trong 45 giây đầu"; \
+                 xcrun simctl spawn "$udid" log show --last 2m --predicate 'process == "Runner"' | tail -80; exit 1; }
+          mkdir -p shots && xcrun simctl io "$udid" screenshot shots/ios-simulator.png
+          # Tiến trình còn sống chưa đủ: màn hình lỗi khởi động cũng giữ tiến trình (sự cố 26.11.1801).
+          { cat ios-app.log 2>/dev/null; xcrun simctl spawn "$udid" log show --last 5m --style compact \
+              --predicate 'eventMessage CONTAINS "LOTUS_SHARE_INIT_ERROR"'; } > ios-check.log || true
+          if grep -qF "LOTUS_SHARE_INIT_ERROR: " ios-check.log; then
+            echo "::error::Ứng dụng iOS hiện màn hình lỗi khởi động:"; grep -F "LOTUS_SHARE_INIT_ERROR: " ios-check.log | tail -3; exit 1
+          fi
+          xcrun simctl shutdown "$udid"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: ios-simulator-screenshot
+          path: shots/*
+          retention-days: 14
+          if-no-files-found: ignore
+
+  macos:
+    name: macOS (ad-hoc + chạy thử)
+    runs-on: macos-15
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Cài Flutter (ghim tag + commit)
+        run: |
+          set -euo pipefail
+          git clone --depth 1 -b "$FLUTTER_VERSION" https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          test "$(git -C "$RUNNER_TEMP/flutter" rev-parse HEAD)" = "$FLUTTER_COMMIT"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+      - name: Chọn Xcode 26
+        run: |
+          set -euo pipefail
+          xc="$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1 || true)"
+          [[ -n "$xc" ]] || { echo "::error::Máy chạy không có Xcode 26"; exit 1; }
+          sudo xcode-select -s "$xc/Contents/Developer"
+          xcodebuild -version
+      - name: Dựng macOS release
+        working-directory: app
+        run: |
+          set -euo pipefail
+          flutter config --no-analytics
+          flutter pub get
+          flutter build macos --release
+      - name: Ký ad-hoc, kiểm gói, chạy thử
+        run: |
+          set -euo pipefail
+          app="app/build/macos/Build/Products/Release/Lotus Share.app"
+          [[ "$(plutil -extract CFBundleIdentifier raw "$app/Contents/Info.plist")" == "$BUNDLE_ID" ]]
+          lipo -info "$app/Contents/MacOS/Lotus Share" | tee /dev/stderr | grep -q arm64
+          # Entitlements Release (sandbox + mạng) phải có trong chữ ký Xcode tạo ra - bản Developer ID sau này giữ chúng.
+          codesign -d --entitlements - --xml "$app" > ent.plist
+          pb() { /usr/libexec/PlistBuddy -c "Print :$1" "$2" 2>/dev/null; }
+          [[ "$(pb com.apple.security.app-sandbox ent.plist)" == true ]] || { echo "::error::Chữ ký thiếu app-sandbox"; exit 1; }
+          [[ "$(pb com.apple.security.network.server ent.plist)" == true ]] || { echo "::error::Chữ ký thiếu network.server"; exit 1; }
+          # Ký lại GIỐNG HỆT job macOS của release-lotus.yml để chạy thử đúng bản người dùng tải về.
+          codesign --force --deep --sign - "$app"
+          codesign --verify --deep --strict "$app"
+          # Chạy thẳng tệp thực thi để giữ stdout/stderr (print của Flutter) mà kiểm dấu hiệu lỗi khởi động.
+          "$app/Contents/MacOS/Lotus Share" > macos-app.log 2>&1 &
+          sleep 30
+          pgrep -x "Lotus Share" >/dev/null || { echo "::error::Ứng dụng macOS thoát/sập trong 30 giây đầu"; \
+            log show --last 2m --predicate 'process == "Lotus Share"' | tail -80; exit 1; }
+          mkdir -p shots && screencapture -x shots/macos.png || echo "::warning::Không chụp được màn hình (máy chạy không có phiên đồ họa)"
+          { cat macos-app.log; log show --last 5m --style compact \
+              --predicate 'eventMessage CONTAINS "LOTUS_SHARE_INIT_ERROR"'; } > macos-check.log || true
+          if grep -qF "LOTUS_SHARE_INIT_ERROR: " macos-check.log; then
+            echo "::error::Ứng dụng macOS hiện màn hình lỗi khởi động:"; grep -F "LOTUS_SHARE_INIT_ERROR: " macos-check.log | tail -3; exit 1
+          fi
+          pkill -x "Lotus Share" || true
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: macos-screenshot
+          path: shots/*
+          retention-days: 14
+          if-no-files-found: ignore

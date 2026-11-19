@@ -40,6 +40,11 @@ jobs:
           languages: ${{ matrix.language }}
           build-mode: none
           queries: security-extended
+          # lotus-share: packages/vendor/ là mã bên thứ ba chép nguyên văn (chủ dự án đồng ý 19/11/2026); lỗ hổng của chúng
+          # theo dõi bằng OSV + Dependabot theo phiên bản gốc, không quét lại như mã của dự án.
+          config: |
+            paths-ignore:
+              - packages/vendor/**
       - uses: github/codeql-action/analyze@33d7b85da1a04171e211befe2c739303b9a4c066 # v4
         with:
           category: /language:${{ matrix.language }}
