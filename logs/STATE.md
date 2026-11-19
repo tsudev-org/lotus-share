@@ -9,10 +9,20 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
+- [ ] 👤 **Duyệt `xuat-ban` của linux-packages** (2 run chờ: 44332608025, 44376379671 + lượt mới) để APT/RPM lên
+      `lotus-share 26.11.1901` - người đang dùng 26.11.1801 qua APT/RPM KHÔNG mở được ứng dụng tới lúc đó. Agent đo
+      `pkg.tsudev.com/catalog.json` sau khi duyệt.
+- [ ] 👤 GitGuardian sự cố 40268788 ("Generic Password", `scripts/apple/nhap-khoa.sh` dòng 7 ở commit 02ad20e): báo nhầm
+      (chỉ kiểm biến môi trường, không có giá trị) - đánh dấu false positive trên dashboard. Mã đã viết lại.
+- [ ] Báo nhầm antivirus **26.11.1901** (4 tệp Windows, 1-2/74 engine - bảng trong Release notes): quét lại + nộp như
+      26.11.1801 (phiếu `20261118-02` mục 6).
+- [ ] Dependabot #82 (cargo, 5 gói) + #83 (pub, 30 gói): CHƯA gộp - xem kỹ từng gói (sự cố 26.11.1801 đến từ lượt nâng
+      hàng loạt); cổng `frb_version_test` + `apple.yml` (Simulator/macOS chạy thử) phải xanh. `libc` >= 0.2.191 cần bản
+      chép `nix` (packages/vendor) - giữ khi nâng.
 - [ ] Báo nhầm antivirus 26.11.1801: ĐÃ NỘP cả 3 hãng 19/11 (phiếu `logs/handover/20261118-02_*`). Từ 20/11: quét lại
       VirusTotal (workflow tạm dùng `VT_API_KEY`, mục 3.2), ghi số engine; theo dõi thư trả lời ở dev.nguyentrangtinhsu@gmail.com.
-- [ ] winget: khi PR microsoft/winget-pkgs#478033 (2.0.0) được gộp, gửi PR cập nhật `tsudev.LotusShare` 26.11.1801
-      (bộ cài `lotus-share_26.11.1801_windows-{x64,arm64}-setup.exe`, SHA-256 từ SHA256SUMS.txt).
+- [ ] winget: khi PR microsoft/winget-pkgs#478033 (2.0.0) được gộp, gửi PR cập nhật `tsudev.LotusShare` **26.11.1901**
+      (KHÔNG dùng 26.11.1801 - bản lỗi; bộ cài `lotus-share_26.11.1901_windows-{x64,arm64}-setup.exe`, SHA-256 từ SHA256SUMS.txt).
 - [ ] winget `tsudev.LotusShare`: chờ người kiểm duyệt cộng đồng duyệt PR microsoft/winget-pkgs#478033 (18/11 đã nâng
       manifest lên **2.0.0** + bộ cài arm64; SHA-256 đo trên tệp tải về). Khi merge: chuyển `winget` từ `planned` sang
       `channels` trong `packaging/package.json`; khối "Cài bằng lệnh" tự hiện lệnh winget ở lần build/deploy kế tiếp.
@@ -29,8 +39,8 @@
       `bash chan-doan-mang.sh` (trong tar.gz; `--sua` mở cổng 53420 ufw/firewalld). Hộp thoại cập nhật chỉ thử thật được
       khi phát hành build 66 (URL tệp phiên bản cố định trong ứng dụng). Chi tiết `docs/vi/KHAM-PHA-THIET-BI.md`.
 - [ ] Phiếu cả hệ `~/projects/logs/handover/20261112-04_yeu-cau-bat-buoc-cap-nhat-he-sinh-thai.md`: theo dõi mục Kết quả.
-- [ ] **Apple (iOS + macOS)** - PR #80 (`apple.yml`, script ký viết sẵn, `docs/vi/APPLE-IOS-MACOS.md`,
-      `docs/store/app-store.md`). Còn: 👤 thử iPhone thật bằng `.ipa` không ký (mục 2 tài liệu, ghi kết quả
+- [ ] **Apple (iOS + macOS)** - PR #80 ĐÃ GỘP (`apple.yml` xanh: Simulator mở app tiếng Việt, macOS mở app; script ký
+      viết sẵn, `docs/vi/APPLE-IOS-MACOS.md`, `docs/store/app-store.md`). Còn: 👤 thử iPhone thật bằng `.ipa` không ký (mục 2 tài liệu, ghi kết quả
       `logs/thu-thiet-bi/`); khi có Mac + Apple Developer (đầu 2027): làm mục 4 tài liệu - xin quyền multicast NGAY,
       ghim `APPLE_TEAM_ID_GHIM`, thử sandbox macOS trên Mac thật. Phiếu toàn hệ `~/projects/logs/handover/20261119-AP1_*`.
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
@@ -41,6 +51,22 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 19/11/2026 (lotus-share-fc) - **SỰ CỐ 26.11.1801 + bản sửa `v26.11.1901`**: 26.11.1801 không mở được trên Windows,
+  Linux, macOS, Android (màn hình lỗi "codegen version (2.12.0) should be the same as runtime version (2.13.0)"); CLI
+  không ảnh hưởng. Nguyên nhân: `ceb85a9d` (nâng phụ thuộc) nâng gói Dart `flutter_rust_bridge` 2.13.0, mã sinh + crate
+  Rust `=2.12.0`. Phát hiện nhờ ảnh chụp macOS của `apple.yml` (PR #80). Sửa #81: ghim Dart `2.12.0`, test
+  `frb_version_test` (kiểm ngược: lock 2.13.0 => đỏ), Dependabot bỏ qua gói này. Phát hành `v26.11.1901` (22 tệp,
+  SHA256SUMS khớp, `gh attestation verify` đạt); VirusTotal gắn cờ 4 tệp Windows 1-2/74 => chủ dự án chọn **Publish
+  ngay** (01:11 UTC, ghi chú VirusTotal + thông báo bản sửa trong Release notes). PR #84 `phien-ban.json` 26111901 + deploy
+  (đo: `/tai/*` 7 đường dẫn -> 26.11.1901). Scoop + Homebrew tự lên 26.11.1901 (hash khớp). Bài học: phép chạy thử phải
+  bắt màn hình lỗi khởi động (`LOTUS_SHARE_INIT_ERROR: `, `app/lib/config/init_error.dart`).
+- 19/11/2026 (lotus-share-fc) - **Apple** PR #80: `apple.yml` (iOS không ký + Simulator, macOS chạy thử, ảnh chụp),
+  PrivacyInfo, bỏ `aps-environment`, `scripts/apple/*` + bước gated trong `release-lotus.yml`, tài liệu + hồ sơ App
+  Store. iOS cần vá `nix` 0.26.4 (`libc` 0.2.191 bỏ `sockaddr_ctl` trên iOS) => bản chép `packages/vendor/nix-0.26.4` +
+  `[patch.crates-io]`; CodeQL bỏ qua `packages/vendor/**` (chủ dự án đồng ý). Phiếu toàn hệ AP1 gửi phiên điều phối.
+- 19/11/2026 (lotus-share-fc) - **TC2** PR #85: TsuFiles không còn là client giao thức; hợp đồng "mở kèm tệp"
+  `docs/MO-KEM-TEP.md` + test khóa; bỏ tên TsuFiles khỏi `GIAO-THUC-LOTUS-V2.md`. tsufiles#119 đã dùng.
 
 - 19/11/2026 (lotus-share-fc) - **T3 + T2 (phần Lotus Share)** PR #79: app người dùng mới theo ngôn ngữ + giao diện hệ
   thống (chưa có bản dịch => tiếng Anh), `_migrate6` giữ tiếng Việt + Tối cho máy đã cài chưa từng chọn; test bắt buộc
