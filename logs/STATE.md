@@ -4,6 +4,10 @@
 > và `.standards/docs/DISTRIBUTION_TRUST.md` (chuẩn v3.7.0) + `.standards/docs/VERSIONING.md` mục 2. Khuôn thẻ/tên tệp mới chỉ áp
 > cho bản phát hành KẾ TIẾP, đọc mục 2.4 (updater đã cài) trước khi đổi.
 
+> **Phiên kế tiếp (từ 20/11/2026): đọc TRƯỚC phiếu `logs/handover/20261119-03_ban-giao-phien-sau-uy-quyen-moi.md`** - ủy
+> quyền mới của chủ dự án 19/11 (tự duyệt/gộp PR + xử lý GitGuardian; tự mở trình duyệt nộp báo nhầm antivirus và lập
+> phiếu cho mọi repo cần nộp; tự làm việc phía agent của `docs/vi/APPLE-IOS-MACOS.md`) kèm giới hạn, và thứ tự việc.
+
 > Agent đọc file này ở đầu mỗi phiên và cập nhật ở cuối mỗi phiên.
 > Quy trình: `.standards/docs/AGENT_PROTOCOL.md`.
 
