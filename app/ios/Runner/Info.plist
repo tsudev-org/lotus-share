@@ -140,15 +140,15 @@
 
     <!-- Permissions -->
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>Ứng dụng cần quyền truy cập thư viện ảnh để bạn chọn ảnh, video muốn chia sẻ.</string>
+    <string>The app needs access to your photo library so you can choose photos and videos to share.</string>
     <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Ứng dụng lưu ảnh, video nhận được vào thư viện ảnh.</string>
+    <string>The app saves received photos and videos to your photo library.</string>
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>Ứng dụng cần địa chỉ IP trong mạng nội bộ để kết nối với thiết bị khác.</string>
+    <string>The app needs your IP address on the local network to connect to other devices.</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Ứng dụng cần địa chỉ IP trong mạng nội bộ để kết nối với thiết bị khác.</string>
+    <string>The app needs your IP address on the local network to connect to other devices.</string>
     <key>NSLocalNetworkUsageDescription</key>
-    <string>Ứng dụng dùng mạng nội bộ để tìm và kết nối với các thiết bị ở gần.</string>
+    <string>The app uses the local network to find and connect to nearby devices.</string>
     <key>NSBonjourServices</key>
     <array>
         <string>_http._tcp</string>
