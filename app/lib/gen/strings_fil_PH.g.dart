@@ -19,7 +19,7 @@ class TranslationsFilPh extends Translations with BaseTranslations<AppLocale, Tr
     PluralResolver? ordinalResolver,
     TranslationMetadata<AppLocale, Translations>? meta,
   }) : assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
-       $meta =
+       _meta =
            meta ??
            TranslationMetadata(
              locale: AppLocale.filPh,
@@ -30,8 +30,9 @@ class TranslationsFilPh extends Translations with BaseTranslations<AppLocale, Tr
        super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver);
 
   /// Metadata for the translations of <fil-PH>.
+  final TranslationMetadata<AppLocale, Translations> _meta;
   @override
-  final TranslationMetadata<AppLocale, Translations> $meta;
+  TranslationMetadata<AppLocale, Translations> get $meta => _meta;
 
   late final TranslationsFilPh _root = this; // ignore: unused_field
 

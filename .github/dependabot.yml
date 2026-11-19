@@ -8,9 +8,17 @@ updates:
     # flutter_rust_bridge: crate Rust + gói Dart + mã sinh phải cùng một bản (test frb_version_test) - nâng tay cả ba.
     ignore:
       - dependency-name: flutter_rust_bridge
+      # webrtc >= 0.15 viết lại API (packages/core/src/webrtc) - nâng tay trong task riêng.
+      - dependency-name: webrtc
+        versions: [">=0.15"]
+      # tokio-cron-scheduler >= 0.14 kéo chrono-tz 0.10.4 (RUSTSEC-2026-0555) - chờ bản kéo chrono-tz đã vá.
+      - dependency-name: tokio-cron-scheduler
+        versions: [">=0.14"]
+    # Chỉ gom minor/patch; bản major mở PR riêng từng gói (19/11/2026: #82/#83 gộp major hàng loạt => đỏ, không gộp được).
     groups:
       cargo:
         patterns: ["*"]
+        update-types: [minor, patch]
   - package-ecosystem: pub
     directory: /
     schedule: { interval: monthly, timezone: Asia/Ho_Chi_Minh }
@@ -18,9 +26,11 @@ updates:
     # flutter_rust_bridge: crate Rust + gói Dart + mã sinh phải cùng một bản (test frb_version_test) - nâng tay cả ba.
     ignore:
       - dependency-name: flutter_rust_bridge
+    # Chỉ gom minor/patch; bản major mở PR riêng từng gói (19/11/2026: #82/#83 gộp major hàng loạt => đỏ, không gộp được).
     groups:
       pub:
         patterns: ["*"]
+        update-types: [minor, patch]
   - package-ecosystem: github-actions
     directory: /
     schedule: { interval: monthly, timezone: Asia/Ho_Chi_Minh }
