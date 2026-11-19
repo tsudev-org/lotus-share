@@ -4,14 +4,16 @@
 > ứng dụng Lotus Share và CLI `lotus-share-cli`. Mẫu thông điệp: [`giao-thuc-mau/`](giao-thuc-mau/) - test
 > `packages/core/tests/protocol_samples.rs` buộc mẫu khớp kiểu dữ liệu của lõi (đọc được và ghi lại y hệt).
 > Hằng số mạng đối chiếu Dart/Rust ở `packages/core/tests/protocol_constants.rs`.
-> Người dùng đầu tiên ngoài Lotus Share: TsuFiles (phiếu `logs/handover/20261119-TC1_*`).
+> Hiện chưa có client nào ngoài Lotus Share + CLI (TsuFiles bỏ kế hoạch làm client 19/11/2026 - phiếu
+> `logs/handover/20261119-TC2_*`; ứng dụng khác muốn gửi tệp qua Lotus Share dùng hợp đồng
+> [`MO-KEM-TEP.md`](MO-KEM-TEP.md)). Đặc tả giữ làm hợp đồng cho client tương lai trong hệ.
 
 ## 1. Cam kết ổn định
 
 - Phiên bản giao thức hiện hành: **`2.2`** (trường `version`; hằng `PROTOCOL_VERSION_V2`). Đường dẫn `/api/lotus/v2/`.
 - Trong v2 chỉ được **thêm** trường tùy chọn (bên nhận phải bỏ qua trường lạ) hoặc thêm endpoint. Đổi phá vỡ (đổi
   cổng, nhóm multicast, tên/kiểu trường bắt buộc, ý nghĩa mã trạng thái, cách tính vân tay) => tăng **`/api/lotus/v3/`**,
-  nâng `toiThieu` ở `website/public/phien-ban.json` và mở phiếu cho mọi client trong hệ (tsufiles) TRƯỚC khi phát hành.
+  nâng `toiThieu` ở `website/public/phien-ban.json` và mở phiếu cho mọi client trong hệ (nếu có) TRƯỚC khi phát hành.
 - `/api/lotus/v3/nonce`, `/api/lotus/v3/register` đang thử nghiệm, chưa thuộc hợp đồng - client ngoài KHÔNG dùng.
 - `/api/lotus/v2/show` là nội bộ (chỉ nhận từ máy cục bộ để đưa cửa sổ lên trước) - không thuộc hợp đồng.
 
@@ -40,7 +42,7 @@ Mẫu: [`giao-thuc-mau/multicast.json`](giao-thuc-mau/multicast.json).
 | --- | --- | --- | --- |
 | `alias` | chuỗi | có | Tên hiển thị |
 | `version` | chuỗi | có | `"2.2"` |
-| `deviceModel` | chuỗi | không | Tự do, hiện cho người dùng (TsuFiles gửi `"TsuFiles"`) |
+| `deviceModel` | chuỗi | không | Tự do, hiện cho người dùng (tên ứng dụng hoặc đời máy) |
 | `deviceType` | chuỗi | không | `mobile` \| `desktop` \| `web` \| `headless` \| `server`; giá trị lạ được hiểu là `desktop` |
 | `fingerprint` | chuỗi | có | HTTPS: vân tay chứng thư (mục 5.1); HTTP: chuỗi ngẫu nhiên định danh thiết bị |
 | `port` | số | có | Cổng TCP máy chủ HTTP(S) của **chính thiết bị gửi** - được khác 53420 |
@@ -58,7 +60,7 @@ multicast. Bên được trả lời thêm thiết bị đó vào danh sách t�
 ### 3.3. Quét mạng con
 
 Khi người dùng làm mới, ngoài việc chào, thiết bị gửi `POST register` tới mọi địa chỉ /24 ở **cổng 53420**. Hệ quả cho
-client dùng cổng máy chủ khác 53420 (TsuFiles): chỉ được tìm thấy qua gói chào (mục 3.1) - hãy chào khi mở ứng dụng và
+client dùng cổng máy chủ khác 53420: chỉ được tìm thấy qua gói chào (mục 3.1) - hãy chào khi mở ứng dụng và
 khi người dùng làm mới; quét mạng con của bên đó vẫn tìm thấy Lotus Share ở 53420.
 
 ## 4. API HTTP (`/api/lotus/v2/`)
@@ -141,7 +143,7 @@ bên phải cùng chế độ. Client ngoài NÊN dùng `https`.
 
 ### 5.3. Chấp nhận client khác trong hệ
 
-Không có danh sách trắng: mọi thiết bị nói đúng giao thức (vd `deviceModel: "TsuFiles"`, `deviceType: "mobile"`) được
+Không có danh sách trắng: mọi thiết bị nói đúng giao thức (vd `deviceModel: "iPhone"`, `deviceType: "mobile"`) được
 hiển thị và **bên nhận Lotus Share hỏi người dùng** trước khi nhận tệp, trừ khi chính người dùng đó bật "tự nhận"
 (cho mọi thiết bị, hoặc chỉ thiết bị yêu thích - khi đó tin bằng vân tay chứng thư client đã xác minh qua mTLS, không
 tin trường `fingerprint` tự khai).
