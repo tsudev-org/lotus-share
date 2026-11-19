@@ -5,7 +5,8 @@
 #   - iOS: `flutter build ios --release --no-codesign` -> Lotus-Share-unsigned.ipa (artifact 14 ngày, KHÔNG đăng
 #     Release) cho chủ dự án ký lại bằng Apple ID cá nhân (Sideloadly) và cài lên iPhone của chính mình.
 #   - iOS Simulator: dựng bản debug, cài + mở trên iPhone giả lập, kiểm ứng dụng còn chạy sau 45 giây VÀ không ghi
-#     LOTUS_SHARE_INIT_ERROR (màn hình lỗi khởi động - app/lib/config/init_error.dart), chụp màn hình.
+#     LOTUS_SHARE_INIT_ERROR (màn hình lỗi khởi động - app/lib/config/init_error.dart), chụp màn hình; lặp lại trên
+#     iPad Pro 13" giả lập (ảnh App Store iPad 13").
 #   - macOS: dựng release, ký ad-hoc, mở thử, kiểm còn chạy, chụp màn hình.
 #   - Kiểm tĩnh trên gói: bundle id, PrivacyInfo.xcprivacy có trong .app, entitlements multicast + app group, không
 #     còn aps-environment, chuỗi xin quyền tiếng Việt không rỗng.
@@ -153,6 +154,47 @@ jobs:
           if grep -qF "LOTUS_SHARE_INIT_ERROR: " ios-check.log; then
             echo "::error::Ứng dụng iOS hiện màn hình lỗi khởi động:"; grep -F "LOTUS_SHARE_INIT_ERROR: " ios-check.log | tail -3; exit 1
           fi
+          xcrun simctl shutdown "$udid"
+      # Ứng dụng hỗ trợ iPad (TARGETED_DEVICE_FAMILY "1,2") => App Store bắt buộc ảnh iPad 13" (docs/store/app-store.md
+      # mục 6). Chụp trên iPad Pro 13" giả lập, đồng thời kiểm app không sập / không lỗi khởi động trên iPad.
+      - name: Chạy thử + chụp ảnh trên iPad 13" giả lập
+        run: |
+          set -euo pipefail
+          udid="$(xcrun simctl list devices available -j | python3 -I -c '
+          import json, sys
+          d = json.load(sys.stdin)["devices"]
+          ios = sorted((k for k in d if "iOS" in k), key=lambda k: [int(x) for x in k.rsplit("iOS-", 1)[1].split("-")])
+          for ten in ("iPad Pro 13", "iPad Pro (12.9-inch)", "iPad Air 13"):
+              for k in reversed(ios):
+                  for dev in d[k]:
+                      if dev["name"].startswith(ten):
+                          print(dev["udid"]); sys.exit()
+          ')"
+          [[ -n "$udid" ]] || { echo "::error::Không có iPad 13\" giả lập"; xcrun simctl list devices available; exit 1; }
+          xcrun simctl boot "$udid"
+          xcrun simctl bootstatus "$udid" -b
+          xcrun simctl spawn "$udid" defaults write -g AppleLanguages -array vi
+          xcrun simctl spawn "$udid" defaults write -g AppleLocale vi_VN
+          xcrun simctl install "$udid" app/build/ios/iphonesimulator/Runner.app
+          xcrun simctl launch --stdout="$PWD/ipad-app.log" --stderr="$PWD/ipad-app.log" "$udid" "$BUNDLE_ID"
+          sleep 45
+          xcrun simctl spawn "$udid" launchctl list | grep -q "UIKitApplication:$BUNDLE_ID" \
+            || { echo "::error::Ứng dụng thoát/sập trên iPad giả lập trong 45 giây đầu"; \
+                 xcrun simctl spawn "$udid" log show --last 2m --predicate 'process == "Runner"' | tail -80; exit 1; }
+          mkdir -p shots && xcrun simctl io "$udid" screenshot shots/ipad-13.png
+          { cat ipad-app.log 2>/dev/null; xcrun simctl spawn "$udid" log show --last 5m --style compact \
+              --predicate 'eventMessage CONTAINS "LOTUS_SHARE_INIT_ERROR"'; } > ipad-check.log || true
+          if grep -qF "LOTUS_SHARE_INIT_ERROR: " ipad-check.log; then
+            echo "::error::Ứng dụng trên iPad hiện màn hình lỗi khởi động:"; grep -F "LOTUS_SHARE_INIT_ERROR: " ipad-check.log | tail -3; exit 1
+          fi
+          # Cỡ App Store nhận cho khe iPad 13" (dọc): 2064x2752 hoặc 2048x2732.
+          w=$(sips -g pixelWidth shots/ipad-13.png | awk '/pixelWidth/{print $2}')
+          h=$(sips -g pixelHeight shots/ipad-13.png | awk '/pixelHeight/{print $2}')
+          echo "Ảnh iPad: ${w}x${h} - $(xcrun simctl list devices | grep -F "$udid" | sed 's/^ *//')"
+          case "${w}x${h}" in
+            2064x2752|2048x2732) ;;
+            *) echo "::error::Ảnh iPad ${w}x${h} không đúng cỡ App Store 13\" (2064x2752 hoặc 2048x2732)"; exit 1 ;;
+          esac
           xcrun simctl shutdown "$udid"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
