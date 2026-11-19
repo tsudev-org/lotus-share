@@ -1,5 +1,5 @@
 //! lotus-share: bộ mẫu thông điệp giao thức Lotus v2 (`docs/giao-thuc-mau/`, đặc tả `docs/GIAO-THUC-LOTUS-V2.md`)
-//! phải khớp kiểu dữ liệu thật của lõi: đọc được VÀ ghi lại ra đúng JSON đó. Client ngoài (TsuFiles) đối chiếu với
+//! phải khớp kiểu dữ liệu thật của lõi: đọc được VÀ ghi lại ra đúng JSON đó. Client ngoài (nếu có) đối chiếu với
 //! các tệp mẫu này; đổi DTO mà quên đổi mẫu (hoặc ngược lại) là test đỏ.
 #![cfg(all(feature = "http", feature = "multicast"))]
 

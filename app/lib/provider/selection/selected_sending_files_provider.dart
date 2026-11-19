@@ -288,7 +288,12 @@ class RemoveSelectedFileAction extends ReduxAction<SelectedSendingFilesNotifier,
 class LoadSelectionFromArgsAction extends AsyncReduxActionWithResult<SelectedSendingFilesNotifier, List<CrossFile>, bool> {
   final List<String> args;
 
-  LoadSelectionFromArgsAction(this.args);
+  /// lotus-share: chuyển tệp thành CrossFile; test thay bằng bản thuần Dart (bản mặc định đọc metadata qua lõi Rust).
+  final Future<CrossFile> Function(File file) fileConverter;
+
+  /// Hợp đồng "mở kèm tệp" (docs/MO-KEM-TEP.md, test load_selection_from_args_test.dart): mỗi đối số là đường dẫn
+  /// tệp/thư mục; `--share <json>`, `--text`/`-t <tin nhắn>`; đối số khác bắt đầu bằng `-` bị bỏ qua.
+  LoadSelectionFromArgsAction(this.args, {this.fileConverter = CrossFileConverters.convertFile});
 
   @override
   Future<(List<CrossFile>, bool)> reduce() async {
@@ -340,7 +345,7 @@ class LoadSelectionFromArgsAction extends AsyncReduxActionWithResult<SelectedSen
         await dispatchAsync(
           AddFilesAction(
             files: [file],
-            converter: CrossFileConverters.convertFile,
+            converter: fileConverter,
           ),
         );
         filesAdded = true;
