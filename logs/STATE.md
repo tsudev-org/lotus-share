@@ -13,6 +13,7 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
+- [ ] **Tiếp phiên 20/11 (bị cắt vì hết hạn mức)**: (1) PR #100 tray_manager 0.8.3 - đã sửa lỗi THIẾU `libcnativeapi.so`/`cnativeapi.dll` trong bundle (CMake `NATIVE_ASSETS_DIR` + cổng `tools/check_native_assets.py`), khay Linux chạy thật OK; chờ build thử run 44627917965 + CI xanh => gộp, đóng Dependabot #101 (0.9 cần Flutter 3.50). (2) PR #104 cụm win32 6 (thay #102): CI xanh => gộp, đóng #102; 👤 thử bật/tắt Khởi động cùng Windows. (3) Nhánh `deps/flutter-foreground-task-11` (WIP đã đẩy, chỉ đổi pubspec; Flutter 3.47.9 tự gắn KGP cho plugin): mở PR để CI Android/iOS kiểm, thử Android thật. (4) Xuất/nhập tệp yêu thích + cài đặt (miễn phí, ADR-0001 mục 2). 👤 duyệt `xuat-ban` linux-packages run **44590008085** (APT/RPM còn 26.11.1801 - bản lỗi).
 - [ ] 👤 **Duyệt `xuat-ban` của linux-packages** (2 run chờ: 44332608025, 44376379671 + lượt mới) để APT/RPM lên
       `lotus-share 26.11.1901` - người đang dùng 26.11.1801 qua APT/RPM KHÔNG mở được ứng dụng tới lúc đó. Agent đo
       `pkg.tsudev.com/catalog.json` sau khi duyệt.
@@ -72,6 +73,8 @@
 | --- | --- | --- |
 
 ## Đã hoàn thành (mới nhất trên cùng)
+
+- 20/11/2026 - **#103 gộp**: sync quy ước v3.9.1 + `docs/adr/0001-pro1-luu-cuc-bo-pro-dong-bo.md` (kiểm kê: bản miễn phí đã đạt N2; Pro = đồng bộ yêu thích + cài đặt qua TsuDEV Sync). Phát hiện + sửa lỗi khay hệ thống của #100 bằng chạy thật bản build thử.
 
 - 19/11/2026 (phiên lotus-share, khuya) - **VirusTotal**: workflow tạm `VT_API_KEY` (run 44523059222, nhánh đã xóa)
   đọc engine 26.11.1901 + quét lại 8 tệp: Cylance đã gỡ cờ mọi tệp; còn APEX (2 bộ cài 1901 + 1801) và DeepInstinct
