@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'crypto.dart';
@@ -9,6 +9,7 @@ part of 'crypto.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$RsHashFileEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHashFileEvent);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHashFileEvent);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RsHashFileEvent()';
+    return 'RsHashFileEvent()';
 }
 
 
@@ -190,16 +191,18 @@ $RsHashFileEvent_ProgressCopyWith<RsHashFileEvent_Progress> get copyWith => _$Rs
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHashFileEvent_Progress&&(identical(other.bytes, bytes) || other.bytes == bytes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHashFileEvent_Progress&&(identical(other.bytes, bytes) || other.bytes == bytes));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,bytes);
+int get hashCode {
+    return Object.hash(runtimeType,bytes);
+}
 
 @override
 String toString() {
-  return 'RsHashFileEvent.progress(bytes: $bytes)';
+    return 'RsHashFileEvent.progress(bytes: $bytes)';
 }
 
 
@@ -256,16 +259,18 @@ $RsHashFileEvent_DoneCopyWith<RsHashFileEvent_Done> get copyWith => _$RsHashFile
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHashFileEvent_Done&&(identical(other.hash, hash) || other.hash == hash));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHashFileEvent_Done&&(identical(other.hash, hash) || other.hash == hash));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,hash);
+int get hashCode {
+    return Object.hash(runtimeType,hash);
+}
 
 @override
 String toString() {
-  return 'RsHashFileEvent.done(hash: $hash)';
+    return 'RsHashFileEvent.done(hash: $hash)';
 }
 
 

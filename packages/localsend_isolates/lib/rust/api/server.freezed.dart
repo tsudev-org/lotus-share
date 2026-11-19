@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'server.dart';
@@ -9,6 +9,7 @@ part of 'server.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$RsServerEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RsServerEvent()';
+    return 'RsServerEvent()';
 }
 
 
@@ -239,16 +240,18 @@ $RsServerEvent_RegisterCopyWith<RsServerEvent_Register> get copyWith => _$RsServ
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_Register&&(identical(other.ip, ip) || other.ip == ip)&&(identical(other.info, info) || other.info == info));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_Register&&(identical(other.ip, ip) || other.ip == ip)&&(identical(other.info, info) || other.info == info));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,ip,info);
+int get hashCode {
+    return Object.hash(runtimeType,ip,info);
+}
 
 @override
 String toString() {
-  return 'RsServerEvent.register(ip: $ip, info: $info)';
+    return 'RsServerEvent.register(ip: $ip, info: $info)';
 }
 
 
@@ -291,7 +294,7 @@ as RegisterDtoV2,
 
 
 class RsServerEvent_PrepareUpload extends RsServerEvent {
-  const RsServerEvent_PrepareUpload({required this.sessionId, required this.ip, required this.info, this.certFingerprint, required final  Map<String, FileDto> files}): _files = files,super._();
+  const RsServerEvent_PrepareUpload({required this.sessionId, required this.ip, required this.info, this.certFingerprint, required  Map<String, FileDto> files}): _files = files,super._();
   
 
 /// The session ID the upload session will have when the request is accepted.
@@ -321,16 +324,18 @@ $RsServerEvent_PrepareUploadCopyWith<RsServerEvent_PrepareUpload> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_PrepareUpload&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.ip, ip) || other.ip == ip)&&(identical(other.info, info) || other.info == info)&&(identical(other.certFingerprint, certFingerprint) || other.certFingerprint == certFingerprint)&&const DeepCollectionEquality().equals(other._files, _files));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_PrepareUpload&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.ip, ip) || other.ip == ip)&&(identical(other.info, info) || other.info == info)&&(identical(other.certFingerprint, certFingerprint) || other.certFingerprint == certFingerprint)&&const DeepCollectionEquality().equals(other.files, _files));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,ip,info,certFingerprint,const DeepCollectionEquality().hash(_files));
+int get hashCode {
+    return Object.hash(runtimeType,sessionId,ip,info,certFingerprint,const DeepCollectionEquality().hash(_files));
+}
 
 @override
 String toString() {
-  return 'RsServerEvent.prepareUpload(sessionId: $sessionId, ip: $ip, info: $info, certFingerprint: $certFingerprint, files: $files)';
+    return 'RsServerEvent.prepareUpload(sessionId: $sessionId, ip: $ip, info: $info, certFingerprint: $certFingerprint, files: $files)';
 }
 
 
@@ -393,16 +398,18 @@ $RsServerEvent_FileUploadCopyWith<RsServerEvent_FileUpload> get copyWith => _$Rs
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_FileUpload&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.fileId, fileId) || other.fileId == fileId)&&(identical(other.file, file) || other.file == file));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_FileUpload&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.fileId, fileId) || other.fileId == fileId)&&(identical(other.file, file) || other.file == file));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,fileId,file);
+int get hashCode {
+    return Object.hash(runtimeType,sessionId,fileId,file);
+}
 
 @override
 String toString() {
-  return 'RsServerEvent.fileUpload(sessionId: $sessionId, fileId: $fileId, file: $file)';
+    return 'RsServerEvent.fileUpload(sessionId: $sessionId, fileId: $fileId, file: $file)';
 }
 
 
@@ -462,16 +469,18 @@ $RsServerEvent_SessionEndCopyWith<RsServerEvent_SessionEnd> get copyWith => _$Rs
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_SessionEnd&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.reason, reason) || other.reason == reason));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_SessionEnd&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.reason, reason) || other.reason == reason));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,reason);
+int get hashCode {
+    return Object.hash(runtimeType,sessionId,reason);
+}
 
 @override
 String toString() {
-  return 'RsServerEvent.sessionEnd(sessionId: $sessionId, reason: $reason)';
+    return 'RsServerEvent.sessionEnd(sessionId: $sessionId, reason: $reason)';
 }
 
 
@@ -529,16 +538,18 @@ $RsServerEvent_PrepareUploadAbortedCopyWith<RsServerEvent_PrepareUploadAborted> 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_PrepareUploadAborted&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_PrepareUploadAborted&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,sessionId);
+int get hashCode {
+    return Object.hash(runtimeType,sessionId);
+}
 
 @override
 String toString() {
-  return 'RsServerEvent.prepareUploadAborted(sessionId: $sessionId)';
+    return 'RsServerEvent.prepareUploadAborted(sessionId: $sessionId)';
 }
 
 
@@ -596,16 +607,18 @@ $RsServerEvent_CancelReceivedCopyWith<RsServerEvent_CancelReceived> get copyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_CancelReceived&&(identical(other.ip, ip) || other.ip == ip)&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_CancelReceived&&(identical(other.ip, ip) || other.ip == ip)&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,ip,sessionId);
+int get hashCode {
+    return Object.hash(runtimeType,ip,sessionId);
+}
 
 @override
 String toString() {
-  return 'RsServerEvent.cancelReceived(ip: $ip, sessionId: $sessionId)';
+    return 'RsServerEvent.cancelReceived(ip: $ip, sessionId: $sessionId)';
 }
 
 
@@ -665,16 +678,18 @@ $RsServerEvent_WebPrepareDownloadCopyWith<RsServerEvent_WebPrepareDownload> get 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_WebPrepareDownload&&(identical(other.ip, ip) || other.ip == ip)&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.userAgent, userAgent) || other.userAgent == userAgent));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_WebPrepareDownload&&(identical(other.ip, ip) || other.ip == ip)&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.userAgent, userAgent) || other.userAgent == userAgent));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,ip,sessionId,userAgent);
+int get hashCode {
+    return Object.hash(runtimeType,ip,sessionId,userAgent);
+}
 
 @override
 String toString() {
-  return 'RsServerEvent.webPrepareDownload(ip: $ip, sessionId: $sessionId, userAgent: $userAgent)';
+    return 'RsServerEvent.webPrepareDownload(ip: $ip, sessionId: $sessionId, userAgent: $userAgent)';
 }
 
 
@@ -735,16 +750,18 @@ $RsServerEvent_WebFileDownloadCopyWith<RsServerEvent_WebFileDownload> get copyWi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_WebFileDownload&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.fileId, fileId) || other.fileId == fileId)&&(identical(other.file, file) || other.file == file));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_WebFileDownload&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.fileId, fileId) || other.fileId == fileId)&&(identical(other.file, file) || other.file == file));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,fileId,file);
+int get hashCode {
+    return Object.hash(runtimeType,sessionId,fileId,file);
+}
 
 @override
 String toString() {
-  return 'RsServerEvent.webFileDownload(sessionId: $sessionId, fileId: $fileId, file: $file)';
+    return 'RsServerEvent.webFileDownload(sessionId: $sessionId, fileId: $fileId, file: $file)';
 }
 
 
@@ -788,7 +805,7 @@ as FileDto,
 
 
 class RsServerEvent_Show extends RsServerEvent {
-  const RsServerEvent_Show({required final  List<String> args}): _args = args,super._();
+  const RsServerEvent_Show({required  List<String> args}): _args = args,super._();
   
 
 /// Command-line arguments forwarded by the other application instance.
@@ -811,16 +828,18 @@ $RsServerEvent_ShowCopyWith<RsServerEvent_Show> get copyWith => _$RsServerEvent_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_Show&&const DeepCollectionEquality().equals(other._args, _args));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_Show&&const DeepCollectionEquality().equals(other.args, _args));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_args));
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_args));
+}
 
 @override
 String toString() {
-  return 'RsServerEvent.show_(args: $args)';
+    return 'RsServerEvent.show_(args: $args)';
 }
 
 
@@ -878,16 +897,18 @@ $RsServerEvent_ListenerFailedCopyWith<RsServerEvent_ListenerFailed> get copyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_ListenerFailed&&(identical(other.error, error) || other.error == error));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsServerEvent_ListenerFailed&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,error);
+int get hashCode {
+    return Object.hash(runtimeType,error);
+}
 
 @override
 String toString() {
-  return 'RsServerEvent.listenerFailed(error: $error)';
+    return 'RsServerEvent.listenerFailed(error: $error)';
 }
 
 
@@ -934,7 +955,7 @@ mixin _$WebMode {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WebMode);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WebMode);
 }
 
 
@@ -943,7 +964,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'WebMode()';
+    return 'WebMode()';
 }
 
 
@@ -1105,7 +1126,7 @@ class WebMode_Disabled extends WebMode {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WebMode_Disabled);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WebMode_Disabled);
 }
 
 
@@ -1114,7 +1135,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'WebMode.disabled()';
+    return 'WebMode.disabled()';
 }
 
 
@@ -1127,7 +1148,7 @@ String toString() {
 
 
 class WebMode_Download extends WebMode {
-  const WebMode_Download({required final  Map<String, FileDto> files, this.pin}): _files = files,super._();
+  const WebMode_Download({required  Map<String, FileDto> files, this.pin}): _files = files,super._();
   
 
 /// The metadata of the files offered for download, mapped by file ID.
@@ -1154,16 +1175,18 @@ $WebMode_DownloadCopyWith<WebMode_Download> get copyWith => _$WebMode_DownloadCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WebMode_Download&&const DeepCollectionEquality().equals(other._files, _files)&&(identical(other.pin, pin) || other.pin == pin));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WebMode_Download&&const DeepCollectionEquality().equals(other.files, _files)&&(identical(other.pin, pin) || other.pin == pin));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_files),pin);
+int get hashCode {
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_files),pin);
+}
 
 @override
 String toString() {
-  return 'WebMode.download(files: $files, pin: $pin)';
+    return 'WebMode.download(files: $files, pin: $pin)';
 }
 
 
@@ -1216,7 +1239,7 @@ class WebMode_Upload extends WebMode {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WebMode_Upload);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WebMode_Upload);
 }
 
 
@@ -1225,7 +1248,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'WebMode.upload()';
+    return 'WebMode.upload()';
 }
 
 

@@ -26,6 +26,12 @@ updates:
     # flutter_rust_bridge: crate Rust + gói Dart + mã sinh phải cùng một bản (test frb_version_test) - nâng tay cả ba.
     ignore:
       - dependency-name: flutter_rust_bridge
+      # test >= 1.32 cần test_api 0.7.14+, flutter_test của Flutter ghim (.fvmrc) khóa 0.7.12 => không giải được (#65, #90).
+      # Nâng cùng lúc nâng Flutter.
+      - dependency-name: test
+        versions: [">=1.32"]
+      # pasteboard đang dùng bản git vá (dependency_overrides trong app/pubspec.yaml) - bỏ bản vá là task riêng.
+      - dependency-name: pasteboard
     # Chỉ gom minor/patch; bản major mở PR riêng từng gói (19/11/2026: #82/#83 gộp major hàng loạt => đỏ, không gộp được).
     groups:
       pub:

@@ -42,11 +42,23 @@ class $AssetsImgGen {
   List<dynamic> get values => [logo128, logo256, logo32Black, logo32White, logo32, logo512White, logo512, logo];
 }
 
-class Assets {
-  const Assets._();
+class $AssetsLegalGen {
+  const $AssetsLegalGen();
 
+  /// File path: assets/legal/LICENSE
+  String get license => 'assets/legal/LICENSE';
+
+  /// File path: assets/legal/NOTICE
+  String get notice => 'assets/legal/NOTICE';
+
+  /// List of all assets
+  List<String> get values => [license, notice];
+}
+
+abstract final class Assets {
   static const String changelog = 'assets/CHANGELOG.md';
   static const $AssetsImgGen img = $AssetsImgGen();
+  static const $AssetsLegalGen legal = $AssetsLegalGen();
 
   /// List of all assets
   static List<String> get values => [changelog];

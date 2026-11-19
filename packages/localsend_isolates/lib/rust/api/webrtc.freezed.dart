@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'webrtc.dart';
@@ -9,6 +9,7 @@ part of 'webrtc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$RTCStatus {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RTCStatus()';
+    return 'RTCStatus()';
 }
 
 
@@ -221,7 +222,7 @@ class RTCStatus_SdpExchanged extends RTCStatus {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_SdpExchanged);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_SdpExchanged);
 }
 
 
@@ -230,7 +231,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RTCStatus.sdpExchanged()';
+    return 'RTCStatus.sdpExchanged()';
 }
 
 
@@ -253,7 +254,7 @@ class RTCStatus_Connected extends RTCStatus {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_Connected);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_Connected);
 }
 
 
@@ -262,7 +263,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RTCStatus.connected()';
+    return 'RTCStatus.connected()';
 }
 
 
@@ -285,7 +286,7 @@ class RTCStatus_PinRequired extends RTCStatus {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_PinRequired);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_PinRequired);
 }
 
 
@@ -294,7 +295,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RTCStatus.pinRequired()';
+    return 'RTCStatus.pinRequired()';
 }
 
 
@@ -317,7 +318,7 @@ class RTCStatus_TooManyAttempts extends RTCStatus {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_TooManyAttempts);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_TooManyAttempts);
 }
 
 
@@ -326,7 +327,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RTCStatus.tooManyAttempts()';
+    return 'RTCStatus.tooManyAttempts()';
 }
 
 
@@ -349,7 +350,7 @@ class RTCStatus_Declined extends RTCStatus {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_Declined);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_Declined);
 }
 
 
@@ -358,7 +359,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RTCStatus.declined()';
+    return 'RTCStatus.declined()';
 }
 
 
@@ -381,7 +382,7 @@ class RTCStatus_Sending extends RTCStatus {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_Sending);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_Sending);
 }
 
 
@@ -390,7 +391,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RTCStatus.sending()';
+    return 'RTCStatus.sending()';
 }
 
 
@@ -413,7 +414,7 @@ class RTCStatus_Finished extends RTCStatus {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_Finished);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_Finished);
 }
 
 
@@ -422,7 +423,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RTCStatus.finished()';
+    return 'RTCStatus.finished()';
 }
 
 
@@ -450,16 +451,18 @@ $RTCStatus_ErrorCopyWith<RTCStatus_Error> get copyWith => _$RTCStatus_ErrorCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_Error&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RTCStatus_Error&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'RTCStatus.error(field0: $field0)';
+    return 'RTCStatus.error(field0: $field0)';
 }
 
 
@@ -506,7 +509,7 @@ mixin _$WsServerMessage {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage);
 }
 
 
@@ -515,7 +518,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'WsServerMessage()';
+    return 'WsServerMessage()';
 }
 
 
@@ -691,7 +694,7 @@ return error(_that.code);case _:
 
 
 class WsServerMessage_Hello extends WsServerMessage {
-  const WsServerMessage_Hello({required this.client, required final  List<ClientInfo> peers}): _peers = peers,super._();
+  const WsServerMessage_Hello({required this.client, required  List<ClientInfo> peers}): _peers = peers,super._();
   
 
  final  ClientInfo client;
@@ -713,16 +716,18 @@ $WsServerMessage_HelloCopyWith<WsServerMessage_Hello> get copyWith => _$WsServer
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Hello&&(identical(other.client, client) || other.client == client)&&const DeepCollectionEquality().equals(other._peers, _peers));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Hello&&(identical(other.client, client) || other.client == client)&&const DeepCollectionEquality().equals(other.peers, _peers));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,client,const DeepCollectionEquality().hash(_peers));
+int get hashCode {
+    return Object.hash(runtimeType,client,const DeepCollectionEquality().hash(_peers));
+}
 
 @override
 String toString() {
-  return 'WsServerMessage.hello(client: $client, peers: $peers)';
+    return 'WsServerMessage.hello(client: $client, peers: $peers)';
 }
 
 
@@ -780,16 +785,18 @@ $WsServerMessage_JoinCopyWith<WsServerMessage_Join> get copyWith => _$WsServerMe
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Join&&(identical(other.peer, peer) || other.peer == peer));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Join&&(identical(other.peer, peer) || other.peer == peer));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,peer);
+int get hashCode {
+    return Object.hash(runtimeType,peer);
+}
 
 @override
 String toString() {
-  return 'WsServerMessage.join(peer: $peer)';
+    return 'WsServerMessage.join(peer: $peer)';
 }
 
 
@@ -846,16 +853,18 @@ $WsServerMessage_UpdateCopyWith<WsServerMessage_Update> get copyWith => _$WsServ
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Update&&(identical(other.peer, peer) || other.peer == peer));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Update&&(identical(other.peer, peer) || other.peer == peer));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,peer);
+int get hashCode {
+    return Object.hash(runtimeType,peer);
+}
 
 @override
 String toString() {
-  return 'WsServerMessage.update(peer: $peer)';
+    return 'WsServerMessage.update(peer: $peer)';
 }
 
 
@@ -912,16 +921,18 @@ $WsServerMessage_LeftCopyWith<WsServerMessage_Left> get copyWith => _$WsServerMe
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Left&&(identical(other.peerId, peerId) || other.peerId == peerId));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Left&&(identical(other.peerId, peerId) || other.peerId == peerId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,peerId);
+int get hashCode {
+    return Object.hash(runtimeType,peerId);
+}
 
 @override
 String toString() {
-  return 'WsServerMessage.left(peerId: $peerId)';
+    return 'WsServerMessage.left(peerId: $peerId)';
 }
 
 
@@ -978,16 +989,18 @@ $WsServerMessage_OfferCopyWith<WsServerMessage_Offer> get copyWith => _$WsServer
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Offer&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Offer&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'WsServerMessage.offer(field0: $field0)';
+    return 'WsServerMessage.offer(field0: $field0)';
 }
 
 
@@ -1044,16 +1057,18 @@ $WsServerMessage_AnswerCopyWith<WsServerMessage_Answer> get copyWith => _$WsServ
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Answer&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Answer&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'WsServerMessage.answer(field0: $field0)';
+    return 'WsServerMessage.answer(field0: $field0)';
 }
 
 
@@ -1110,16 +1125,18 @@ $WsServerMessage_ErrorCopyWith<WsServerMessage_Error> get copyWith => _$WsServer
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Error&&(identical(other.code, code) || other.code == code));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is WsServerMessage_Error&&(identical(other.code, code) || other.code == code));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,code);
+int get hashCode {
+    return Object.hash(runtimeType,code);
+}
 
 @override
 String toString() {
-  return 'WsServerMessage.error(code: $code)';
+    return 'WsServerMessage.error(code: $code)';
 }
 
 
