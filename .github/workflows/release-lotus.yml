@@ -88,6 +88,8 @@ jobs:
           flutter config --no-analytics
           flutter pub get
           flutter build windows --release
+      - name: Kiểm thư viện build hook trong bundle
+        run: python -I tools/check_native_assets.py app\build\windows\x64\runner\Release .
       - name: Gói ZIP di động + bộ cài
         shell: pwsh
         run: |
@@ -159,6 +161,8 @@ jobs:
           flutter config --no-analytics
           flutter pub get
           flutter build windows --release
+      - name: Kiểm thư viện build hook trong bundle
+        run: python -I tools/check_native_assets.py app\build\windows\arm64\runner\Release .
       - name: Gói ZIP di động + bộ cài
         shell: pwsh
         run: |
@@ -217,6 +221,8 @@ jobs:
           flutter config --no-analytics
           flutter pub get
           flutter build linux --release
+      - name: Kiểm thư viện build hook trong bundle
+        run: python3 -I tools/check_native_assets.py app/build/linux/x64/release/bundle lib
       - name: Gói tar.gz + chuẩn bị AppImage
         run: |
           set -euo pipefail
@@ -295,6 +301,8 @@ jobs:
           flutter config --no-analytics
           flutter pub get
           flutter build linux --release
+      - name: Kiểm thư viện build hook trong bundle
+        run: python3 -I tools/check_native_assets.py app/build/linux/arm64/release/bundle lib
       - name: Gói tar.gz
         run: |
           set -euo pipefail

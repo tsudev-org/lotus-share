@@ -133,6 +133,14 @@ foreach(bundled_library ${PLUGIN_BUNDLED_LIBRARIES})
     COMPONENT Runtime)
 endforeach(bundled_library)
 
+# Copy the native assets provided by the build hooks (hook/build.dart) of all packages.
+# lotus-share: khối của mẫu Flutter mới (thiếu ở mẫu cũ) - không có thì thư viện của build hook (vd. cnativeapi của
+# tray_manager >= 0.7) không vào bundle, khay hệ thống hỏng im lặng. Cổng: tools/check_native_assets.py.
+set(NATIVE_ASSETS_DIR "${PROJECT_BUILD_DIR}native_assets/linux/")
+install(DIRECTORY "${NATIVE_ASSETS_DIR}"
+  DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
+  COMPONENT Runtime)
+
 # Fully re-copy the assets directory on each build to avoid having stale files
 # from a previous install.
 set(FLUTTER_ASSET_DIR_NAME "flutter_assets")
