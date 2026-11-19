@@ -15,6 +15,9 @@ from pathlib import Path
 
 
 def main() -> int:
+    # Máy chạy Windows dùng cp1252 cho console: ép UTF-8 để in được tiếng Việt.
+    for stream in (sys.stdout, sys.stderr):
+        stream.reconfigure(encoding="utf-8")
     if len(sys.argv) != 3:
         print(__doc__, file=sys.stderr)
         return 2
