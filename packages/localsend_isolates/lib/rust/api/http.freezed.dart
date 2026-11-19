@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'http.dart';
@@ -9,6 +9,7 @@ part of 'http.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
@@ -20,7 +21,7 @@ mixin _$RsHttpClientError {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHttpClientError);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHttpClientError);
 }
 
 
@@ -29,7 +30,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RsHttpClientError()';
+    return 'RsHttpClientError()';
 }
 
 
@@ -209,16 +210,18 @@ $RsHttpClientError_StatusCodeCopyWith<RsHttpClientError_StatusCode> get copyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHttpClientError_StatusCode&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHttpClientError_StatusCode&&(identical(other.status, status) || other.status == status)&&(identical(other.message, message) || other.message == message));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,status,message);
+int get hashCode {
+    return Object.hash(runtimeType,status,message);
+}
 
 @override
 String toString() {
-  return 'RsHttpClientError.statusCode(status: $status, message: $message)';
+    return 'RsHttpClientError.statusCode(status: $status, message: $message)';
 }
 
 
@@ -276,16 +279,18 @@ $RsHttpClientError_ReqwestCopyWith<RsHttpClientError_Reqwest> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHttpClientError_Reqwest&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHttpClientError_Reqwest&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'RsHttpClientError.reqwest(field0: $field0)';
+    return 'RsHttpClientError.reqwest(field0: $field0)';
 }
 
 
@@ -342,16 +347,18 @@ $RsHttpClientError_JsonCopyWith<RsHttpClientError_Json> get copyWith => _$RsHttp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHttpClientError_Json&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHttpClientError_Json&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'RsHttpClientError.json(field0: $field0)';
+    return 'RsHttpClientError.json(field0: $field0)';
 }
 
 
@@ -408,16 +415,18 @@ $RsHttpClientError_IoCopyWith<RsHttpClientError_Io> get copyWith => _$RsHttpClie
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHttpClientError_Io&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHttpClientError_Io&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'RsHttpClientError.io(field0: $field0)';
+    return 'RsHttpClientError.io(field0: $field0)';
 }
 
 
@@ -474,16 +483,18 @@ $RsHttpClientError_OtherCopyWith<RsHttpClientError_Other> get copyWith => _$RsHt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHttpClientError_Other&&(identical(other.field0, field0) || other.field0 == field0));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsHttpClientError_Other&&(identical(other.field0, field0) || other.field0 == field0));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,field0);
+int get hashCode {
+    return Object.hash(runtimeType,field0);
+}
 
 @override
 String toString() {
-  return 'RsHttpClientError.other(field0: $field0)';
+    return 'RsHttpClientError.other(field0: $field0)';
 }
 
 
@@ -530,7 +541,7 @@ mixin _$RsUploadEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsUploadEvent);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsUploadEvent);
 }
 
 
@@ -539,7 +550,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'RsUploadEvent()';
+    return 'RsUploadEvent()';
 }
 
 
@@ -700,16 +711,18 @@ $RsUploadEvent_ProgressCopyWith<RsUploadEvent_Progress> get copyWith => _$RsUplo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsUploadEvent_Progress&&(identical(other.progress, progress) || other.progress == progress));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsUploadEvent_Progress&&(identical(other.progress, progress) || other.progress == progress));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,progress);
+int get hashCode {
+    return Object.hash(runtimeType,progress);
+}
 
 @override
 String toString() {
-  return 'RsUploadEvent.progress(progress: $progress)';
+    return 'RsUploadEvent.progress(progress: $progress)';
 }
 
 
@@ -766,16 +779,18 @@ $RsUploadEvent_FailedCopyWith<RsUploadEvent_Failed> get copyWith => _$RsUploadEv
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RsUploadEvent_Failed&&(identical(other.error, error) || other.error == error));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is RsUploadEvent_Failed&&(identical(other.error, error) || other.error == error));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,error);
+int get hashCode {
+    return Object.hash(runtimeType,error);
+}
 
 @override
 String toString() {
-  return 'RsUploadEvent.failed(error: $error)';
+    return 'RsUploadEvent.failed(error: $error)';
 }
 
 
