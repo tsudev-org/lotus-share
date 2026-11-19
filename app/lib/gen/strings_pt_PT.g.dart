@@ -19,7 +19,7 @@ class TranslationsPtPt extends Translations with BaseTranslations<AppLocale, Tra
     PluralResolver? ordinalResolver,
     TranslationMetadata<AppLocale, Translations>? meta,
   }) : assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
-       $meta =
+       _meta =
            meta ??
            TranslationMetadata(
              locale: AppLocale.ptPt,
@@ -30,8 +30,9 @@ class TranslationsPtPt extends Translations with BaseTranslations<AppLocale, Tra
        super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver);
 
   /// Metadata for the translations of <pt-PT>.
+  final TranslationMetadata<AppLocale, Translations> _meta;
   @override
-  final TranslationMetadata<AppLocale, Translations> $meta;
+  TranslationMetadata<AppLocale, Translations> get $meta => _meta;
 
   late final TranslationsPtPt _root = this; // ignore: unused_field
 
