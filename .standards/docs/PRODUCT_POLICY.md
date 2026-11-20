@@ -1,4 +1,4 @@
-# CHÍNH SÁCH SẢN PHẨM TOÀN HỆ TSUDEV (v1.1.1)
+# CHÍNH SÁCH SẢN PHẨM TOÀN HỆ TSUDEV (v1.2.0)
 
 > Áp dụng cho MỌI phần mềm / tool / app / trò chơi / website sản phẩm của hệ sinh thái TsuDEV, ở mọi giai đoạn xây
 > dựng và phát triển. Quyết định của chủ dự án ngày **19/11/2026**. Tài liệu này nói **sản phẩm phải như thế nào**;
@@ -83,17 +83,19 @@ Android, không đợi có Mac:
    - Tờ khai cửa hàng: Play Console "Ứng dụng có chứa quảng cáo không?" = **Không**; App Store nhãn quyền riêng tư không
      có mục "Quảng cáo của bên thứ ba".
 2. **Nguồn thu duy nhất** là:
-   - **Gói Pro** theo **tháng** hoặc **năm** (thuê bao, tự gia hạn, huỷ bất cứ lúc nào). Tính năng cốt lõi `MUST` dùng
-     được miễn phí; Pro chỉ mở tính năng nâng cao. Không có "mua một lần" trừ khi chủ dự án quyết riêng.
+   - **Gói Pro** theo **kỳ 1 năm**, **không tự gia hạn** - người dùng chủ động gia hạn, gia hạn sớm được cộng dồn thời
+     hạn (quyết định chủ dự án 20/11/2026, mục 7.2). Tính năng cốt lõi `MUST` dùng được miễn phí; Pro chỉ mở tính năng
+     nâng cao. Không có "mua một lần" trừ khi chủ dự án quyết riêng.
    - **Nút Ủng hộ (Donate)**: tự nguyện, không bắt buộc, không làm phiền (không popup nhắc, không đếm ngược).
    - Gói, giá, mã sản phẩm cửa hàng và phần nào là Pro (đồng bộ/sao lưu đám mây luôn là Pro): mục 7. Ngoại lệ duy
-     nhất được nhắc bằng hộp thoại là thông báo "nhiều thiết bị chưa có Pro" ở mục 7.3.
+     nhất được nhắc bằng hộp thoại là thông báo "nhiều thiết bị chưa có Pro" ở mục 7.3 và nhắc gia hạn / hết kỳ Pro ở
+     mục 7.6.
 3. **Thanh toán đúng kênh của từng nền tảng** (vi phạm là lý do bị gỡ app hay gặp nhất):
 
-   | Nơi người dùng mua | Pro (thuê bao) | Ủng hộ |
+   | Nơi người dùng mua | Pro (kỳ 1 năm, không tự gia hạn) | Ủng hộ |
    | --- | --- | --- |
-   | App tải từ **Google Play** | **Google Play Billing** (subscription, gói tháng + gói năm cùng một sản phẩm) | **Google Play Billing** (sản phẩm tiêu hao "Ủng hộ") - đã chốt 19/11/2026, mục 4.3 |
-   | App từ **App Store** (2027) | **In-App Purchase** auto-renewable | IAP (tip) hoặc ẩn hẳn - theo phiếu `20261112-02` |
+   | App tải từ **Google Play** | **Google Play Billing** (thuê bao `tsudev_pro`, gói cơ sở **trả trước** `nam` P1Y - không tự gia hạn, gia hạn bằng nạp thêm) | **Google Play Billing** (sản phẩm tiêu hao "Ủng hộ") - đã chốt 19/11/2026, mục 4.3 |
+   | App từ **App Store** (2027) | **In-App Purchase** Non-Renewing Subscription | IAP (tip) hoặc ẩn hẳn - theo phiếu `20261112-02` |
    | Website, app desktop tải trực tiếp, winget/Scoop/APT/Homebrew, APK ngoài Play | Thanh toán trên **tsudev.com** (VietQR có xác nhận tự động/thủ công), không nhúng cổng thanh toán vào app | Trang `tsudev.com/ung-ho` (VietQR) |
    | Microsoft Store | App desktop được dùng thanh toán ngoài: mở trang tsudev.com | Như website |
 
@@ -107,7 +109,8 @@ Android, không đợi có Mac:
      ngày), hết hạn thì về miễn phí - KHÔNG xoá dữ liệu người dùng.
    - Không có tài khoản vẫn dùng được bản miễn phí; Pro/huy hiệu cần đăng nhập.
 5. Hiển thị giá: theo giá cửa hàng trả về (Play/App Store tự quy đổi tiền tệ); trên web hiển thị VNĐ đã gồm thuế.
-   Điều khoản thuê bao (giá, chu kỳ, tự gia hạn, cách huỷ) `MUST` hiện TRƯỚC nút mua - yêu cầu của cả Google và Apple.
+   Điều khoản (giá, thời hạn 1 năm, không tự gia hạn, điều gì xảy ra khi hết hạn) `MUST` hiện TRƯỚC nút mua - yêu cầu
+   của cả Google và Apple; nội dung nguyên văn ở mục 7.5.
 6. Hoàn tiền, huỷ: theo chính sách của kênh mua; ghi rõ ở trang Điều khoản của tsudev.com.
 
 ## 4. Huy hiệu Pro / Ủng hộ
@@ -217,14 +220,23 @@ máy chủ được xoá dữ liệu thử nghiệm.
 
 ### 7.2. Gói, giá và khi Pro hết hạn
 
-- **Một gói "TsuDEV Pro" chung cho mọi sản phẩm** (quyền lợi gắn với tài khoản, mục 3.4): **49.000 ₫/tháng**,
-  **490.000 ₫/năm**. Ủng hộ 4 mức: **20.000 / 50.000 / 100.000 / 200.000 ₫**. Giá web đã gồm thuế; Play/App Store tự
-  quy đổi tiền tệ theo mức tương đương. Không dùng thử miễn phí khi chủ dự án chưa duyệt. Không có gói mua một lần (gói
-  `pro_tron_doi` cũ của app-la-ban bị bỏ).
+- **Một gói "TsuDEV Pro" chung cho mọi sản phẩm** (quyền lợi gắn với tài khoản, mục 3.4), **kỳ 1 năm: 490.000 ₫**
+  (quyết định chủ dự án 20/11/2026 - bỏ gói tháng 49.000 ₫ của v1.1). Ủng hộ 4 mức: **20.000 / 50.000 / 100.000 /
+  200.000 ₫**. Giá web đã gồm thuế; Play/App Store tự quy đổi tiền tệ theo mức tương đương. Không dùng thử miễn phí khi
+  chủ dự án chưa duyệt. Không có gói mua một lần (gói `pro_tron_doi` cũ của app-la-ban bị bỏ).
+- **Thời hạn**: mỗi lần mua/gia hạn cộng **1 năm** (12 tháng theo lịch, giờ UTC) vào `pro_until`:
+  `pro_until_mới = max(pro_until, bây giờ) + 1 năm` - gia hạn sớm không mất ngày nào. **Không tự gia hạn ở mọi kênh**
+  (Play: gói trả trước; App Store: Non-Renewing Subscription; web: VietQR). Máy chủ quyền lợi tsudev.com là nơi duy
+  nhất tính `pro_until` (mục 3.4).
 - Tính năng Pro riêng của từng sản phẩm (ngoài đồng bộ/sao lưu đám mây) ghi ở ADR của repo, chủ dự án duyệt.
-- **Pro hết hạn**: máy chủ chặn đẩy mới ngay (`402 pro_required`); vẫn cho **kéo + xuất bản mã thêm 90 ngày**; app báo
-  trước ở mốc **30 ngày** và **7 ngày** trước khi xoá; hết 90 ngày ⇒ xoá dữ liệu trên máy chủ theo quy trình xoá. Dữ
-  liệu trên thiết bị **không bao giờ** bị xoá.
+- **Hết kỳ mà không gia hạn** ⇒ tài khoản trở về **trạng thái miễn phí ("khách mời")**: dùng đầy đủ tính năng cục bộ,
+  KHÔNG đồng bộ/sao lưu lên đám mây, huy hiệu Pro tắt (huy hiệu Ủng hộ giữ nguyên). Máy chủ chặn đẩy mới ngay
+  (`402 pro_required`); vẫn cho **kéo + xuất bản mã thêm 90 ngày**; app báo trước ở mốc **30 ngày** và **7 ngày** trước
+  khi xoá; hết 90 ngày ⇒ xoá dữ liệu trên máy chủ theo quy trình xoá **có xác minh** (mục 7.4 "Kênh trạng thái"): máy
+  chủ `MUST` hỏi lại tsudev.com ngay trước khi xoá, chưa xác nhận được thì hoãn. Dữ liệu trên thiết bị **không bao giờ**
+  bị xoá.
+- Nhắc gia hạn trong app: mục 7.6. tsudev.com `SHOULD` gửi thư nhắc cho người đã xác minh email (7 ngày trước khi hết
+  kỳ, ngày hết kỳ, 30 và 7 ngày trước khi xoá dữ liệu đám mây) - người không mở app vẫn được báo.
 
 ### 7.3. Thông báo "nhiều thiết bị chưa có Pro"
 
@@ -259,9 +271,9 @@ máy chủ được xoá dữ liệu thử nghiệm.
 
 | Nơi | Pro | Ủng hộ |
 | --- | --- | --- |
-| Google Play (từng app tạo cùng mã) | Thuê bao `tsudev_pro`, gói cơ sở `thang` (P1M) và `nam` (P1Y), tự gia hạn | Tiêu hao `ung_ho_20k`, `ung_ho_50k`, `ung_ho_100k`, `ung_ho_200k` |
-| App Store (2027) | Nhóm `TsuDEV Pro`: `com.tsudev.pro.thang`, `com.tsudev.pro.nam` | Tiêu hao `com.tsudev.ung_ho.20k` … `com.tsudev.ung_ho.200k` |
-| Web/desktop/APK ngoài Play/Microsoft Store | `https://tsudev.com/pro?app=<client_id>` (VietQR, mã nội dung `TSU <mã 8 ký tự>`) | `https://tsudev.com/ung-ho?app=<client_id>` |
+| Google Play (từng app tạo cùng mã) | Thuê bao `tsudev_pro`, MỘT gói cơ sở **trả trước** `nam` (P1Y, không tự gia hạn, cho phép nạp thêm) | Tiêu hao `ung_ho_20k`, `ung_ho_50k`, `ung_ho_100k`, `ung_ho_200k` |
+| App Store (2027) | Non-Renewing Subscription `com.tsudev.pro.nam` | Tiêu hao `com.tsudev.ung_ho.20k` … `com.tsudev.ung_ho.200k` |
+| Web/desktop/APK ngoài Play/Microsoft Store | `https://tsudev.com/pro?app=<client_id>` (VietQR 1 năm, mã nội dung `TSU <mã 8 ký tự>`) | `https://tsudev.com/ung-ho?app=<client_id>` |
 
 Luồng mua Play: `obfuscatedAccountId` = base64url(SHA-256(`tsudev-pro|` + `sub`)), 43 ký tự (giới hạn 64). Biên nhận
 **chỉ** được xác minh ở máy chủ quyền lợi tsudev.com - không ở app, không ở máy chủ sản phẩm.
@@ -273,8 +285,11 @@ theo `kid`):
 ```json
 { "iss": "https://tsudev.com/oidc", "sub": "<id tài khoản>", "aud": "<client_id>", "iat": 0, "exp": 0,
   "pro_until": 0, "pro_source": "play|appstore|web|null", "donor": false,
-  "badge": "pro|donor|both|none", "devices_30d": 1 }
+  "badge": "pro|donor|both|none", "devices_30d": 1, "cnf": { "jkt": "<tuỳ chọn>" } }
 ```
+
+Mã `thang` (P1M) và `com.tsudev.pro.thang` của v1.1 bị bỏ: `MUST NOT` tạo trên cửa hàng; repo đã tạo thì lưu trữ
+(archive) gói đó.
 
 - `exp` ≤ `iat` + 7 ngày. App đệm JWS, quá `exp` ⇒ coi là miễn phí. Máy chủ sản phẩm đệm ≤ 24 giờ. Bên kiểm `MUST`
   kiểm `iss`, `aud` = `client_id` của mình, `exp`, và chỉ nhận `alg` = `ES256`.
@@ -288,6 +303,25 @@ theo `kid`):
   ký với tsudev.com (tsudev ADR-0002). Chỉ trả cho `sub` đã cấp quyền cho client đó (`sub` khác ⇒ `404
   unknown_subject`). Gửi biên nhận Play qua `POST https://tsudev.com/api/rp/entitlements/play` (cùng xác thực).
 - Mã cài đặt gửi trong header `X-Tsu-Installation` (`AUTH_AND_ACCOUNT.md` mục 14.3).
+- **Gắn khoá thiết bị (DPoP, RFC 9449)** - `SHOULD`, lộ trình ở tsusync ADR-0002: app tạo khoá P-256 riêng mỗi cài
+  đặt (kho khoá an toàn của nền tảng), gửi header `DPoP` khi gọi `GET /api/me/entitlements`; tsudev.com khi đó thêm
+  `cnf.jkt` (thumbprint RFC 7638) vào JWS. Máy chủ nhận JWS có `cnf.jkt` `MUST` đòi `Authorization: DPoP <jws>` + bằng
+  chứng `DPoP` hợp lệ (`htm`, `htu`, `iat` ±60 giây, `jti` một lần, `ath`).
+- **JWS do app gửi thẳng lên máy chủ đồng bộ** (TsuDEV Sync, máy chủ sản phẩm nhận JWS làm thẻ): bên nhận `MUST` chỉ
+  nhận JWS có `iat` ≤ 24 giờ; cũ hơn ⇒ `401 {"error":"invalid_token","reason":"stale"}`, app lấy JWS mới rồi thử lại
+  một lần.
+- **Kênh trạng thái** (chống xoá nhầm người gia hạn trên web mà không mở app):
+  `POST https://tsudev.com/api/rp/entitlements/status`, `Authorization: Bearer <client assertion>` (như kênh RP, `aud` =
+  đúng URL này), thân `{"client_id": "<client_id>", "subs": ["<sub>", ...]}` (≤ 100). RP chỉ được hỏi cho `client_id` của
+  chính mình; client `tsusync` được hỏi thay mọi `client_id` đã đăng ký dùng TsuDEV Sync. Trả về (`Cache-Control:
+  no-store`) `{"results": {"<sub>": {"status": "ok", "pro_until": <giây>} | {"status": "deleted"} | {"status":
+  "unknown_subject"}}}` cho mọi `sub` **đã từng** cấp quyền cho `client_id` đó - KHÔNG phụ thuộc grant OIDC 30 ngày
+  (khác `GET /api/rp/entitlements/{sub}`). `deleted` = tài khoản đã xoá (tsudev.com giữ dấu `sub` đã xoá ≥ 1 năm).
+  Chỉ trả `pro_until`, không trả email/huy hiệu/thiết bị.
+- **Xoá dữ liệu đám mây vì hết Pro**: máy chủ đồng bộ (sản phẩm hoặc TsuDEV Sync) `MUST` gọi kênh trạng thái ngay trước
+  khi xoá; `pro_until` + 90 ngày còn ở tương lai (đã gia hạn) ⇒ cập nhật hạn, GIỮ dữ liệu; `deleted` hoặc đã quá 90
+  ngày ⇒ xoá; lỗi mạng/HTTP, `unknown_subject` ⇒ **hoãn**, hỏi lại sau ≥ 24 giờ. `MUST NOT` xoá chỉ dựa trên
+  `pro_until` đệm cục bộ.
 
 **Máy chủ sản phẩm / TsuDEV Sync:**
 
@@ -304,17 +338,57 @@ theo `kid`):
   (ví dụ qulythuchi 200 MiB + 1 GiB, ADR-0016).
 - Huy hiệu: Flutter `TsuBadge` trong gói `tsudev_ui` (`tsudev-org/tsudev-ui-flutter`), web `<TsuBadge>` trong
   `@tsudev/ui`; desktop .NET/Rust/C++ vẽ lại từ SVG ở `assets/badges/` của bộ quy ước (không tự thiết kế).
-- Màn **Pro / Ủng hộ**: điều khoản thuê bao đứng TRƯỚC nút mua, nguyên văn (vi): "TsuDEV Pro {giá}/{chu kỳ}, tự gia hạn
-  cho tới khi bạn huỷ. Huỷ bất cứ lúc nào trong {Google Play | App Store | tsudev.com → Tài khoản}; quyền Pro dùng tới
-  hết kỳ đã trả." - (en): "TsuDEV Pro {price}/{period}, renews automatically until you cancel. Cancel anytime in
-  {Google Play | App Store | tsudev.com → Account}; Pro stays active until the end of the paid period."
+- Màn **Pro / Ủng hộ**: điều khoản đứng TRƯỚC nút mua, nguyên văn (vi): "TsuDEV Pro {giá} cho 1 năm, KHÔNG tự gia hạn.
+  Gia hạn sớm được cộng thêm 1 năm vào thời hạn còn lại. Hết hạn mà chưa gia hạn, ứng dụng trở về bản miễn phí và ngừng
+  đồng bộ lên đám mây; dữ liệu trên thiết bị vẫn giữ nguyên, bản sao trên đám mây còn tải về được 90 ngày rồi bị xoá."
+  - (en): "TsuDEV Pro {price} for 1 year, does NOT renew automatically. Renewing early adds 1 year to your remaining
+  time. If it expires without renewal, the app returns to the free version and stops syncing to the cloud; data on your
+  device stays intact, and your cloud copy can be downloaded for 90 days before it is deleted."
+
+### 7.6. Nhắc gia hạn và khi hết kỳ Pro
+
+Quyết định chủ dự án 20/11/2026. Nguồn thời hạn là `pro_until` trong JWS quyền lợi còn hạn (mục 7.4); app không có
+JWS còn hạn ⇒ không hiện gì ở mục này (coi như miễn phí, mục 3.4).
+
+- **Nhắc gia hạn** - điều kiện: 0 < `pro_until` - bây giờ ≤ **7 ngày**. Hiện **mỗi lần mở app** (khởi động mới, hoặc
+  quay lại app sau ≥ 30 phút ở nền), tối đa một lần cho mỗi lần mở; đóng được, không chặn dùng app, không hiện giữa lúc
+  đang nhập liệu. `{n}` = số ngày còn lại làm tròn lên (≥ 1), `{ngày}`/`{date}` = ngày hết hạn theo giờ máy, dạng
+  DD/MM/YYYY (vi) / theo ngôn ngữ (en). Nội dung nguyên văn:
+
+  | | vi | en |
+  | --- | --- | --- |
+  | Tiêu đề | Gia hạn TsuDEV Pro | Renew TsuDEV Pro |
+  | Thân | Gói TsuDEV Pro của bạn hết hạn sau {n} ngày (ngày {ngày}). Gia hạn để tiếp tục đồng bộ và sao lưu đám mây. Nếu không gia hạn, ứng dụng sẽ trở về bản miễn phí: dữ liệu trên thiết bị vẫn giữ nguyên nhưng không còn đồng bộ lên đám mây. | Your TsuDEV Pro expires in {n} days (on {date}). Renew to keep cloud sync and backup. If you don't renew, the app returns to the free version: data on this device stays intact but no longer syncs to the cloud. |
+  | Nút chính | Gia hạn | Renew |
+  | Nút phụ | Để sau | Later |
+
+- **Khi hết kỳ** - điều kiện: `pro_until` ≤ bây giờ và JWS trước đó của thiết bị từng có Pro. Hiện **một lần** cho mỗi
+  giá trị `pro_until` (khoá cục bộ `tsu.pro_expired.notified_until` = `pro_until` đã báo, giây Unix):
+
+  | | vi | en |
+  | --- | --- | --- |
+  | Tiêu đề | TsuDEV Pro đã hết hạn | TsuDEV Pro has expired |
+  | Thân | Ứng dụng đã trở về bản miễn phí và ngừng đồng bộ lên đám mây. Dữ liệu trên thiết bị vẫn giữ nguyên. Bản sao trên đám mây còn tải về được tới ngày {ngày_xoá}. | The app is back on the free version and has stopped syncing to the cloud. Data on this device stays intact. Your cloud copy can be downloaded until {delete_date}. |
+  | Nút chính | Gia hạn | Renew |
+  | Nút phụ | Đóng | Close |
+
+  `{ngày_xoá}` = `pro_until` + 90 ngày. Sản phẩm không có đồng bộ đám mây bỏ câu cuối.
+- **Kênh nút "Gia hạn"**: như mục 7.3 (Play/App Store ⇒ luồng IAP gói `nam`; ngoài cửa hàng ⇒ `tsudev.com/pro?app=<client_id>`;
+  bản Play `MUST NOT` dẫn ra thanh toán web).
+- Đây là ngoại lệ có chủ đích của mục 3.2 (nhắc **Pro**, chủ dự án duyệt 20/11/2026), chỉ trong đúng điều kiện trên.
+- **Test bắt buộc** (6 ca): còn 8 ngày ⇒ không nhắc; còn 7 ngày ⇒ nhắc; mở app 2 lần trong 7 ngày cuối ⇒ nhắc 2 lần, quay
+  lại sau < 30 phút ⇒ không nhắc lại; hết hạn ⇒ báo hết kỳ đúng một lần, mở lại ⇒ không báo nữa; gia hạn (JWS mới có
+  `pro_until` xa hơn) ⇒ thôi nhắc, lần hết kỳ sau báo lại; ngoại tuyến với JWS hết hạn ⇒ không nhắc, không lỗi.
+- Thành phần dùng chung: Flutter `ProRenewalNotice` trong `tsudev_ui`, web trong `@tsudev/ui`; desktop .NET/Rust/C++
+  dùng đúng nội dung và điều kiện trên.
 
 ## 8. Checklist nghiệm thu
 
 - [ ] Lần chạy đầu: ngôn ngữ = ngôn ngữ hệ thống (dự phòng EN rồi VI), giao diện = Hệ thống; có test (mục 1.4).
 - [ ] Có tiếng Việt + tiếng Anh, không chuỗi viết cứng.
 - [ ] Không SDK quảng cáo, không quyền `AD_ID`; tờ khai cửa hàng "không quảng cáo".
-- [ ] Pro tháng/năm qua đúng kênh (mục 3.3); quyền lợi xác minh phía máy chủ; hết hạn không mất dữ liệu.
+- [ ] Pro kỳ 1 năm, không tự gia hạn, qua đúng kênh (mục 3.3, 7.4); không còn mã `thang`; quyền lợi xác minh phía
+  máy chủ; hết hạn ⇒ về bản miễn phí, không mất dữ liệu.
 - [ ] Huy hiệu Pro/Ủng hộ đúng bảng 4.1, có lựa chọn hiển thị, tôn trọng giảm chuyển động.
 - [ ] Bản Play: ủng hộ cấp huy hiệu đi qua Play Billing (mục 4.3).
 - [ ] Có thư mục `ios/` dựng được trên CI macOS (app di động); kết quả thử trên iPhone thật ghi ở `logs/`.
@@ -323,7 +397,10 @@ theo `kid`):
 - [ ] Máy chủ đồng bộ từ chối đẩy/tải lên của tài khoản không Pro (`402 pro_required`), có test; JWS sai `aud`/hết
   hạn/sai chữ ký bị từ chối.
 - [ ] Thông báo nhiều thiết bị đúng nội dung + chu kỳ 30 ngày, đủ 5 test (mục 7.3).
-- [ ] Pro hết hạn ⇒ không mất dữ liệu trên thiết bị; kéo/xuất được trong 90 ngày (mục 7.2).
+- [ ] Pro hết hạn ⇒ không mất dữ liệu trên thiết bị; kéo/xuất được trong 90 ngày (mục 7.2); máy chủ chỉ xoá sau khi
+  kênh trạng thái xác nhận, có test "gia hạn trên web mà không mở app ⇒ không xoá" (mục 7.4).
+- [ ] Nhắc gia hạn 7 ngày cuối mỗi lần mở app + báo hết kỳ một lần, đúng nội dung, đủ 6 test (mục 7.6).
+- [ ] Máy chủ nhận JWS từ app chỉ nhận `iat` ≤ 24 giờ (mục 7.4).
 - [ ] Định danh cửa hàng, JWS, header, mã lỗi đúng hợp đồng mục 7.4; điều khoản thuê bao đứng trước nút mua (mục 7.5).
 - [ ] Số đo phản hồi thao tác chính < 100 ms ghi trong PR; thử tải đồng bộ nếu có máy chủ (N1, N5).
 - [ ] Phiếu rà soát bảo mật + THREAT_MODEL cập nhật (giả mạo quyền lợi, dùng lại biên nhận, vượt hạn mức, liệt kê thiết bị).
