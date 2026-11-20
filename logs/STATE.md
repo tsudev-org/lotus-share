@@ -13,7 +13,13 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
-- [ ] **Tiếp phiên 20/11 (bị cắt vì hết hạn mức)**: (1) PR #100 tray_manager 0.8.3 - đã sửa lỗi THIẾU `libcnativeapi.so`/`cnativeapi.dll` trong bundle (CMake `NATIVE_ASSETS_DIR` + cổng `tools/check_native_assets.py`), khay Linux chạy thật OK; chờ build thử run 44627917965 + CI xanh => gộp, đóng Dependabot #101 (0.9 cần Flutter 3.50). (2) PR #104 cụm win32 6 (thay #102): CI xanh => gộp, đóng #102; 👤 thử bật/tắt Khởi động cùng Windows. (3) Nhánh `deps/flutter-foreground-task-11` (WIP đã đẩy, chỉ đổi pubspec; Flutter 3.47.9 tự gắn KGP cho plugin): mở PR để CI Android/iOS kiểm, thử Android thật. (4) Xuất/nhập tệp yêu thích + cài đặt (miễn phí, ADR-0001 mục 2). 👤 duyệt `xuat-ban` linux-packages run **44590008085** (APT/RPM còn 26.11.1801 - bản lỗi).
+- [ ] **Tiếp phiên 20/11**: chờ gộp tuần tự (tự gộp đã bật, ruleset đòi nhánh cập nhật => sau mỗi lần gộp chạy
+      `gh pr update-branch <số>` cho PR kế): **#100** tray_manager 0.8.3 (sửa thiếu `libcnativeapi.so`/`cnativeapi.dll`
+      + cổng `tools/check_native_assets.py`; khay Linux chạy thật OK) -> đóng Dependabot #101; **#106**
+      flutter_foreground_task 11 (build thử run 44646837299 xanh, gồm APK); **#107** Sao lưu ra tệp (miễn phí).
+      Sau đó build thử `release-lotus.yml` trên main. 👤 thử thật trước phát hành kế tiếp: khay Windows (icon, chuột
+      trái/phải), Khởi động cùng Windows (#104), Android nhận tệp khi tắt màn hình (#106), xuất/nhập sao lưu Android (#107).
+      👤 duyệt `xuat-ban` linux-packages run **44590008085** (APT/RPM còn 26.11.1801 - bản lỗi).
 - [ ] 👤 **Duyệt `xuat-ban` của linux-packages** (2 run chờ: 44332608025, 44376379671 + lượt mới) để APT/RPM lên
       `lotus-share 26.11.1901` - người đang dùng 26.11.1801 qua APT/RPM KHÔNG mở được ứng dụng tới lúc đó. Agent đo
       `pkg.tsudev.com/catalog.json` sau khi duyệt.
@@ -74,6 +80,9 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 20/11/2026 - **#104 gộp** (thay Dependabot #102, đã đóng): cụm win32 6 - win32_registry 3 (viết lại
+  `autostart_helper.dart`, đóng khóa registry), device/package/network_info_plus, file_picker 13, wakelock_plus 1.8.
+  **#107** (mở) Sao lưu ra tệp miễn phí: JSON `lotus-share-backup` v1, không mang khóa/PIN/lưu nhanh, 8 test.
 - 20/11/2026 - **#103 gộp**: sync quy ước v3.9.1 + `docs/adr/0001-pro1-luu-cuc-bo-pro-dong-bo.md` (kiểm kê: bản miễn phí đã đạt N2; Pro = đồng bộ yêu thích + cài đặt qua TsuDEV Sync). Phát hiện + sửa lỗi khay hệ thống của #100 bằng chạy thật bản build thử.
 
 - 19/11/2026 (phiên lotus-share, khuya) - **VirusTotal**: workflow tạm `VT_API_KEY` (run 44523059222, nhánh đã xóa)
