@@ -16,10 +16,6 @@
 - [ ] 👤 **Thử thật trước phát hành kế tiếp** (đã gộp 20/11, build thử trên main run ghi ở Đã hoàn thành): khay
       Windows (icon, chuột trái mở cửa sổ, chuột phải menu - #100), Khởi động cùng Windows bật/tắt (#104), Android nhận
       tệp lớn khi tắt màn hình (#106), xuất/nhập Sao lưu ra tệp trên Android (#107).
-- [ ] 👤 **Duyệt `xuat-ban` của linux-packages** để APT/RPM lên `lotus-share 26.11.1901` - người đang dùng 26.11.1801
-      qua APT/RPM KHÔNG mở được ứng dụng tới lúc đó. Đo 20/11: `catalog.json` vẫn 26.11.1801; run 44590008085 +
-      44376379671 đã bị hủy; **44332608025** chờ duyệt môi trường `packages`, **44649543688** (00:54 UTC 20/11) xếp
-      hàng sau nó => duyệt 44332608025 (hoặc hủy để lượt mới chạy) rồi duyệt 44649543688. Agent đo lại sau khi duyệt.
 - [ ] 👤 GitGuardian sự cố 40268788 ("Generic Password", `scripts/apple/nhap-khoa.sh` dòng 7 ở commit 02ad20e): báo nhầm
       (chỉ kiểm biến môi trường, không có giá trị) - đánh dấu false positive trên dashboard. Mã đã viết lại.
 - [ ] 👤 Gửi báo nhầm **26.11.1901** (đã đọc engine 19/11, phiếu `20261118-02` mục 7): mở
@@ -69,7 +65,8 @@
       danh sách thiết bị/cài đặt qua PRO-D; truyền LAN vẫn miễn phí, không relay internet. KHÔNG làm trước khi
       tsudev-standards v3.9.0 (PRO-A) + PRO-B/PRO-D sẵn sàng. Đo 20/11: tsudev#336 ĐÃ gộp (19/11 22:01 UTC), nhưng repo
       `tsudev-org/tsudev-ui-flutter` chưa tồn tại (gói `tsudev_ui`, PRO-C2) và chưa thấy `client_id` Lotus Share => chưa
-      viết mã Pro (ADR-0001 mục 5). Đo lại 20/11 trưa: vẫn 404.
+      viết mã Pro (ADR-0001 mục 5). Đo lại 20/11 chiều: `tsudev_ui` v0.2.0 ĐÃ có (tag, gồm ProRenewal 7.6,
+      `jwsForServer`, DPoP); còn thiếu `client_id` Lotus Share + thư viện Dart `tsusync` (repo chưa có pubspec) => chưa viết mã.
 - [ ] `release-lotus.yml` bản DMG ad-hoc (khi `vars.APPLE_TEAM_ID` trống) vẫn ký lại `codesign --force --deep --sign -`
       => DMG người dùng tải về KHÔNG có entitlements/sandbox. Từ #109 gói Xcode ký đã hợp lệ (helper LaunchAtLogin sửa ở
       pbxproj) nên có thể bỏ bước ký lại; nhưng bật sandbox đổi hành vi bản đã phát hành (vùng chứa mới ở
@@ -84,6 +81,11 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 20/11/2026 (chiều) - **APT/RPM lên `lotus-share 26.11.1901`**: chủ dự án ủy quyền agent xử lý linux-packages; theo lựa
+  chọn của chủ dự án, Environment `packages` thêm người duyệt `tsudev-tsudev` + tắt `prevent_self_review` (ảnh chụp trước/
+  sau `~/.cache/lotus-tmp/env-packages/`, chính sách nhánh `main` giữ nguyên). Đã kiểm workflow (SHA-256 Release, vân tay
+  GPG, gpgv, cài thật) rồi duyệt run 44332608025: xanh, cài thật ubuntu amd64/arm64 đạt; `catalog.json` có deb/rpm
+  26.11.1901-1. Run 44649543688 tự bỏ qua (kho đã mới). **#110** nhận phiếu PRO2.
 - 20/11/2026 - **#109** `apple.yml` macOS chạy thử đúng gói Xcode ký ad-hoc kèm `Release.entitlements` (bỏ
   `codesign --force --deep --sign -`, mẫu qulythuchi#30); kiểm entitlements + thư mục Container lúc chạy. Lần đầu đỏ:
   `copy-helper-swiftpm.sh` (LaunchAtLogin-Legacy) ký helper bằng tên định danh mở rộng không có trong keychain, lỗi
