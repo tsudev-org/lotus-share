@@ -19,6 +19,9 @@ Future<String?> pickDirectoryPath() async {
     /// We need the raw path to properly manipulate the path to save new files, or
     /// to list files recursively.
     /// Also, on iOS, file_selector does not work with directories.
+    // lotus-share: file_picker 13 đánh dấu getDirectoryPath() lỗi thời (thay bằng pickDirectory() trả Uri), nhưng ở đây
+    // CẦN đường dẫn thô (Android dưới contentUriMinSdk + iOS), Uri content:// không dùng được. Bỏ khi file_picker gỡ hàm.
+    // ignore: deprecated_member_use
     return await FilePicker.getDirectoryPath();
   } else {
     return await file_selector.getDirectoryPath();

@@ -11,7 +11,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   pasteboard
   screen_retriever_linux
   system_date_time_format
-  tray_manager
   uri_content
   url_launcher_linux
   window_manager

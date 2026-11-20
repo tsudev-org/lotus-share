@@ -28,4 +28,21 @@ Xem phiếu gốc mục 8 (giá Pro, ân hạn, nơi đặt dịch vụ đồng 
 
 ## 4. Kết quả xử lý (phiên nhận điền)
 
--
+- 20/11/2026 (lotus-share, phiên tiếp) - **Kiểm kê + ADR** `docs/adr/0001-pro1-luu-cuc-bo-pro-dong-bo.md`: không có đo
+  lường/báo lỗi; dữ liệu chỉ rời máy trong LAN (khám phá, truyền tệp) + `GET phien-ban.json` (không dữ liệu người
+  dùng); WebRTC/tín hiệu tắt lúc biên dịch ⇒ bản miễn phí ĐÃ đạt N2, không có đường đồng bộ miễn phí phải tắt. Pro =
+  đồng bộ thiết bị yêu thích + cài đặt không gắn máy qua TsuDEV Sync (E2EE); khóa TLS, lịch sử nhận, tệp không bao giờ
+  đồng bộ; không relay internet. Sync quy ước v3.9.1 cùng PR. Mã chờ tsudev#336 + `client_id`, `tsudev_ui` (PRO-C2),
+  `tsusync` (PRO-D) - bảng ADR mục 5.
+
+## 5. Đã chốt (19/11/2026, bổ sung sau khi mở phiếu)
+
+Chủ dự án giao agent chốt mọi câu hỏi mở và xác nhận **chưa có người dùng thật** ⇒ phiếu gốc mục 8 ĐÃ CHỐT, mục 9
+là **HỢP ĐỒNG CHUNG** (mọi repo dùng đúng định danh, không tự đặt khác): gói chung **TsuDEV Pro 49.000 ₫/tháng,
+490.000 ₫/năm**; Ủng hộ 20/50/100/200 nghìn; Play `tsudev_pro` (`thang`/`nam`) + `ung_ho_20k`…`ung_ho_200k`; JWS
+quyền lợi (ES256, `exp` ≤ 7 ngày, `badge`, `devices_30d`); HTTP 402 `pro_required`; mã cài đặt `X-Tsu-Installation`;
+dịch vụ đồng bộ dùng chung ở repo mới `tsudev-org/tsusync`; huy hiệu `TsuBadge`; nội dung thông báo vi/en nguyên văn.
+Pro hết hạn: chặn đẩy, kéo/xuất 90 ngày, báo trước 30 và 7 ngày, dữ liệu trên thiết bị không bao giờ bị xoá.
+
+Làm được NGAY (không phụ thuộc PRO-B/PRO-D): kiểm kê, ADR, màn Pro/Ủng hộ, thông báo nhiều thiết bị (nguồn quyền lợi giả
+trong test), tắt mọi đường gửi dữ liệu người dùng lên mạng ở bản miễn phí. Thứ tự toàn hệ: phiếu gốc mục 9.5.
