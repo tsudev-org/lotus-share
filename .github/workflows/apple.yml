@@ -7,7 +7,9 @@
 #   - iOS Simulator: dựng bản debug, cài + mở trên iPhone giả lập, kiểm ứng dụng còn chạy sau 45 giây VÀ không ghi
 #     LOTUS_SHARE_INIT_ERROR (màn hình lỗi khởi động - app/lib/config/init_error.dart), chụp màn hình; lặp lại trên
 #     iPad Pro 13" giả lập (ảnh App Store iPad 13").
-#   - macOS: dựng release, ký ad-hoc, mở thử, kiểm còn chạy, chụp màn hình.
+#   - macOS: dựng release (Xcode ký ad-hoc kèm Release.entitlements => sandbox bật THẬT), kiểm entitlements, mở thử
+#     đúng gói Xcode ký, kiểm còn chạy + không LOTUS_SHARE_INIT_ERROR, chụp màn hình. KHÔNG ký lại bằng
+#     `codesign --force --deep --sign -` (làm mất entitlements => chạy thử không sandbox, phiếu AP1 mục 2.1).
 #   - Kiểm tĩnh trên gói: bundle id, PrivacyInfo.xcprivacy có trong .app, entitlements multicast + app group, không
 #     còn aps-environment, chuỗi xin quyền tiếng Việt không rỗng.
 name: Apple (iOS, macOS)
@@ -232,25 +234,31 @@ jobs:
           flutter config --no-analytics
           flutter pub get
           flutter build macos --release
-      - name: Ký ad-hoc, kiểm gói, chạy thử
+      - name: Kiểm chữ ký + entitlements, chạy thử (sandbox bật)
         run: |
           set -euo pipefail
           app="app/build/macos/Build/Products/Release/Lotus Share.app"
           [[ "$(plutil -extract CFBundleIdentifier raw "$app/Contents/Info.plist")" == "$BUNDLE_ID" ]]
           lipo -info "$app/Contents/MacOS/Lotus Share" | tee /dev/stderr | grep -q arm64
-          # Entitlements Release (sandbox + mạng) phải có trong chữ ký Xcode tạo ra - bản Developer ID sau này giữ chúng.
+          codesign --verify --deep --strict "$app"
+          codesign -dv "$app" 2>&1 | grep -E '^(Signature|Identifier|TeamIdentifier)'
+          # Entitlements Release (sandbox + mạng) phải nằm trong chữ ký Xcode tạo ra - bản Developer ID sau này giữ chúng.
           codesign -d --entitlements - --xml "$app" > ent.plist
           pb() { /usr/libexec/PlistBuddy -c "Print :$1" "$2" 2>/dev/null; }
-          [[ "$(pb com.apple.security.app-sandbox ent.plist)" == true ]] || { echo "::error::Chữ ký thiếu app-sandbox"; exit 1; }
-          [[ "$(pb com.apple.security.network.server ent.plist)" == true ]] || { echo "::error::Chữ ký thiếu network.server"; exit 1; }
-          # Ký lại GIỐNG HỆT job macOS của release-lotus.yml để chạy thử đúng bản người dùng tải về.
-          codesign --force --deep --sign - "$app"
-          codesign --verify --deep --strict "$app"
+          for k in com.apple.security.app-sandbox com.apple.security.network.client com.apple.security.network.server \
+                   com.apple.security.files.downloads.read-write com.apple.security.files.user-selected.read-write; do
+            [[ "$(pb "$k" ent.plist)" == true ]] || { echo "::error::Chữ ký thiếu $k"; exit 1; }
+          done
+          if pb com.apple.security.cs.allow-jit ent.plist >/dev/null; then echo "::error::Bản release mang allow-jit"; exit 1; fi
+          # KHÔNG ký lại: chạy đúng gói Xcode ký kèm entitlements để sandbox bật thật.
           # Chạy thẳng tệp thực thi để giữ stdout/stderr (print của Flutter) mà kiểm dấu hiệu lỗi khởi động.
           "$app/Contents/MacOS/Lotus Share" > macos-app.log 2>&1 &
           sleep 30
           pgrep -x "Lotus Share" >/dev/null || { echo "::error::Ứng dụng macOS thoát/sập trong 30 giây đầu"; \
-            log show --last 2m --predicate 'process == "Lotus Share"' | tail -80; exit 1; }
+            cat macos-app.log; log show --last 2m --predicate 'process == "Lotus Share"' | tail -80; exit 1; }
+          # Bằng chứng sandbox bật lúc chạy: macOS tạo vùng chứa riêng cho ứng dụng sandbox.
+          test -d "$HOME/Library/Containers/$BUNDLE_ID/Data" \
+            || { echo "::error::Không thấy ~/Library/Containers/$BUNDLE_ID - ứng dụng không chạy trong sandbox"; exit 1; }
           mkdir -p shots && screencapture -x shots/macos.png || echo "::warning::Không chụp được màn hình (máy chạy không có phiên đồ họa)"
           { cat macos-app.log; log show --last 5m --style compact \
               --predicate 'eventMessage CONTAINS "LOTUS_SHARE_INIT_ERROR"'; } > macos-check.log || true
