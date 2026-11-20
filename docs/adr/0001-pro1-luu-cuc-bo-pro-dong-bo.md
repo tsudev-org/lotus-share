@@ -47,7 +47,7 @@ Không có tính năng Pro nào khác: Lotus Share không khóa bớt tính năn
 - Chưa có người dùng thật + chưa có đường đồng bộ miễn phí ⇒ không cần ân hạn chuyển tiếp.
 - Pro hết hạn: theo PRODUCT_POLICY 7.2 (TsuDEV Sync chặn đẩy `402 pro_required`, kéo 90 ngày, báo trước 30/7 ngày).
   Danh sách yêu thích + cài đặt trên thiết bị không bao giờ bị xóa; app chỉ ngừng đẩy/kéo.
-- Kênh (PRODUCT_POLICY 3.3, 4.3, 7.4): bản Google Play ⇒ IAP `tsudev_pro` (`thang`/`nam`), `ung_ho_*`; bản ngoài cửa
+- Kênh (PRODUCT_POLICY 3.3, 4.3, 7.4): bản Google Play ⇒ IAP `tsudev_pro` gói trả trước `nam` (490.000 ₫ / 1 năm, không tự gia hạn - PRO2; bỏ `thang`), `ung_ho_*`; bản ngoài cửa
   hàng (Windows/Linux/macOS/APK GitHub, Scoop, Homebrew, APT/RPM, winget) ⇒ mở `https://tsudev.com/pro?app=<client_id>`
   và `https://tsudev.com/ung-ho?app=<client_id>`. Bản Play `MUST NOT` dẫn ra thanh toán web. Trang Ủng hộ hiện có
   (`forkSupportPageUrl`) chuyển sang tsudev.com/ung-ho khi B3 của tsudev xong (đổi `fork_config.dart` ⇒ 👤 duyệt).
@@ -88,3 +88,10 @@ Không có tính năng Pro nào khác: Lotus Share không khóa bớt tính năn
 - THREAT_MODEL bổ sung khi viết mã đồng bộ: giả mạo JWS (kiểm `iss`/`aud`/`exp`/`alg=ES256`), dùng lại biên nhận (chỉ
   máy chủ tsudev xác minh), liệt kê thiết bị (`devices_30d` chỉ là số đếm), chiếm tài khoản (E2EE + kiểm vân tay TLS).
 - Đo phản hồi thao tác chính (< 100 ms) trước/sau khi thêm đăng nhập + đồng bộ, ghi vào PR mã.
+
+## Bổ sung PRO2 (20/11/2026)
+
+Phiếu `logs/handover/20261120-PRO2_*` (tsudev-standards v4.0.0, PRODUCT_POLICY v1.2.0) thay phần giá/gói của PRO1: Pro chỉ
+còn 490.000 ₫ / 1 năm, không tự gia hạn; hết kỳ ⇒ bản miễn phí, ngừng đồng bộ qua TsuDEV Sync (bản sao đám mây kéo về
+được 90 ngày); nhắc gia hạn mỗi lần mở app trong 7 ngày cuối + báo hết kỳ một lần (mục 7.6, `ProRenewalNotice` của
+`tsudev_ui` v0.2.0). Truyền LAN vẫn miễn phí. Điều kiện bắt đầu viết mã giữ như mục 5 (thêm `tsudev_ui` v0.2.0).
