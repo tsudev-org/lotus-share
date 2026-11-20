@@ -9,7 +9,7 @@ import connectivity_plus
 import desktop_drop
 import device_info_plus
 import dynamic_color
-import file_picker
+import file_picker_darwin
 import file_selector_macos
 import gal
 import network_info_plus
