@@ -37,10 +37,10 @@ Terminal=false
         await setLaunchAtLoginMinimized(startHidden);
         return true;
       case TargetPlatform.windows:
-        _getWindowsRegistryKey().createValue(
-          RegistryValue.string(
+        _withWindowsRunKey(
+          (key) => key.setValue(
             _windowsRegistryKeyValue,
-            '"${Platform.resolvedExecutable}"${startHidden ? ' $startHiddenFlag' : ''}',
+            RegistryValue.string('"${Platform.resolvedExecutable}"${startHidden ? ' $startHiddenFlag' : ''}'),
           ),
         );
         return true;
@@ -67,7 +67,11 @@ Future<bool> disableAutoStart() async {
         await setLaunchAtLogin(false);
         break;
       case TargetPlatform.windows:
-        _getWindowsRegistryKey().deleteValue(_windowsRegistryKeyValue);
+        _withWindowsRunKey((key) {
+          if (key.getType(_windowsRegistryKeyValue) != null) {
+            key.removeValue(_windowsRegistryKeyValue);
+          }
+        });
         break;
       default:
         break;
@@ -87,7 +91,7 @@ Future<bool> isAutoStartEnabled() async {
     case TargetPlatform.macOS:
       return await getLaunchAtLogin();
     case TargetPlatform.windows:
-      return _getWindowsRegistryKey().getStringValue(_windowsRegistryKeyValue)?.contains(Platform.resolvedExecutable) ?? false;
+      return _withWindowsRunKey((key) => key.getString(_windowsRegistryKeyValue))?.contains(Platform.resolvedExecutable) ?? false;
     default:
       return false;
   }
@@ -105,7 +109,7 @@ Future<bool> isAutoStartHidden() async {
     case TargetPlatform.macOS:
       return await getLaunchAtLoginMinimized();
     case TargetPlatform.windows:
-      return _getWindowsRegistryKey().getStringValue(_windowsRegistryKeyValue)?.contains(startHiddenFlag) ?? false;
+      return _withWindowsRunKey((key) => key.getString(_windowsRegistryKeyValue))?.contains(startHiddenFlag) ?? false;
     default:
       return false;
   }
@@ -113,12 +117,14 @@ Future<bool> isAutoStartHidden() async {
 
 const _windowsRegistryKeyValue = 'lotus-share'; // lotus-share
 
-RegistryKey _getWindowsRegistryKey() {
-  return Registry.openPath(
-    RegistryHive.currentUser,
-    path: r'Software\Microsoft\Windows\CurrentVersion\Run',
-    desiredAccessRights: AccessRights.allAccess,
-  );
+/// Mở khóa `HKCU\...\Run` (win32_registry 3: tạo nếu thiếu, quyền đọc-ghi), chạy [action] rồi đóng khóa.
+T _withWindowsRunKey<T>(T Function(RegistryKey key) action) {
+  final key = CURRENT_USER.create(r'Software\Microsoft\Windows\CurrentVersion\Run');
+  try {
+    return action(key);
+  } finally {
+    key.close();
+  }
 }
 
 String _getLinuxFilePath(String appName) {
