@@ -63,11 +63,13 @@
       viết sẵn, `docs/vi/APPLE-IOS-MACOS.md`, `docs/store/app-store.md`). Còn: 👤 thử iPhone thật bằng `.ipa` không ký (mục 2 tài liệu, ghi kết quả
       `logs/thu-thiet-bi/`); khi có Mac + Apple Developer (đầu 2027): làm mục 4 tài liệu - xin quyền multicast NGAY,
       ghim `APPLE_TEAM_ID_GHIM`, thử sandbox macOS trên Mac thật. Phiếu toàn hệ `~/projects/logs/handover/20261119-AP1_*`.
-- [ ] **PRO1** (phiếu `logs/handover/20261119-PRO1_*`, từ qulythuchi-b2 19/11): lưu cục bộ mặc định, Pro chỉ đồng bộ
+- [ ] **PRO1 + PRO2** (phiếu `logs/handover/20261119-PRO1_*` + `20261120-PRO2_*` - PRO2 thay phần giá: chỉ 490.000 ₫ /
+      1 năm, không tự gia hạn, bỏ `thang`; nhắc gia hạn 7 ngày cuối + báo hết kỳ một lần bằng `ProRenewalNotice` của
+      `tsudev_ui` v0.2.0; sync quy ước v4.0.0 cùng PR mã): lưu cục bộ mặc định, Pro chỉ đồng bộ
       danh sách thiết bị/cài đặt qua PRO-D; truyền LAN vẫn miễn phí, không relay internet. KHÔNG làm trước khi
       tsudev-standards v3.9.0 (PRO-A) + PRO-B/PRO-D sẵn sàng. Đo 20/11: tsudev#336 ĐÃ gộp (19/11 22:01 UTC), nhưng repo
       `tsudev-org/tsudev-ui-flutter` chưa tồn tại (gói `tsudev_ui`, PRO-C2) và chưa thấy `client_id` Lotus Share => chưa
-      viết mã Pro (ADR-0001 mục 5).
+      viết mã Pro (ADR-0001 mục 5). Đo lại 20/11 trưa: vẫn 404.
 - [ ] `release-lotus.yml` bản DMG ad-hoc (khi `vars.APPLE_TEAM_ID` trống) vẫn ký lại `codesign --force --deep --sign -`
       => DMG người dùng tải về KHÔNG có entitlements/sandbox. Từ #109 gói Xcode ký đã hợp lệ (helper LaunchAtLogin sửa ở
       pbxproj) nên có thể bỏ bước ký lại; nhưng bật sandbox đổi hành vi bản đã phát hành (vùng chứa mới ở
