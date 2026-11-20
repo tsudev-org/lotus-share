@@ -997,6 +997,7 @@ class Translations$tsudev$en {
 
   late final Translations$tsudev$updateRequired$en updateRequired = Translations$tsudev$updateRequired$en.internal(_root);
   late final Translations$tsudev$updateAvailable$en updateAvailable = Translations$tsudev$updateAvailable$en.internal(_root);
+  late final Translations$tsudev$backup$en backup = Translations$tsudev$backup$en.internal(_root);
 }
 
 // Path: receiveTab.infoBox
@@ -1933,6 +1934,43 @@ class Translations$tsudev$updateAvailable$en {
 
   /// en: 'Later'
   String get later => 'Later';
+}
+
+// Path: tsudev.backup
+class Translations$tsudev$backup$en {
+  Translations$tsudev$backup$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Back up to a file (free)'
+  String get title => 'Back up to a file (free)';
+
+  /// en: 'Save your favorite devices and settings that are not tied to this device to a JSON file you keep yourself, or restore them from such a file. Device names, keys, PIN, folders and receive history are never included. Nothing is sent to the internet.'
+  String get description =>
+      'Save your favorite devices and settings that are not tied to this device to a JSON file you keep yourself, or restore them from such a file. Device names, keys, PIN, folders and receive history are never included. Nothing is sent to the internet.';
+
+  /// en: 'Export'
+  String get export => 'Export';
+
+  /// en: 'Import'
+  String get import => 'Import';
+
+  /// en: 'Saved to {path}'
+  String exported({required Object path}) => 'Saved to ${path}';
+
+  /// en: 'Restored {n} new favorite devices and the settings in the file'
+  String imported({required Object n}) => 'Restored ${n} new favorite devices and the settings in the file';
+
+  /// en: 'This is not a Lotus Share backup file'
+  String get errorInvalid => 'This is not a Lotus Share backup file';
+
+  /// en: 'This file was made by a newer version of Lotus Share. Please update first.'
+  String get errorNewer => 'This file was made by a newer version of Lotus Share. Please update first.';
+
+  /// en: 'Could not save the file'
+  String get errorWrite => 'Could not save the file';
 }
 
 // Path: settingsTab.general.brightnessOptions

@@ -77,7 +77,7 @@ Không có tính năng Pro nào khác: Lotus Share không khóa bớt tính năn
 | Bước | Phụ thuộc | Trạng thái 20/11/2026 |
 | --- | --- | --- |
 | Kiểm kê + ADR + sync quy ước v3.9.1 | - | Xong (PR này) |
-| Xuất/nhập tệp cài đặt + yêu thích (miễn phí) | - | Làm được ngay, đợt sau |
+| Xuất/nhập tệp cài đặt + yêu thích (miễn phí) | - | Xong 20/11/2026: Cài đặt > Khác > Sao lưu ra tệp (`app/lib/util/settings_backup.dart`). Không mang "lưu nhanh" (tự nhận tệp): tệp lạ có thể thêm vân tay rồi bật tự nhận từ yêu thích |
 | Đăng nhập OIDC + `Entitlements` + `ProNotice` + `TsuBadge` + màn Pro/Ủng hộ | tsudev#336 gộp (👤 chạy migration Neon), `client_id` Lotus Share, gói `tsudev_ui` (PRO-C2) | Chờ |
 | Đồng bộ Pro | `tsudev-org/tsusync` (PRO-D1..D2: Worker + thư viện Dart qua vector) | Chờ |
 | Mua trên Play | tsudev B2 (Play Developer API) + 👤 tạo `tsudev_pro`/`ung_ho_*` trong Play Console | Chờ |

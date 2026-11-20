@@ -6,7 +6,6 @@ import 'package:localsend_app/gen/strings.g.dart';
 import 'package:localsend_app/provider/animation_provider.dart';
 import 'package:localsend_app/util/native/platform_check.dart';
 import 'package:logging/logging.dart';
-import 'package:path/path.dart' as p;
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:tray_manager/tray_manager.dart' as tm;
 import 'package:window_manager/window_manager.dart';
@@ -18,53 +17,86 @@ enum TrayEntry {
   close,
 }
 
+// lotus-share: tray_manager 0.8 (API gốc nativeapi). Giữ tham chiếu tới icon, menu, mục menu suốt đời ứng dụng: đối
+// tượng bị thu gom là icon biến mất.
+({tm.TrayIcon icon, tm.Menu menu, List<tm.MenuItem> items})? _tray;
+
 Future<void> initTray() async {
   if (!checkPlatformHasTray()) {
     return;
   }
+  if (checkPlatform([TargetPlatform.macOS])) {
+    // The menu bar icon will created in AppDelegate.swift
+    return;
+  }
+  if (_tray != null) {
+    return;
+  }
   try {
+    final String asset;
     if (checkPlatform([TargetPlatform.windows])) {
-      await tm.trayManager.setIcon(Assets.img.logo);
-    } else if (checkPlatform([TargetPlatform.macOS])) {
-      // The menu bar icon will created in AppDelegate.swift
-      return;
+      asset = Assets.img.logo;
     } else if (checkPlatform([TargetPlatform.linux])) {
-      String icon;
-      if (await File('/.flatpak-info').exists()) {
-        // Icon for Flatpak, which must exist in /app/share/icons/hicolor/*x*/apps.
-        icon = 'org.localsend.localsend_app-tray';
-      } else if (Platform.environment.containsKey('SNAP')) {
-        // tray_manager only resolves the asset path against the executable directory when it does not detect a sandbox,
-        // and it treats $SNAP as one. The relative path would then reach libayatana-appindicator, which interprets
-        // anything that is not absolute as an icon theme name. A snap sees the same paths as the host, so resolve it here.
-        icon = p.join(p.dirname(Platform.resolvedExecutable), 'data', 'flutter_assets', Assets.img.logo32White.path);
-      } else {
-        icon = Assets.img.logo32White.path;
-      }
-      _logger.info('Using "$icon" as path of system tray icon');
-      await tm.trayManager.setIcon(icon);
+      asset = Assets.img.logo32White.path;
     } else {
-      await tm.trayManager.setIcon(Assets.img.logo32.path);
+      asset = Assets.img.logo32.path;
+    }
+    // Đường dẫn tuyệt đối cạnh tệp chạy (data/flutter_assets/...), đúng cả AppImage, tar.gz, deb, rpm.
+    final icon = tm.ImageAsset.fromAsset(asset);
+    if (icon == null) {
+      _logger.warning('Tray icon "$asset" not found next to ${Platform.resolvedExecutable}');
+      return;
+    }
+    _logger.info('Using "$asset" as system tray icon');
+
+    final trayIcon = tm.TrayIcon.create();
+    if (trayIcon == null) {
+      _logger.warning('Failed to create tray icon');
+      return;
     }
 
-    final items = [
-      tm.MenuItem(
-        key: TrayEntry.open.name,
-        label: t.tray.open,
-      ),
-      tm.MenuItem(
-        key: TrayEntry.close.name,
-        label: defaultTargetPlatform == TargetPlatform.windows ? t.tray.closeWindows : t.tray.close,
-      ),
-    ];
-    await tm.trayManager.setContextMenu(tm.Menu(items: items));
-    // No Linux implementation for setToolTip available as of tray_manager 0.2.2
-    // https://pub.dev/packages/tray_manager#api
-    if (!checkPlatform([TargetPlatform.linux])) {
-      await tm.trayManager.setToolTip(t.appName);
+    final menu = tm.Menu.create()!;
+    final items = <tm.MenuItem>[];
+    for (final (entry, label) in [
+      (TrayEntry.open, t.tray.open),
+      (TrayEntry.close, defaultTargetPlatform == TargetPlatform.windows ? t.tray.closeWindows : t.tray.close),
+    ]) {
+      final item = tm.MenuItem.createWithLabelAndType(label, tm.MenuItemType.normal)!;
+      item.addListener((event) async {
+        if (event is tm.MenuItemClickedEvent) {
+          await _onTrayEntry(entry);
+        }
+      });
+      menu.addItem(item);
+      items.add(item);
     }
+
+    trayIcon
+      ..icon = icon
+      ..setTooltip(t.appName)
+      ..setContextMenu(menu)
+      // Windows: chuột phải mở menu. Linux: bảng điều khiển tự mở menu, nhưng menu chỉ được xuất khi có trigger.
+      ..setContextMenuTrigger(tm.ContextMenuTrigger.rightClicked)
+      ..addListener((event) async {
+        // Chuột trái (Windows) mở cửa sổ. Linux không báo sự kiện bấm icon.
+        if (event is tm.TrayIconClickedEvent) {
+          await showFromTray();
+        }
+      })
+      ..setVisible(true);
+
+    _tray = (icon: trayIcon, menu: menu, items: items);
   } catch (e) {
     _logger.warning('Failed to init tray', e);
+  }
+}
+
+Future<void> _onTrayEntry(TrayEntry entry) async {
+  switch (entry) {
+    case TrayEntry.open:
+      await showFromTray();
+    case TrayEntry.close:
+      exit(0);
   }
 }
 
@@ -100,7 +132,6 @@ Future<void> showFromTray() async {
 }
 
 Future<void> destroyTray() async {
-  if (!checkPlatform([TargetPlatform.linux])) {
-    await tm.trayManager.destroy();
-  }
+  _tray?.icon.dispose();
+  _tray = null;
 }

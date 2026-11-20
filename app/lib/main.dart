@@ -13,7 +13,6 @@ import 'package:localsend_app/util/native/platform_check.dart';
 import 'package:localsend_app/util/ui/dynamic_colors.dart';
 import 'package:localsend_app/widget/watcher/life_cycle_watcher.dart';
 import 'package:localsend_app/widget/watcher/shortcut_watcher.dart';
-import 'package:localsend_app/widget/watcher/tray_watcher.dart';
 import 'package:localsend_app/widget/watcher/window_brightness_watcher.dart';
 import 'package:localsend_app/widget/watcher/window_watcher.dart';
 import 'package:localsend_isolates/isolate.dart';
@@ -56,48 +55,46 @@ class LotusShareApp extends StatelessWidget {
       settingsProvider.select((settings) => (settings.theme, settings.colorMode, settings.customColor)),
     );
     final dynamicColors = ref.watch(dynamicColorsProvider);
-    return TrayWatcher(
-      child: WindowWatcher(
-        child: LifeCycleWatcher(
-          onChangedState: (AppLifecycleState state) {
-            switch (state) {
-              case AppLifecycleState.resumed:
-                ref.redux(localIpProvider).dispatch(InitLocalIpAction());
-                if (checkPlatform([TargetPlatform.iOS, TargetPlatform.android])) {
-                  // The OS may have invalidated the sockets of the suspended app without any error ever reaching the accept loop.
-                  // ignore: discarded_futures
-                  ref.notifier(serverProvider).ensureRunning();
-                }
-                if (checkPlatform([TargetPlatform.iOS])) {
-                  // The multicast sockets die the same silent way but cannot be probed, so always rebind them.
-                  ref.redux(parentIsolateProvider).dispatch(IsolateDiscoveryRestartAction());
-                }
-                break;
-              case AppLifecycleState.detached:
-                // The main isolate is only exited when all child isolates are exited.
-                ref.redux(parentIsolateProvider).dispatch(IsolateDisposeAction());
-                break;
-              default:
-                break;
-            }
-          },
-          child: ShortcutWatcher(
-            child: MaterialApp(
-              title: t.appName,
-              locale: TranslationProvider.of(context).flutterLocale,
-              supportedLocales: AppLocaleUtils.supportedLocales,
-              localizationsDelegates: GlobalMaterialLocalizations.delegates,
-              debugShowCheckedModeBanner: false,
-              theme: getTheme(colorMode, customColor, Brightness.light, dynamicColors),
-              darkTheme: getTheme(colorMode, customColor, Brightness.dark, dynamicColors),
-              themeMode: colorMode == ColorMode.oled ? ThemeMode.dark : themeMode,
-              builder: (context, child) => WindowBrightnessWatcher(child: child!),
-              navigatorKey: context.read(navigationProvider).key,
-              home: RouterinoHome(
-                builder: () => const HomePage(
-                  initialTab: HomeTab.receive,
-                  appStart: true,
-                ),
+    return WindowWatcher(
+      child: LifeCycleWatcher(
+        onChangedState: (AppLifecycleState state) {
+          switch (state) {
+            case AppLifecycleState.resumed:
+              ref.redux(localIpProvider).dispatch(InitLocalIpAction());
+              if (checkPlatform([TargetPlatform.iOS, TargetPlatform.android])) {
+                // The OS may have invalidated the sockets of the suspended app without any error ever reaching the accept loop.
+                // ignore: discarded_futures
+                ref.notifier(serverProvider).ensureRunning();
+              }
+              if (checkPlatform([TargetPlatform.iOS])) {
+                // The multicast sockets die the same silent way but cannot be probed, so always rebind them.
+                ref.redux(parentIsolateProvider).dispatch(IsolateDiscoveryRestartAction());
+              }
+              break;
+            case AppLifecycleState.detached:
+              // The main isolate is only exited when all child isolates are exited.
+              ref.redux(parentIsolateProvider).dispatch(IsolateDisposeAction());
+              break;
+            default:
+              break;
+          }
+        },
+        child: ShortcutWatcher(
+          child: MaterialApp(
+            title: t.appName,
+            locale: TranslationProvider.of(context).flutterLocale,
+            supportedLocales: AppLocaleUtils.supportedLocales,
+            localizationsDelegates: GlobalMaterialLocalizations.delegates,
+            debugShowCheckedModeBanner: false,
+            theme: getTheme(colorMode, customColor, Brightness.light, dynamicColors),
+            darkTheme: getTheme(colorMode, customColor, Brightness.dark, dynamicColors),
+            themeMode: colorMode == ColorMode.oled ? ThemeMode.dark : themeMode,
+            builder: (context, child) => WindowBrightnessWatcher(child: child!),
+            navigatorKey: context.read(navigationProvider).key,
+            home: RouterinoHome(
+              builder: () => const HomePage(
+                initialTab: HomeTab.receive,
+                appStart: true,
               ),
             ),
           ),

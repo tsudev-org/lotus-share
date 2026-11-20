@@ -612,6 +612,17 @@
       "body": "Bạn đang dùng phiên bản {current}. Bản mới có sửa lỗi và cải tiến.",
       "download": "Tải bản mới",
       "later": "Để sau"
+    },
+    "backup": {
+      "title": "Sao lưu ra tệp (miễn phí)",
+      "description": "Lưu thiết bị yêu thích và các cài đặt không gắn với máy này vào một tệp JSON do bạn tự giữ, hoặc khôi phục từ tệp đó. Tên thiết bị, khóa, mã PIN, thư mục lưu và lịch sử nhận không bao giờ có trong tệp. Không có gì được gửi lên internet.",
+      "export": "Xuất ra tệp",
+      "import": "Nhập từ tệp",
+      "exported": "Đã lưu vào {path}",
+      "imported": "Đã khôi phục {n} thiết bị yêu thích mới và các cài đặt trong tệp",
+      "errorInvalid": "Đây không phải tệp sao lưu của Lotus Share",
+      "errorNewer": "Tệp này do bản Lotus Share mới hơn tạo. Hãy cập nhật ứng dụng trước.",
+      "errorWrite": "Không lưu được tệp"
     }
   }
 }
