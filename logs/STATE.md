@@ -15,11 +15,11 @@
 
 - [ ] 👤 **Thử thật trước phát hành kế tiếp** (đã gộp 20/11, build thử trên main run ghi ở Đã hoàn thành): khay
       Windows (icon, chuột trái mở cửa sổ, chuột phải menu - #100), Khởi động cùng Windows bật/tắt (#104), Android nhận
-      tệp lớn khi tắt màn hình (#106), xuất/nhập Sao lưu ra tệp trên Android (#107). 👤 duyệt `xuat-ban`
-      linux-packages run **44590008085** (APT/RPM còn 26.11.1801 - bản lỗi).
-- [ ] 👤 **Duyệt `xuat-ban` của linux-packages** (2 run chờ: 44332608025, 44376379671 + lượt mới) để APT/RPM lên
-      `lotus-share 26.11.1901` - người đang dùng 26.11.1801 qua APT/RPM KHÔNG mở được ứng dụng tới lúc đó. Agent đo
-      `pkg.tsudev.com/catalog.json` sau khi duyệt.
+      tệp lớn khi tắt màn hình (#106), xuất/nhập Sao lưu ra tệp trên Android (#107).
+- [ ] 👤 **Duyệt `xuat-ban` của linux-packages** để APT/RPM lên `lotus-share 26.11.1901` - người đang dùng 26.11.1801
+      qua APT/RPM KHÔNG mở được ứng dụng tới lúc đó. Đo 20/11: `catalog.json` vẫn 26.11.1801; run 44590008085 +
+      44376379671 đã bị hủy; **44332608025** chờ duyệt môi trường `packages`, **44649543688** (00:54 UTC 20/11) xếp
+      hàng sau nó => duyệt 44332608025 (hoặc hủy để lượt mới chạy) rồi duyệt 44649543688. Agent đo lại sau khi duyệt.
 - [ ] 👤 GitGuardian sự cố 40268788 ("Generic Password", `scripts/apple/nhap-khoa.sh` dòng 7 ở commit 02ad20e): báo nhầm
       (chỉ kiểm biến môi trường, không có giá trị) - đánh dấu false positive trên dashboard. Mã đã viết lại.
 - [ ] 👤 Gửi báo nhầm **26.11.1901** (đã đọc engine 19/11, phiếu `20261118-02` mục 7): mở
@@ -30,8 +30,6 @@
       `C:\Users\devng\Downloads\lotus-share-ios\Lotus-Share-26.11.1901-unsigned.ipa` (SHA-256 `672df4df...f288c`, khớp
       SHA256SUMS.txt cùng thư mục); làm theo `docs/vi/APPLE-IOS-MACOS.md` mục 2 (Sideloadly, 👤 đăng nhập Apple ID), ghi
       kết quả `logs/thu-thiet-bi/`.
-- [ ] Dependabot mở 19/11 sau #93 (CHƯA xem, đều đỏ): #95 nhóm pub (build_runner 2.16 + freezed 4.0.3 an toàn; còn kéo
-      test 1.32 + tray_manager 0.9 => tách), #96 dynamic_color 2 (major, test + Apple đỏ).
 - [ ] Bản major còn lại (Dependabot sẽ mở PR riêng từng gói nhờ `dependabot.yml` mới): tray_manager 0.9 (thử khay hệ
       thống 3 desktop), flutter_foreground_task 11 (KGP/SPM/UIScene, thử Android thật), device_info_plus 13,
       package_info_plus 10, network_info_plus 8, file_picker 13, dynamic_color 2, win32_registry 3; pasteboard (bỏ bản
@@ -67,7 +65,9 @@
       ghim `APPLE_TEAM_ID_GHIM`, thử sandbox macOS trên Mac thật. Phiếu toàn hệ `~/projects/logs/handover/20261119-AP1_*`.
 - [ ] **PRO1** (phiếu `logs/handover/20261119-PRO1_*`, từ qulythuchi-b2 19/11): lưu cục bộ mặc định, Pro chỉ đồng bộ
       danh sách thiết bị/cài đặt qua PRO-D; truyền LAN vẫn miễn phí, không relay internet. KHÔNG làm trước khi
-      tsudev-standards v3.9.0 (PRO-A) + PRO-B/PRO-D sẵn sàng.
+      tsudev-standards v3.9.0 (PRO-A) + PRO-B/PRO-D sẵn sàng. Đo 20/11: tsudev#336 ĐÃ gộp (19/11 22:01 UTC), nhưng repo
+      `tsudev-org/tsudev-ui-flutter` chưa tồn tại (gói `tsudev_ui`, PRO-C2) và chưa thấy `client_id` Lotus Share => chưa
+      viết mã Pro (ADR-0001 mục 5).
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
 
 ## Đang thực hiện
@@ -77,6 +77,10 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 20/11/2026 (đo nhanh) - `pkg.tsudev.com/catalog.json`: `lotus-share` vẫn 26.11.1801 (chờ 👤 duyệt linux-packages,
+  xem hàng đợi). winget microsoft/winget-pkgs#478033 vẫn mở (Validation-Completed, New-Package, chưa có người duyệt).
+  Không có PR Dependabot đang mở (#95/#96 đã đóng 19/11, thay bằng #100/#104/#106; dynamic_color 2 còn trong danh sách
+  major). PRO1 chưa đủ điều kiện (thiếu `tsudev-ui-flutter`). Quét lại VirusTotal chờ tới 22/11.
 - 20/11/2026 - **#100 gộp** tray_manager 0.8.3 (API nativeapi; sửa bundle Windows/Linux thiếu thư viện build hook
   `cnativeapi` - CMake `NATIVE_ASSETS_DIR` + cổng `tools/check_native_assets.py` trong 4 job desktop; khay Linux chạy
   thật trên WSLg: SNI + menu, bấm Thoát => thoát mã 0), đóng Dependabot #101 (0.9 cần Flutter 3.50). **#106 gộp**
