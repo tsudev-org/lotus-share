@@ -889,6 +889,8 @@ class _Translations$tsudev$vi extends Translations$tsudev$en {
   late final _Translations$tsudev$updateRequired$vi updateRequired = _Translations$tsudev$updateRequired$vi._(_root);
   @override
   late final _Translations$tsudev$updateAvailable$vi updateAvailable = _Translations$tsudev$updateAvailable$vi._(_root);
+  @override
+  late final _Translations$tsudev$backup$vi backup = _Translations$tsudev$backup$vi._(_root);
 }
 
 // Path: receiveTab.infoBox
@@ -1662,6 +1664,34 @@ class _Translations$tsudev$updateAvailable$vi extends Translations$tsudev$update
   String get download => 'Tải bản mới';
   @override
   String get later => 'Để sau';
+}
+
+// Path: tsudev.backup
+class _Translations$tsudev$backup$vi extends Translations$tsudev$backup$en {
+  _Translations$tsudev$backup$vi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+  final TranslationsVi _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'Sao lưu ra tệp (miễn phí)';
+  @override
+  String get description =>
+      'Lưu thiết bị yêu thích và các cài đặt không gắn với máy này vào một tệp JSON do bạn tự giữ, hoặc khôi phục từ tệp đó. Tên thiết bị, khóa, mã PIN, thư mục lưu và lịch sử nhận không bao giờ có trong tệp. Không có gì được gửi lên internet.';
+  @override
+  String get export => 'Xuất ra tệp';
+  @override
+  String get import => 'Nhập từ tệp';
+  @override
+  String exported({required Object path}) => 'Đã lưu vào ${path}';
+  @override
+  String imported({required Object n}) => 'Đã khôi phục ${n} thiết bị yêu thích mới và các cài đặt trong tệp';
+  @override
+  String get errorInvalid => 'Đây không phải tệp sao lưu của Lotus Share';
+  @override
+  String get errorNewer => 'Tệp này do bản Lotus Share mới hơn tạo. Hãy cập nhật ứng dụng trước.';
+  @override
+  String get errorWrite => 'Không lưu được tệp';
 }
 
 // Path: settingsTab.general.brightnessOptions

@@ -605,6 +605,17 @@
       "body": "You are using version {current}. The new version includes fixes and improvements.",
       "download": "Download",
       "later": "Later"
+    },
+    "backup": {
+      "title": "Back up to a file (free)",
+      "description": "Save your favorite devices and settings that are not tied to this device to a JSON file you keep yourself, or restore them from such a file. Device names, keys, PIN, folders and receive history are never included. Nothing is sent to the internet.",
+      "export": "Export",
+      "import": "Import",
+      "exported": "Saved to {path}",
+      "imported": "Restored {n} new favorite devices and the settings in the file",
+      "errorInvalid": "This is not a Lotus Share backup file",
+      "errorNewer": "This file was made by a newer version of Lotus Share. Please update first.",
+      "errorWrite": "Could not save the file"
     }
   }
 }
