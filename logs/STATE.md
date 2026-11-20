@@ -13,13 +13,10 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
-- [ ] **Tiếp phiên 20/11**: chờ gộp tuần tự (tự gộp đã bật, ruleset đòi nhánh cập nhật => sau mỗi lần gộp chạy
-      `gh pr update-branch <số>` cho PR kế): **#100** tray_manager 0.8.3 (sửa thiếu `libcnativeapi.so`/`cnativeapi.dll`
-      + cổng `tools/check_native_assets.py`; khay Linux chạy thật OK) -> đóng Dependabot #101; **#106**
-      flutter_foreground_task 11 (build thử run 44646837299 xanh, gồm APK); **#107** Sao lưu ra tệp (miễn phí).
-      Sau đó build thử `release-lotus.yml` trên main. 👤 thử thật trước phát hành kế tiếp: khay Windows (icon, chuột
-      trái/phải), Khởi động cùng Windows (#104), Android nhận tệp khi tắt màn hình (#106), xuất/nhập sao lưu Android (#107).
-      👤 duyệt `xuat-ban` linux-packages run **44590008085** (APT/RPM còn 26.11.1801 - bản lỗi).
+- [ ] 👤 **Thử thật trước phát hành kế tiếp** (đã gộp 20/11, build thử trên main run ghi ở Đã hoàn thành): khay
+      Windows (icon, chuột trái mở cửa sổ, chuột phải menu - #100), Khởi động cùng Windows bật/tắt (#104), Android nhận
+      tệp lớn khi tắt màn hình (#106), xuất/nhập Sao lưu ra tệp trên Android (#107). 👤 duyệt `xuat-ban`
+      linux-packages run **44590008085** (APT/RPM còn 26.11.1801 - bản lỗi).
 - [ ] 👤 **Duyệt `xuat-ban` của linux-packages** (2 run chờ: 44332608025, 44376379671 + lượt mới) để APT/RPM lên
       `lotus-share 26.11.1901` - người đang dùng 26.11.1801 qua APT/RPM KHÔNG mở được ứng dụng tới lúc đó. Agent đo
       `pkg.tsudev.com/catalog.json` sau khi duyệt.
@@ -80,9 +77,15 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 20/11/2026 - **#100 gộp** tray_manager 0.8.3 (API nativeapi; sửa bundle Windows/Linux thiếu thư viện build hook
+  `cnativeapi` - CMake `NATIVE_ASSETS_DIR` + cổng `tools/check_native_assets.py` trong 4 job desktop; khay Linux chạy
+  thật trên WSLg: SNI + menu, bấm Thoát => thoát mã 0), đóng Dependabot #101 (0.9 cần Flutter 3.50). **#106 gộp**
+  flutter_foreground_task 11.0.3 (build thử 44646837299 xanh, gồm APK). **#107 gộp** Sao lưu ra tệp.
+  Bài học: `gh pr merge` lỗi rồi xóa nhánh = PR bị đóng (khôi phục bằng đẩy lại SHA + `gh pr reopen`); ruleset đòi
+  nhánh cập nhật => gộp tuần tự bằng `--auto` + `gh pr update-branch`.
 - 20/11/2026 - **#104 gộp** (thay Dependabot #102, đã đóng): cụm win32 6 - win32_registry 3 (viết lại
   `autostart_helper.dart`, đóng khóa registry), device/package/network_info_plus, file_picker 13, wakelock_plus 1.8.
-  **#107** (mở) Sao lưu ra tệp miễn phí: JSON `lotus-share-backup` v1, không mang khóa/PIN/lưu nhanh, 8 test.
+  **#107** Sao lưu ra tệp miễn phí: JSON `lotus-share-backup` v1, không mang khóa/PIN/lưu nhanh, 8 test.
 - 20/11/2026 - **#103 gộp**: sync quy ước v3.9.1 + `docs/adr/0001-pro1-luu-cuc-bo-pro-dong-bo.md` (kiểm kê: bản miễn phí đã đạt N2; Pro = đồng bộ yêu thích + cài đặt qua TsuDEV Sync). Phát hiện + sửa lỗi khay hệ thống của #100 bằng chạy thật bản build thử.
 
 - 19/11/2026 (phiên lotus-share, khuya) - **VirusTotal**: workflow tạm `VT_API_KEY` (run 44523059222, nhánh đã xóa)
