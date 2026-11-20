@@ -68,6 +68,11 @@
       tsudev-standards v3.9.0 (PRO-A) + PRO-B/PRO-D sẵn sàng. Đo 20/11: tsudev#336 ĐÃ gộp (19/11 22:01 UTC), nhưng repo
       `tsudev-org/tsudev-ui-flutter` chưa tồn tại (gói `tsudev_ui`, PRO-C2) và chưa thấy `client_id` Lotus Share => chưa
       viết mã Pro (ADR-0001 mục 5).
+- [ ] `release-lotus.yml` bản DMG ad-hoc (khi `vars.APPLE_TEAM_ID` trống) vẫn ký lại `codesign --force --deep --sign -`
+      => DMG người dùng tải về KHÔNG có entitlements/sandbox. Từ #109 gói Xcode ký đã hợp lệ (helper LaunchAtLogin sửa ở
+      pbxproj) nên có thể bỏ bước ký lại; nhưng bật sandbox đổi hành vi bản đã phát hành (vùng chứa mới ở
+      `~/Library/Containers/com.tsudev.lotusshare` => cài đặt/khóa TLS cũ ở `~/Library/Application Support` không tự
+      sang) => cần thiết kế di trú hoặc chờ bản Developer ID; quyết cùng phát hành kế tiếp.
 - [ ] Nâng `rsa` 0.9 -> 0.10 khi lõi upstream nâng (xóa chấp nhận RUSTSEC-2023-0071 trong `tools/osv_scan.py`).
 
 ## Đang thực hiện
@@ -77,6 +82,14 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 20/11/2026 - **#109** `apple.yml` macOS chạy thử đúng gói Xcode ký ad-hoc kèm `Release.entitlements` (bỏ
+  `codesign --force --deep --sign -`, mẫu qulythuchi#30); kiểm entitlements + thư mục Container lúc chạy. Lần đầu đỏ:
+  `copy-helper-swiftpm.sh` (LaunchAtLogin-Legacy) ký helper bằng tên định danh mở rộng không có trong keychain, lỗi
+  im lặng => `LaunchAtLoginHelper.app` chữ ký hỏng (đây là lý do cũ phải ký lại `--deep`). Sửa phase trong pbxproj:
+  ký `-` khi ad-hoc, dừng build nếu script lỗi, kiểm chữ ký helper. Run 44673993748 xanh: Signature=adhoc, sandbox bật,
+  ảnh chụp màn hình chính, không `INIT_ERROR` (hộp thoại Mạng cục bộ hiện tên `hosted-compute-` vì chạy thẳng tệp
+  thực thi từ tiến trình máy chạy - không phải lỗi app). Đo đầu phiên: catalog vẫn 26.11.1801, winget#478033 vẫn mở,
+  không có Dependabot, `tsudev-ui-flutter` 404 => PRO1 chưa đủ điều kiện; VirusTotal chờ 22/11.
 - 20/11/2026 (đo nhanh) - `pkg.tsudev.com/catalog.json`: `lotus-share` vẫn 26.11.1801 (chờ 👤 duyệt linux-packages,
   xem hàng đợi). winget microsoft/winget-pkgs#478033 vẫn mở (Validation-Completed, New-Package, chưa có người duyệt).
   Không có PR Dependabot đang mở (#95/#96 đã đóng 19/11, thay bằng #100/#104/#106; dynamic_color 2 còn trong danh sách
