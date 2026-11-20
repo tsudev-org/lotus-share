@@ -383,7 +383,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
+			shellScript = "# lotus-share: ad-hoc signing (CODE_SIGN_IDENTITY = -) expands to a name that is not in the keychain, so the\n# helper script's codesign fails silently and LaunchAtLoginHelper.app keeps a broken signature. Use - instead.\nn=\"${EXPANDED_CODE_SIGN_IDENTITY_NAME:-}\"\nif [ \"${EXPANDED_CODE_SIGN_IDENTITY:-}\" = - ] || [ -z \"$n\" ] || [ \"$n\" = \"Sign to Run Locally\" ]; then\n  export EXPANDED_CODE_SIGN_IDENTITY_NAME=-\nfi\n\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\" || exit 1\ncodesign --verify --strict \"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Library/LoginItems/LaunchAtLoginHelper.app\"\n";
 		};
 		2DA7D291A0AEEC0A0C7CE5C0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
