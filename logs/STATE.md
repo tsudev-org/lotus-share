@@ -81,6 +81,10 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 20/11/2026 (đo 07:32 UTC) - Không việc nào đủ điều kiện: winget-pkgs#478033 vẫn mở (REVIEW_REQUIRED); không có
+  PR Dependabot; `tsudev-org/tsusync` chưa có thư viện Dart (không pubspec/.dart, chỉ `worker/`) và chưa thấy
+  `client_id` Lotus Share => PRO1+PRO2 chưa viết mã; VirusTotal chờ 22/11; linux-packages không có run chờ duyệt,
+  `catalog.json` đã `lotus-share 26.11.1901-1`.
 - 20/11/2026 (chiều) - **APT/RPM lên `lotus-share 26.11.1901`**: chủ dự án ủy quyền agent xử lý linux-packages; theo lựa
   chọn của chủ dự án, Environment `packages` thêm người duyệt `tsudev-tsudev` + tắt `prevent_self_review` (ảnh chụp trước/
   sau `~/.cache/lotus-tmp/env-packages/`, chính sách nhánh `main` giữ nguyên). Đã kiểm workflow (SHA-256 Release, vân tay
