@@ -12,6 +12,7 @@ import 'package:localsend_app/provider/network/server/server_provider.dart';
 import 'package:localsend_app/provider/settings_provider.dart';
 import 'package:localsend_app/util/ip_helper.dart';
 import 'package:localsend_app/widget/animations/initial_fade_transition.dart';
+import 'package:localsend_app/widget/canh_sen_motif.dart';
 import 'package:localsend_app/widget/column_list_view.dart';
 import 'package:localsend_app/widget/custom_icon_button.dart';
 import 'package:localsend_app/widget/lotus_share_logo.dart';
@@ -60,6 +61,8 @@ class _ReceiveTabState extends State<ReceiveTab> {
 
     return Stack(
       children: [
+        // Hoạ tiết chữ ký canh-sen (bản sắc v5.0.0) - tĩnh, sau nội dung màn hình đầu
+        const Positioned.fill(child: CanhSenMotif()),
         Center(
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: ResponsiveListView.defaultMaxWidth),
