@@ -2,7 +2,7 @@
 
 - **Mã phiếu**: 20261121-STD50
 - **Từ**: phiên tsudev-standards, 21/11/2026 - **Đến**: phiên kế tiếp của `lotus-share`
-- **Trạng thái**: MỞ
+- **Trạng thái**: MỞ (PR 1 xong 21/11/2026 - #114; còn PR 2 bố cục)
 - **Nguồn**: https://github.com/tsudev-org/tsudev-standards/releases/tag/v5.0.0 - `docs/DESIGN_SYSTEM.md` mục 1.2,
   CHANGELOG 5.0.0 "Hướng dẫn nâng cấp"
 - **Bối cảnh**: chủ dự án muốn mỗi sản phẩm có đặc trưng nổi bật riêng (màu, giao diện, bố cục). Trước v5.0.0, 9/11
@@ -46,4 +46,20 @@ kiểm chống trùng phải xanh. KHÔNG ghi đè tại repo này.
 
 ## Kết quả xử lý
 
-- 
+- **21/11/2026 - PR 1 (màu + hình) #114** `feat(ui): bản sắc lotus theo tsudev-standards v5.0.0`:
+  - Sync `.standards/` v3.9.1 -> v5.0.0 (bước `curl` sync-standards.sh từ tag v5.0.0 trước).
+  - Web: `Trang.astro` nạp `.standards/tokens/tokens.css` + `products.css`, `<html data-theme="dark" data-product="lotus">`.
+    Xoá `website/src/styles/palette.css` (cả quầng cam/xanh `--glow-cam/--glow-xanh`) và bản sao cũ `src/styles/tokens.css`
+    (v2.0.0). Nút `var(--radius-control)`, mọi bo góc `--radius-sm/md/lg`; h1-h3 `var(--font-display)`: Quicksand tự host
+    (`public/fonts/quicksand-{600,700}-{latin,latin-ext,vietnamese}.woff2`, OFL). Màu cứng còn lại có chủ đích: nền trắng
+    sau mã QR. `check-dist.mjs` chặn thiếu `data-product`, tự khai token, mã tím cũ.
+  - App: `tools/gen_product_tokens.py` sinh `app/lib/config/product_tokens.g.dart` từ `products/lotus.json` +
+    `products.css` (CI `fork-ci.yml` chạy `--check`); `theme.dart` dùng màu nhấn bản sắc, bỏ tím tsudev + xanh/cam tự khai;
+    nút viên thuốc, ô nhập `radiusMd`; textTheme tiêu đề + chữ lớn (tên thiết bị, tên sản phẩm) dùng Quicksand bản biến
+    thiên nguyên văn google/fonts (trục wght 600/700), giấy phép OFL đăng ký ở Giới thiệu > Giấy phép.
+  - `warm` -> `light`: `website/public/theme.js` đã có (check:theme kiểm); app không có giá trị `warm`.
+  - Ảnh trước/sau Sáng + Tối (app Linux, web trang chủ + Tải về): `logs/anh/20261121-STD50/`, đính trong PR.
+  - Kiểm: flutter analyze sạch, flutter test 147 đạt, website build/check-dist/check:theme/check:a11y 0 lỗi,
+    check-standards đạt, i18n đạt.
+  - Để PR 2: bố cục `trinh-dien`, hoạ tiết `canh-sen`, sinh lại `og-image.png` (`website/scripts/brand_assets.py` còn
+    `#A970FF` cho og-image - sửa cùng lúc sinh lại ảnh).
