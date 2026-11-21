@@ -2,7 +2,7 @@
 
 - **Mã phiếu**: 20261121-STD50
 - **Từ**: phiên tsudev-standards, 21/11/2026 - **Đến**: phiên kế tiếp của `lotus-share`
-- **Trạng thái**: MỞ (PR 1 xong 21/11/2026 - #114; còn PR 2 bố cục)
+- **Trạng thái**: ĐÃ XỬ LÝ (PR 1 #114 gộp 21/11/2026; PR 2 bố cục 21/11/2026 - chờ gộp + deploy website)
 - **Nguồn**: https://github.com/tsudev-org/tsudev-standards/releases/tag/v5.0.0 - `docs/DESIGN_SYSTEM.md` mục 1.2,
   CHANGELOG 5.0.0 "Hướng dẫn nâng cấp"
 - **Bối cảnh**: chủ dự án muốn mỗi sản phẩm có đặc trưng nổi bật riêng (màu, giao diện, bố cục). Trước v5.0.0, 9/11
@@ -63,3 +63,19 @@ kiểm chống trùng phải xanh. KHÔNG ghi đè tại repo này.
     check-standards đạt, i18n đạt.
   - Để PR 2: bố cục `trinh-dien`, hoạ tiết `canh-sen`, sinh lại `og-image.png` (`website/scripts/brand_assets.py` còn
     `#A970FF` cho og-image - sửa cùng lúc sinh lại ảnh).
+
+- **21/11/2026 - PR 2 (bố cục + hoạ tiết)** `feat(ui): bố cục trinh-dien + hoạ tiết canh-sen` (PR 1 #114 đã gộp đầu phiên,
+  mọi cổng xanh, ủy quyền A):
+  - Hoạ tiết `canh-sen` MỘT hình học cho ba nơi (bảy cánh sen, điểm nối nhau, gốc đáy giữa): `website/src/lib/canh-sen.ts`,
+    `app/lib/widget/canh_sen_motif.dart`, `website/scripts/brand_assets.py` (`canh_sen_geometry`) - đổi một nơi thì đổi cả ba.
+    Tĩnh, màu `accent` của bản sắc, độ phủ 12% (web, og) / 10% (app), không nhận chuột, ẩn khỏi trình đọc màn hình.
+  - Website trang chủ `trinh-dien`: hero hai cột (chữ trái; ảnh chụp THẬT màn hình Nhận bản Linux, Sáng/Tối theo
+    `data-theme`, tràn mép phải và cắt ở mép màn hình - không cuộn ngang 1440/390px) + Tính năng dạng bento 4 cột (ô
+    lớn 2x2 kèm dải nền tảng, ô rộng, ô ngang; 2 cột <= 960px, 1 cột <= 560px). Xoá `public/anh/minh-hoa.svg` (màu xanh
+    cứng cũ, chỉ dùng ở hero). Header/chân trang/bộ chọn giao diện giữ nguyên.
+  - App: màn hình đầu (tab Nhận) có hoạ tiết sau nội dung; test `test/unit/widget/canh_sen_motif_test.dart`.
+  - `og-image.png` sinh lại: màu từ `.standards/tokens/products/lotus.json` (bỏ `#A970FF` + quầng cam/xanh), tiêu đề
+    Quicksand 700 (font biến thiên trong `app/assets/fonts`), hoạ tiết canh-sen. Favicon/icon tái sinh trùng byte.
+  - Ảnh trước/sau: trước = `web-trang-chu-*.webp`, `app-*.webp`; sau = `pr2-web-trang-chu-*.webp`, `pr2-app-*.webp`
+    (`logs/anh/20261121-STD50/`).
+  - Còn: deploy website sau khi gộp (`npm run deploy` trong `website/`, kiểm `wrangler whoami` trước).

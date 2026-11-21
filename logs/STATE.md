@@ -13,8 +13,8 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
-- [ ] **Phiếu `20261121-STD50` PR 2** (bản sắc v5.0.0 - bố cục `trinh-dien` + hoạ tiết `canh-sen` + sinh lại `og-image.png`,
-      ảnh trước/sau Sáng + Tối). PR 1 (màu + hình) đã gộp #114. Deploy website sau PR 1 để lotus.tsudev.com đổi màu.
+- [ ] **Deploy website** lotus.tsudev.com sau khi gộp PR bố cục `trinh-dien` (phiếu `20261121-STD50`): `cd website &&
+      npm run deploy` (kiểm `wrangler whoami` trước - tài khoản dùng chung).
 - [ ] 👤 **Thử thật trước phát hành kế tiếp** (đã gộp 20/11, build thử trên main run ghi ở Đã hoàn thành): khay
       Windows (icon, chuột trái mở cửa sổ, chuột phải menu - #100), Khởi động cùng Windows bật/tắt (#104), Android nhận
       tệp lớn khi tắt màn hình (#106), xuất/nhập Sao lưu ra tệp trên Android (#107).
@@ -83,6 +83,9 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 21/11/2026 - **#114 gộp** (bản sắc v5.0.0 PR 1). **PR bố cục** (phiếu `20261121-STD50` PR 2): trang chủ website
+  `trinh-dien` (hero hai cột + ảnh chụp app thật Sáng/Tối, bento tính năng), hoạ tiết `canh-sen` một hình học cho web/
+  app (tab Nhận)/og-image, sinh lại `og-image.png` theo màu bản sắc. Ảnh `logs/anh/20261121-STD50/pr2-*`.
 - 21/11/2026 - **#114** bản sắc lotus theo tsudev-standards **v5.0.0** (phiếu `20261121-STD50` PR 1): sync quy ước,
   website dùng `tokens.css` + `products.css` với `data-product="lotus"` (tím cánh sen `#E47DFB`/`#A23DB8`), xoá
   `palette.css`; nút viên thuốc, tiêu đề Quicksand; app sinh màu/bo góc từ `.standards` (`tools/gen_product_tokens.py`,

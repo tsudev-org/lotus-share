@@ -1,5 +1,6 @@
 ---
 import Trang from '../layouts/Trang.astro';
+import CanhSen from '../components/CanhSen.astro';
 import { banMoiNhat, REPO_URL } from '../lib/noi-dung';
 
 const ban = await banMoiNhat();
@@ -8,15 +9,16 @@ const buoc = [
   { t: 'Chọn tệp, chọn máy nhận', d: 'Ở thẻ Gửi, chọn tệp, thư mục, ảnh, văn bản hay nội dung bộ nhớ tạm, rồi bấm vào tên máy trong mục Thiết bị lân cận.' },
   { t: 'Bên nhận bấm Chấp nhận', d: 'Tệp đi thẳng từ máy này sang máy kia qua kết nối HTTPS được mã hóa. Không bên thứ ba nào nhìn thấy nội dung.' },
 ];
-const tinhNang = [
-  { t: 'Mọi hệ điều hành', d: 'Windows, macOS, Linux, Android, iOS. Gửi từ điện thoại sang máy tính và ngược lại như nhau.' },
+// Bố cục trinh-dien: khối tính năng dạng bento (co = lon 2x2 | rong 2 cột | ngang cả hàng; trống = 1 ô)
+const tinhNang: { t: string; d: string; co?: 'lon' | 'rong' | 'ngang'; nen?: string[] }[] = [
+  { t: 'Mọi hệ điều hành', d: 'Gửi từ điện thoại sang máy tính và ngược lại như nhau, cùng một giao diện tiếng Việt.', co: 'lon', nen: ['Windows', 'macOS', 'Linux', 'Android', 'iOS'] },
   { t: 'Luôn mới nhất', d: 'Ứng dụng tự kiểm tra phiên bản khi mở; bản quá cũ được yêu cầu cập nhật để mọi máy nói cùng một giao thức.' },
   { t: 'Tệp lớn, nhiều tệp', d: 'Không giới hạn dung lượng hay số tệp. Gửi nguyên thư mục, gửi cho nhiều máy cùng lúc.' },
-  { t: 'Chia sẻ qua liên kết', d: 'Máy không cài ứng dụng vẫn nhận được: mở liên kết trong trình duyệt, có thể đặt mã PIN.' },
+  { t: 'Chia sẻ qua liên kết', co: 'rong', d: 'Máy không cài ứng dụng vẫn nhận được: mở liên kết trong trình duyệt, có thể đặt mã PIN.' },
   { t: 'Thiết bị yêu thích', d: 'Lưu máy hay dùng để gửi nhanh; chế độ Lưu nhanh chỉ tự nhận từ máy yêu thích.' },
   { t: 'Dòng lệnh', d: 'Công cụ dòng lệnh cho máy chủ không giao diện và script tự động hóa, dùng chung lõi giao thức.' },
-  { t: 'Tiếng Việt mặc định', d: 'Giao diện tiếng Việt đầy đủ ngay lần mở đầu, tên thiết bị ngẫu nhiên kiểu "Xoài Thông Minh"; vẫn đổi được sang hơn 60 ngôn ngữ.' },
-  { t: 'Miễn phí, không quảng cáo', d: 'Mã nguồn mở theo giấy phép Apache 2.0, không theo dõi, không thu thập dữ liệu.' },
+  { t: 'Tiếng Việt mặc định', co: 'rong', d: 'Giao diện tiếng Việt đầy đủ ngay lần mở đầu, tên thiết bị ngẫu nhiên kiểu "Xoài Thông Minh"; vẫn đổi được sang hơn 60 ngôn ngữ.' },
+  { t: 'Miễn phí, không quảng cáo', co: 'ngang', d: 'Mã nguồn mở theo giấy phép Apache 2.0, không theo dõi, không thu thập dữ liệu.' },
 ];
 const baoMat = [
   { t: 'Dữ liệu không rời mạng nội bộ', d: 'Không máy chủ trung gian, không đám mây. Tính năng cần máy chủ ngoài (WebRTC) đang tắt trong mã nguồn.' },
@@ -26,9 +28,11 @@ const baoMat = [
 ];
 ---
 <Trang moTa="Lotus Share: gửi tệp và tin nhắn giữa điện thoại, máy tính trong cùng mạng Wi-Fi, không cần Internet, mã hóa đầu cuối, giao diện tiếng Việt." duongDan="/">
+  <!-- Bố cục chữ ký trinh-dien (DESIGN_SYSTEM mục 1.2.2): chữ trái, ảnh chụp app lớn tràn phải; hoạ tiết canh-sen tĩnh -->
   <section class="mo-dau">
+    <CanhSen />
     <div class="khung mo-dau__luoi">
-      <div>
+      <div class="mo-dau__chu">
         <span class="nhan">{ban ? `Phiên bản ${ban.phienBan} · ${ban.ngay}` : 'Sắp có bản phát hành đầu tiên'}</span>
         <h1>Gửi tệp giữa các thiết bị, <span class="chu-tim">không cần Internet</span></h1>
         <p class="mo-dau__phu">Lotus Share chuyển ảnh, video, tài liệu và tin nhắn giữa điện thoại, máy tính bảng và máy tính trong cùng mạng Wi-Fi. Mã hóa, không tài khoản, không qua đám mây, giao diện tiếng Việt.</p>
@@ -38,9 +42,10 @@ const baoMat = [
         </div>
         <p class="mo-dau__ghi-chu">Windows · macOS · Linux · Android · iOS · giấy phép Apache 2.0</p>
       </div>
-      <figure class="minh-hoa">
-        <img src="/anh/minh-hoa.svg" alt="Sơ đồ: điện thoại và máy tính trong cùng mạng Wi-Fi gửi tệp trực tiếp cho nhau qua kết nối có khóa, không qua Internet" width="640" height="420">
-        <figcaption>Tệp đi thẳng giữa hai máy trong mạng nội bộ</figcaption>
+      <figure class="anh-app">
+        <!-- Ảnh chụp thật màn hình Nhận (bản Linux), một ảnh cho mỗi chế độ; ảnh ẩn không tải nhờ loading="lazy" -->
+        <img class="anh-app__toi" src="/anh/app-nhan-toi.webp" alt="Màn hình Nhận của Lotus Share: tên thiết bị Sen Hồng Nhanh Nhẹn, thanh bên Nhận, Gửi, Cài đặt" width="1280" height="800" fetchpriority="high">
+        <img class="anh-app__sang" src="/anh/app-nhan-sang.webp" alt="Màn hình Nhận của Lotus Share: tên thiết bị Sen Hồng Nhanh Nhẹn, thanh bên Nhận, Gửi, Cài đặt" width="1280" height="800" loading="lazy">
       </figure>
     </div>
   </section>
@@ -59,8 +64,14 @@ const baoMat = [
     <div class="khung">
       <h2 id="tinh-nang">Tính năng</h2>
       <p class="muc__dan">Tiếng Việt từ đầu, nhiều lớp bảo vệ, chạy trên mọi nền tảng.</p>
-      <ul class="the-luoi">
-        {tinhNang.map((x) => <li class="the"><h3>{x.t}</h3><p>{x.d}</p></li>)}
+      <ul class="bento">
+        {tinhNang.map((x) => (
+          <li class:list={['the', x.co && `the--${x.co}`]}>
+            <h3>{x.t}</h3>
+            <p>{x.d}</p>
+            {x.nen && <ul class="bento__nen" aria-label="Nền tảng hỗ trợ">{x.nen.map((n) => <li>{n}</li>)}</ul>}
+          </li>
+        ))}
       </ul>
     </div>
   </section>

@@ -1,0 +1,25 @@
+---
+// Hoạ tiết chữ ký canh-sen: SVG TĨNH dựng lúc build, nét/điểm theo currentColor (CSS đặt màu --accent, độ phủ <= 15%).
+// Trang trí thuần tuý: aria-hidden, không nhận chuột.
+import { canhSen } from '../lib/canh-sen';
+
+const DON_VI = 300; // px của cánh giữa trong viewBox
+const GOC: [number, number] = [400, 340];
+const p = ([x, y]: [number, number]) => `${(GOC[0] + x * DON_VI).toFixed(1)} ${(GOC[1] + y * DON_VI).toFixed(1)}`;
+const canh = canhSen();
+const duong = canh.map(({ trai, phai }) => 'M' + [...trai, ...phai.slice(0, -1).reverse()].map(p).join(' L') + ' Z');
+const gang = canh.flatMap(({ trai, phai }) => trai.slice(1, -1).map((d, i) => `M${p(d)} L${p(phai[i + 1])}`));
+const diem = canh.flatMap(({ trai, phai }) => [...trai.slice(1, -1), ...phai.slice(1, -1)]).map(p);
+const ngon = canh.map(({ trai }) => p(trai[trai.length - 1]));
+---
+<svg class="hoa-tiet" viewBox="0 0 800 360" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMax meet">
+  <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
+    {duong.map((d) => <path d={d} />)}
+    <path d={gang.join(' ')} />
+  </g>
+  <g fill="currentColor">
+    {diem.map((d) => { const [x, y] = d.split(' '); return <circle cx={x} cy={y} r="2.6" />; })}
+    {ngon.map((d) => { const [x, y] = d.split(' '); return <circle cx={x} cy={y} r="3.6" />; })}
+    <circle cx={GOC[0]} cy={GOC[1]} r="4.5" />
+  </g>
+</svg>

@@ -13,7 +13,7 @@
 html { scroll-padding-top: 5rem; background: var(--bg-base); }
 body {
   margin: 0;
-  /* Quầng TĨNH ở đỉnh trang bằng --glow của bản sắc, trên một nền liền mạch (hoạ tiết canh-sen: PR bố cục sau) */
+  /* Quầng TĨNH ở đỉnh trang bằng --glow của bản sắc, trên một nền liền mạch (hoạ tiết canh-sen ở hero trang chủ) */
   background:
     radial-gradient(64rem 34rem at 50% -12rem, var(--glow), transparent 70%) no-repeat,
     var(--bg-base);
@@ -82,24 +82,47 @@ pre {
 .nut--phu { background: var(--bg-surface); border-color: var(--border-control); color: var(--text-primary); }
 .nut--phu:hover { background: var(--bg-hover); border-color: var(--text-muted); color: var(--text-primary); }
 
-/* Trang chủ: hero canh giữa */
-.mo-dau { padding: 5rem 0 3rem; text-align: center; }
-.mo-dau__luoi { display: grid; gap: 3rem; justify-items: center; }
-.mo-dau h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); line-height: 1.12; margin: 0 auto 1.1rem; letter-spacing: -0.025em; max-width: 46rem; }
+/* Trang chủ - bố cục chữ ký `trinh-dien` (DESIGN_SYSTEM mục 1.2.2): hero hai cột, chữ trái, ảnh chụp app lớn tràn
+   phải; dưới là khối tính năng bento. Hoạ tiết `canh-sen` (mục 1.2.4) TĨNH sau hero, màu --accent, độ phủ 12%. */
+.mo-dau { position: relative; padding: 5rem 0 4rem; overflow: clip; isolation: isolate; }
+.hoa-tiet {
+  position: absolute; z-index: -1; pointer-events: none;
+  left: 50%; bottom: 0; width: min(68rem, 140vw); height: auto; transform: translateX(-50%);
+  color: var(--accent); opacity: 0.12;
+}
+.mo-dau__luoi { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 3rem; align-items: center; }
+.mo-dau h1 { font-size: clamp(2.1rem, 4.4vw, 3.3rem); line-height: 1.12; margin: 0 0 1.1rem; letter-spacing: -0.025em; }
 .chu-tim {
   background: linear-gradient(90deg, var(--primary), var(--accent));
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.mo-dau__phu { font-size: 1.12rem; color: var(--text-secondary); margin: 0 auto 1.75rem; max-width: 38rem; }
-.mo-dau__nut { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
-.muc .mo-dau__nut { justify-content: flex-start; }   /* khối nội dung canh trái: nút theo chữ */
+.mo-dau__phu { font-size: 1.12rem; color: var(--text-secondary); margin: 0 0 1.75rem; max-width: 34rem; }
+.mo-dau__nut { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 .mo-dau__ghi-chu { margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem; }
 /* Nhãn nhỏ (eyebrow): mono chữ hoa màu liên kết, không phải viên thuốc có nền */
 .nhan { display: inline-block; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-link); margin-bottom: 1rem; }
 
-.minh-hoa { margin: 0; width: 100%; max-width: 56rem; background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 0.6rem; }
-.minh-hoa img { display: block; width: 100%; border-radius: var(--radius-lg); }
-.minh-hoa figcaption { margin-top: 0.5rem; color: var(--text-muted); font-size: 0.88rem; text-align: center; }
+/* Ảnh chụp app: khung cửa sổ, rộng hơn cột và tràn khỏi mép phải khung nội dung (cắt ở mép màn hình) */
+.anh-app {
+  margin: 0 calc(-1 * clamp(2rem, 12vw, 14rem)) 0 0;
+  background: var(--bg-surface); border: 1px solid var(--border-strong); border-radius: var(--radius-lg);
+  padding: 0.5rem; box-shadow: 0 1.5rem 4rem -1.5rem var(--glow);
+}
+.anh-app img { display: block; width: 100%; border-radius: var(--radius-md); }
+[data-theme="dark"] .anh-app__sang, [data-theme="light"] .anh-app__toi { display: none; }
+
+/* Bento: lưới 4 cột, ô lớn 2x2, ô rộng 2 cột, ô ngang cả hàng */
+.bento { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-flow: row dense; gap: 1rem; list-style: none; padding: 0; margin: 0; }
+.the--lon { grid-column: span 2; grid-row: span 2; display: flex; flex-direction: column; padding: 1.75rem; }
+.the--lon .bento__nen { margin-top: auto; padding-top: 1.25rem; }
+.the--lon h3 { font-size: 1.5rem; }
+.the--rong { grid-column: span 2; }
+.the--ngang { grid-column: 1 / -1; }
+.bento__nen { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; margin: 1.25rem 0 0; }
+.bento__nen li {
+  padding: 0.25rem 0.8rem; border-radius: var(--radius-control); font-size: 0.88rem; font-weight: 500; color: var(--text-link);
+  background: color-mix(in srgb, var(--primary) 10%, var(--bg-surface)); border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+}
 
 /* Các khối: ranh giới là khoảng trống, không dải nền */
 .muc { padding: 3.5rem 0; }
@@ -195,8 +218,14 @@ kbd { border: 1px solid var(--border-strong); border-bottom-width: 2px; border-r
 .giao-dien button[aria-checked="true"] { background: var(--bg-hover); color: var(--text-primary); }
 .giao-dien button:focus-visible { outline-offset: 1px; }
 
+@media (max-width: 960px) {
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .the--lon { grid-row: auto; }
+}
 @media (max-width: 860px) {
   .mo-dau { padding: 3rem 0 2rem; }
+  .mo-dau__luoi { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+  .anh-app { margin-right: 0; }
   .tai-lieu { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.5rem; }
   .tai-lieu__menu { position: static; }
   .tai-lieu__menu ul { display: flex; flex-wrap: wrap; gap: 0.25rem; }
@@ -206,6 +235,10 @@ kbd { border: 1px solid var(--border-strong); border-bottom-width: 2px; border-r
   /* Chân trang di động (phiếu 20261113-07 mục 3.3): giới thiệu trên cùng, hai cột liên kết xếp lưới 2 cột. */
   .chan-trang__trong { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem 1.25rem; }
   .chan-trang__cot { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .bento { grid-template-columns: minmax(0, 1fr); }
+  .the--lon, .the--rong { grid-column: auto; }
 }
 
 /* Trang Ủng hộ (chép từ tsudev-files): thẻ kênh, ảnh QR luôn trên nền trắng để máy quét đọc được ở chế độ Tối */
