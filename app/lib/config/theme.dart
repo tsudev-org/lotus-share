@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:localsend_app/config/product_tokens.g.dart';
 import 'package:localsend_app/gen/strings.g.dart';
 import 'package:localsend_app/model/persistence/color_mode.dart';
 import 'package:localsend_app/provider/device_info_provider.dart';
@@ -8,7 +9,37 @@ import 'package:localsend_app/util/ui/dynamic_colors.dart';
 import 'package:refena_flutter/refena_flutter.dart';
 import 'package:yaru/yaru.dart' as yaru;
 
-final _borderRadius = BorderRadius.circular(5);
+// lotus-share: bo góc theo bộ `tron` của bản sắc (tsudev-standards v5.0.0, DESIGN_SYSTEM mục 1.2.3) - ô nhập dùng md,
+// nút dùng radius-control (999 = viên thuốc). Giá trị sinh từ .standards (tools/gen_product_tokens.py), không ghi số tay.
+final _borderRadius = BorderRadius.circular(ProductTokens.radiusMd);
+final _buttonShape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(ProductTokens.radiusControl));
+
+/// Kiểu chữ tiêu đề/số liệu lớn của bản sắc (Quicksand, chỉ 600 hoặc 700) cho chữ lớn tự đặt cỡ ngoài textTheme.
+TextStyle displayTextStyle({required double fontSize, int weight = 700}) => TextStyle(
+  fontFamily: ProductTokens.fontDisplay,
+  fontSize: fontSize,
+  fontWeight: weight == 600 ? FontWeight.w600 : FontWeight.w700,
+  fontVariations: [FontVariation.weight(weight == 600 ? 600 : 700)],
+);
+
+/// Font tiêu đề của bản sắc (h1-h3, số liệu lớn) cho nhóm display/headline/titleLarge; thân bài giữ font hệ thống.
+/// Quicksand là font biến thiên (trục wght) nên đặt trục rõ ràng thay vì chỉ fontWeight.
+TextTheme _withDisplayFont(TextTheme t) {
+  TextStyle? display(TextStyle? s, double weight) => s?.copyWith(
+    fontFamily: ProductTokens.fontDisplay,
+    fontWeight: FontWeight.values.firstWhere((w) => w.value == weight.round()),
+    fontVariations: [FontVariation.weight(weight)],
+  );
+  return t.copyWith(
+    displayLarge: display(t.displayLarge, 700),
+    displayMedium: display(t.displayMedium, 700),
+    displaySmall: display(t.displaySmall, 700),
+    headlineLarge: display(t.headlineLarge, 600),
+    headlineMedium: display(t.headlineMedium, 600),
+    headlineSmall: display(t.headlineSmall, 600),
+    titleLarge: display(t.titleLarge, 600),
+  );
+}
 
 ThemeData getTheme(ColorMode colorMode, Color customColor, Brightness brightness, DynamicColors? dynamicColors) {
   if (colorMode == ColorMode.yaru) {
@@ -48,7 +79,7 @@ ThemeData getTheme(ColorMode colorMode, Color customColor, Brightness brightness
     fontFamily = null;
   }
 
-  return ThemeData(
+  final theme = ThemeData(
     colorScheme: colorScheme,
     useMaterial3: true,
     // same density on all platforms so desktop matches mobile (defaults to compact on desktop)
@@ -70,15 +101,20 @@ ThemeData getTheme(ColorMode colorMode, Color customColor, Brightness brightness
       style: ElevatedButton.styleFrom(
         foregroundColor: colorScheme.brightness == Brightness.dark ? Colors.white : null,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        shape: _buttonShape,
       ),
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        shape: _buttonShape,
       ),
     ),
+    filledButtonTheme: FilledButtonThemeData(style: FilledButton.styleFrom(shape: _buttonShape)),
+    outlinedButtonTheme: OutlinedButtonThemeData(style: OutlinedButton.styleFrom(shape: _buttonShape)),
     fontFamily: fontFamily,
   );
+  return theme.copyWith(textTheme: _withDisplayFont(theme.textTheme));
 }
 
 Future<void> updateSystemOverlayStyle(BuildContext context) async {
@@ -139,28 +175,17 @@ extension InputDecorationThemeExt on InputDecorationThemeData {
   BorderRadius get borderRadius => _borderRadius;
 }
 
-const tsudevPurpleDark = Color(0xFFA970FF);
-const tsudevPurpleLight = Color(0xFF7C3AED);
-
-// lotus-share: bảng màu Lotus rút từ logo (support/brand/lotus-share/accent.json: tím #7014B0, xanh #288CE7,
-// cam #F8993D), chỉnh sắc độ để chữ trên/dưới màu đạt WCAG AA ở từng chế độ.
-const lotusBlueDark = Color(0xFF5EA8F2);
-const lotusBlueLight = Color(0xFF1F6FC5);
-const lotusOrangeDark = Color(0xFFF8993D);
-const lotusOrangeLight = Color(0xFFB45309);
-
 ColorScheme _determineColorScheme(ColorMode mode, Color customColor, Brightness brightness, DynamicColors? dynamicColors) {
-  // tsudev: màu nhấn tím của hệ tsudev (phiếu logs/handover/20261110-05 mục 2) - Tối #A970FF, Sáng #7C3AED.
+  // lotus-share: màu nhấn của bản sắc `lotus` (tsudev-standards v5.0.0, tím cánh sen hue 320) - Tối #E47DFB, Sáng #A23DB8;
+  // đọc từ .standards/tokens/products/lotus.json qua product_tokens.g.dart, không tự khai bảng màu.
   // fidelity giữ sắc độ của màu gốc thay vì làm nhạt như tonalSpot mặc định.
+  final accent = brightness == Brightness.dark ? ProductTokens.dark : ProductTokens.light;
   final defaultColorScheme = ColorScheme.fromSeed(
-    seedColor: brightness == Brightness.dark ? tsudevPurpleDark : tsudevPurpleLight,
+    seedColor: accent.primary,
     brightness: brightness,
     dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
-    // lotus-share: màu phụ (xanh) và màu thứ ba (cam) lấy từ logo Lotus.
-    secondary: brightness == Brightness.dark ? lotusBlueDark : lotusBlueLight,
-    onSecondary: brightness == Brightness.dark ? const Color(0xFF0A0A0A) : Colors.white,
-    tertiary: brightness == Brightness.dark ? lotusOrangeDark : lotusOrangeLight,
-    onTertiary: brightness == Brightness.dark ? const Color(0xFF0A0A0A) : Colors.white,
+    primary: accent.primary,
+    onPrimary: accent.onPrimary,
   );
 
   final colorScheme = switch (mode) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:localsend_app/config/theme.dart';
 import 'package:localsend_app/gen/strings.g.dart';
 import 'package:localsend_app/model/state/server/server_state.dart';
 import 'package:localsend_app/pages/home_page.dart';
@@ -88,14 +89,14 @@ class _ReceiveTabState extends State<ReceiveTab> {
                         ),
                         FittedBox(
                           fit: BoxFit.scaleDown,
-                          child: Text(serverState?.alias ?? alias, style: const TextStyle(fontSize: 48)),
+                          child: Text(serverState?.alias ?? alias, style: displayTextStyle(fontSize: 48, weight: 600)),
                         ),
                         InitialFadeTransition(
                           duration: const Duration(milliseconds: 300),
                           delay: const Duration(milliseconds: 500),
                           child: Text(
                             serverState == null ? t.general.offline : localIps.map((ip) => '#${ip.visualId}').toSet().join(' '),
-                            style: const TextStyle(fontSize: 24),
+                            style: displayTextStyle(fontSize: 24, weight: 600),
                             textAlign: TextAlign.center,
                           ),
                         ),

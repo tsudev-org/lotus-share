@@ -82,22 +82,22 @@ const chep = (nhan: string) => /số tài khoản|chủ tài khoản/i.test(nhan
 
 <style>
   .ung-ho { display: grid; gap: 2rem; margin: 1.5rem 0 2.5rem; }
-  .ung-ho__luu-y { display: flex; gap: 0.75rem; padding: 1rem; border: 1px solid var(--border); border-radius: 0.5rem;
+  .ung-ho__luu-y { display: flex; gap: 0.75rem; padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius-lg);
     background: var(--bg-surface); color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6; }
   .ung-ho__luu-y svg { flex-shrink: 0; margin-top: 0.15rem; color: var(--text-link); }
   .ung-ho__luu-y p { margin: 0; }
   .ung-ho__luu-y strong { color: var(--text-primary); font-weight: 600; }
-  .ung-ho__the { display: grid; gap: 2rem; padding: 1.5rem; border: 1px solid var(--border); border-radius: 0.5rem;
+  .ung-ho__the { display: grid; gap: 2rem; padding: 1.5rem; border: 1px solid var(--border); border-radius: var(--radius-lg);
     background: var(--bg-surface); }
   @media (min-width: 48rem) { .ung-ho__the { grid-template-columns: auto 1fr; padding: 2rem; } }
   .ung-ho__qr { width: 100%; max-width: 16rem; margin: 0 auto; }
-  .ung-ho__qr-nen { padding: 0.75rem; border-radius: 0.5rem; background: #fff; }
+  .ung-ho__qr-nen { padding: 0.75rem; border-radius: var(--radius-lg); background: #fff; }
   .ung-ho .ung-ho__qr-nen img { display: block; width: 100%; height: auto; border: 0; border-radius: 0; background: none; }
   .ung-ho__qr p { margin: 0.5rem 0 0; text-align: center; font-size: 0.75rem; color: var(--text-muted); }
   .ung-ho__noi-dung { min-width: 0; }
   .ung-ho__noi-dung h2 { margin: 0; font-size: 1.25rem; font-weight: 600; color: var(--text-primary); border: 0; padding: 0; }
   .ung-ho__mo-ta { margin: 0.4rem 0 0; font-size: 0.875rem; color: var(--text-secondary); }
-  .ung-ho__bang { margin: 1.25rem 0 0; border: 1px solid var(--border); border-radius: 0.375rem; }
+  .ung-ho__bang { margin: 1.25rem 0 0; border: 1px solid var(--border); border-radius: var(--radius-md); }
   .ung-ho__bang > div { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; }
   .ung-ho__bang > div + div { border-top: 1px solid var(--border); }
   .ung-ho__bang dt { width: 8rem; flex-shrink: 0; font-size: 0.875rem; color: var(--text-secondary); }
@@ -105,7 +105,7 @@ const chep = (nhan: string) => /số tài khoản|chủ tài khoản/i.test(nhan
   .ung-ho__bang dd > span:first-child { flex: 1; min-width: 0; overflow-wrap: anywhere; }
   .ung-ho__bang .ung-ho__so { font-family: var(--font-mono); font-size: 1rem; font-variant-numeric: tabular-nums; }
   .ung-ho__chep { display: inline-flex; align-items: center; gap: 0.375rem; height: 2rem; flex-shrink: 0; padding: 0 0.5rem;
-    border: 0; border-radius: 0.25rem; background: transparent; color: var(--text-secondary); font: inherit; font-size: 0.875rem; cursor: pointer; }
+    border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--text-secondary); font: inherit; font-size: 0.875rem; cursor: pointer; }
   .ung-ho__chep:hover { background: var(--bg-subtle); color: var(--text-primary); }
   .ung-ho__chep:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
   .an-chu { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

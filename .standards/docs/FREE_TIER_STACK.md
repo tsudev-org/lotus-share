@@ -111,6 +111,9 @@ chính thức trước khi ra quyết định kiến trúc.
   Máy chủ trả `429`/`5xx` ⇒ app vẫn chạy cục bộ bình thường.
 - **Giới hạn ở máy chủ:** tần suất theo tài khoản + IP, kích thước thân yêu cầu,
   dung lượng - đặt trước khi chạm hạn mức miễn phí của nhà cung cấp.
+- **Xoá có xác minh:** dữ liệu của tài khoản hết Pro chỉ bị xoá sau khi hỏi
+  kênh trạng thái của tsudev.com ([`PRODUCT_POLICY.md`](PRODUCT_POLICY.md) mục
+  7.4); không hỏi được ⇒ hoãn (tốn dung lượng thêm vài ngày, không xoá nhầm).
 - Tính năng nào ước lượng vượt hạn mức miễn phí ⇒ dừng lại, hỏi chủ dự án theo
   mục 6, không tự bật gói trả phí.
 

@@ -5,6 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:localsend_app/config/fork_config.dart';
+import 'package:localsend_app/config/product_tokens.g.dart';
 import 'package:localsend_app/gen/strings.g.dart';
 import 'package:localsend_app/model/persistence/color_mode.dart';
 import 'package:localsend_app/model/persistence/favorite_device.dart';
@@ -336,7 +337,7 @@ class PersistenceService {
     final value = _prefs.getString(_customColorKey);
     final rgb = value == null ? null : int.tryParse(value, radix: 16);
     if (rgb == null) {
-      return const Color(0xFFA970FF); // tsudev: tím của hệ tsudev
+      return ProductTokens.dark.primary; // lotus-share: màu nhấn của bản sắc lotus (tsudev-standards v5.0.0)
     }
     return Color(0xff000000 | rgb);
   }

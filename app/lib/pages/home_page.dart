@@ -115,15 +115,15 @@ class _HomePageState extends State<HomePage> with Refena {
                     extended: sizingInformation.isDesktop,
                     backgroundColor: Theme.of(context).cardColorWithElevation,
                     leading: sizingInformation.isDesktop
-                        ? const Column(
+                        ? Column(
                             children: [
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               Text(
                                 forkProductName, // lotus-share
-                                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+                                style: displayTextStyle(fontSize: 32),
                                 textAlign: TextAlign.center,
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                             ],
                           )
                         : null,
