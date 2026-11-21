@@ -37,7 +37,7 @@ function kiemTra(tep, html) {
   if (luaChon !== 'light,dark,system') loi.push(`${ten}: bộ chọn giao diện cần đúng light,dark,system: ${luaChon}`);
   const viTriChon = html.indexOf('id="giao-dien"');
   if (viTriChon < html.indexOf('<footer') || !/id="giao-dien" role="radiogroup" aria-label="Giao diện"/.test(html)) loi.push(`${ten}: bộ chọn giao diện phải là radiogroup trong <footer>`);
-  if (!/<html lang="vi" data-theme="dark">/.test(html)) loi.push(`${ten}: mặc định phải là data-theme="dark"`);
+  if (!/<html lang="vi" data-theme="dark" data-product="lotus">/.test(html)) loi.push(`${ten}: <html> phải có data-theme="dark" (mặc định trước theme.js) + data-product="lotus" (bản sắc tsudev-standards v5.0.0)`);
   if (/<style[\s>]/.test(html) || / style="/.test(html)) loi.push(`${ten}: có CSS nội tuyến (CSP chặn)`);
   for (const a of html.matchAll(/<a [^>]*target="_blank"[^>]*>/g)) {
     if (!a[0].includes('rel="noopener noreferrer"')) loi.push(`${ten}: thiếu rel noopener noreferrer: ${a[0]}`);
@@ -74,6 +74,21 @@ for (const [ten, duong] of lienKet) {
       loi.push('phien-ban.json: cần số nguyên 1 <= toiThieu <= moiNhat');
     if (!build || pb.moiNhat > Number(build)) loi.push(`phien-ban.json: moiNhat ${pb.moiNhat} lớn hơn số build pubspec ${build}`);
     if (pb.moiNhat === Number(build) && pb.phienBan !== ver) loi.push(`phien-ban.json: phienBan ${pb.phienBan} khác pubspec ${ver}`);
+  }
+}
+// Bản sắc tsudev-standards v5.0.0 (DESIGN_SYSTEM mục 1.2.1): CSS build phải mang khối data-product=lotus từ
+// .standards/tokens/products.css; CSS riêng không được tự khai vai trò nhấn (--primary, --accent...) hay mã màu cũ.
+{
+  const thuMucCss = join(dist, '_astro');
+  const css = readdirSync(thuMucCss).filter((f) => f.endsWith('.css')).map((f) => readFileSync(join(thuMucCss, f), 'utf8')).join('\n');
+  if (!/\[data-product=["']?lotus["']?\]\{[^}]*--primary:/.test(css)) loi.push('CSS: thiếu khối [data-product=lotus] của .standards/tokens/products.css');
+  const nguon = join(dirname(fileURLToPath(import.meta.url)), '../src');
+  const quet = (d) => readdirSync(d, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? quet(join(d, e.name)) : [join(d, e.name)]);
+  for (const f of quet(nguon).filter((f) => /\.(css|astro)$/.test(f))) {
+    const s = readFileSync(f, 'utf8');
+    const tuKhai = s.match(/--(text-link|primary(-hover|-active)?|on-primary|focus-ring|accent|glow[\w-]*|icon-info|icon-nav|bg-[a-z]+|text-(primary|secondary|muted)|border(-strong|-control)?|radius-[a-z]+)\s*:/);
+    if (tuKhai) loi.push(`${f.slice(nguon.length)}: tự khai token ${tuKhai[0]} (dùng .standards/tokens/)`);
+    if (/#a970ff|#7c3aed/i.test(s)) loi.push(`${f.slice(nguon.length)}: còn mã tím cũ dùng chung với TsuFiles`);
   }
 }
 for (const l of loi) console.error('[check-dist] LỖI', l);

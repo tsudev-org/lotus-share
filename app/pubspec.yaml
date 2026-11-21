@@ -107,6 +107,14 @@ flutter:
     - assets/img/
     - assets/CHANGELOG.md
     - assets/legal/
+    - assets/fonts/OFL-Quicksand.txt
+
+  # Font tiêu đề của bản sắc lotus (tsudev-standards v5.0.0, tokens/products/lotus.json): Quicksand bản biến thiên
+  # nguyên văn từ google/fonts (ofl/quicksand, SIL OFL 1.1), dùng trục wght 600/700.
+  fonts:
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand-VariableFont_wght.ttf
 
 flutter_gen:
   line_length: 150

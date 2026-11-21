@@ -33,6 +33,8 @@ jobs:
           python-version: '3.12'
       - name: Kiểm bản dịch tiếng Việt
         run: python3 -I tools/check_i18n_vi.py
+      - name: Token bản sắc của app khớp .standards (tsudev-standards v5.0.0)
+        run: python3 -I tools/gen_product_tokens.py --check
       - name: Cài Flutter (ghim tag + đối chiếu commit, không dùng action bên thứ ba)
         run: |
           set -euo pipefail

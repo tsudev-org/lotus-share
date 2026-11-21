@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:localsend_app/config/fork_config.dart';
+import 'package:localsend_app/config/theme.dart';
 import 'package:localsend_app/gen/assets.gen.dart';
 
 class LotusShareLogo extends StatelessWidget {
@@ -19,9 +20,9 @@ class LotusShareLogo extends StatelessWidget {
       return Column(
         children: [
           logo,
-          const Text(
+          Text(
             forkProductName, // lotus-share
-            style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+            style: displayTextStyle(fontSize: 36),
             textAlign: TextAlign.center,
           ),
         ],

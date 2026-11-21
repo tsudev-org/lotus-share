@@ -13,6 +13,8 @@
 
 ## Hàng đợi task (làm từ trên xuống)
 
+- [ ] **Phiếu `20261121-STD50` PR 2** (bản sắc v5.0.0 - bố cục `trinh-dien` + hoạ tiết `canh-sen` + sinh lại `og-image.png`,
+      ảnh trước/sau Sáng + Tối). PR 1 (màu + hình) đã gộp #114. Deploy website sau PR 1 để lotus.tsudev.com đổi màu.
 - [ ] 👤 **Thử thật trước phát hành kế tiếp** (đã gộp 20/11, build thử trên main run ghi ở Đã hoàn thành): khay
       Windows (icon, chuột trái mở cửa sổ, chuột phải menu - #100), Khởi động cùng Windows bật/tắt (#104), Android nhận
       tệp lớn khi tắt màn hình (#106), xuất/nhập Sao lưu ra tệp trên Android (#107).
@@ -81,6 +83,11 @@
 
 ## Đã hoàn thành (mới nhất trên cùng)
 
+- 21/11/2026 - **#114** bản sắc lotus theo tsudev-standards **v5.0.0** (phiếu `20261121-STD50` PR 1): sync quy ước,
+  website dùng `tokens.css` + `products.css` với `data-product="lotus"` (tím cánh sen `#E47DFB`/`#A23DB8`), xoá
+  `palette.css`; nút viên thuốc, tiêu đề Quicksand; app sinh màu/bo góc từ `.standards` (`tools/gen_product_tokens.py`,
+  CI `--check`). Ảnh trước/sau `logs/anh/20261121-STD50/`. Mẹo máy WSL không sudo: clang/cmake cục bộ để `flutter test`
+  / `flutter build linux` (AKB LES-20261121-1754-3444).
 - 20/11/2026 (đo 07:32 UTC) - Không việc nào đủ điều kiện: winget-pkgs#478033 vẫn mở (REVIEW_REQUIRED); không có
   PR Dependabot; `tsudev-org/tsusync` chưa có thư viện Dart (không pubspec/.dart, chỉ `worker/`) và chưa thấy
   `client_id` Lotus Share => PRO1+PRO2 chưa viết mã; VirusTotal chờ 22/11; linux-packages không có run chờ duyệt,

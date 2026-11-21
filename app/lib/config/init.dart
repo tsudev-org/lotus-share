@@ -100,6 +100,8 @@ Future<RefenaContainer> preInit(List<String> args) async {
     for (final file in ['assets/legal/NOTICE', 'assets/legal/LICENSE']) {
       yield LicenseEntryWithLineBreaks(['Lotus Share'], await rootBundle.loadString(file));
     }
+    // Font tiêu đề Quicksand đóng gói kèm ứng dụng (SIL OFL 1.1 bắt buộc kèm giấy phép).
+    yield LicenseEntryWithLineBreaks(['Quicksand'], await rootBundle.loadString('assets/fonts/OFL-Quicksand.txt'));
   });
 
   TransferNotification.init(notificationStrings);
