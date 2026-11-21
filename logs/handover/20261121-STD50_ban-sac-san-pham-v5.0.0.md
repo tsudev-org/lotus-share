@@ -2,7 +2,7 @@
 
 - **Mã phiếu**: 20261121-STD50
 - **Từ**: phiên tsudev-standards, 21/11/2026 - **Đến**: phiên kế tiếp của `lotus-share`
-- **Trạng thái**: ĐÃ XỬ LÝ (PR 1 #114 gộp 21/11/2026; PR 2 bố cục 21/11/2026 - chờ gộp + deploy website)
+- **Trạng thái**: ĐÃ XỬ LÝ (PR 1 #114 + PR 2 #115 gộp 21/11/2026; website đã deploy)
 - **Nguồn**: https://github.com/tsudev-org/tsudev-standards/releases/tag/v5.0.0 - `docs/DESIGN_SYSTEM.md` mục 1.2,
   CHANGELOG 5.0.0 "Hướng dẫn nâng cấp"
 - **Bối cảnh**: chủ dự án muốn mỗi sản phẩm có đặc trưng nổi bật riêng (màu, giao diện, bố cục). Trước v5.0.0, 9/11
@@ -78,4 +78,4 @@ kiểm chống trùng phải xanh. KHÔNG ghi đè tại repo này.
     Quicksand 700 (font biến thiên trong `app/assets/fonts`), hoạ tiết canh-sen. Favicon/icon tái sinh trùng byte.
   - Ảnh trước/sau: trước = `web-trang-chu-*.webp`, `app-*.webp`; sau = `pr2-web-trang-chu-*.webp`, `pr2-app-*.webp`
     (`logs/anh/20261121-STD50/`).
-  - Còn: deploy website sau khi gộp (`npm run deploy` trong `website/`, kiểm `wrangler whoami` trước).
+  - #115 gộp; deploy lotus.tsudev.com 21/11/2026 (Version c00dff2e), kiểm production đạt.
